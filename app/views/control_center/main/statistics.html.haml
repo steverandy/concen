@@ -22,12 +22,12 @@
 					%span.primary= ControlCenter::VisitStatistic.visits_for_current :month
 				%p.label.last= "This Month (#{@current_month.strftime('%B %Y')})"
 	.panels.clearfix
-		.panel.wide{:style => 'height:180px'}
+		.panel.wide{:style => "height:180px"}
 			%h3 
 				Historical Visits
-				%span.link= link_to 'Yearly', '#', :title => 'Show statistic year by year.'
-				%span.link= link_to 'Monthly', '#', :title => 'Show statistic month by month.'
-				%span.link= link_to 'Daily', '#', :title => 'Show statistic day by day.'
+				%span.link= link_to "Yearly", "#", :title => "Show statistic year by year."
+				%span.link= link_to "Monthly", "#", :title => "Show statistic month by month."
+				%span.link= link_to "Daily", "#", :title => "Show statistic day by day."
 			- current_time = Time.zone.now
 			- current_hour = Time.zone.local(current_time.year, current_time.month, current_time.day, current_time.hour)
 			- historical_visits = ControlCenter::VisitStatistic.visits_for_last_24_hours
@@ -37,71 +37,71 @@
 				- (0..23).each do |num|
 					%li
 						.count
-							.total{:style => "height:#{historical_visits[num].to_f/top_value.to_f*100.0}%", :title => pluralize(historical_visits[num], 'visit')}
-							.unique{:style => "height:#{historical_unique_visits[num].to_f/top_value.to_f*100.0}%", :title => pluralize(historical_unique_visits[num], 'unique visit')}
-						%p= (current_hour - num.hour).strftime('%I %p')
+							.total{:style => "height:#{historical_visits[num].to_f/top_value.to_f*100.0}%", :title => pluralize(historical_visits[num], "visit")}
+							.unique{:style => "height:#{historical_unique_visits[num].to_f/top_value.to_f*100.0}%", :title => pluralize(historical_unique_visits[num], "unique visit")}
+						%p= (current_hour - num.hour).strftime("%I %p")
 						
 	.panels.clearfix
 		.panel
 			%h3
 				Popular Pages
-				%span.link= link_to 'Monthly', '#', :title => 'Show statistic month by month.'
-				%span.link= link_to 'Full', '#', :title => 'Show full list.'
+				%span.link= link_to "Monthly", "#", :title => "Show statistic month by month."
+				%span.link= link_to "Full", "#", :title => "Show full list."
 			%ul
 				- for page in ControlCenter::VisitStatistic.popular_pages(:limit => 6)
 					%li
-						- url_array = URI.split(page['url'])
-						%p= link_to "#{url_array[5]}#{url_array[6]}#{url_array[7]}#{url_array[8]}", page['url'], :title => page['url']
-						%p.right= page['count'].to_i
+						- url_array = URI.split(page["url"])
+						%p= link_to "#{url_array[5]}#{url_array[6]}#{url_array[7]}#{url_array[8]}", page["url"], :title => page["url"]
+						%p.right= page["count"].to_i
 		.panel
 			%h3
 				Referrers
-				%span.link= link_to 'Monthly', '#'
+				%span.link= link_to "Monthly", "#"
 			%ul
 				- for page in ControlCenter::VisitStatistic.referrers(:limit => 6, :unique_domain => true)
 					%li
-						%p= page['referrer_domain']
-						%p.right= page['count'].to_i
+						%p= page["referrer_domain"]
+						%p.right= page["count"].to_i
 		.panel.edge
 			%h3
 				Resolutions
-				%span.link= link_to 'Monthly', '#'
+				%span.link= link_to "Monthly", "#"
 			%ul
 				- for page in ControlCenter::VisitStatistic.resolutions(:limit => 6)
 					%li
 						%p= "#{page['screen_width']}x#{page['screen_height']}"
-						%p.right= page['count'].to_i
+						%p.right= page["count"].to_i
 	.panels.clearfix
 		.panel
 			%h3
 				Browsers
-				%span.link= link_to 'Monthly', '#'
+				%span.link= link_to "Monthly", "#"
 			%ul
 				- for page in ControlCenter::VisitStatistic.browsers(:limit => 6)
 					%li
-						%p= page['browser']
-						%p.right= page['count'].to_i
+						%p= page["browser"]
+						%p.right= page["count"].to_i
 		.panel
 			%h3
 				Operating Systems
-				%span.link= link_to 'Done', '#'
+				%span.link= link_to "Done", "#"
 
 				%span.timezone Sep 2010
 			%ul
 				- for page in ControlCenter::VisitStatistic.operating_systems(:limit => 6)
 					%li
-						%p= page['os']
-						%p.right= page['count'].to_i
+						%p= page["os"]
+						%p.right= page["count"].to_i
 		.panel.edge
 			%h3
 				Locations
-				%span.link= link_to 'Monthly', '#'
+				%span.link= link_to "Monthly", "#"
 			%ul
 				- if locations = ControlCenter::VisitStatistic.locations
 					- for location in locations
 						%li
-							%p= location['_id']['country']
-							%p.right= location['value']['count'].to_i
+							%p= location["_id"]["country"]
+							%p.right= location["value"]["count"].to_i
 	.panels.clearfix
 		.panel
 			%h3
@@ -118,14 +118,14 @@
 					%p.right= "#{@server_statistics[:memory][:used]} MB used, #{@server_statistics[:memory][:free]} MB free" if @server_statistics[:memory].present?
 				%li
 					%p MongoDB Data Size
-					%p.right= number_to_human_size(@mongodb_stats['dataSize'])
+					%p.right= number_to_human_size(@mongodb_stats["dataSize"])
 				%li
 					%p MongoDB Index Size
-					%p.right= number_to_human_size(@mongodb_stats['indexSize'])
+					%p.right= number_to_human_size(@mongodb_stats["indexSize"])
 		.panel
-			= render 'statistics_extra_panel_1' rescue nil
+			= render "statistics_extra_panel_1" rescue nil
 		.panel.edge
-			= render 'statistics_extra_panel_2' rescue nil
+			= render "statistics_extra_panel_2" rescue nil
 	.panels.clearfix
 		.panel.wide
 			%h3

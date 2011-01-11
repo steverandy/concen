@@ -1,18 +1,18 @@
 %header
 	%h1
-		%a{:href => '/'}
+		%a{:href => "/"}
 			%span.control-center Control Center
 			%span.application-name= ControlCenter.application_name
 	%nav
 		%ul.right
 			- if admin_signed_in?
 				%li
-					= link_to 'Statistics', control_center_statistics_path
-				= render 'layouts/control_center/extra_header_links'
+					= link_to "Statistics", control_center_statistics_path
+				= render "layouts/control_center/extra_header_links"
 				%li
-					= link_to 'Settings', edit_admin_registration_path
+					= link_to "Settings", edit_admin_registration_path
 				%li
-					= link_to 'Sign Out', destroy_admin_session_path
+					= link_to "Sign Out", destroy_admin_session_path
 			- if not admin_signed_in?
 				%li
-					= link_to 'Sign In', new_admin_session_path
+					= link_to "Sign In", new_admin_session_path

@@ -1,44 +1,44 @@
 !!! 5
-%html.no-js{:lang => 'en'}
+%html.no-js{:lang => "en"}
 	%head
 		%title= "#{@page_title + ' - ' if @page_title}Control Center - #{ControlCenter.application_name}"
-		%meta{:charset => 'utf-8'}
-		%meta{:name => 'description', :content => 'Web application to control and monitor a website.'}
-		%meta{:name => 'author', :content => 'Steve Randy Tantra'}
-		%meta{:name => 'copyright', :content => 'Copyright © 2011 by Steve Randy Tantra'}
-		%meta{:name => 'DC.title', :content => "#{@page_title + ' - ' if @page_title}Control Center - #{ControlCenter.application_name}"}
-		%meta{:name => 'DC.subject', :content => 'Control, Monitor, Center, Web Application'}
-		%meta{:name => 'DC.creator', :content => 'Steve Randy Tantra'}
-		%meta{:name => 'viewport', :content => 'width = 824'}
-		%meta{'http-equiv' => 'X-UA-Compatible', :content => 'IE=edge'}
+		%meta{:charset => "utf-8"}
+		%meta{:name => "description", :content => "Web application to control and monitor a website."}
+		%meta{:name => "author", :content => "Steve Randy Tantra"}
+		%meta{:name => "copyright", :content => "Copyright © 2011 by Steve Randy Tantra"}
+		%meta{:name => "DC.title", :content => "#{@page_title + ' - ' if @page_title}Control Center - #{ControlCenter.application_name}"}
+		%meta{:name => "DC.subject", :content => "Control, Monitor, Center, Web Application"}
+		%meta{:name => "DC.creator", :content => "Steve Randy Tantra"}
+		%meta{:name => "viewport", :content => "width = 824"}
+		%meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge"}
 		= csrf_meta_tag
-		= stylesheet_link_tag '/control_center/stylesheets/application.css', :media => 'screen'
-		= stylesheet_link_tag '/control_center/stylesheets/print.css', :media => 'print'
+		= stylesheet_link_tag "/control_center/stylesheets/application.css", :media => "screen"
+		= stylesheet_link_tag "/control_center/stylesheets/print.css", :media => "print"
 		- unless ios?
-			= stylesheet_link_tag '/control_center/stylesheets/non_ios.css', :media => 'screen'
+			= stylesheet_link_tag "/control_center/stylesheets/non_ios.css", :media => "screen"
 		- if content_for?(:head_stylesheets)
 			= yield :head_stylesheets
 		/[if lt IE 8]
-			= stylesheet_link_tag '/control_center/stylesheets/ie.css', :media => 'screen'
+			= stylesheet_link_tag "/control_center/stylesheets/ie.css", :media => "screen"
 		/[if lt IE 7]
-			= javascript_include_tag '/control_center/javascripts/ie7/IE7'
-			= javascript_include_tag '/control_center/javascripts/ie7/ie7-squish'
-		- if Rails.env == 'production'
-			= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'
-			= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js'
+			= javascript_include_tag "/control_center/javascripts/ie7/IE7"
+			= javascript_include_tag "/control_center/javascripts/ie7/ie7-squish"
+		- if Rails.env == "production"
+			= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"
+			= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js"
 		- else
-			= javascript_include_tag '/control_center/javascripts/jquery-1.4.4.js', '/control_center/javascripts/ui/jquery-ui-1.8.7.js'
-		%script{:type => 'text/javascript', :src => "http://use.typekit.com/wjq3dno.js"}
-		%script{:type => 'text/javascript'} try{Typekit.load();}catch(e){}
-		= javascript_include_tag '/control_center/javascripts/rails.js'
-		= javascript_include_tag '/control_center/javascripts/controlcenter.js'
-		= javascript_include_tag '/control_center/javascripts/application.js'
+			= javascript_include_tag "/control_center/javascripts/jquery-1.4.4.js", "/control_center/javascripts/ui/jquery-ui-1.8.7.js"
+		%script{:type => "text/javascript", :src => "http://use.typekit.com/wjq3dno.js"}
+		%script{:type => "text/javascript"} try{Typekit.load();}catch(e){}
+		= javascript_include_tag "/control_center/javascripts/rails.js"
+		= javascript_include_tag "/control_center/javascripts/controlcenter.js"
+		= javascript_include_tag "/control_center/javascripts/application.js"
 		- if content_for?(:head_javascripts)
 			= yield :head_javascripts 
 		- if content_for?(:head)
 			= yield :head 
 	%body.controlcenter
-		= render 'layouts/control_center/header'
+		= render "layouts/control_center/header"
 		= yield
 		%footer.clearfix
 			%p Copyright © 2011 by Steve Randy Tantra

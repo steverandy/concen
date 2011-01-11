@@ -10,6 +10,6 @@
 			= f.text_field :email
 			- error_message_for resource, :email
 		.actions
-			= f.submit "Resend Confirmation", :disable_with => 'Please Wait...'
+			= f.submit "Resend Confirmation", :disable_with => "Please Wait..."
 	.side-panel
 		= render :partial => "users/shared/links"
