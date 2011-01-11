@@ -1,7 +1,5 @@
 module ControlCenter
-
   class Visit
-  
     include Mongoid::Document
   
     field :url, :type => String
@@ -20,7 +18,5 @@ module ControlCenter
     index :url
     index :timestamp
     index :visitor_id
-  
   end
-
 end

@@ -2,16 +2,14 @@
 # TODO: Create cron job to calculate unique_visits on every hour.
 
 module ControlCenter
-
   class VisitStatistic
-  
     include Mongoid::Document
   
-    embeds_many :referrers, :class_name => 'ControlCenter::Referrer'
-    embeds_many :resolutions, :class_name => 'ControlCenter::Resolution'
-    embeds_many :browsers, :class_name => 'ControlCenter::Browser'
-    embeds_many :operating_systems, :class_name => 'ControlCenter::OperatingSystem'
-    embeds_many :locations, :class_name => 'ControlCenter::Location'
+    embeds_many :referrers, :class_name => "ControlCenter::Referrer"
+    embeds_many :resolutions, :class_name => "ControlCenter::Resolution"
+    embeds_many :browsers, :class_name => "ControlCenter::Browser"
+    embeds_many :operating_systems, :class_name => "ControlCenter::OperatingSystem"
+    embeds_many :locations, :class_name => "ControlCenter::Location"
   
     field :hour, :type => Time
     field :day, :type => Time
@@ -84,14 +82,14 @@ module ControlCenter
     def self.popular_pages(*args)
       options = args.extract_options!
       current_time = Time.zone.now
-      statistic = Visit.only(:url).where(:timestamp.gte => current_time - 2.years, :timestamp.lte => current_time).aggregate.sort! {|x,y| y['count'] <=> x['count'] }
+      statistic = Visit.only(:url).where(:timestamp.gte => current_time - 2.years, :timestamp.lte => current_time).aggregate.sort! {|x,y| y["count"] <=> x["count"] }
       statistic.first(options[:limit] || 5)
     end
   
     def self.resolutions(*args)
       options = args.extract_options!
       current_time = Time.zone.now
-      statistic = Visit.only(:screen_height, :screen_width).where(:timestamp.gte => current_time - 2.years, :timestamp.lte => current_time).aggregate.sort! {|x,y| y['count'] <=> x['count'] }
+      statistic = Visit.only(:screen_height, :screen_width).where(:timestamp.gte => current_time - 2.years, :timestamp.lte => current_time).aggregate.sort! {|x,y| y["count"] <=> x["count"] }
       statistic.first(options[:limit] || 5)
     end
   
@@ -99,11 +97,11 @@ module ControlCenter
       options = args.extract_options!
       current_time = Time.zone.now
       if options[:unique_domain]
-        statistic = Visit.only(:referrer_domain).where(:timestamp.gte => current_time - 2.years, :timestamp.lte => current_time).aggregate.sort! {|x,y| y['count'] <=> x['count'] }
-        statistic.delete_if {|x| x['referrer_domain'].blank? }
+        statistic = Visit.only(:referrer_domain).where(:timestamp.gte => current_time - 2.years, :timestamp.lte => current_time).aggregate.sort! {|x,y| y["count"] <=> x["count"] }
+        statistic.delete_if {|x| x["referrer_domain"].blank? }
       else
-        statistic = Visit.only(:referrer_url).where(:timestamp.gte => current_time - 2.years, :timestamp.lte => current_time).aggregate.sort! {|x,y| y['count'] <=> x['count'] }
-        statistic.delete_if {|x| x['referrer_url'].blank? }
+        statistic = Visit.only(:referrer_url).where(:timestamp.gte => current_time - 2.years, :timestamp.lte => current_time).aggregate.sort! {|x,y| y["count"] <=> x["count"] }
+        statistic.delete_if {|x| x["referrer_url"].blank? }
       end
       statistic.first(options[:limit] || 5)
     end
@@ -112,9 +110,9 @@ module ControlCenter
       options = args.extract_options!
       current_time = Time.zone.now
       if options[:version]
-        statistic = Visit.only(:browser, :browser_version).where(:timestamp.gte => current_time - 2.years, :timestamp.lte => current_time).aggregate.sort! {|x,y| y['count'] <=> x['count'] }
+        statistic = Visit.only(:browser, :browser_version).where(:timestamp.gte => current_time - 2.years, :timestamp.lte => current_time).aggregate.sort! {|x,y| y["count"] <=> x["count"] }
       else
-        statistic = Visit.only(:browser).where(:timestamp.gte => current_time - 2.years, :timestamp.lte => current_time).aggregate.sort! {|x,y| y['count'] <=> x['count'] }
+        statistic = Visit.only(:browser).where(:timestamp.gte => current_time - 2.years, :timestamp.lte => current_time).aggregate.sort! {|x,y| y["count"] <=> x["count"] }
       end
       statistic.first(options[:limit] || 5)
     end
@@ -122,7 +120,7 @@ module ControlCenter
     def self.operating_systems(*args)
       options = args.extract_options!
       current_time = Time.zone.now
-      statistic = Visit.only(:os).where(:timestamp.gte => current_time - 2.years, :timestamp.lte => current_time).aggregate.sort! {|x,y| y['count'] <=> x['count'] }
+      statistic = Visit.only(:os).where(:timestamp.gte => current_time - 2.years, :timestamp.lte => current_time).aggregate.sort! {|x,y| y["count"] <=> x["count"] }
       statistic.first(options[:limit] || 5)
     end
   
@@ -145,13 +143,11 @@ module ControlCenter
           return {count: total};
         };"
       if VisitStatistic.where(:hourly_location_done => true, :hour.lte => current_hour).to_a.count > 0
-        result = VisitStatistic.collection.map_reduce(map, reduce, :query => {'hourly_location_done' => true, 'hour' => {'$lte' => current_hour}}).find().to_a
-        result.sort! {|x,y| y['value']['count'].to_i <=> x['value']['count'].to_i }
+        result = VisitStatistic.collection.map_reduce(map, reduce, :query => {"hourly_location_done" => true, "hour" => {"$lte" => current_hour}}).find().to_a
+        result.sort! {|x,y| y["value"]["count"].to_i <=> x["value"]["count"].to_i }
       else
         return false
       end
     end
-  
   end
-
 end

@@ -1,7 +1,5 @@
 module ControlCenter
-
   class Admin
-
     include Mongoid::Document
     include Mongoid::Timestamps
            
@@ -13,7 +11,7 @@ module ControlCenter
   
     field :username, :type => String
     field :full_name, :type => String
-    field :time_zone, :type => String, :default => 'UTC'
+    field :time_zone, :type => String, :default => "UTC"
     field :past_months_statistics_follow_timezone, :type => Boolean
     
     index :username
@@ -41,7 +39,5 @@ module ControlCenter
       value = conditions[authentication_keys.first].downcase
       self.any_of({ :username => value }, { :email => value }).first
     end
-
   end
-
 end
