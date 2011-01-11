@@ -4,7 +4,7 @@ namespace :control_center do
     
     desc "Load custom environment for visit_statisitc."
     task :custom_environment => :environment do
-      Time.zone = 'UTC' # All time must be in UTC
+      Time.zone = "UTC" # All time must be in UTC
       GeoIp.api_key = ControlCenter.geoip_api_key # Set GeoIp API key.
     end
   
@@ -28,7 +28,7 @@ namespace :control_center do
   
     desc "Add browser version for Internet Explorer browsers. It is a fix for a bug where user agent didn't parse browser version correctly."
     task :fix_unknown_ie_version => :custom_environment do      
-      targets = ControlCenter::Visit.where(:browser => 'Internet Explorer', :browser_version => '')
+      targets = ControlCenter::Visit.where(:browser => "Internet Explorer", :browser_version => "")
       for target in targets
         target.browser_version = Agent.new(target.user_agent).version
         target.save
@@ -46,14 +46,14 @@ namespace :control_center do
         end_day = Time.utc(last_visit.timestamp.year, last_visit.timestamp.month, last_visit.timestamp.day)
         (0..((end_day - start_day).to_i / (60*60*24))).each do |day_count|
           day = start_day + day_count.day
-          puts day unless Rails.env == 'production'
+          puts day unless Rails.env == "production"
           for visit in ControlCenter::Visit.only(:url).where(:timestamp.gte => day, :timestamp.lt => day + 1.day).group
-            puts visit['url'] unless Rails.env == 'production'
-            visit_statistic = ControlCenter::VisitStatistic.where(:day => day, :url => visit['url'])
+            puts visit["url"] unless Rails.env == "production"
+            visit_statistic = ControlCenter::VisitStatistic.where(:day => day, :url => visit["url"])
             if visit_statistic.count < 1
-              ControlCenter::VisitStatistic.create(:url => visit['url'], :day => day, 
-                :visits => visit['group'].count,
-                :title => ControlCenter::VisitStatistic.where(:hour.gte => day, :hour.lt => day + 1.day, :url => visit['url']).asc(:hour).last.title
+              ControlCenter::VisitStatistic.create(:url => visit["url"], :day => day, 
+                :visits => visit["group"].count,
+                :title => ControlCenter::VisitStatistic.where(:hour.gte => day, :hour.lt => day + 1.day, :url => visit["url"]).asc(:hour).last.title
               )
             end
           end   
@@ -72,14 +72,14 @@ namespace :control_center do
         end_month = Time.utc(last_visit.timestamp.year, last_visit.timestamp.month)
         (0..((end_month.month - start_month.month) + 12 * (end_month.year - start_month.year))).each do |month_count|
           month = start_month + month_count.month
-          puts month unless Rails.env == 'production'
+          puts month unless Rails.env == "production"
           for visit in ControlCenter::Visit.only(:url).where(:timestamp.gte => month, :timestamp.lt => month + 1.month).group
-            puts visit['url'] unless Rails.env == 'production'
-            visit_statistic = ControlCenter::VisitStatistic.where(:month => month, :url => visit['url'])
+            puts visit["url"] unless Rails.env == "production"
+            visit_statistic = ControlCenter::VisitStatistic.where(:month => month, :url => visit["url"])
             if visit_statistic.count < 1
-              ControlCenter::VisitStatistic.create(:url => visit['url'], :month => month, 
-                :visits => visit['group'].count,
-                :title => ControlCenter::VisitStatistic.where(:hour.gte => month, :hour.lt => month + 1.month, :url => visit['url']).asc(:hour).last.title
+              ControlCenter::VisitStatistic.create(:url => visit["url"], :month => month, 
+                :visits => visit["group"].count,
+                :title => ControlCenter::VisitStatistic.where(:hour.gte => month, :hour.lt => month + 1.month, :url => visit["url"]).asc(:hour).last.title
               )
             end
           end   
@@ -173,9 +173,9 @@ namespace :control_center do
             visit_statistics = ControlCenter::VisitStatistic.where(:hourly_location_done.ne => true, :hour => hour)
             for visit_statistic in visit_statistics
               for visit in ControlCenter::Visit.where(:url => visit_statistic.url, :timestamp.gte => hour, :timestamp.lt => hour + 1.hour)
-                puts "#{visit.ip_address}" unless Rails.env == 'production'
-                if geoips[visit.ip_address].present? && geoips[visit.ip_address][:status].downcase == 'ok'
-                  puts "#{visit.ip_address}: successful." unless Rails.env == 'production'
+                puts "#{visit.ip_address}" unless Rails.env == "production"
+                if geoips[visit.ip_address].present? && geoips[visit.ip_address][:status].downcase == "ok"
+                  puts "#{visit.ip_address}: successful." unless Rails.env == "production"
                   location = visit_statistic.locations.where(:country => geoips[visit.ip_address][:country_name]).first
                   if location.present?
                     location.count += 1; location.save;
@@ -290,7 +290,7 @@ namespace :control_center do
     desc "Calculate monthly location."
     task :monthly_location => :custom_environment do
       if starting_statistic = ControlCenter::VisitStatistic.where(:monthly_location_done.ne => true, :month.exists => true).asc(:month).first
-        puts "Started at #{Time.now.utc}" unless Rails.env == 'production'
+        puts "Started at #{Time.now.utc}" unless Rails.env == "production"
         current_time = Time.now.utc
         end_month = Time.utc(current_time.year, current_time.month) - 1.month
         start_month = starting_statistic.month
