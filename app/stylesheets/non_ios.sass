@@ -1,0 +1,16 @@
+@import "compass"
+@import "partials/mixins"
+
+ul.squares
+	li.child-container
+		h3
+			$use-mozilla-ellipsis-binding: true
+			@include ellipsis
+		p.date
+			$use-mozilla-ellipsis-binding: true
+			@include ellipsis
+		
+#article-top
+	h2
+		$use-mozilla-ellipsis-binding: true
+		@include ellipsis

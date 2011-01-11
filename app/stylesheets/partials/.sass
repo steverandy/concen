@@ -1,0 +1,21 @@
+= sprite(!group_name, !image_name, !offset=0)
+  @if !group_name == "navigation" and !image_name == "button-grid"
+    background: url('//public/images/sprites/navigation.png?1281848626') no-repeat 0px #{0+!offset}px
+    width: 26px
+    height: 26px
+  @else if !group_name == "navigation" and !image_name == "button-next-disabled"
+    background: url('//public/images/sprites/navigation.png?1281848626') no-repeat 0px #{-26+!offset}px
+    width: 26px
+    height: 26px
+  @else if !group_name == "navigation" and !image_name == "button-next"
+    background: url('//public/images/sprites/navigation.png?1281848626') no-repeat 0px #{-52+!offset}px
+    width: 26px
+    height: 26px
+  @else if !group_name == "navigation" and !image_name == "button-prev-disabled"
+    background: url('//public/images/sprites/navigation.png?1281848626') no-repeat 0px #{-78+!offset}px
+    width: 26px
+    height: 26px
+  @else if !group_name == "navigation" and !image_name == "button-prev"
+    background: url('//public/images/sprites/navigation.png?1281848626') no-repeat 0px #{-104+!offset}px
+    width: 26px
+    height: 26px

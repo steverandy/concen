@@ -1,0 +1,8 @@
+@mixin image-dimensions($path)
+	height: image-height($path)
+	width: image-width($path)
+
+@mixin background-image($path)
+	background: image-url($path)
+	background-repeat: no-repeat 
+	@include image-dimensions($path)

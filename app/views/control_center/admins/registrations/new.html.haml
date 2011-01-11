@@ -1,0 +1,34 @@
+#header
+	%h1 Sign Up for an Account for Free
+#content.relative
+	- if devise_error_messages!.present?
+		.flash-messages
+			%p.alert Sign up failed. Please review the form again.
+	= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+		.field
+			= f.label :full_name, 'Full Name', :class => 'wide'
+			= f.text_field :full_name
+			- error_message_for resource, :full_name
+		.field
+			= f.label :username, nil, :class => 'wide'
+			= f.text_field :username
+			- error_message_for resource, :username
+			.clear
+			%p.hint.wide Username is not case sensitive
+		.field
+			= f.label :email, nil, :class => 'wide'
+			= f.text_field :email
+			- error_message_for resource, :email
+		.field
+			= f.label :password, nil, :class => 'wide'
+			= f.password_field :password
+			- error_message_for resource, :password
+		.field
+			= f.label :password_confirmation, 'Password Confirmation', :class => 'wide'
+			= f.password_field :password_confirmation
+			- error_message_for resource, :password_confirmation
+		.actions.wide
+			= f.submit "Sign Up", :disable_with => 'Please Wait...'
+			= link_to 'Cancel', root_path, :class => 'link-button'
+	.side-panel
+		= render :partial => "users/shared/links"

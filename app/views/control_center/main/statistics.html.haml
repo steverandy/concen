@@ -1,0 +1,137 @@
+%section.content
+	.panels.clearfix
+		.panel.wide
+			%h3 
+				Recent Visits
+			.big-text
+				%p
+					%span.secondary= ControlCenter::VisitStatistic.visits_for_current :hour, :unique => true
+					%span.slash /
+					%span.primary= ControlCenter::VisitStatistic.visits_for_current :hour
+				%p.label= "This Hour (#{@current_hour.strftime('%I:%M %p')})"
+			.big-text
+				%p
+					%span.secondary= ControlCenter::VisitStatistic.visits_for_current :day, :unique => true
+					%span.slash /
+					%span.primary= ControlCenter::VisitStatistic.visits_for_current :day
+				%p.label= "Today (#{@current_day.strftime('%d %B')})"
+			.big-text.edge
+				%p
+					%span.secondary= ControlCenter::VisitStatistic.visits_for_current :month, :unique => true
+					%span.slash /
+					%span.primary= ControlCenter::VisitStatistic.visits_for_current :month
+				%p.label.last= "This Month (#{@current_month.strftime('%B %Y')})"
+	.panels.clearfix
+		.panel.wide{:style => 'height:180px'}
+			%h3 
+				Historical Visits
+				%span.link= link_to 'Yearly', '#', :title => 'Show statistic year by year.'
+				%span.link= link_to 'Monthly', '#', :title => 'Show statistic month by month.'
+				%span.link= link_to 'Daily', '#', :title => 'Show statistic day by day.'
+			- current_time = Time.zone.now
+			- current_hour = Time.zone.local(current_time.year, current_time.month, current_time.day, current_time.hour)
+			- historical_visits = ControlCenter::VisitStatistic.visits_for_last_24_hours
+			- historical_unique_visits = ControlCenter::VisitStatistic.visits_for_last_24_hours :unique => true
+			- top_value = [historical_visits.max, historical_unique_visits.max].max
+			%ul.historical-visits.clearfix
+				- (0..23).each do |num|
+					%li
+						.count
+							.total{:style => "height:#{historical_visits[num].to_f/top_value.to_f*100.0}%", :title => pluralize(historical_visits[num], 'visit')}
+							.unique{:style => "height:#{historical_unique_visits[num].to_f/top_value.to_f*100.0}%", :title => pluralize(historical_unique_visits[num], 'unique visit')}
+						%p= (current_hour - num.hour).strftime('%I %p')
+						
+	.panels.clearfix
+		.panel
+			%h3
+				Popular Pages
+				%span.link= link_to 'Monthly', '#', :title => 'Show statistic month by month.'
+				%span.link= link_to 'Full', '#', :title => 'Show full list.'
+			%ul
+				- for page in ControlCenter::VisitStatistic.popular_pages(:limit => 6)
+					%li
+						- url_array = URI.split(page['url'])
+						%p= link_to "#{url_array[5]}#{url_array[6]}#{url_array[7]}#{url_array[8]}", page['url'], :title => page['url']
+						%p.right= page['count'].to_i
+		.panel
+			%h3
+				Referrers
+				%span.link= link_to 'Monthly', '#'
+			%ul
+				- for page in ControlCenter::VisitStatistic.referrers(:limit => 6, :unique_domain => true)
+					%li
+						%p= page['referrer_domain']
+						%p.right= page['count'].to_i
+		.panel.edge
+			%h3
+				Resolutions
+				%span.link= link_to 'Monthly', '#'
+			%ul
+				- for page in ControlCenter::VisitStatistic.resolutions(:limit => 6)
+					%li
+						%p= "#{page['screen_width']}x#{page['screen_height']}"
+						%p.right= page['count'].to_i
+	.panels.clearfix
+		.panel
+			%h3
+				Browsers
+				%span.link= link_to 'Monthly', '#'
+			%ul
+				- for page in ControlCenter::VisitStatistic.browsers(:limit => 6)
+					%li
+						%p= page['browser']
+						%p.right= page['count'].to_i
+		.panel
+			%h3
+				Operating Systems
+				%span.link= link_to 'Done', '#'
+
+				%span.timezone Sep 2010
+			%ul
+				- for page in ControlCenter::VisitStatistic.operating_systems(:limit => 6)
+					%li
+						%p= page['os']
+						%p.right= page['count'].to_i
+		.panel.edge
+			%h3
+				Locations
+				%span.link= link_to 'Monthly', '#'
+			%ul
+				- if locations = ControlCenter::VisitStatistic.locations
+					- for location in locations
+						%li
+							%p= location['_id']['country']
+							%p.right= location['value']['count'].to_i
+	.panels.clearfix
+		.panel
+			%h3
+				Server
+			%ul
+				%li
+					%p Uptime
+					%p.right= @server_statistics[:uptime] if @server_statistics
+				%li
+					%p Processor
+					%p.right= "#{@server_statistics[:processor][:user]}% user, #{@server_statistics[:processor][:sys]}% sys, #{@server_statistics[:processor][:idle]}% idle" if @server_statistics[:processor].present?
+				%li
+					%p Memory
+					%p.right= "#{@server_statistics[:memory][:used]} MB used, #{@server_statistics[:memory][:free]} MB free" if @server_statistics[:memory].present?
+				%li
+					%p MongoDB Data Size
+					%p.right= number_to_human_size(@mongodb_stats['dataSize'])
+				%li
+					%p MongoDB Index Size
+					%p.right= number_to_human_size(@mongodb_stats['indexSize'])
+		.panel
+			= render 'statistics_extra_panel_1' rescue nil
+		.panel.edge
+			= render 'statistics_extra_panel_2' rescue nil
+	.panels.clearfix
+		.panel.wide
+			%h3
+				Information
+			%ul
+				%li
+					%p= "Statistics were started on ___. That was ___ ago. Storage usage up to now is ___. Number of pages that has been tracked is ___."
+				%li
+					%p= "Every statistic for the current month is based on local time (#{Time.zone.now.strftime('%Z')}). Every other statistic is based on universal time (UTC)."

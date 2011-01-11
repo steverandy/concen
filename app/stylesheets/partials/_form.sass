@@ -1,0 +1,57 @@
+form
+	padding-bottom: 30px
+	@include clearfix
+	label
+		font-size: 13px
+		float: left
+		width: 120px
+		display: block
+		font-weight: 400
+		line-height: 27px
+	label.blank
+		text-indent: -9999px
+	label.inline
+		margin-left: 6px
+		margin-right: 16px
+		width: auto
+	input[type=text], input[type=password], textarea
+		border: 1px solid lighten(#000, 70%)
+		font: normal 13px/normal 'Helvetica Neue', Helvetica, Arial, sans-serif
+		height: 15px
+		padding: 5px 6px
+		color: lighten(#000, 20%)
+		min-width: 400px
+	input[type=checkbox], input[type=radio]
+		float: left
+		height: 27px
+		margin: 0
+		padding: 0
+	input[type=text]:focus, input[type=password]:focus, textarea:focus
+		outline: 0
+		border: 1px solid lighten(#000, 40%)
+	textarea
+		height: 48px
+	#errorExplanation ul
+		margin: 10px 0 16px 12px
+		li
+			font-size: 12px
+			list-style-position: inside
+			line-height: 18px
+			color: #f12d40
+			
+.wf-active form 
+	input[type=text], input[type=password], textarea
+		font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
+				
+form.edit_child
+	width: 60%
+
+.field
+	margin-bottom: 16px
+	min-height: 27px
+
+.actions
+	margin-left: 120px
+	padding-top: 10px
+	a
+		font-size: 13px
