@@ -1,8 +1,6 @@
 module ControlCenter
-
   class MainController < ApplicationController
-    
-    layout 'control_center/application'
+    layout "control_center/application"
   
     def index
       redirect_to :action => :statistics
@@ -14,7 +12,7 @@ module ControlCenter
     # Historical statistics
     # Month: visits
     def statistics
-      @page_title = 'Statistics'
+      @page_title = "Statistics"
     
       @current_time = Time.zone.now
       @current_hour = Time.zone.local(@current_time.year, @current_time.month, @current_time.day, @current_time.hour, 0, 0, 0)
@@ -45,9 +43,9 @@ module ControlCenter
           }
         end
       end
-      uptime_array = `uptime`.split('up')[1].strip.split('user')[0].split(','); uptime_array.delete_at(uptime_array.length - 1)
+      uptime_array = `uptime`.split("up")[1].strip.split("user")[0].split(","); uptime_array.delete_at(uptime_array.length - 1)
       if uptime_array.present?
-        uptime = uptime_array.join(',') 
+        uptime = uptime_array.join(",") 
         @server_statistics[:uptime] = uptime
       end
     
@@ -55,7 +53,7 @@ module ControlCenter
     
       # Disabled because it's uncertain the result is what as intended.
       # begin
-      #   @assets_storage_usage = Mongoid.database.collection('fs.chunks').stats['storageSize']
+      #   @assets_storage_usage = Mongoid.database.collection("fs.chunks").stats["storageSize"]
       # rescue
       #   @assets_storage_usage = 0
       # end
@@ -66,9 +64,6 @@ module ControlCenter
     end
   
     def assets
-    
     end
-  
   end
-
 end

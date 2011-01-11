@@ -1,5 +1,4 @@
 module ControlCenter
-  
   class Admins::ConfirmationsController < ApplicationController
     include Devise::Controllers::InternalHelpers
 
@@ -33,6 +32,4 @@ module ControlCenter
       end
     end
   end
-  
-  
 end

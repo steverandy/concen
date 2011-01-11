@@ -1,7 +1,5 @@
 module ControlCenter
-
   class ApplicationController < ActionController::Base
-  
     protect_from_forgery
   
     before_filter :authenticate_admin!
@@ -12,7 +10,7 @@ module ControlCenter
     helper_method :ios?
 	
   	def ios?
-      if @user_agent.os.to_s == 'iOS'
+      if @user_agent.os.to_s == "iOS"
         return true
       else
         return false
@@ -32,7 +30,5 @@ module ControlCenter
     def set_admin_time_zone
       Time.zone = current_admin.time_zone if admin_signed_in?
     end
-    
   end
-
 end

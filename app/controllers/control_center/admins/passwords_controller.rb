@@ -1,5 +1,4 @@
-module ControlCenter
-  
+module ControlCenter  
   class Admins::PasswordsController < ApplicationController
     prepend_before_filter :require_no_authentication
     include Devise::Controllers::InternalHelpers
@@ -41,6 +40,4 @@ module ControlCenter
       end
     end
   end
-  
-  
 end

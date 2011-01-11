@@ -1,10 +1,9 @@
 module ControlCenter
-
   class Admins::SessionsController < ApplicationController
     prepend_before_filter :require_no_authentication, :only => [ :new, :create ]
     include Devise::Controllers::InternalHelpers
     
-    layout 'control_center/application'
+    layout "control_center/application"
 
     # GET /resource/sign_in
     def new
@@ -25,5 +24,4 @@ module ControlCenter
       sign_out_and_redirect(resource_name)
     end
   end
-
 end

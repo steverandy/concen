@@ -1,5 +1,4 @@
-module ControlCenter
-  
+module ControlCenter  
   class Admins::RegistrationsController < ApplicationController
     prepend_before_filter :require_no_authentication, :only => [ :new, :create ]
     prepend_before_filter :authenticate_scope!, :only => [:edit, :update, :destroy]
@@ -26,7 +25,7 @@ module ControlCenter
 
     # GET /resource/edit
     def edit
-      @page_title = 'Settings'
+      @page_title = "Settings"
       render_with_scope :edit
     end
     
@@ -59,6 +58,4 @@ module ControlCenter
         self.resource = resource_class.find(send(:"current_#{resource_name}").id)
       end
   end
-  
-  
 end
