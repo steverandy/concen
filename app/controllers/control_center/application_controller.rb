@@ -1,6 +1,8 @@
 module ControlCenter
   class ApplicationController < ActionController::Base
     protect_from_forgery
+    
+    layout "control_center/application"
   
     before_filter :authenticate_admin!
     before_filter :get_user_agent

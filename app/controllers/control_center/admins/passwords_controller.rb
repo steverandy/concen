@@ -2,6 +2,8 @@ module ControlCenter
   class Admins::PasswordsController < ApplicationController
     prepend_before_filter :require_no_authentication
     include Devise::Controllers::InternalHelpers
+    
+    layout "control_center/application"
 
     # GET /resource/password/new
     def new

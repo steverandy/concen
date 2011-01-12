@@ -1,6 +1,8 @@
 module ControlCenter
   class Admins::ConfirmationsController < ApplicationController
     include Devise::Controllers::InternalHelpers
+    
+    layout "control_center/application"
 
     # GET /resource/confirmation/new
     def new

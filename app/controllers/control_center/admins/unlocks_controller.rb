@@ -2,6 +2,8 @@ module ControlCenter
   class Admins::UnlocksController < ApplicationController
     prepend_before_filter :require_no_authentication
     include Devise::Controllers::InternalHelpers
+    
+    layout "control_center/application"
 
     # GET /resource/unlock/new
     def new
