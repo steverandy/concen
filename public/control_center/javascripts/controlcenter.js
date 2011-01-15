@@ -166,3 +166,8 @@ $(document).ready(function() {
 	});
 	
 });
+
+window.autoRefresh = function(time) {
+	if (typeof time == "undefined") { time = 10000 };
+	setTimeout("location.reload(true);", time);
+}

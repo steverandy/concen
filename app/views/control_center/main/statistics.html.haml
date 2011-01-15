@@ -135,3 +135,6 @@
 					%p= "Statistics were started on ___. That was ___ ago. Storage usage up to now is ___. Number of pages that has been tracked is ___."
 				%li
 					%p= "Every statistic for the current month is based on local time (#{Time.zone.now.strftime('%Z')}). Every other statistic is based on universal time (UTC)."
+
+:javascript
+	autoRefresh();
