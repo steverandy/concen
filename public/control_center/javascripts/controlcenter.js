@@ -128,4 +128,41 @@ $(document).ready(function() {
 		}
 	});
 	
+	$("div.panels [title]").qtip({
+		show: {
+			delay: 0,
+			when: {
+				event: "click"
+			}
+		},
+		hide: {
+			when: {
+				event: "unfocus"
+			}
+		},
+		style: { 
+			border: {
+				width: 0,
+				radius: 0,
+				color: "white"
+			},
+			background: "white",
+			color: "black",
+			tip: {
+				color: false,
+				corner: "bottomMiddle",
+				size: {x:0,y:0}
+			}
+		},
+		position: {
+			corner: {
+				target: "topMiddle",
+				tooltip: "bottomMiddle"
+			},
+			adjust: {
+				y: -5
+			}
+		}
+	});
+	
 });

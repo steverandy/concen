@@ -436,7 +436,7 @@ a.grid
 				left: 0
 				width: 100%
 			div.total
-				background: #40c863
+				background: #43d166
 				z-index: 10
 			div.unique
 				background: #9aeeb0
@@ -447,6 +447,17 @@ a.grid
 				font-size: 11px
 				line-height: 14px
 				text-align: center
+				
+.qtip-content
+	font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
+	font-size: 13px
+	color: $grey20
+	background: white
+	
+.qtip-tip, .qtip-wrapper
+
+.qtip-wrapper
+	@include box-shadow(rgba(0,0,0,0.75), 0, 1px, 3px)
 				
 .wf-active .panels .panel div.big-text 
 	p

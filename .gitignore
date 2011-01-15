@@ -1,6 +1,7 @@
 .DS_Store
 .bundle/
 log/*.log
+app/stylesheets/.sass-cache
 pkg/
 test/dummy/db/*.sqlite3
 test/dummy/log/*.log
