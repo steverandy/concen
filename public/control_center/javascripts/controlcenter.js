@@ -168,6 +168,6 @@ $(document).ready(function() {
 });
 
 window.autoRefresh = function(time) {
-	if (typeof time == "undefined") { time = 10000 };
+	if (typeof time == "undefined") { time = 60000 };
 	setTimeout("location.reload(true);", time);
 }
