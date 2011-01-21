@@ -119,6 +119,27 @@ form {
   *zoom: 1;
 }
 /* line 4, ../../../app/stylesheets/partials/_form.sass */
+form .field {
+  overflow: hidden;
+  *zoom: 1;
+  margin-bottom: 16px;
+}
+/* line 7, ../../../app/stylesheets/partials/_form.sass */
+form span.align {
+  line-height: 30px;
+  font-size: 12px;
+  vertical-align: middle;
+  visibility: hidden;
+}
+/* line 12, ../../../app/stylesheets/partials/_form.sass */
+form .actions {
+  margin-left: 120px;
+}
+/* line 14, ../../../app/stylesheets/partials/_form.sass */
+form .actions a {
+  font-size: 13px;
+}
+/* line 16, ../../../app/stylesheets/partials/_form.sass */
 form label {
   font-size: 13px;
   float: left;
@@ -127,17 +148,22 @@ form label {
   font-weight: 400;
   line-height: 27px;
 }
-/* line 11, ../../../app/stylesheets/partials/_form.sass */
+/* line 23, ../../../app/stylesheets/partials/_form.sass */
 form label.blank {
   text-indent: -9999px;
+  font-size: 14px;
+  line-height: normal;
 }
-/* line 13, ../../../app/stylesheets/partials/_form.sass */
+/* line 27, ../../../app/stylesheets/partials/_form.sass */
 form label.inline {
-  margin-left: 6px;
-  margin-right: 16px;
+  font-size: 13px;
   width: auto;
+  float: none;
+  display: inline;
+  line-height: normal;
+  vertical-align: middle;
 }
-/* line 17, ../../../app/stylesheets/partials/_form.sass */
+/* line 34, ../../../app/stylesheets/partials/_form.sass */
 form input[type=text], form input[type=password], form textarea {
   border: 1px solid #b3b3b3;
   font: normal 13px/normal "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -146,27 +172,26 @@ form input[type=text], form input[type=password], form textarea {
   color: #333333;
   min-width: 400px;
 }
-/* line 24, ../../../app/stylesheets/partials/_form.sass */
+/* line 41, ../../../app/stylesheets/partials/_form.sass */
 form input[type=checkbox], form input[type=radio] {
-  float: left;
-  height: 27px;
-  margin: 0;
+  margin: 0 3px 0 0;
   padding: 0;
+  vertical-align: middle;
 }
-/* line 29, ../../../app/stylesheets/partials/_form.sass */
+/* line 45, ../../../app/stylesheets/partials/_form.sass */
 form input[type=text]:focus, form input[type=password]:focus, form textarea:focus {
   outline: 0;
   border: 1px solid #666666;
 }
-/* line 32, ../../../app/stylesheets/partials/_form.sass */
+/* line 48, ../../../app/stylesheets/partials/_form.sass */
 form textarea {
   height: 48px;
 }
-/* line 34, ../../../app/stylesheets/partials/_form.sass */
+/* line 50, ../../../app/stylesheets/partials/_form.sass */
 form #errorExplanation ul {
   margin: 10px 0 16px 12px;
 }
-/* line 36, ../../../app/stylesheets/partials/_form.sass */
+/* line 52, ../../../app/stylesheets/partials/_form.sass */
 form #errorExplanation ul li {
   font-size: 12px;
   list-style-position: inside;
@@ -174,30 +199,14 @@ form #errorExplanation ul li {
   color: #f12d40;
 }
 
-/* line 43, ../../../app/stylesheets/partials/_form.sass */
+/* line 59, ../../../app/stylesheets/partials/_form.sass */
 .wf-active form input[type=text], .wf-active form input[type=password], .wf-active form textarea {
   font-family: "proxima-nova-1", "proxima-nova-2", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-/* line 46, ../../../app/stylesheets/partials/_form.sass */
+/* line 62, ../../../app/stylesheets/partials/_form.sass */
 form.edit_child {
   width: 60%;
-}
-
-/* line 49, ../../../app/stylesheets/partials/_form.sass */
-.field {
-  margin-bottom: 16px;
-  min-height: 27px;
-}
-
-/* line 53, ../../../app/stylesheets/partials/_form.sass */
-.actions {
-  margin-left: 120px;
-  padding-top: 10px;
-}
-/* line 56, ../../../app/stylesheets/partials/_form.sass */
-.actions a {
-  font-size: 13px;
 }
 
 /* line 15, ../../../app/stylesheets/application.sass */

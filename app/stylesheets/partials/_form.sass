@@ -1,6 +1,18 @@
 form
 	padding-bottom: 30px
 	@include clearfix
+	.field
+		@include clearfix
+		margin-bottom: 16px
+	span.align
+		line-height: 30px
+		font-size: 12px
+		vertical-align: middle
+		visibility: hidden
+	.actions
+		margin-left: 120px
+		a
+			font-size: 13px
 	label
 		font-size: 13px
 		float: left
@@ -10,10 +22,15 @@ form
 		line-height: 27px
 	label.blank
 		text-indent: -9999px
+		font-size: 14px
+		line-height: normal
 	label.inline
-		margin-left: 6px
-		margin-right: 16px
+		font-size: 13px
 		width: auto
+		float: none
+		display: inline
+		line-height: normal
+		vertical-align: middle
 	input[type=text], input[type=password], textarea
 		border: 1px solid lighten(#000, 70%)
 		font: normal 13px/normal 'Helvetica Neue', Helvetica, Arial, sans-serif
@@ -22,10 +39,9 @@ form
 		color: lighten(#000, 20%)
 		min-width: 400px
 	input[type=checkbox], input[type=radio]
-		float: left
-		height: 27px
-		margin: 0
+		margin: 0 3px 0 0
 		padding: 0
+		vertical-align: middle
 	input[type=text]:focus, input[type=password]:focus, textarea:focus
 		outline: 0
 		border: 1px solid lighten(#000, 40%)
@@ -45,13 +61,3 @@ form
 				
 form.edit_child
 	width: 60%
-
-.field
-	margin-bottom: 16px
-	min-height: 27px
-
-.actions
-	margin-left: 120px
-	padding-top: 10px
-	a
-		font-size: 13px
