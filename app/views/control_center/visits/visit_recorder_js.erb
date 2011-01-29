@@ -1,12 +1,12 @@
 VisitRecorder = {};
 VisitRecorder.record = function(data) {
-	var date = new Date();
-	data.k = "<%= @visit_key.id %>"
+  var date = new Date();
+  data.k = "<%= @visit_key.id %>"
   data.u = document.location.href;
-	data.w = screen.width
-	data.h = screen.height
-	data.t = document.title
-	data.n = date.getTime();
+  data.w = screen.width
+  data.h = screen.height
+  data.t = document.title
+  data.n = date.getTime();
   if(document.referrer && document.referrer != "") {
     data.r = document.referrer;
   }

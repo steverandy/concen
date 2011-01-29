@@ -41,13 +41,13 @@ module ControlCenter
       end
       image = File.open("#{Rails.root}/public/control_center/images/record-visit.gif")
       send_data image.read, :type => "image/gif", :filename => "record-visit.gif", :disposition => "inline"
-  	end
-	
-  	def visit_recorder_js
+    end
+  
+    def visit_recorder_js
       @visit_key = SecureRandom.hex(8)
       @visit_key = VisitKey.create(:expire => Time.now.utc + 30.seconds)
       cookies[:visitor_id] = {:value => UUID.new.generate, :expires => 20.years.from_now} if cookies[:visitor_id].blank?
-  	  render :layout => false, :mime_type => "text/javascript"
-  	end
+      render :layout => false, :mime_type => "text/javascript"
+    end
   end
 end

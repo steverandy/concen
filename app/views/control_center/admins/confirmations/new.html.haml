@@ -1,15 +1,15 @@
 #header
-	%h1 Resend Confirmation Instructions
+  %h1 Resend Confirmation Instructions
 #content.relative
-	- if devise_error_messages!.present?
-		.flash-messages
-			%p.alert Failed to submit the form. Please review the form again.
-	= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name)) do |f|
-		.field
-			= f.label :email
-			= f.text_field :email
-			- error_message_for resource, :email
-		.actions
-			= f.submit "Resend Confirmation", :disable_with => "Please Wait..."
-	.side-panel
-		= render :partial => "users/shared/links"
+  - if devise_error_messages!.present?
+    .flash-messages
+      %p.alert Failed to submit the form. Please review the form again.
+  = form_for(resource, :as => resource_name, :url => confirmation_path(resource_name)) do |f|
+    .field
+      = f.label :email
+      = f.text_field :email
+      - error_message_for resource, :email
+    .actions
+      = f.submit "Resend Confirmation", :disable_with => "Please Wait..."
+  .side-panel
+    = render :partial => "users/shared/links"

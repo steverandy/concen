@@ -1,36 +1,36 @@
 %section.content
-	%h2 Settings
-	= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-		-if resource.errors.any?
-			#errorExplanation
-				%h3= "#{pluralize(resource.errors.count, "error")} prohibited this admin from being saved:"
-				%ul
-					- resource.errors.full_messages.each do |msg|
-						%li= msg
-		.field
-			= f.label :current_password, "Current Password"
-			= f.password_field :current_password
-		.field
-			= f.label :username
-			= f.text_field :username
-		.field
-			= f.label :email
-			= f.text_field :email
-		.field
-			= f.label :time_zone, "Time Zone"
-			= f.time_zone_select :time_zone, nil, :default => resource.time_zone
-			- # Some browser require a presence of another elemnt to properly set vertical-align.
-			%span.align Align
-		.field
-			= label_tag :past_months_statistics_follow_timezone, "Blank", :class => "blank"
-			= f.check_box :past_months_statistics_follow_timezone
-			= label_tag :past_months_statistics_follow_timezone, "Statistics for past months using the above time zone", :class => "inline"
-		.field
-			= f.label :password, "New Password"
-			= f.password_field :password
-		.field
-			= f.label :password_confirmation, "Confirm Password"
-			= f.password_field :password_confirmation
-		.actions
-			= f.submit "Save"
-			= link_to "Cancel", control_center_admin_root_path, :style => "margin-left: 10px"
+  %h2 Settings
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+    -if resource.errors.any?
+      #errorExplanation
+        %h3= "#{pluralize(resource.errors.count, "error")} prohibited this admin from being saved:"
+        %ul
+          - resource.errors.full_messages.each do |msg|
+            %li= msg
+    .field
+      = f.label :current_password, "Current Password"
+      = f.password_field :current_password
+    .field
+      = f.label :username
+      = f.text_field :username
+    .field
+      = f.label :email
+      = f.text_field :email
+    .field
+      = f.label :time_zone, "Time Zone"
+      = f.time_zone_select :time_zone, nil, :default => resource.time_zone
+      - # Some browser require a presence of another elemnt to properly set vertical-align.
+      %span.align Align
+    .field
+      = label_tag :past_months_statistics_follow_timezone, "Blank", :class => "blank"
+      = f.check_box :past_months_statistics_follow_timezone
+      = label_tag :past_months_statistics_follow_timezone, "Statistics for past months using the above time zone", :class => "inline"
+    .field
+      = f.label :password, "New Password"
+      = f.password_field :password
+    .field
+      = f.label :password_confirmation, "Confirm Password"
+      = f.password_field :password_confirmation
+    .actions
+      = f.submit "Save"
+      = link_to "Cancel", control_center_admin_root_path, :style => "margin-left: 10px"
