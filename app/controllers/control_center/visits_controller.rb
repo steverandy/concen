@@ -7,8 +7,8 @@ module ControlCenter
     def record
       VisitKey.where(:expire.lte => Time.now.utc).destroy_all
       if params[:k]
-        visit_key = VisitKey.criteria.id(params[:k]).first
-        if visit_key
+        visit_key = 
+        if visit_key = VisitKey.find(params[:k])
           cookies[:visitor_id] = {:value => UUID.new.generate, :expires => 20.years.from_now} if cookies[:visitor_id].blank?
           # Parsing user agent on server side may cause some slow down.
           # TODO: May implement on client side.
