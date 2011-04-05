@@ -14,9 +14,7 @@ Gem::Specification.new do |s|
   
   s.rubyforge_project = "control_center"
   
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.files = Dir["README", "MIT-LICENSE", "config/routes.rb", "init.rb", "lib/**/*", "app/**/*", "public/control_center/**/*"]
   s.require_paths = ["lib"]
   
   s.add_development_dependency("compass", "0.10.6")
