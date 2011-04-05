@@ -6,7 +6,7 @@ module ControlCenter
     
     def record
       VisitKey.where(:expire.lte => Time.now.utc).destroy_all
-      if params[:k] && visit_key = VisitKey.where(:id => params[:k]).first
+      if params[:k] && visit_key = VisitKey.where(:_id => params[:k]).first
         cookies[:visitor_id] = {:value => UUID.new.generate, :expires => 20.years.from_now} if cookies[:visitor_id].blank?
         # Parsing user agent on server side may cause some slow down.
         # TODO: May implement on client side.
@@ -41,7 +41,6 @@ module ControlCenter
     end
   
     def visit_recorder_js
-      @visit_key = SecureRandom.hex(8)
       @visit_key = VisitKey.create(:expire => Time.now.utc + 30.seconds)
       cookies[:visitor_id] = {:value => UUID.new.generate, :expires => 20.years.from_now} if cookies[:visitor_id].blank?
       render :layout => false, :mime_type => "text/javascript"
