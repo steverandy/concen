@@ -5,14 +5,12 @@ require "control_center/version"
 Gem::Specification.new do |s|  
   s.name = "control_center"
   s.version = ControlCenter::VERSION
-  s.platform    = Gem::Platform::RUBY
-  s.author = "Steve Randy Tantra"
-  s.email = "mail@steverandytantra.com"
+  s.platform = Gem::Platform::RUBY
+  s.authors = ["Steve Randy Tantra"]
+  s.email = ["mail@steverandytantra.com"]
   s.homepage = "http://steverandytantra.com"
-  s.summary = "Control Center"
-  s.description = "Control and monitor website."
-  
-  s.rubyforge_project = "control_center"
+  s.summary = %q{Control and monitor website.}
+  s.description = %q{This gem provides a Rails engine for Rails application to control and monitor the application from a web interface. It covers controlling content, monitoring visitors, and monitoring application performance. The engine is flexible in term of form and function. It can be styled and have custom functions. }
   
   s.files = Dir["README", "MIT-LICENSE", "config/routes.rb", "init.rb", "lib/**/*", "app/**/*", "public/control_center/**/*"]
   s.require_paths = ["lib"]
