@@ -1,7 +1,8 @@
 Rails.application.routes.draw do  
-  scope :constraints => {:subdomain => "controlcenter"}, :as => "control_center" do
-    match "/statistics" => "control_center/main#statistics", :as => "statistics"
-    match "/content" => "control_center/main#content", :as => "content"
+  scope :constraints => {:subdomain => "controlcenter"}, :module => "control_center", :as => "control_center"  do
+    match "/statistics" => "main#statistics", :as => "statistics"
+    resources :pages
+    root :to => "main#statistics"
   end
   
   match "/visits/record.gif" => "control_center/visits#record", :as => "record_visit"

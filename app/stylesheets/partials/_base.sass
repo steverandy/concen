@@ -1,28 +1,99 @@
-// Here is where you can define your constants for your application and to configure the blueprint framework.
-// Feel free to delete these if you want keep the defaults:
+html
+  overflow-y: scroll
 
-$blueprint-grid-columns: 24
-$blueprint-grid-width: 30px
-$blueprint-grid-margin: 10px
+body
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+  font-weight: 400
+  color: $grey-20
+  min-width: 820px
+  // Improved handling of kerning pairs and ligatures.
+  text-rendering: optimizeLegibility
+  
+.wf-active body
+  font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
+  
+h1
+  font-size: 24px
 
-// If you change your grid column dimensions
-// you can make a new grid background image from the command line like this:
-// compass grid-img 30+10x16
+h2
+  font: 20px/normal 'Helvetica Neue', Helvetica, Arial, sans-serif
+  font-weight: 500
+  margin-bottom: 30px
+  
+.wf-active h2
+  font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
+  font-weight: 600
+  
+h3
+  font: 16px/normal 'Helvetica Neue', Helvetica, Arial, sans-serif
+  font-weight: 500
+  
+.wf-active h3
+  font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
+  font-weight: 600
+  
+p
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
+  font-weight: 400
+  
+.wf-active p
+  font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
+
+a
+  @include link-colors($grey-20, $grey-20, $grey-20, $grey-20, $grey-20)
+  border-bottom: 1px solid lighten(black, 80%)
+  text-decoration: none
+  
+a:focus
+  text-decoration: none
+  
+.controlcenter a
+  outline: none
+  
+a.inactive
+  color: lighten(#000, 60%)
+  text-decoration: none
+  
+img.visit-recorder
+  position: absolute
+  top: 0
+  left: 0
+  
+.clearfix
+  @include clearfix
+  
+.center
+  text-align: center
+  
+a.link-button
+  font-size: 13px
+  @include hover-link
+  @include inline-block
+  border: 1px solid lighten(#000, 60%)
+  padding: 4px 10px
+  font-weight: 500
+  width: auto
+  min-width: 80px
+  max-width: 140px
+
+a.link-button:hover
+  background: lighten(#000, 94%)
+  text-decoration: none
 
 .upcase
-	text-transform: uppercase
+  text-transform: uppercase
 
 .center
-	text-align: center
+  text-align: center
 
 .clearfix
-	@include clearfix
+  @include clearfix
 
 .clear
-	clear: both
+  clear: both
 
 .hide
-	display: none
+  display: none
 
 .cursor-move
-	cursor: move
+  cursor: move

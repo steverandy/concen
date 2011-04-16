@@ -59,10 +59,6 @@ module ControlCenter
       # end
     end
   
-    def content
-      # @parents = Parent.all.asc(:position)
-    end
-  
     def assets
     end
   end

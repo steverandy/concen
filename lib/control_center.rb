@@ -7,5 +7,5 @@ module ControlCenter
 
   def self.setup
     yield self
-  end 
+  end
 end

@@ -19,6 +19,6 @@ Gem::Specification.new do |s|
   s.add_dependency("haml", ">=3.1.0.alpha.147")
   s.add_dependency("mongoid", "~>2.0.0")
   s.add_dependency("bson_ext", "~>1.3.0")
-  s.add_dependency("uuid", ">=2.3.1")
+  s.add_dependency("uuid", ">=2.3.2")
   s.add_dependency("whenever", "~>0.6.2")
 end
