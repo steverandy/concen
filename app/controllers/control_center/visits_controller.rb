@@ -2,8 +2,6 @@ require "uuid"
 
 module ControlCenter
   class VisitsController < ApplicationController
-    skip_before_filter :authenticate_admin!
-    
     def record
       VisitKey.where(:expire.lte => Time.now.utc).destroy_all
       if params[:k] && visit_key = VisitKey.where(:_id => params[:k]).first

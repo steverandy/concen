@@ -4,9 +4,7 @@ module ControlCenter
     
     layout "control_center/application"
   
-    before_filter :authenticate_admin!
     before_filter :get_user_agent
-    before_filter :set_admin_time_zone
     before_filter :set_controlcenter
   
     helper_method :ios?
@@ -27,10 +25,6 @@ module ControlCenter
   
     def set_controlcenter
       @controlcenter = true
-    end
-  
-    def set_admin_time_zone
-      Time.zone = current_admin.time_zone if admin_signed_in?
     end
   end
 end
