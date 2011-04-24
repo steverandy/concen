@@ -6,3 +6,13 @@
   background: image-url($path)
   background-repeat: no-repeat
   +image-dimensions($path)
+  
+@mixin typekit-font($font-name)
+  @if $font-name == "proxima-nova"
+    font-family: "proxima-nova-1", "proxima-nova-2", "Helvetica Neue", Helvetica, Arial, sans-serif
+    .wf-loading &
+      visibility: hidden
+  @if $font-name == "proxima-nova-extra-condensed"
+    font-family: "proxima-nova-extra-condensed-1", "proxima-nova-extra-condensed-2", "Helvetica Neue", Helvetica, Arial, sans-serif
+    .wf-loading &
+      visibility: hidden

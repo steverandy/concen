@@ -3,33 +3,34 @@
 @import "blueprint/print"
 @import "partials/mixins"
 @import "partials/variables"
-@import "partials/fonts"
 @import "partials/base"
 @import "partials/form"
 
 @media print
   +blueprint-print
+  
+body.controlcenter
+  header, #content, footer
+    width: 960px
 
 // Header
 
 header
-  width: 760px
   display: block
-  border-bottom: 1px solid lighten(#000, 80%)
+  border-bottom: 1px solid $gray-80
   margin: 30px auto 0 auto
   position: relative
   h1
-    padding-bottom: 15px
-    height: 25px
+    +typekit-font("proxima-nova")
     font-weight: 600
+    height: 25px
+    padding-bottom: 15px
     a
       font-size: 22px
       line-height: 25px
       display: block
-      @include clearfix
       border-bottom: 0
-    a:hover
-      text-decoration: none
+      +clearfix
     span
       float: left
     span.application-name
@@ -39,13 +40,14 @@ header
       display: block
   nav
     ul
-      @include horizontal-list(10px)
+      +horizontal-list(10px)
+      font-size: 13px
       overflow: visible
       position: absolute
       top: 4px
-      font-size: 13px
       li a
         line-height: 17px
+        +typekit-font("proxima-nova")
     ul.left
       left: 0
     ul.right
@@ -55,41 +57,31 @@ header
     top: 0
     right: 0
   input#keyword
+    font-size: 12px
+    line-height: 15px
     @include background-image-with-dimension('magnifying-glass.png')
     background-position: 6px 5px
     border: 1px solid lighten(#000, 70%)
+    outline: none
     @include border-radius(60px)
-    -webkit-appearance: none
+    -webkit-appearance: none    
     min-width: 120px
     width: 120px
     height: 15px
     padding: 4px 12px 4px 24px
-    font-size: 12px
-    line-height: 15px
-    color: lighten(#000, 60%)
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
-    outline: none
+    color: $gray-60
   input#keyword:focus
-    color: lighten(#000, 20%)
-    
-.wf-active header input#keyword
-  font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
-
-body
-  header, #content, footer
-    width: 760px
-
-body.controlcenter
-  header, #content, footer
-    width: 960px
+    color: $gray-20
     
 // Content Section
 
 #content
-  margin: 0 auto
-  margin-top: 30px
-  display: block
+  margin: 30px auto 0 auto
   text-align: left
+  h2
+    +typekit-font("proxima-nova")
+    font-weight: 600
+    margin-bottom: 30px
   div.parent-header
     height: 24px
     width: 100%
@@ -104,13 +96,16 @@ body.controlcenter
       margin-left: 6px
       color: lighten(#000, 60%)
     p.counter
-      font: italic 18px/24px  Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif
+      font-style: italic
+      font-size: 18px
+      line-height: 24px
       float: right
       
 ul.pages
   margin-left: 20px
   font-size: 14px
   p
+    +typekit-font("proxima-nova")
     margin-bottom: 10px
   a
     font-size: 12px
@@ -121,9 +116,6 @@ ul.pages.level-0
   
 section#article
   width: 774px
-      
-.wf-active ul.search-result div.text p.date
-  font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
       
 .boxshadow ul.search-result
   padding-bottom: 0
@@ -136,8 +128,8 @@ section#article
 // Footer
 
 footer
-  color: $grey-20
-  margin: 0px auto 30px auto
+  color: $gray-20
+  margin: 30px auto
   width: 760px
   display: block
   font-size: 12px
@@ -145,9 +137,7 @@ footer
   p
     text-align: center
     margin: 15px 0 0 0
-
-body.controlcenter footer
-  width: 960px
+    +typekit-font("proxima-nova")
     
 // Buttons
 
@@ -224,15 +214,15 @@ a.grid
           text-indent: -9999px
           float: left
         .check
-          @include background-image-with-dimension("glyph-small-check.png")
+          +background-image-with-dimension("glyph-small-check.png")
         .activate
-          @include background-image-with-dimension("glyph-small-check-alt.png")
+          +background-image-with-dimension("glyph-small-check-alt.png")
         .activate:hover
-          @include background-image-with-dimension("glyph-small-check.png")
+          +background-image-with-dimension("glyph-small-check.png")
         .handle
-          @include background-image-with-dimension("glyph-small-handle.png")
+          +background-image-with-dimension("glyph-small-handle.png")
         .delete
-          @include background-image-with-dimension("glyph-small-delete.png")
+          +background-image-with-dimension("glyph-small-delete.png")
         
 .panels
   .panel
@@ -259,20 +249,20 @@ a.grid
           float: right
           display: block
           border: 1px solid lighten(#000, 60%)
-          @include border-radius(2px)
+          +border-radius(2px)
           padding: 2px 6px
           font-weight: 600
-          @include box-shadow(white, 0px, 1px, 0px)
+          +box-shadow(white, 0px, 1px, 0px)
           margin-left: 8px
           text-align: center
           color: lighten(#000, 40%)
           background: lighten(#000, 88%)
-          @include linear-gradient(color-stops(lighten(#000, 95%), lighten(#000, 85%)))
+          +linear-gradient(color-stops(lighten(#000, 95%), lighten(#000, 85%)))
         a.active, a:active
           color: lighten(#000, 40%)
           border-color: lighten(#000, 50%)
           background: lighten(#000, 85%)
-          @include linear-gradient(color-stops(lighten(#000, 85%), lighten(#000, 95%)))
+          +linear-gradient(color-stops(lighten(#000, 85%), lighten(#000, 95%)))
         a:hover
           text-decoration: none
       span.timezone
@@ -281,10 +271,10 @@ a.grid
         float: right
         display: block
         border: 1px solid lighten(#000, 70%)
-        @include border-radius(2px)
+        +border-radius(2px)
         padding: 2px 6px
         font-weight: 600
-        @include box-shadow(white, 0px, 1px, 0px)
+        +box-shadow(white, 0px, 1px, 0px)
         margin-left: 8px
         text-align: center
         color: lighten(#000, 60%)
@@ -379,34 +369,27 @@ a.grid
         line-height: 14px
         text-align: center
         
+// Qtip JS Plugin
+        
 .qtip-content
   font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
   font-size: 13px
-  color: $grey-20
+  color: $gray-20
   background: white
   
 .qtip-tip, .qtip-wrapper
 
 .qtip-wrapper
   @include box-shadow(rgba(0,0,0,0.75), 0, 1px, 3px)
-        
-.wf-active .panels .panel div.big-text 
-  p
-    font-family: 'proxima-nova-extra-condensed-1', 'proxima-nova-extra-condensed-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
-    font-weight: 700
-  p.label
-    font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
-    font-weight: 500
 
-// Typekit specific
+// Ace Text Editor
 
-.wf-loading
-  ul.squares-column li.parent h2,
-  ul.squares-column li.parent p,
-  #article-top h2,
-  #article-top p.extra-info,
-  header nav ul li a,
-  footer p,
-  ul.squares h2,
-  ul.squares p
-    visibility: hidden
+#content-editor
+  width: 700px
+  height: 400px
+  line-height: normal
+  border: 1px solid lighten(#000, 80%)
+  position: relative
+  
+.ace_gutter
+  display: none

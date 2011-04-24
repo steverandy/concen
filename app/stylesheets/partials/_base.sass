@@ -2,46 +2,33 @@ html
   overflow-y: scroll
 
 body
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+  font-family: $base-font-family
   font-weight: 400
-  color: $grey-20
+  color: $gray-20
   min-width: 820px
   // Improved handling of kerning pairs and ligatures.
   text-rendering: optimizeLegibility
   
-.wf-active body
-  font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
-  
 h1
   font-size: 24px
+  font-weight: 600
 
 h2
-  font: 20px/normal 'Helvetica Neue', Helvetica, Arial, sans-serif
-  font-weight: 500
-  margin-bottom: 30px
-  
-.wf-active h2
-  font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
+  font-size: 20px
   font-weight: 600
+  line-height: normal
   
 h3
-  font: 16px/normal 'Helvetica Neue', Helvetica, Arial, sans-serif
-  font-weight: 500
-  
-.wf-active h3
-  font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
+  font-size: 16px
   font-weight: 600
+  line-height: normal
   
 p
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
   font-weight: 400
-  
-.wf-active p
-  font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
 
 a
-  @include link-colors($grey-20, $grey-20, $grey-20, $grey-20, $grey-20)
-  border-bottom: 1px solid lighten(black, 80%)
+  @include link-colors($gray-20, $gray-20, $gray-20, $gray-20, $gray-20)
+  border-bottom: 1px solid $gray-80
   text-decoration: none
   
 a:focus
@@ -51,19 +38,8 @@ a:focus
   outline: none
   
 a.inactive
-  color: lighten(#000, 60%)
+  color: $gray-60
   text-decoration: none
-  
-img.visit-recorder
-  position: absolute
-  top: 0
-  left: 0
-  
-.clearfix
-  @include clearfix
-  
-.center
-  text-align: center
   
 a.link-button
   font-size: 13px
@@ -79,6 +55,17 @@ a.link-button
 a.link-button:hover
   background: lighten(#000, 94%)
   text-decoration: none
+  
+img.visit-recorder
+  position: absolute
+  top: 0
+  left: 0
+  
+.clearfix
+  @include clearfix
+  
+.center
+  text-align: center
 
 .upcase
   text-transform: uppercase
@@ -92,8 +79,9 @@ a.link-button:hover
 .clear
   clear: both
 
-.hide
+.hidden
   display: none
+  visibility: hidden
 
 .cursor-move
   cursor: move

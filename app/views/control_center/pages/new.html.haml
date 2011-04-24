@@ -1,3 +1,6 @@
+- content_for :head_javascripts do
+  = javascript_include_tag "/control_center/javascripts/ace/ace.js"
+  
 #content
   %h2 New Page
   = render "form"

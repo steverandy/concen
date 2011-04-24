@@ -6,10 +6,10 @@
         - @page.errors.full_messages.each do |msg|
           %li= msg
   .field
-    = f.label :title
-    = f.text_field :title
+    #content-editor
+  = f.text_area :content, :class => "hidden"
   = f.hidden_field :parent_id
   = f.hidden_field :level
-  .actions
+  .actions.flush
     = f.submit "Save"
     = link_to "Cancel", control_center_pages_path

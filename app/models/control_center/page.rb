@@ -8,9 +8,11 @@ module ControlCenter
     field :parent_id, :type => BSON::ObjectId
     field :level, :type => Integer
     field :title, :type => String
+    field :description, :type => String
     field :slug, :type => String
     field :content, :type => String
     field :position, :type => Integer
+    field :publish_time, :type => Time
     
     validates_presence_of :title
     validates_presence_of :slug
@@ -19,6 +21,7 @@ module ControlCenter
     
     before_validation :set_slug
     before_create :set_position
+    before_destroy :destroy_children
     after_destroy :reset_position
     
     scope :with_position, where(:position.exists => true)
@@ -44,6 +47,12 @@ module ControlCenter
           page.position = page.position - 1
           page.save
         end
+      end
+    end
+    
+    def destroy_children
+      for child in Page.where(:parent_id => self.id)
+        child.destroy
       end
     end
   end
