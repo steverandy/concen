@@ -1,12 +1,5 @@
 #content
   - if @home_page
-    %ul.pages.level-0
-      %li
-        %p
-          %span= @home_page.title
-          = link_to "Edit", edit_control_center_page_path(@home_page)
-          = link_to "Delete", control_center_page_path(@home_page), :method => :delete, :confirm => "Are you sure?"
-          = link_to "Add Child", new_control_center_page_path(:level => @home_page.level + 1, :parent_id => @home_page.id)
-        - nested_pages_for(@home_page)
+    = render :partial => "nested_list", :locals => {:page => @home_page, :root => true}
   - else
     = link_to "New", new_control_center_page_path(:level => 0)
