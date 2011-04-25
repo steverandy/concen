@@ -15,11 +15,12 @@ Gem::Specification.new do |s|
   s.files = Dir["README", "MIT-LICENSE", "config/routes.rb", "init.rb", "lib/**/*", "app/**/*", "public/control_center/**/*"]
   s.require_paths = ["lib"]
   
-  s.add_development_dependency("compass", "0.10.6")
-  s.add_dependency("haml", ">=3.1.0.alpha.147")
+  s.add_development_dependency("compass", "0.11.0")
+  s.add_dependency("haml", ">=3.1.0")
   s.add_dependency("mongoid", "~>2.0.0")
   s.add_dependency("bson_ext", "~>1.3.0")
   s.add_dependency("uuid", ">=2.3.2")
   s.add_dependency("whenever", "~>0.6.2")
   s.add_dependency("aaronh-chronic")
+  s.add_dependency("redcarpet", "1.11.0")
 end
