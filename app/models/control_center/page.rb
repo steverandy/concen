@@ -3,7 +3,7 @@ module ControlCenter
     include Mongoid::Document
     include Mongoid::Timestamps
     
-    embeds_many :files
+    embeds_many :grid_files, :class_name => "ControlCenter::GridFile"
 
     field :parent_id, :type => BSON::ObjectId
     field :level, :type => Integer

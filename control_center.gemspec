@@ -23,4 +23,5 @@ Gem::Specification.new do |s|
   s.add_dependency("whenever", "~>0.6.2")
   s.add_dependency("aaronh-chronic", "~>0.3.9")
   s.add_dependency("redcarpet", "~>1.11.2")
+  s.add_dependency("mime-types", "~>1.16")
 end

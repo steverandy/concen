@@ -7,6 +7,10 @@
   .clearfix
     = render "form"
     #files
+      - if @page.grid_files.count > 0
+        %ul
+          - for file in @page.grid_files
+            %li= file.filename
       #file-uploader
         %noscript
           %p Please enable JavaScript to use file uploader.
@@ -16,7 +20,7 @@
     // pass the dom node (ex. $(selector)[0] for jQuery users)
     element: $("#file-uploader")[0],
     // path to server-side upload script
-    action: '#{upload_file_control_center_pages_path}',
+    action: '#{upload_file_control_center_page_path(@page)}',
     // additional data to send, name-value pairs
     params: {},
     // validation
