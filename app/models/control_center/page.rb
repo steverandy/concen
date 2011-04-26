@@ -26,6 +26,14 @@ module ControlCenter
     
     scope :with_position, where(:position.exists => true)
     
+    def children
+      Page.where(:parent_id => self.id)
+    end
+    
+    def parent
+      Page.find(self.parent_id)
+    end
+    
     protected
     
     def set_slug
