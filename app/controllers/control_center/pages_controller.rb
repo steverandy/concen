@@ -48,6 +48,12 @@ module ControlCenter
       redirect_to control_center_pages_path
     end
     
+    def upload_file
+      logger.info { "----#{env['rack.input']}" }
+      logger.info { "----#{env['HTTP_X_FILE_NAME']}" }
+      logger.info { "----#{env['CONTENT_TYPE']}" }
+    end
+    
     def parse_content
       meta_data = @page.content.split("---").first
       @page.title = meta_data.split("Title: ").last.split("\r\n").first

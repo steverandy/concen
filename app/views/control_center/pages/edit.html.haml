@@ -1,6 +1,41 @@
 - content_for :head_javascripts do
   = javascript_include_tag "/control_center/javascripts/ace/ace.js"
+  = javascript_include_tag "/control_center/javascripts/fileuploader.js"
 
 #content
   %h2 Edit Page
-  = render "form"
+  .clearfix
+    = render "form"
+    #files
+      #file-uploader
+        %noscript
+          %p Please enable JavaScript to use file uploader.
+ 
+:javascript
+  var uploader = new qq.FileUploader({
+    // pass the dom node (ex. $(selector)[0] for jQuery users)
+    element: $("#file-uploader")[0],
+    // path to server-side upload script
+    action: '#{upload_file_control_center_pages_path}',
+    // additional data to send, name-value pairs
+    params: {},
+    // validation
+    // ex. ['jpg', 'jpeg', 'png', 'gif'] or []
+    allowedExtensions: [],        
+    // each file size limit in bytes
+    // this option isn't supported in all browsers
+    sizeLimit: 0, // max size
+    minSizeLimit: 0, // min size
+    // set to true to output server response to console
+    debug: false,
+    // events         
+    // you can return false to abort submit
+    onSubmit: function(id, fileName){},
+    onProgress: function(id, fileName, loaded, total){},
+    onComplete: function(id, fileName, responseJSON){},
+    onCancel: function(id, fileName){},
+    messages: {
+        // error messages, see qq.FileUploaderBasic for content            
+    },
+    showMessage: function(message){ alert(message); }
+  });

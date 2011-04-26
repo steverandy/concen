@@ -5,6 +5,7 @@
 @import "partials/variables"
 @import "partials/base"
 @import "partials/form"
+@import "partials/fileuploader"
 
 @media print
   +blueprint-print
@@ -388,8 +389,17 @@ a.grid
   width: 700px
   height: 400px
   line-height: normal
-  border: 1px solid lighten(#000, 80%)
+  border: 1px solid $gray-80
   position: relative
   
 .ace_gutter
   display: none
+  
+#files
+  float: right
+  width: 186px
+  padding: 20px
+  border: 1px solid $gray-80
+
+form.edit_control_center_page
+  float: left
