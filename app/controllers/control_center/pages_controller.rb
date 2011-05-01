@@ -16,9 +16,9 @@ module ControlCenter
     
     def create
       @page = Page.new(params[:control_center_page])
-      parse_content
+      @page.parse_raw_text
       if @page.save
-        redirect_to(control_center_pages_path, :notice => "{Page was successfully created.") 
+        redirect_to(edit_control_center_page_path(@page), :notice => "{Page was successfully created.")
       else
         render :new
       end
@@ -31,9 +31,9 @@ module ControlCenter
     def update
       @page = Page.find(params[:id])
       if @page.update_attributes(params[:control_center_page])
-        parse_content
+        @page.parse_raw_text
         if @page.save
-          redirect_to control_center_pages_path
+          redirect_to(edit_control_center_page_path(@page), :notice => "{Page was successfully created.")
         else
           render :edit
         end
@@ -49,9 +49,9 @@ module ControlCenter
     end
     
     def upload_file
-      logger.info { "----#{env['rack.input']}" }
-      logger.info { "----#{env['HTTP_X_FILE_NAME']}" }
-      logger.info { "----#{env['CONTENT_TYPE']}" }
+      # logger.info { "----#{env['rack.input']}" }
+      # logger.info { "----#{env['HTTP_X_FILE_NAME']}" }
+      # logger.info { "----#{env['CONTENT_TYPE']}" }
       @page = Page.find(params[:id])
       @file = @page.grid_files.build
       if env['rack.input']
@@ -61,24 +61,6 @@ module ControlCenter
       end
       if @file.save
         render :text => "{'success': true}"
-      end
-    end
-    
-    def parse_content
-      meta_data = @page.content.split("---").first
-      @page.title = meta_data.split("Title: ").last.split("\r\n").first
-      @page.description = meta_data.split("Description: ").last.split("\r\n").first
-      publish_time_string = meta_data.split("Publish Time: ").last.split("\r\n").first
-      begin
-        Chronic.time_class = Time.zone
-        parsed_date = Chronic.parse(publish_time_string, :now => Time.zone.now)
-      rescue
-        parsed_date = nil
-      end
-      if parsed_date
-        @page.publish_time = parsed_date
-      elsif parsed_date = Time.zone.parse(publish_time_string)
-        @page.publish_time = parsed_date
       end
     end
   end

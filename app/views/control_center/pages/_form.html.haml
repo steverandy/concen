@@ -1,4 +1,4 @@
-= form_for @page do |f|
+= form_for @page, :class => "has-text-editor" do |f|
   - if @page.errors.any?
     #errorExplanation
       %h3= "#{pluralize(@page.errors.count, "error")} prohibited this parent from being saved:"
@@ -6,8 +6,8 @@
         - @page.errors.full_messages.each do |msg|
           %li= msg
   .field
-    #content-editor
-  = f.text_area :content, :class => "hidden"
+    #text-editor{:class => !@page.persisted? && "wide"}
+  = f.text_area :raw_text, :class => "text-editor-content hidden"
   = f.hidden_field :parent_id
   = f.hidden_field :level
   .actions.flush

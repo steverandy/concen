@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency("mongoid", "~>2.0.0")
   s.add_dependency("bson_ext", "~>1.3.0")
   s.add_dependency("uuid", "~>2.3.2")
-  s.add_dependency("whenever", "~>0.6.2")
+  s.add_dependency("whenever", "~>0.6.7")
   s.add_dependency("aaronh-chronic", "~>0.3.9")
   s.add_dependency("redcarpet", "~>1.11.2")
   s.add_dependency("mime-types", "~>1.16")

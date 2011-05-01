@@ -373,7 +373,7 @@ a.grid
 // Qtip JS Plugin
         
 .qtip-content
-  font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
+  +typekit-font("proxima-nova")
   font-size: 13px
   color: $gray-20
   background: white
@@ -385,12 +385,14 @@ a.grid
 
 // Ace Text Editor
 
-#content-editor
+#text-editor
   width: 700px
   height: 400px
   line-height: normal
   border: 1px solid $gray-80
   position: relative
+  &.wide
+    width: 958px
   
 .ace_gutter
   display: none
@@ -400,6 +402,13 @@ a.grid
   width: 186px
   padding: 20px
   border: 1px solid $gray-80
-
-form.edit_control_center_page
+  ul
+    +typekit-font("proxima-nova")
+    font-size: 12px
+    li
+      margin: 10px 0
+      &.last
+        margin-bottom: 0
+  
+form.new_control_center_page, form.edit_control_center_page
   float: left

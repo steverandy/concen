@@ -338,35 +338,42 @@ form.edit_child {
 .qq-uploader {
   position: relative;
   width: 186px;
+  font-family: "proxima-nova-1", "proxima-nova-2", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+/* line 13, ../../../app/stylesheets/partials/_mixins.sass */
+.wf-loading .qq-uploader {
+  visibility: hidden;
 }
 
-/* line 5, ../../../app/stylesheets/partials/_fileuploader.sass */
+/* line 6, ../../../app/stylesheets/partials/_fileuploader.sass */
 .qq-upload-button {
   display: block;
   width: 184px;
-  height: 184px;
-  color: white;
+  color: #333333;
   border: 1px solid #cccccc;
+  text-align: center;
+  padding: 10px 0;
+  height: 20px;
+  line-height: 20px;
+  font-weight: 600;
+  font-size: 16px;
 }
 
-/* line 12, ../../../app/stylesheets/partials/_fileuploader.sass */
-.qq-upload-button-hover {
-  color: white;
-}
-
-/* line 15, ../../../app/stylesheets/partials/_fileuploader.sass */
+/* line 20, ../../../app/stylesheets/partials/_fileuploader.sass */
 .qq-upload-button-focus {
   outline: 1px dotted black;
 }
 
-/* line 18, ../../../app/stylesheets/partials/_fileuploader.sass */
+/* line 23, ../../../app/stylesheets/partials/_fileuploader.sass */
 .qq-upload-drop-area {
   position: absolute;
   top: 0;
   left: 0;
   width: 184px;
-  height: 184px;
+  height: 20px;
+  padding: 10px 0;
   border: 1px solid #cccccc;
+  background: white;
   z-index: 2;
   text-align: center;
   font-family: "proxima-nova-1", "proxima-nova-2", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -375,22 +382,26 @@ form.edit_child {
 .wf-loading .qq-upload-drop-area {
   visibility: hidden;
 }
-/* line 28, ../../../app/stylesheets/partials/_fileuploader.sass */
+/* line 35, ../../../app/stylesheets/partials/_fileuploader.sass */
 .qq-upload-drop-area span {
   display: block;
   position: absolute;
-  top: 50%;
+  top: 0;
+  left: 0;
   width: 100%;
-  margin-top: -8px;
+  height: 20px;
+  line-height: 20px;
+  padding: 10px 0;
   font-size: 14px;
+  text-align: center;
 }
 
-/* line 36, ../../../app/stylesheets/partials/_fileuploader.sass */
+/* line 47, ../../../app/stylesheets/partials/_fileuploader.sass */
 .qq-upload-drop-area-active {
   background: #e6e6e6;
 }
 
-/* line 39, ../../../app/stylesheets/partials/_fileuploader.sass */
+/* line 50, ../../../app/stylesheets/partials/_fileuploader.sass */
 .qq-upload-list {
   padding: 0;
   list-style: disc;
@@ -398,7 +409,7 @@ form.edit_child {
   margin-left: 30px;
   margin-top: 10px;
 }
-/* line 45, ../../../app/stylesheets/partials/_fileuploader.sass */
+/* line 56, ../../../app/stylesheets/partials/_fileuploader.sass */
 .qq-upload-list li {
   margin: 0;
   padding: 0;
@@ -411,12 +422,12 @@ form.edit_child {
   visibility: hidden;
 }
 
-/* line 52, ../../../app/stylesheets/partials/_fileuploader.sass */
+/* line 63, ../../../app/stylesheets/partials/_fileuploader.sass */
 .qq-upload-file, .qq-upload-spinner, .qq-upload-size, .qq-upload-cancel, .qq-upload-failed-text {
   margin-right: 7px;
 }
 
-/* line 57, ../../../app/stylesheets/partials/_fileuploader.sass */
+/* line 68, ../../../app/stylesheets/partials/_fileuploader.sass */
 .qq-upload-spinner {
   display: inline-block;
   background: url("/control_center/images/fileuploader-loading.gif");
@@ -425,17 +436,17 @@ form.edit_child {
   vertical-align: text-bottom;
 }
 
-/* line 64, ../../../app/stylesheets/partials/_fileuploader.sass */
+/* line 75, ../../../app/stylesheets/partials/_fileuploader.sass */
 .qq-upload-size, .qq-upload-cancel {
   font-size: 11px;
 }
 
-/* line 67, ../../../app/stylesheets/partials/_fileuploader.sass */
+/* line 78, ../../../app/stylesheets/partials/_fileuploader.sass */
 .qq-upload-failed-text {
   display: none;
 }
 
-/* line 70, ../../../app/stylesheets/partials/_fileuploader.sass */
+/* line 81, ../../../app/stylesheets/partials/_fileuploader.sass */
 .qq-upload-fail .qq-upload-failed-text {
   display: inline;
 }
@@ -1149,6 +1160,10 @@ a.grid {
   color: #333333;
   background: white;
 }
+/* line 13, ../../../app/stylesheets/partials/_mixins.sass */
+.wf-loading .qtip-content {
+  visibility: hidden;
+}
 
 /* line 383, ../../../app/stylesheets/main.sass */
 .qtip-wrapper {
@@ -1159,28 +1174,49 @@ a.grid {
 }
 
 /* line 388, ../../../app/stylesheets/main.sass */
-#content-editor {
+#text-editor {
   width: 700px;
   height: 400px;
   line-height: normal;
   border: 1px solid #cccccc;
   position: relative;
 }
+/* line 394, ../../../app/stylesheets/main.sass */
+#text-editor.wide {
+  width: 958px;
+}
 
-/* line 395, ../../../app/stylesheets/main.sass */
+/* line 397, ../../../app/stylesheets/main.sass */
 .ace_gutter {
   display: none;
 }
 
-/* line 398, ../../../app/stylesheets/main.sass */
+/* line 400, ../../../app/stylesheets/main.sass */
 #files {
   float: right;
   width: 186px;
   padding: 20px;
   border: 1px solid #cccccc;
 }
+/* line 405, ../../../app/stylesheets/main.sass */
+#files ul {
+  font-family: "proxima-nova-1", "proxima-nova-2", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+}
+/* line 13, ../../../app/stylesheets/partials/_mixins.sass */
+.wf-loading #files ul {
+  visibility: hidden;
+}
+/* line 408, ../../../app/stylesheets/main.sass */
+#files ul li {
+  margin: 10px 0;
+}
+/* line 410, ../../../app/stylesheets/main.sass */
+#files ul li.last {
+  margin-bottom: 0;
+}
 
-/* line 404, ../../../app/stylesheets/main.sass */
-form.edit_control_center_page {
+/* line 413, ../../../app/stylesheets/main.sass */
+form.new_control_center_page, form.edit_control_center_page {
   float: left;
 }
