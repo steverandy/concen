@@ -327,9 +327,22 @@ form #errorExplanation ul li {
   list-style-position: inside;
   line-height: 18px;
   color: #f12d40;
+  font-family: "proxima-nova-1", "proxima-nova-2", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+/* line 13, ../../../app/stylesheets/partials/_mixins.sass */
+.wf-loading form #errorExplanation ul li {
+  visibility: hidden;
+}
+/* line 65, ../../../app/stylesheets/partials/_form.sass */
+form #errorExplanation ul h3 {
+  font-family: "proxima-nova-1", "proxima-nova-2", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+/* line 13, ../../../app/stylesheets/partials/_mixins.sass */
+.wf-loading form #errorExplanation ul h3 {
+  visibility: hidden;
 }
 
-/* line 65, ../../../app/stylesheets/partials/_form.sass */
+/* line 68, ../../../app/stylesheets/partials/_form.sass */
 form.edit_child {
   width: 60%;
 }
@@ -1217,6 +1230,6 @@ a.grid {
 }
 
 /* line 413, ../../../app/stylesheets/main.sass */
-form.new_control_center_page, form.edit_control_center_page {
+form.with-text-editor {
   float: left;
 }

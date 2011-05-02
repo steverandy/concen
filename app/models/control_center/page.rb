@@ -39,24 +39,21 @@ module ControlCenter
       Page.find(self.parent_id)
     end
     
-    def images(*args)
-      options = args.extract_options!
-      search_grid_files(["png", "jpg", "jpeg", "gif"], options[:filename])
+    def images(filename=nil)
+      search_grid_files(["png", "jpg", "jpeg", "gif"], filename)
     end
     
-    def stylesheets(*args)
-      options = args.extract_options!
-      search_grid_files(["css"], options[:filename])
+    def stylesheets(filename=nil)
+      search_grid_files(["css"], filename)
     end
     
-    def javascripts(*args)
-      options = args.extract_options!
-      search_grid_files(["js"], options[:filename])
+    def javascripts(filename=nil)
+      search_grid_files(["js"], filename)
     end
     
-    def search_grid_files(extensions, *filename)
+    def search_grid_files(extensions, filename=nil)
       if filename
-        self.grid_files.where(:original_filename => /#{filename}/i).and(:original_filename => /.*\.(#{extensions.join("|")}).*/i)
+        self.grid_files.where(:original_filename => /.*#{filename}.*.*\.(#{extensions.join("|")}).*$/i)
       else
         self.grid_files.where(:original_filename => /.*\.(#{extensions.join("|")}).*/i)
       end

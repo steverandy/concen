@@ -1,4 +1,4 @@
-= form_for @page, :class => "has-text-editor" do |f|
+= form_for @page, {:html => {:class => "with-text-editor"}} do |f|
   - if @page.errors.any?
     #errorExplanation
       %h3= "#{pluralize(@page.errors.count, "error")} prohibited this parent from being saved:"

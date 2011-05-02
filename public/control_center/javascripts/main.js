@@ -18,7 +18,7 @@ $(document).ready(function() {
     editor.getSession().setUseWrapMode(true);
     editor.getSession().setValue($("textarea.text-editor-content").eq(0).val());
     
-    $("form.has-text-editor").submit(function() {
+    $("form.with-text-editor").submit(function() {
   	  var editorContent = editor.getSession().getValue();
   	  $("textarea.text-editor-content").eq(0).val(editorContent);
   	  console.log($("textarea.text-editor-content").eq(0).val());
