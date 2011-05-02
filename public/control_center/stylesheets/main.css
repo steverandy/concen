@@ -725,27 +725,27 @@ header input#keyword:focus {
 }
 
 /* line 105, ../../../app/stylesheets/main.sass */
-ul.pages {
+ul.contents {
   margin-left: 20px;
   font-size: 14px;
 }
 /* line 108, ../../../app/stylesheets/main.sass */
-ul.pages p {
+ul.contents p {
   font-family: "proxima-nova-1", "proxima-nova-2", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-bottom: 10px;
 }
 /* line 13, ../../../app/stylesheets/partials/_mixins.sass */
-.wf-loading ul.pages p {
+.wf-loading ul.contents p {
   visibility: hidden;
 }
 /* line 111, ../../../app/stylesheets/main.sass */
-ul.pages a {
+ul.contents a {
   font-size: 12px;
   margin-left: 10px;
 }
 
 /* line 115, ../../../app/stylesheets/main.sass */
-ul.pages.level-0 {
+ul.contents.level-0 {
   margin-left: 0;
 }
 

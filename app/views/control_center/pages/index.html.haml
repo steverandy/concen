@@ -1,5 +1,0 @@
-#content
-  - if @home_page
-    = render :partial => "nested_list", :locals => {:page => @home_page, :root => true}
-  - else
-    = link_to "New Page", new_control_center_page_path(:level => 0)

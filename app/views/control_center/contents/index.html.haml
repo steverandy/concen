@@ -1,0 +1,5 @@
+#content
+  - if @content
+    = render :partial => "nested_list", :locals => {:content => @content, :root => true}
+  - else
+    = link_to "New Content", new_control_center_content_path(:level => 0)

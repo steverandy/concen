@@ -1,5 +1,7 @@
+require "yaml"
+
 module ControlCenter
-  class Page
+  class Content
     include Mongoid::Document
     include Mongoid::Timestamps
     
@@ -10,11 +12,12 @@ module ControlCenter
     field :title, :type => String
     field :description, :type => String
     field :default_slug, :type => String
-    field :content, :type => String
     field :raw_text, :type => String
+    field :markup, :type => String
     field :position, :type => Integer
     field :publish_time, :type => Time
     field :labels, :type => Array, :default => []
+    field :authors, :type => Array, :default => []
     
     validates_presence_of :title
     validates_presence_of :default_slug
@@ -23,20 +26,22 @@ module ControlCenter
     
     before_validation :set_default_slug
     before_create :set_position
+    after_save :unset_unused_dynamic_fields
     before_destroy :destroy_children
     before_destroy :destroy_grid_files
     after_destroy :reset_position
     
     scope :with_position, where(:position.exists => true)
     
-    PROTECTED_FIELDS = [:parent_id, :level, :default_slug, :content, :raw_text, :position]
+    PREDEFINED_FIELDS = [:_id, :created_at, :updated_at, :parent_id, :level, :title, :description, :default_slug, :raw_text, :markup, :position, :publish_time, :labels, :authors]
+    PROTECTED_FIELDS = [:_id, :parent_id, :level, :default_slug, :content, :raw_text, :position]
     
     def children
-      Page.where(:parent_id => self.id)
+      Content.where(:parent_id => self.id)
     end
     
     def parent
-      Page.find(self.parent_id)
+      Content.find(self.parent_id)
     end
     
     def images(filename=nil)
@@ -61,26 +66,35 @@ module ControlCenter
     
     def parse_raw_text
       raw_text_array = self.raw_text.split("---")
-      if raw_text_array.count > 0
-        meta_data = raw_text_array.first.strip.split("\r\n\r\n")
-        self.content = raw_text_array.last.strip
+      if raw_text_array.count > 1
+        meta_data = raw_text_array.first.strip
+        self.markup = raw_text_array.last.strip
       else
-        meta_data = self.raw_text.strip.split("\r\n\r\n")
-        self.content = nil
+        meta_data = self.raw_text.strip
+        self.markup = nil
       end
-      for data in meta_data
-        key = data.split(":").first.gsub(" ","").underscore.to_sym
-        value = data.split(":").last.strip
-        unless ControlCenter::Page::PROTECTED_FIELDS.include?(key)
+      meta_data = underscore_hash_keys(YAML.load(meta_data))
+      meta_data.each do |key, value|
+        unless ControlCenter::Content::PROTECTED_FIELDS.include?(key)
           if key == :publish_time
             self.parse_publish_time(value)
-          elsif key == :labels
-            self.parse_labels(value)
           else
             self[key] = value
           end
         end
       end
+      (self.attributes.keys.map{ |k| k.to_sym } - PREDEFINED_FIELDS).each do |field|
+        self[field] = nil if !meta_data.keys.include?(field)
+      end
+    end
+    
+    def underscore_hash_keys(hash)
+      new_hash = {}
+      hash.each do |key, value|        
+        value = underscore_hash_keys(value) if value.is_a?(Hash)
+        new_hash[key.gsub(" ","_").downcase.to_sym] = value
+      end
+      new_hash
     end
     
     def parse_publish_time(publish_time_string)
@@ -97,12 +111,6 @@ module ControlCenter
       end
     end
     
-    def parse_labels(labels_string)
-      labels_string.split(",").each do |label|
-        self.labels << label.strip
-      end
-    end
-    
     protected
     
     def set_default_slug
@@ -110,25 +118,25 @@ module ControlCenter
     end
     
     def set_position
-      if Page.where(:level => self.level).count > 0
-        self.position = Page.with_position.where(:level => self.level).asc(:position).last.position + 1
+      if Content.where(:level => self.level).count > 0
+        self.position = Content.with_position.where(:level => self.level).asc(:position).last.position + 1
       else
         self.position = 1
       end
     end
 
     def reset_position
-      affected_pages = Page.with_position.where(:level => self.level, :position.gt => self.position)
-      if affected_pages.count > 0
-        for page in affected_pages
-          page.position = page.position - 1
-          page.save
+      affected_contents = Content.with_position.where(:level => self.level, :position.gt => self.position)
+      if affected_contents.count > 0
+        for content in affected_contents
+          content.position = content.position - 1
+          content.save
         end
       end
     end
     
     def destroy_children
-      for child in Page.where(:parent_id => self.id)
+      for child in Content.where(:parent_id => self.id)
         child.destroy
       end
     end
@@ -137,6 +145,16 @@ module ControlCenter
       for grid_file in self.grid_files
         grid_file.destroy
       end
+    end
+    
+    def unset_unused_dynamic_fields
+      target_fields = {}
+      for field in self.attributes.keys
+        if !PREDEFINED_FIELDS.include?(field.to_sym) && self[field.to_sym].nil?
+          target_fields[field.to_s] = 1
+        end
+      end
+      Content.collection.update({"_id" => self.id}, {"$unset" => target_fields})
     end
   end
 end

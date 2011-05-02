@@ -3,7 +3,7 @@ module ControlCenter
     include Mongoid::Document
     include Mongoid::Timestamps
   
-    embedded_in :page
+    embedded_in :content
   
     field :filename, :type => String
     field :original_filename, :type => String

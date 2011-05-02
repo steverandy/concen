@@ -1,0 +1,15 @@
+= form_for @content, {:html => {:class => "with-text-editor"}} do |f|
+  - if @content.errors.any?
+    #errorExplanation
+      %h3= "#{pluralize(@content.errors.count, "error")} prohibited this parent from being saved:"
+      %ul
+        - @content.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    #text-editor{:class => !@content.persisted? && "wide"}
+  = f.text_area :raw_text, :class => "text-editor-content hidden"
+  = f.hidden_field :parent_id
+  = f.hidden_field :level
+  .actions.flush
+    = f.submit "Save"
+    = link_to "Cancel", control_center_contents_path
