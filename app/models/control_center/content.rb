@@ -33,7 +33,11 @@ module ControlCenter
     
     scope :with_position, where(:position.exists => true)
     
+    # Get the list of dynamic fields by checking againts this array.
+    # Values should mirror the listed fields above.
     PREDEFINED_FIELDS = [:_id, :created_at, :updated_at, :parent_id, :level, :title, :description, :default_slug, :raw_text, :markup, :position, :publish_time, :labels, :authors]
+    
+    # These fields can't be overwritten by user's meta data when parsing raw_text.
     PROTECTED_FIELDS = [:_id, :parent_id, :level, :default_slug, :content, :raw_text, :position]
     
     def children
