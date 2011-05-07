@@ -1,13 +1,13 @@
-= form_for [@content, @grid_file], :url => control_center_content_grid_file_path(@content, @grid_file), :html => {:class => "with-text-editor"} do |f|
+= form_for [@page, @grid_file], :url => control_center_page_grid_file_path(@page, @grid_file), :html => {:class => "with-text-editor"} do |f|
   - if @grid_file.errors.any?
     #errorExplanation
-      %h3= "#{pluralize(@content.errors.count, "error")} prohibited this parent from being saved:"
+      %h3= "#{pluralize(@page.errors.count, "error")} prohibited this parent from being saved:"
       %ul
-        - @content.errors.full_messages.each do |msg|
+        - @page.errors.full_messages.each do |msg|
           %li= msg
   .field
     #text-editor.wide
-  = text_area_tag :control_center_grid_file_content, @grid_file.read, :class => "text-editor-content hidden"
+  = text_area_tag :control_center_grid_file_page, @grid_file.read, :class => "text-editor-content hidden"
   .actions.flush
     = f.submit "Save"
-    = link_to "Cancel", edit_control_center_content_path(@content)
+    = link_to "Cancel", edit_control_center_page_path(@page)

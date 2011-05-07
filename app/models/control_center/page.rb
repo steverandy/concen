@@ -1,7 +1,7 @@
 require "yaml"
 
 module ControlCenter
-  class Content
+  class Page
     include Mongoid::Document
     include Mongoid::Timestamps
     
@@ -41,11 +41,11 @@ module ControlCenter
     PROTECTED_FIELDS = [:_id, :parent_id, :level, :default_slug, :content, :raw_text, :position]
     
     def children
-      Content.where(:parent_id => self.id)
+      Page.where(:parent_id => self.id)
     end
     
     def parent
-      Content.find(self.parent_id)
+      Page.find(self.parent_id)
     end
     
     def images(filename=nil)
@@ -79,7 +79,7 @@ module ControlCenter
       end
       meta_data = underscore_hash_keys(YAML.load(meta_data))
       meta_data.each do |key, value|
-        unless ControlCenter::Content::PROTECTED_FIELDS.include?(key)
+        unless ControlCenter::Page::PROTECTED_FIELDS.include?(key)
           if key == :publish_time
             self.parse_publish_time(value)
           else
@@ -122,25 +122,25 @@ module ControlCenter
     end
     
     def set_position
-      if Content.where(:level => self.level).count > 0
-        self.position = Content.with_position.where(:level => self.level).asc(:position).last.position + 1
+      if Page.where(:level => self.level).count > 0
+        self.position = Page.with_position.where(:level => self.level).asc(:position).last.position + 1
       else
         self.position = 1
       end
     end
 
     def reset_position
-      affected_contents = Content.with_position.where(:level => self.level, :position.gt => self.position)
-      if affected_contents.count > 0
-        for content in affected_contents
-          content.position = content.position - 1
-          content.save
+      affected_pages = Page.with_position.where(:level => self.level, :position.gt => self.position)
+      if affected_pages.count > 0
+        for page in affected_pages
+          page.position = page.position - 1
+          page.save
         end
       end
     end
     
     def destroy_children
-      for child in Content.where(:parent_id => self.id)
+      for child in Page.where(:parent_id => self.id)
         child.destroy
       end
     end
@@ -158,7 +158,7 @@ module ControlCenter
           target_fields[field.to_s] = 1
         end
       end
-      Content.collection.update({"_id" => self.id}, {"$unset" => target_fields})
+      Page.collection.update({"_id" => self.id}, {"$unset" => target_fields})
     end
   end
 end

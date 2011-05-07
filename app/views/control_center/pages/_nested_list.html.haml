@@ -1,0 +1,14 @@
+- if root && page.level == 0
+  - children = [page]
+- else
+  - children = ControlCenter::Page.where(:parent_id => page.id)
+- for child in children
+  %ul.pages{:class => "level-#{child.level}"}
+    %li
+      %p
+        %span= child.title
+        = link_to "Edit", edit_control_center_page_path(child)
+        = link_to "Delete", control_center_page_path(child), :method => :delete, :confirm => "Are you sure?"
+        = link_to "Add Child Page", new_control_center_page_path(:level => child.level + 1, :parent_id => child.id)
+    - if ControlCenter::Page.where(:parent_id => child.id).count > 0
+      = render :partial => "nested_list", :locals => {:page => child, :root => false}
