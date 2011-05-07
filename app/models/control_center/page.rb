@@ -13,7 +13,7 @@ module ControlCenter
     field :description, :type => String
     field :default_slug, :type => String
     field :raw_text, :type => String
-    field :markup, :type => String
+    field :content, :type => String
     field :position, :type => Integer
     field :publish_time, :type => Time
     field :labels, :type => Array, :default => []
@@ -35,7 +35,7 @@ module ControlCenter
     
     # Get the list of dynamic fields by checking againts this array.
     # Values should mirror the listed fields above.
-    PREDEFINED_FIELDS = [:_id, :created_at, :updated_at, :parent_id, :level, :title, :description, :default_slug, :raw_text, :markup, :position, :publish_time, :labels, :authors]
+    PREDEFINED_FIELDS = [:_id, :created_at, :updated_at, :parent_id, :level, :title, :description, :default_slug, :raw_text, :content, :position, :publish_time, :labels, :authors]
     
     # These fields can't be overwritten by user's meta data when parsing raw_text.
     PROTECTED_FIELDS = [:_id, :parent_id, :level, :default_slug, :content, :raw_text, :position]
@@ -72,10 +72,10 @@ module ControlCenter
       raw_text_array = self.raw_text.split("---")
       if raw_text_array.count > 1
         meta_data = raw_text_array.first.strip
-        self.markup = raw_text_array.last.strip
+        self.content = raw_text_array.last.strip
       else
         meta_data = self.raw_text.strip
-        self.markup = nil
+        self.content = nil
       end
       meta_data = underscore_hash_keys(YAML.load(meta_data))
       meta_data.each do |key, value|

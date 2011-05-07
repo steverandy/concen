@@ -33,11 +33,16 @@
         DD_belatedPNG.fix('img, .png-bg')
     - if Rails.env == "production"
       = javascript_include_tag "//ajax.cdnjs.com/ajax/libs/modernizr/1.7/modernizr-1.7.min.js"
-      = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"
+      = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"
     - else
       = javascript_include_tag "/control_center/javascripts/modernizr-1.7.js"
       = javascript_include_tag "/control_center/javascripts/jquery.js"
-    = javascript_include_tag "/control_center/javascripts/jquery-ui/jquery-ui-1.8.7.js"
+    = javascript_include_tag "/control_center/javascripts/jquery-ui/jquery.ui.core.js"
+    = javascript_include_tag "/control_center/javascripts/jquery-ui/jquery.ui.widget.js"
+    = javascript_include_tag "/control_center/javascripts/jquery-ui/jquery.ui.mouse.js"
+    = javascript_include_tag "/control_center/javascripts/jquery-ui/jquery.ui.position.js"
+    = javascript_include_tag "/control_center/javascripts/jquery-ui/jquery.ui.sortable.js"
+    = javascript_include_tag "/control_center/javascripts/jquery.ui.nestedSortable.js"
     = javascript_include_tag "/control_center/javascripts/rails.js"
     = javascript_include_tag "/control_center/javascripts/jquery.qtip-1.0.0-rc3.min.js"
     = javascript_include_tag "/control_center/javascripts/controlcenter.js"

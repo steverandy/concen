@@ -50,19 +50,43 @@ module ControlCenter
     
     def upload_file
       # logger.info { "----#{env['rack.input']}" }
-      # 
       # logger.info { "----#{env['HTTP_X_FILE_NAME']}" }
-      # logger.info { "----#{env['CONTENT
-      # _TYPE']}" }
+      # logger.info { "----#{env['CONTENT_TYPE']}" }
       @page = Page.find(params[:id])
       @file = @page.grid_files.build
       if env['rack.input']
         @file.store(env['rack.input'], env['HTTP_X_FILE_NAME'])
       else
         @file.store(params[:qqfile].read, params[:qqfile].original_filename)
-      end
-      if @file.save
-        render :text => "{'success': true}"
+      end      
+      render :json => {:success => true} if @file.save
+    end
+    
+    def sort
+      if params[:page]
+        child_count = {}
+        params[:page].each do |key, value|
+          if value == "root"
+            root = Page.find(key)
+            root.parent_id = nil
+            root.level = 0
+            root.save
+          else
+            child = Page.find(key)
+            parent = Page.find(value)
+            child.parent_id = parent.id
+            child.level = parent.level + 1
+            if child_count[value]
+              child.position = child_count[value] + 1
+              child_count[value] += 1
+            else
+              child.position = 1
+              child_count[value] = 1
+            end
+            child.save
+          end
+        end
+        render :json => {:success => true}
       end
     end
   end
