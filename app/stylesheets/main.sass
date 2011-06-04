@@ -1,8 +1,8 @@
 @import "compass"
 @import "compass/reset"
 @import "blueprint/print"
-@import "partials/mixins"
 @import "partials/variables"
+@import "partials/mixins"
 @import "partials/base"
 @import "partials/form"
 @import "partials/fileuploader"
@@ -18,25 +18,28 @@ body.controlcenter
 
 header
   display: block
-  border-bottom: 1px solid $gray-80
+  border-bottom: 1px solid $color-2
   margin: 30px auto 0 auto
   position: relative
   h1
     +typekit-font("proxima-nova")
-    font-weight: 600
     height: 25px
+    line-height: 25px
     padding-bottom: 15px
+    font-size: 24px
+    .wf-active &
+      font-weight: 600
     a
-      font-size: 22px
-      line-height: 25px
       display: block
       border-bottom: 0
       +clearfix
     span
       float: left
     span.application-name
-      font-weight: 300
       margin-left: 14px
+      font-weight: 400
+      .wf-active &
+        font-weight: 300
     img
       display: block
   nav
@@ -49,6 +52,7 @@ header
       li a
         line-height: 17px
         +typekit-font("proxima-nova")
+        +hover-link
     ul.left
       left: 0
     ul.right
@@ -60,11 +64,11 @@ header
   input#keyword
     font-size: 12px
     line-height: 15px
-    @include background-image-with-dimension('magnifying-glass.png')
+    +background-image-with-dimension('magnifying-glass.png')
     background-position: 6px 5px
     border: 1px solid lighten(#000, 70%)
     outline: none
-    @include border-radius(60px)
+    +border-radius(60px)
     -webkit-appearance: none    
     min-width: 120px
     width: 120px
@@ -79,10 +83,11 @@ header
 #content
   margin: 30px auto 0 auto
   text-align: left
-  h2
+  h1
     +typekit-font("proxima-nova")
-    font-weight: 600
     margin-bottom: 30px
+    .wf-active &
+      font-weight: 600
   div.parent-header
     height: 24px
     width: 100%
@@ -128,37 +133,38 @@ section#article
 // Footer
 
 footer
-  color: $gray-20
+  color: $color-1
   margin: 30px auto
   width: 760px
   display: block
   font-size: 12px
-  border-top: 1px solid lighten(#000, 80%)
+  border-top: 1px solid $color-2
   p
     text-align: center
     margin: 15px 0 0 0
     +typekit-font("proxima-nova")
-    
+    font-size: 12px
+
 // Buttons
 
 a.prev
-  @include background-image-with-dimension("button-prev.png")
+  +background-image-with-dimension("button-prev.png")
   text-indent: -9999px
   display: block
   
 a.prev.disabled
-  @include background-image-with-dimension("button-prev-disabled.png")
+  +background-image-with-dimension("button-prev-disabled.png")
   
 a.next
-  @include background-image-with-dimension("button-next.png")
+  +background-image-with-dimension("button-next.png")
   text-indent: -9999px
   display: block
   
 a.next.disabled
-  @include background-image-with-dimension("button-next-disabled.png")
+  +background-image-with-dimension("button-next-disabled.png")
   
 a.grid
-  @include background-image-with-dimension("button-grid.png")
+  +background-image-with-dimension("button-grid.png")
   text-indent: -9999px
   display: block
   
@@ -168,7 +174,7 @@ a.grid
   // background: lighten(#000, 94%)
   padding: 0 0 0 20px
   margin-bottom: 20px
-  @include text-shadow(white, 0px, 1px, 0px)
+  +text-shadow(white, 0px, 1px, 0px)
   position: relative
   h3
     line-height: 1
@@ -177,7 +183,7 @@ a.grid
     position: relative
     background: lighten(#000, 92%)
     padding: 6px 10px
-    @include text-shadow(white, 0px, 1px, 0px)
+    +text-shadow(white, 0px, 1px, 0px)
   a.organize
     font-size: 12px
     font-weight: 600
@@ -199,13 +205,13 @@ a.grid
       list-style-type: square
       padding: 8px 10px
       border-bottom: 1px solid lighten(#000, 92%)
-      @include clearfix
+      +clearfix
       a
         font-size: 12px
       .right
         float: right
         height: inherit
-        @include clearfix
+        +clearfix
         div, a
           width: 12px
           height: 12px
@@ -236,7 +242,7 @@ a.grid
       line-height: 1
       background: lighten(#000, 92%)
       padding: 6px 10px
-      @include text-shadow(white, 0px, 1px, 0px)
+      +text-shadow(white, 0px, 1px, 0px)
       span
         font-size: 12px
         margin-left: 2px
@@ -321,7 +327,7 @@ a.grid
           font-size: 12px
           line-height: normal
           $use-mozilla-ellipsis-binding: true
-          @include ellipsis
+          +ellipsis
           -moz-binding: url('/control_center/stylesheets/xml/ellipsis.xml#ellipsis')
           display: block
           width: 100%
@@ -380,7 +386,7 @@ a.grid
 .qtip-tip, .qtip-wrapper
 
 .qtip-wrapper
-  @include box-shadow(rgba(0,0,0,0.75), 0, 1px, 3px)
+  +box-shadow(rgba(0,0,0,0.75), 0, 1px, 3px)
 
 // Ace Text Editor
 
@@ -388,26 +394,33 @@ a.grid
   width: 700px
   height: 400px
   line-height: normal
-  border: 1px solid $gray-80
   position: relative
   &.wide
-    width: 958px
+    width: 950px
   
 .ace_gutter
   display: none
   
 #files
   float: right
-  width: 186px
-  padding: 20px
-  border: 1px solid $gray-80
+  div.border
+    padding: 20px
+    width: 178px
+  #file-uploader
+    margin-bottom: 20px
+  h3
+    +typekit-font("proxima-nova")
   ul
     +typekit-font("proxima-nova")
-    font-size: 12px
+    list-style: disc inside
     li
+      font-size: 12px
       margin: 10px 0
-      &.last
-        margin-bottom: 0
+      a
+        color: $color-2
+        margin-right: 4px
+        &.filename
+          color: $color-1
   
 form.with-text-editor
   float: left

@@ -3,7 +3,7 @@ module ControlCenter
     include Mongoid::Document
     include Mongoid::Timestamps
   
-    embedded_in :page
+    embedded_in :page, :class_name => "ControlCenter::Page"
   
     field :filename, :type => String
     field :original_filename, :type => String
@@ -12,7 +12,7 @@ module ControlCenter
     
     before_destroy :destroy_gridfs
     
-    def url
+    def path
       "/gridfs/" + self.filename
     end
     
@@ -23,7 +23,7 @@ module ControlCenter
     
     def text?
       grid = Mongo::Grid.new(Mongoid.database)
-      grid.get(self.grid_id).content_type.include?("text")
+      grid.get(self.grid_id).content_type.include?("text") || grid.get(self.grid_id).content_type.include?("javascript")
     end
     
     def store(content, filename)

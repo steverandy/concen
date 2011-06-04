@@ -1,4 +1,5 @@
 require "yaml"
+require "redcarpet"
 
 module ControlCenter
   class Page
@@ -16,6 +17,7 @@ module ControlCenter
     field :content, :type => String
     field :position, :type => Integer
     field :publish_time, :type => Time
+    field :publish_month, :type => Time
     field :labels, :type => Array, :default => []
     field :authors, :type => Array, :default => []
     
@@ -25,6 +27,7 @@ module ControlCenter
     validates_uniqueness_of :default_slug, :scope => [:parent_id, :level], :case_sensitive => false
     
     before_validation :set_default_slug
+    before_save :set_publish_month
     before_create :set_position
     after_save :unset_unused_dynamic_fields
     before_destroy :destroy_children
@@ -32,13 +35,14 @@ module ControlCenter
     after_destroy :reset_position
     
     scope :with_position, where(:position.exists => true)
+    scope :published, lambda { {:where => {:publish_time.lte => Time.now.utc}} }
     
     # Get the list of dynamic fields by checking againts this array.
     # Values should mirror the listed fields above.
-    PREDEFINED_FIELDS = [:_id, :created_at, :updated_at, :parent_id, :level, :title, :description, :default_slug, :raw_text, :content, :position, :publish_time, :labels, :authors]
+    PREDEFINED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :default_slug, :content, :raw_text, :position, :grid_files, :title, :description, :publish_time, :labels, :authors]
     
     # These fields can't be overwritten by user's meta data when parsing raw_text.
-    PROTECTED_FIELDS = [:_id, :parent_id, :level, :default_slug, :content, :raw_text, :position]
+    PROTECTED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :default_slug, :content, :raw_text, :position, :grid_files]
     
     def children
       Page.where(:parent_id => self.id)
@@ -46,6 +50,30 @@ module ControlCenter
     
     def parent
       Page.find(self.parent_id)
+    end
+    
+    def content_in_html
+      if self.content_is_markdown?
+        Redcarpet.new(self.content, :smart).to_html
+      else
+        return nil
+      end
+    end
+    
+    def content_is_haml?
+      if self[:template_engine] && self.template_engine.downcase == "haml"
+        return true
+      else
+        return false
+      end
+    end
+    
+    def content_is_markdown?
+      if !self[:template_engine] || self.template_engine == "markdown"
+        return true
+      else
+        return false
+      end
     end
     
     def images(filename=nil)
@@ -58,6 +86,15 @@ module ControlCenter
     
     def javascripts(filename=nil)
       search_grid_files(["js"], filename)
+    end
+    
+    def others(filename=nil)
+      excluded_ids = []
+      [:images, :stylesheets, :javascripts].each do |file_type|
+        excluded_ids += self.send(file_type).map(&:_id)
+      end
+      Rails.logger.info { "---#{excluded_ids}" }
+      self.grid_files.where(:_id.nin => excluded_ids)
     end
     
     def search_grid_files(extensions, filename=nil)
@@ -87,7 +124,8 @@ module ControlCenter
           end
         end
       end
-      (self.attributes.keys.map{ |k| k.to_sym } - PREDEFINED_FIELDS).each do |field|
+      # Set the field to nil if the value isn't present in meta data.
+      (self.attributes.keys.map{ |k| k.to_sym } - PROTECTED_FIELDS).each do |field|
         self[field] = nil if !meta_data.keys.include?(field)
       end
     end
@@ -112,6 +150,78 @@ module ControlCenter
         self.publish_time = parsed_date
       elsif parsed_date = Time.zone.parse(publish_time_string)
         self.publish_time = parsed_date
+      end
+    end
+    
+    def published?
+      self.publish_time.present?
+    end
+    
+    def previous(*args)
+      options = args.extract_options!
+      if options[:only_published]
+        children = self.parent.children.published.asc(:position)
+        first = self.first?(:only_published => true)
+      else
+        children = self.parent.children.asc(:position)
+        first = self.first?
+      end
+      if first
+        return false
+      else
+        children.each_with_index { |child, index| return children.to_a[index-1] if child.id == self.id }
+      end
+    end
+
+    def next(*args)
+      options = args.extract_options!
+      if options[:only_published]
+        children = self.parent.children.published.asc(:position)
+        last = self.last?(:only_published => true)
+      else
+        children = self.parent.children.asc(:position)
+        last = self.last?
+      end
+      if last
+        return false
+      else
+        children.each_with_index { |child, index| return children.to_a[index+1] if child.id == self.id }
+      end
+    end
+    
+    def first?(*args)
+      options = args.extract_options!
+      if options[:only_published]
+        children = self.parent.children.published.asc(:position)
+      else
+        children = self.parent.children.asc(:position)
+      end
+      if children.first
+        if self.id == children.first.id
+          return true
+        else
+          return false
+        end
+      else
+        return false
+      end
+    end
+
+    def last?(*args)
+      options = args.extract_options!
+      if options[:only_published]
+        children = self.parent.children.published.asc(:position)
+      else
+        children = self.parent.children.asc(:position)
+      end
+      if children.last
+        if self.id == children.last.id
+          return true
+        else
+          return false
+        end
+      else
+        return false
       end
     end
     
@@ -159,6 +269,12 @@ module ControlCenter
         end
       end
       Page.collection.update({"_id" => self.id}, {"$unset" => target_fields})
+    end
+    
+    def set_publish_month
+      if self.publish_time
+        self.publish_month = Time.zone.local(self.publish_time.year, self.publish_time.month)
+      end
     end
   end
 end

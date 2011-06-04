@@ -1,0 +1,7 @@
+%ul
+  - files.each_with_index do |file, index|
+    %li{:class => index+1 == files.count && "last"}
+      = link_to file.original_filename, file.path, :class => "filename"
+      - if file.text?
+        = link_to "Edit", edit_control_center_page_grid_file_path(file.page, file)
+      = link_to "Delete", control_center_page_grid_file_path(file.page, file), :method => :delete, :confirm => "Are you sure?"

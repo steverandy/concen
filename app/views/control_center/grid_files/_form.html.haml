@@ -5,8 +5,13 @@
       %ul
         - @page.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    #text-editor.wide
+  .field.shadow
+    .border
+      #text-editor.wide
+      .shadow-right
+        .corner
+      .shadow-bottom
+        .corner
   = text_area_tag :control_center_grid_file_page, @grid_file.read, :class => "text-editor-content hidden"
   .actions.flush
     = f.submit "Save"

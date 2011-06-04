@@ -1,50 +1,42 @@
 html
   overflow-y: scroll
+  background: white
 
 body
-  font-family: $base-font-family
-  font-weight: 400
-  color: $gray-20
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+  line-height: 1.25
+  color: $color-1
   min-width: 820px
   // Improved handling of kerning pairs and ligatures.
   text-rendering: optimizeLegibility
+  -webkit-text-size-adjust: none
+  
+h1, h2, h3
+  font-weight: bold
   
 h1
-  font-size: 24px
-  font-weight: 600
+  font-size: 20px
 
 h2
-  font-size: 20px
-  font-weight: 600
-  line-height: normal
+  font-size: 18px
   
 h3
   font-size: 16px
-  font-weight: 600
-  line-height: normal
-  
-p
-  font-weight: 400
+
+p, ul, ol, li
+  font-size: 14px
 
 a
-  @include link-colors($gray-20, $gray-20, $gray-20, $gray-20, $gray-20)
-  border-bottom: 1px solid $gray-80
-  text-decoration: none
+  +link-colors($color-1, $color-1, $color-1, $color-1, $color-1)
+  text-decoration: underline
   
-a:focus
-  text-decoration: none
-  
-.controlcenter a
-  outline: none
-  
-a.inactive
-  color: $gray-60
-  text-decoration: none
+strong
+  font-weight: bold
   
 a.link-button
   font-size: 13px
-  @include hover-link
-  @include inline-block
+  +hover-link
+  +inline-block
   border: 1px solid lighten(#000, 60%)
   padding: 4px 10px
   font-weight: 500
@@ -61,8 +53,51 @@ img.visit-recorder
   top: 0
   left: 0
   
+.shadow
+  overflow: hidden
+  div.border
+    border: 1px solid $color-2
+    margin-right: 4px
+    margin-bottom: 4px
+    &.has-image
+      padding: 2px
+  position: relative
+  img
+    width: 100%
+    margin: 0
+
+div.shadow-right
+  width: $shadow-size
+  height: 100%
+  background: $color-3
+  position: absolute
+  top: 4px
+  right: 0
+  div.corner
+    background: url("/control_center/images/shadow-corner-right.png")
+    width: 4px
+    height: 4px
+    position: absolute
+    top: -4px
+    left: 0
+
+div.shadow-bottom
+  width: 100%
+  height: $shadow-size
+  background: $color-3
+  position: absolute
+  bottom: 0
+  left: 4px
+  div.corner
+    background: url("/control_center/images/shadow-corner-bottom.png")
+    width: 4px
+    height: 4px
+    position: absolute
+    top: 0px
+    left: -4px
+  
 .clearfix
-  @include clearfix
+  +clearfix
   
 .center
   text-align: center
@@ -74,7 +109,7 @@ img.visit-recorder
   text-align: center
 
 .clearfix
-  @include clearfix
+  +clearfix
 
 .clear
   clear: both

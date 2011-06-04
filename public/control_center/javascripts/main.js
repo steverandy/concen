@@ -55,31 +55,6 @@ $(document).ready(function() {
     });
   };
   
-  // $("ul.pages").sortable({
-  //   scroll: true,
-  //   items: "li",
-  //   connectWith: ".connected-sortable",
-  //   update: function(event, ui) {
-  //     data = {pages: []};
-  //     $(this).find("> li").each(function(index) {
-  //       data.pages[index] = $(this).data("id");
-  //     });
-  //     data.level = $(this).data("level");
-  //     data.parent_id = $(this).parent().data("id");
-  //      $.ajax({
-  //        url: "/pages/sort",
-  //        type: "PUT",
-  //        dataType: "json",
-  //        data: data,
-  //        success: function(data, textStatus, xhr) {
-  //          $(this).sortable("cancel");
-  //        }
-  //      });
-  //    },
-  //    
-  // });
-  
-  
   $("ul.pages").nestedSortable({
 		disableNesting: 'no-nest',
 		forcePlaceholderSize: true,

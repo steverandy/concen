@@ -3,20 +3,28 @@
   = javascript_include_tag "/control_center/javascripts/fileuploader.js"
 
 #content
-  %h2 Edit Page
+  %h1 Edit Page
   .clearfix
     = render "form"
-    #files
-      #file-uploader{:data => {"upload-path" => upload_file_control_center_page_path(@page)}}
-        %noscript
-          %p Please enable JavaScript to use file uploader.
-      - if @page.grid_files.count > 0
-        %ul
-          - @page.grid_files.each_with_index do |file, index|
-            %li{:class => index+1 == @page.grid_files.count && "last"}
-              %span= file.original_filename
-              - if file.text?
-                = link_to "Edit", edit_control_center_page_grid_file_path(@page, file)
-              - else
-                = link_to "View", file.url
-              = link_to "Delete", control_center_page_grid_file_path(@page, file), :method => :delete, :confirm => "Are you sure?"
+    #files.shadow
+      .border
+        #file-uploader{:data => {"upload-path" => upload_file_control_center_page_path(@page)}}
+          %noscript
+            %p Please enable JavaScript to use file uploader.
+        - if @page.grid_files.count > 0
+          - if @page.stylesheets.count > 0
+            %h3 Stylesheets
+            = render :partial => "file_list", :locals => {:files => @page.stylesheets}
+          - if @page.javascripts.count > 0
+            %h3 JavaScripts
+            = render :partial => "file_list", :locals => {:files => @page.javascripts}
+          - if @page.images.count > 0
+            %h3 Images
+            = render :partial => "file_list", :locals => {:files => @page.images}
+          - if @page.others.count > 0
+            %h3 Others
+            = render :partial => "file_list", :locals => {:files => @page.others}
+      .shadow-right
+        .corner
+      .shadow-bottom
+        .corner
