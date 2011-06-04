@@ -30,11 +30,7 @@ module ControlCenter
     def update
       @page = Page.find(params[:id])
       if @page.update_attributes(params[:control_center_page])
-        if @page.save
-          redirect_to(edit_control_center_page_path(@page), :notice => "Page was successfully created.")
-        else
-          render :edit
-        end
+        redirect_to(edit_control_center_page_path(@page), :notice => "Page was successfully created.")
       else
         render :edit
       end
