@@ -1,11 +1,9 @@
-require "uuid"
-
 module ControlCenter
   class VisitsController < ApplicationController
     def record
       VisitKey.where(:expire.lte => Time.now.utc).destroy_all
       if params[:k] && visit_key = VisitKey.where(:_id => params[:k]).first
-        cookies[:visitor_id] = {:value => UUID.new.generate, :expires => 20.years.from_now} if cookies[:visitor_id].blank?
+        cookies[:visitor_id] = {:value => SecureRandom.uuid, :expires => 20.years.from_now} if cookies[:visitor_id].blank?
         # Parsing user agent on server side may cause some slow down.
         # TODO: May implement on client side.
         user_agent = Agent.new request.env["HTTP_USER_AGENT"]
@@ -42,7 +40,7 @@ module ControlCenter
   
     def visit_recorder_js
       @visit_key = VisitKey.create(:expire => Time.now.utc + 30.seconds)
-      cookies[:visitor_id] = {:value => UUID.new.generate, :expires => 20.years.from_now} if cookies[:visitor_id].blank?
+      cookies[:visitor_id] = {:value => SecureRandom.uuid, :expires => 20.years.from_now} if cookies[:visitor_id].blank?
       render :layout => false, :mime_type => "text/javascript"
     end
   end
