@@ -16,7 +16,6 @@ module ControlCenter
     
     def create
       @page = Page.new(params[:control_center_page])
-      @page.parse_raw_text
       if @page.save
         redirect_to(edit_control_center_page_path(@page), :notice => "Page was successfully created.")
       else
@@ -31,7 +30,6 @@ module ControlCenter
     def update
       @page = Page.find(params[:id])
       if @page.update_attributes(params[:control_center_page])
-        @page.parse_raw_text
         if @page.save
           redirect_to(edit_control_center_page_path(@page), :notice => "Page was successfully created.")
         else
