@@ -1,0 +1,14 @@
+.files
+  - if @page.grid_files.count > 0
+    - if @page.stylesheets.count > 0
+      %h3 Stylesheets
+      = render :partial => "file_list", :locals => {:files => @page.stylesheets}
+    - if @page.javascripts.count > 0
+      %h3 JavaScripts
+      = render :partial => "file_list", :locals => {:files => @page.javascripts}
+    - if @page.images.count > 0
+      %h3 Images
+      = render :partial => "file_list", :locals => {:files => @page.images}
+    - if @page.others.count > 0
+      %h3 Others
+      = render :partial => "file_list", :locals => {:files => @page.others}

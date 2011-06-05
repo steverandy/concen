@@ -5,13 +5,9 @@
       %ul
         - @page.errors.full_messages.each do |msg|
           %li= msg
-  .field.shadow
+  .field.thick-border
     .border
       #text-editor{:class => !@page.persisted? && "wide"}
-      .shadow-right
-        .corner
-      .shadow-bottom
-        .corner
   = f.text_area :raw_text, :class => "text-editor-content hidden"
   = f.hidden_field :parent_id
   = f.hidden_field :level

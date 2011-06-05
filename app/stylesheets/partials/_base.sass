@@ -3,11 +3,10 @@ html
   background: white
 
 body
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+  font-family: $proxima-nova
   line-height: 1.25
   color: $color-1
   min-width: 820px
-  // Improved handling of kerning pairs and ligatures.
   text-rendering: optimizeLegibility
   -webkit-text-size-adjust: none
   
@@ -53,48 +52,24 @@ img.visit-recorder
   top: 0
   left: 0
   
-.shadow
-  overflow: hidden
-  div.border
-    border: 1px solid $color-2
-    margin-right: 4px
-    margin-bottom: 4px
-    &.has-image
-      padding: 2px
+.thick-border
   position: relative
-  img
-    width: 100%
-    margin: 0
-
-div.shadow-right
-  width: $shadow-size
-  height: 100%
+  padding: 3px
   background: $color-3
-  position: absolute
-  top: 4px
-  right: 0
-  div.corner
-    background: url("/control_center/images/shadow-corner-right.png")
-    width: 4px
-    height: 4px
-    position: absolute
-    top: -4px
-    left: 0
+  +border-radius(4px)
+  .border
+    border: 1px solid $color-2 
+    +border-radius(3px)
+    background: white
+    position: relative
+    &.with-padding
+      padding: 2px
 
-div.shadow-bottom
-  width: 100%
-  height: $shadow-size
-  background: $color-3
-  position: absolute
-  bottom: 0
-  left: 4px
-  div.corner
-    background: url("/control_center/images/shadow-corner-bottom.png")
-    width: 4px
-    height: 4px
-    position: absolute
-    top: 0px
-    left: -4px
+a.thick-border
+  .border
+    +thick-border-shadow(bottom)
+  &:active .border
+    +thick-border-shadow(top)
   
 .clearfix
   +clearfix

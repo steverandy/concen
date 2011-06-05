@@ -18,7 +18,7 @@
     %meta{:name => "viewport", :content => "width = 1024"}
     %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge"}
     = csrf_meta_tag
-    = stylesheet_link_tag "/control_center/stylesheets/main.css"
+    = stylesheet_link_tag "/control_center/stylesheets/application.css"
     - unless ios?
       = stylesheet_link_tag "/control_center/stylesheets/non_ios.css"
     - if content_for?(:head_stylesheets)
@@ -43,7 +43,7 @@
     = javascript_include_tag "/control_center/javascripts/jquery-ui/jquery.ui.sortable.js"
     = javascript_include_tag "/control_center/javascripts/jquery.ui.nestedSortable.js"
     = javascript_include_tag "/control_center/javascripts/jquery_ujs.js"
-    = javascript_include_tag "/control_center/javascripts/main.js"
+    = javascript_include_tag "/control_center/javascripts/application.js"
     - if content_for?(:head_javascripts)
       = yield :head_javascripts
     - if content_for?(:head)

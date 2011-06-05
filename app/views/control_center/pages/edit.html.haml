@@ -6,25 +6,9 @@
   %h1 Edit Page
   .clearfix
     = render "form"
-    #files.shadow
+    #file-manager.thick-border
       .border
         #file-uploader{:data => {"upload-path" => upload_file_control_center_page_path(@page)}}
           %noscript
             %p Please enable JavaScript to use file uploader.
-        - if @page.grid_files.count > 0
-          - if @page.stylesheets.count > 0
-            %h3 Stylesheets
-            = render :partial => "file_list", :locals => {:files => @page.stylesheets}
-          - if @page.javascripts.count > 0
-            %h3 JavaScripts
-            = render :partial => "file_list", :locals => {:files => @page.javascripts}
-          - if @page.images.count > 0
-            %h3 Images
-            = render :partial => "file_list", :locals => {:files => @page.images}
-          - if @page.others.count > 0
-            %h3 Others
-            = render :partial => "file_list", :locals => {:files => @page.others}
-      .shadow-right
-        .corner
-      .shadow-bottom
-        .corner
+        = render "files"

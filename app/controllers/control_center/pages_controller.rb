@@ -48,12 +48,15 @@ module ControlCenter
       # logger.info { "----#{env['CONTENT_TYPE']}" }
       @page = Page.find(params[:id])
       @file = @page.grid_files.build
-      if env['rack.input']
-        @file.store(env['rack.input'], env['HTTP_X_FILE_NAME'])
+      if env["rack.input"]
+        @file.store(env["rack.input"], env["HTTP_X_FILE_NAME"])
       else
         @file.store(params[:qqfile].read, params[:qqfile].original_filename)
-      end      
-      render :json => {:success => true} if @file.save
+      end
+      if @file.save
+        content = render_to_string(:partial => "files")
+        render :json => {:success => true, :content => content}
+      end
     end
     
     def sort

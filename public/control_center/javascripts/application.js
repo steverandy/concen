@@ -46,7 +46,12 @@ $(document).ready(function() {
       // you can return false to abort submit
       onSubmit: function(id, fileName){},
       onProgress: function(id, fileName, loaded, total){},
-      onComplete: function(id, fileName, responseJSON){},
+      onComplete: function(id, fileName, responseJSON){
+        if (responseJSON.success) {
+          $("#file-manager div.files").replaceWith(responseJSON.content);
+          $("#file-manager ul.qq-upload-list").html("");
+        }
+      },
       onCancel: function(id, fileName){},
       messages: {
           // error messages, see qq.FileUploaderBasic for content            
