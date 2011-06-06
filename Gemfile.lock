@@ -1,0 +1,58 @@
+PATH
+  remote: .
+  specs:
+    control_center (0.1)
+      aaronh-chronic (~> 0.3.9)
+      bson_ext (~> 1.3.0)
+      haml (~> 3.1.0)
+      mime-types (~> 1.16)
+      mongoid (~> 2.0.0)
+      rack-gridfs (~> 0.4.0)
+      redcarpet (~> 1.11.2)
+      whenever (~> 0.6.7)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    aaronh-chronic (0.3.9)
+    activemodel (3.0.7)
+      activesupport (= 3.0.7)
+      builder (~> 2.1.2)
+      i18n (~> 0.5.0)
+    activesupport (3.0.7)
+    bson (1.3.1)
+    bson_ext (1.3.1)
+    builder (2.1.2)
+    chunky_png (1.2.0)
+    compass (0.11.1)
+      chunky_png (~> 1.1)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
+    fssm (0.2.7)
+    haml (3.1.1)
+    i18n (0.5.0)
+    mime-types (1.16)
+    mongo (1.3.1)
+      bson (>= 1.3.1)
+    mongoid (2.0.2)
+      activemodel (~> 3.0)
+      mongo (~> 1.3)
+      tzinfo (~> 0.3.22)
+    rack (1.3.0)
+    rack-gridfs (0.4.0)
+      mime-types
+      mongo (~> 1.2)
+      rack
+    redcarpet (1.11.4)
+    sass (3.1.2)
+    tzinfo (0.3.27)
+    whenever (0.6.8)
+      aaronh-chronic (>= 0.3.9)
+      activesupport (>= 2.3.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  compass (= 0.11.1)
+  control_center!
