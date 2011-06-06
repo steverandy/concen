@@ -23,4 +23,5 @@ Gem::Specification.new do |s|
   s.add_dependency("aaronh-chronic", "~>0.3.9")
   s.add_dependency("redcarpet", "~>1.11.2")
   s.add_dependency("mime-types", "~>1.16")
+  s.add_dependency("rack-gridfs", "~>0.4.0")
 end
