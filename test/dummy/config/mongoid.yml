@@ -1,0 +1,20 @@
+defaults: &defaults
+  host: localhost
+  use_activesupport_time_zone: true
+
+development:
+  <<: *defaults
+  database: steverandytantra_development
+
+test:
+  <<: *defaults
+  database: steverandytantra_test
+
+# set these environment variables on your prod server
+production:
+  <<: *defaults
+  host: localhost
+  port: 27017
+  database: steverandytantra_production
+  # username: 
+  # password:
