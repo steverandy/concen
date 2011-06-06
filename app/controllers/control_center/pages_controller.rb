@@ -9,8 +9,11 @@ module ControlCenter
     end
     
     def new
-      @page = Page.new
-      @page.parent_id = BSON::ObjectId(params[:parent_id]) if params[:parent_id]
+      if params[:parent_id]
+        @page = Page.find(params[:parent_id]).children.build
+      else
+        @page = Page.new
+      end
       @page.level = params[:level].to_i if params[:level]
     end
     

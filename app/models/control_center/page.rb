@@ -6,6 +6,8 @@ module ControlCenter
     include Mongoid::Document
     include Mongoid::Timestamps
     
+    references_many :children, :class_name => "ControlCenter::Page",:foreign_key => :parent_id, :inverse_of => :parent
+    referenced_in :parent, :class_name => "ControlCenter::Page", :inverse_of => :children
     embeds_many :grid_files, :class_name => "ControlCenter::GridFile"
 
     field :parent_id, :type => BSON::ObjectId
@@ -44,14 +46,6 @@ module ControlCenter
     
     # These fields can't be overwritten by user's meta data when parsing raw_text.
     PROTECTED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :default_slug, :content, :raw_text, :position, :grid_files]
-    
-    def children
-      Page.where(:parent_id => self.id)
-    end
-    
-    def parent
-      Page.find(self.parent_id)
-    end
     
     def content_in_html
       if self.content_is_markdown?
@@ -268,7 +262,7 @@ module ControlCenter
     end
     
     def destroy_children
-      for child in Page.where(:parent_id => self.id)
+      for child in self.children
         child.destroy
       end
     end
