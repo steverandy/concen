@@ -47,27 +47,35 @@ module ControlCenter
     # These fields can't be overwritten by user's meta data when parsing raw_text.
     PROTECTED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :default_slug, :content, :raw_text, :position, :grid_files]
     
-    def content_in_html
-      if self.content_is_markdown?
-        Redcarpet.new(self.content, :smart).to_html
+    def content_in_html(key = "main", scope = Object.new)
+      if content = self.content.try(:[], key)
+        case self.content_template(key)
+        when "markdown"
+          Redcarpet.new(content, :smart).to_html
+        when "haml"
+          Haml::Engine.new(content).render(scope)
+        end
       else
         return nil
       end
     end
     
-    def content_is_haml?
-      if self[:template_engine] && self.template_engine.downcase == "haml"
-        return true
+    def content_template(key="main")
+      if content = self.content.try(:[], key)
+        match_count = 0
+        for line in content.lines
+          for matcher in ["%h1", "%h2", "%h3", "%h4", "$h5", "%h6", "%p", "%div"]
+            match_count += 1 if line.match(/^#{matcher}\s{1}/)
+            break if match_count >= 2
+          end
+        end
+        if match_count >= 2
+          return "haml"
+        else
+          return "markdown"
+        end
       else
-        return false
-      end
-    end
-    
-    def content_is_markdown?
-      if !self[:template_engine] || self.template_engine == "markdown"
-        return true
-      else
-        return false
+        return nil
       end
     end
     
@@ -220,7 +228,7 @@ module ControlCenter
     end
     
     def parse_raw_text
-      if self.raw_text && self.raw_text.length > 0
+      if self.raw_text_changed? && self.raw_text && self.raw_text.length > 0
         self.content = {}
         raw_text_array = self.raw_text.split("---")
         if raw_text_array.count > 1

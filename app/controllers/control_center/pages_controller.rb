@@ -45,23 +45,6 @@ module ControlCenter
       redirect_to control_center_pages_path
     end
     
-    def upload_file
-      # logger.info { "----#{env['rack.input']}" }
-      # logger.info { "----#{env['HTTP_X_FILE_NAME']}" }
-      # logger.info { "----#{env['CONTENT_TYPE']}" }
-      @page = Page.find(params[:id])
-      @file = @page.grid_files.build
-      if env["rack.input"]
-        @file.store(env["rack.input"], env["HTTP_X_FILE_NAME"])
-      else
-        @file.store(params[:qqfile].read, params[:qqfile].original_filename)
-      end
-      if @file.save
-        content = render_to_string(:partial => "files")
-        render :json => {:success => true, :content => content}
-      end
-    end
-    
     def sort
       if params[:page]
         child_count = {}

@@ -5,7 +5,7 @@
       %ul
         - @page.errors.full_messages.each do |msg|
           %li= msg
-  .field.shadow
+  .field.thick-border
     .border
       #text-editor.wide
       .shadow-right
@@ -15,4 +15,5 @@
   = text_area_tag :control_center_grid_file_page, @grid_file.read, :class => "text-editor-content hidden"
   .actions.flush
     = f.submit "Save"
+    = link_to "Delete", control_center_page_grid_file_path(@page, @grid_file), :method => :delete
     = link_to "Cancel", edit_control_center_page_path(@page)

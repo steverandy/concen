@@ -12,7 +12,7 @@
   = f.hidden_field :parent_id
   = f.hidden_field :level
   .actions.flush
-    = f.submit "Save"
-    = link_to "Cancel", control_center_pages_path
+    = f.submit "Save"    
     - if @page.persisted?
       = link_to "Delete", control_center_page_path(@page), :method => :delete
+    = link_to "Cancel", control_center_pages_path

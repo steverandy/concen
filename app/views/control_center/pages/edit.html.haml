@@ -8,7 +8,7 @@
     = render "form"
     #file-manager.thick-border
       .border
-        #file-uploader{:data => {"upload-path" => upload_file_control_center_page_path(@page)}}
+        #file-uploader{:data => {"upload-path" => upload_control_center_page_grid_files_path(@page)}}
           %noscript
             %p Please enable JavaScript to use file uploader.
         = render "files"

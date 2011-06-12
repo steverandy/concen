@@ -12,10 +12,11 @@ Rails.application.routes.draw do
       collection do
         put :sort
       end
-      member do
-        post :upload_file
+      resources :grid_files do
+        collection do
+          post :upload
+        end
       end
-      resources :grid_files
     end
     root :to => "main#statistics"
   end

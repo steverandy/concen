@@ -1,9 +1,16 @@
-$(document).ready(function() {
-	
-	$("a.inactive").live("click", function(){
-		return false;
+$(document).ready(function() {	
+	$("#file-manager a.new-file").live("click", function(event) {
+    var filename = prompt("Filename", "");
+    if (filename) {
+      $.post($(this).attr("href"), {filename: filename}, function(data, textStatus, xhr) {
+        if (data.success) {
+          $("#file-manager div.files").replaceWith(data.content);
+        };
+      });
+    };
+    event.preventDefault();
 	});
-	
+
 	$("div.panel ul li p.right").each(function(index) {
 		$(this).parents("li").eq(0).find("p:not(.right)").width($(this).parents("li").eq(0).width() - $(this).innerWidth());
 		$(this).parents("li").eq(0).find("a").width($(this).parents("li").eq(0).width() - $(this).innerWidth());
@@ -91,6 +98,4 @@ $(document).ready(function() {
 		  };
 		},
 	});
-  
-	
 });

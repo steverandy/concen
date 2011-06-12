@@ -21,6 +21,11 @@ module ControlCenter
       grid.get(self.grid_id).read
     end
     
+    def size
+      grid = Mongo::Grid.new(Mongoid.database)
+      grid.get(self.grid_id).file_length
+    end
+    
     def text?
       grid = Mongo::Grid.new(Mongoid.database)
       grid.get(self.grid_id).content_type.include?("text") || grid.get(self.grid_id).content_type.include?("javascript")
