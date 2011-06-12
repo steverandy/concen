@@ -16,6 +16,12 @@ module ControlCenter
       "/gridfs/" + self.filename
     end
     
+    def url(root_url)
+      root_url.gsub!("controlcenter.", "") # Remove controlcenter subdomain.
+      root_url = root_url[0..-2] # Remove trailing slash.
+      root_url + self.path
+    end
+    
     def read
       grid = Mongo::Grid.new(Mongoid.database)
       grid.get(self.grid_id).read
