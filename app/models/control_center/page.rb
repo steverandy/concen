@@ -5,7 +5,7 @@ module ControlCenter
   class Page
     include Mongoid::Document
     include Mongoid::Timestamps
-    
+
     references_many :children, :class_name => "ControlCenter::Page",:foreign_key => :parent_id, :inverse_of => :parent
     referenced_in :parent, :class_name => "ControlCenter::Page", :inverse_of => :children
     embeds_many :grid_files, :class_name => "ControlCenter::GridFile"
@@ -22,12 +22,12 @@ module ControlCenter
     field :publish_month, :type => Time
     field :labels, :type => Array, :default => []
     field :authors, :type => Array, :default => []
-    
+
     validates_presence_of :title
     validates_presence_of :default_slug
     validates_uniqueness_of :title, :scope => [:parent_id, :level], :case_sensitive => false
     validates_uniqueness_of :default_slug, :scope => [:parent_id, :level], :case_sensitive => false
-    
+
     before_validation :parse_raw_text
     before_validation :set_default_slug
     before_save :set_publish_month
@@ -36,17 +36,17 @@ module ControlCenter
     before_destroy :destroy_children
     before_destroy :destroy_grid_files
     after_destroy :reset_position
-    
+
     scope :with_position, where(:position.exists => true)
     scope :published, lambda { {:where => {:publish_time.lte => Time.now.utc}} }
-    
+
     # Get the list of dynamic fields by checking againts this array.
     # Values should mirror the listed fields above.
     PREDEFINED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :default_slug, :content, :raw_text, :position, :grid_files, :title, :description, :publish_time, :labels, :authors]
-    
+
     # These fields can't be overwritten by user's meta data when parsing raw_text.
     PROTECTED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :default_slug, :content, :raw_text, :position, :grid_files]
-    
+
     def content_in_html(key = "main", scope = Object.new)
       if content = self.content.try(:[], key)
         case self.content_template(key)
@@ -59,7 +59,7 @@ module ControlCenter
         return nil
       end
     end
-    
+
     def content_template(key="main")
       if content = self.content.try(:[], key)
         match_count = 0
@@ -78,19 +78,19 @@ module ControlCenter
         return nil
       end
     end
-    
+
     def images(filename=nil)
       search_grid_files(["png", "jpg", "jpeg", "gif"], filename)
     end
-    
+
     def stylesheets(filename=nil)
       search_grid_files(["css"], filename)
     end
-    
+
     def javascripts(filename=nil)
       search_grid_files(["js"], filename)
     end
-    
+
     def others(filename=nil)
       excluded_ids = []
       [:images, :stylesheets, :javascripts].each do |file_type|
@@ -99,7 +99,7 @@ module ControlCenter
       Rails.logger.info { "---#{excluded_ids}" }
       self.grid_files.where(:_id.nin => excluded_ids)
     end
-    
+
     def search_grid_files(extensions, filename=nil)
       if filename
         self.grid_files.where(:original_filename => /.*#{filename}.*.*\.(#{extensions.join("|")}).*$/i)
@@ -107,16 +107,16 @@ module ControlCenter
         self.grid_files.where(:original_filename => /.*\.(#{extensions.join("|")}).*/i)
       end
     end
-    
+
     def underscore_hash_keys(hash)
       new_hash = {}
-      hash.each do |key, value|        
+      hash.each do |key, value|
         value = underscore_hash_keys(value) if value.is_a?(Hash)
         new_hash[key.gsub(" ","_").downcase.to_sym] = value
       end
       new_hash
     end
-    
+
     def parse_publish_time(publish_time_string)
       begin
         Chronic.time_class = Time.zone
@@ -130,11 +130,11 @@ module ControlCenter
         self.publish_time = parsed_date
       end
     end
-    
+
     def published?
       self.publish_time.present?
     end
-    
+
     def previous(*args)
       options = args.extract_options!
       if options[:only_published]
@@ -166,7 +166,7 @@ module ControlCenter
         children.each_with_index { |child, index| return children.to_a[index+1] if child.id == self.id }
       end
     end
-    
+
     def first?(*args)
       options = args.extract_options!
       if options[:only_published]
@@ -202,13 +202,13 @@ module ControlCenter
         return false
       end
     end
-    
+
     protected
-    
+
     def set_default_slug
       self.default_slug = self.title.parameterize if self.title
     end
-    
+
     def set_position
       if Page.where(:level => self.level).count > 0
         self.position = Page.with_position.where(:level => self.level).asc(:position).last.position + 1
@@ -226,7 +226,7 @@ module ControlCenter
         end
       end
     end
-    
+
     def parse_raw_text
       if self.raw_text_changed? && self.raw_text && self.raw_text.length > 0
         self.content = {}
@@ -237,9 +237,9 @@ module ControlCenter
             content = content.lines.to_a
             # Cleanup line breaks.
             loop { content.first == "\r\n" ? content.delete_at(0) : break }
-            if content.first.include?("! ")
+            if content.first.include?("@ ")
               # Extract content key from ! syntax.
-              content_key = content.delete_at(0).gsub("! ", "").downcase
+              content_key = content.delete_at(0).gsub("@ ", "").downcase
               content_key = content_key.gsub("content", "").strip.gsub(" ", "_")
             elsif index == 0
               content_key = "main"
@@ -270,13 +270,13 @@ module ControlCenter
         end
       end
     end
-    
+
     def destroy_children
       for child in self.children
         child.destroy
       end
     end
-    
+
     def destroy_grid_files
       for grid_file in self.grid_files
         grid_file.destroy
@@ -292,7 +292,7 @@ module ControlCenter
       end
       Page.collection.update({"_id" => self.id}, {"$unset" => target_fields})
     end
-    
+
     def set_publish_month
       if self.publish_time
         self.publish_month = Time.zone.local(self.publish_time.year, self.publish_time.month)

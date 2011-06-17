@@ -1180,11 +1180,6 @@ a.grid {
   width: 950px;
 }
 
-/* line 395, ../../../app/stylesheets/application.sass */
-.ace_gutter {
-  display: none;
-}
-
 /* line 398, ../../../app/stylesheets/application.sass */
 #file-manager {
   float: right;
