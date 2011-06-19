@@ -257,7 +257,7 @@ module ControlCenter
 
               # Cleanup line breaks.
               loop { content.first == "\r\n" ? content.delete_at(0) : break }
-              if content.first.include?("@ ")
+              if content.first && content.first.include?("@ ")
                 # Extract content key from @ syntax.
                 content_key = content.delete_at(0).gsub("@ ", "").downcase
                 content_key = content_key.gsub("content", "").strip.gsub(" ", "_")
