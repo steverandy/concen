@@ -47,6 +47,10 @@ module ControlCenter
     # These fields can't be overwritten by user's meta data when parsing raw_text.
     PROTECTED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :default_slug, :content, :raw_text, :position, :grid_files]
 
+    def slug
+      super.nil? ? self.default_slug : super
+    end
+
     def content_in_html(key = "main", scope = Object.new)
       if content = self.content.try(:[], key)
         case self.content_template(key)
@@ -283,7 +287,7 @@ module ControlCenter
               if key == :publish_time
                 self.parse_publish_time(value)
               else
-                self[key] = value
+                self.write_attribute(key, value)
               end
             end
           end
