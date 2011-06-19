@@ -31,15 +31,23 @@ class PageTest < ActiveSupport::TestCase
   end
 
   test "should have authors" do
-    page = Fabricate.build("control_center/page", :title => nil, :authors => ["user1", "user2", "user3"])
+    page = Fabricate.build("control_center/page", :authors => ["user1", "user2", "user3"])
     assert_equal(page.authors.count, 3)
   end
 
   test "should get correct author_as_user" do
     user = Fabricate("control_center/user")
-    page = Fabricate.build("control_center/page", :title => nil, :authors => [user.username, "user2"])
+    page = Fabricate.build("control_center/page", :authors => [user.username, "user2"])
     assert_equal(page.authors.count, 2)
     assert_equal(page.authors_as_user.count, 1)
     assert(page.authors_as_user.include?(user.reload), "Does not include a correct user.")
+  end
+
+  test "should get the correct slug" do
+    page = Fabricate("control_center/page", :title => "New Title")
+    assert_equal(page.slug, "new-title")
+    page.write_attribute(:slug, "new-slug")
+    page.save
+    assert_equal(page.slug, "new-slug")
   end
 end

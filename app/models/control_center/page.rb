@@ -48,7 +48,11 @@ module ControlCenter
     PROTECTED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :default_slug, :content, :raw_text, :position, :grid_files]
 
     def slug
-      super.nil? ? self.default_slug : super
+      if user_defined_slug = self.read_attribute(:slug)
+        user_defined_slug
+      else
+        self.default_slug
+      end
     end
 
     def content_in_html(key = "main", scope = Object.new)
