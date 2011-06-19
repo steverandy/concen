@@ -50,6 +50,7 @@ $(document).ready(function() {
       minSizeLimit: 0, // min size
       // set to true to output server response to console
       debug: false,
+      csrf: true,
       // events
       // you can return false to abort submit
       template: '<div class="qq-uploader">' +
