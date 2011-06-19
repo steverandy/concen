@@ -33,8 +33,8 @@ module ControlCenter
     before_save :set_publish_month
     before_create :set_position
     after_save :unset_unused_dynamic_fields
-    before_destroy :destroy_children
-    before_destroy :destroy_grid_files
+    after_destroy :destroy_children
+    after_destroy :destroy_grid_files
     after_destroy :reset_position
 
     scope :with_position, where(:position.exists => true)

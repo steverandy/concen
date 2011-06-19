@@ -1,12 +1,12 @@
 module ControlCenter
   class GridFilesController < ApplicationController
     layout "control_center/application"
-    
+
     def new
       @page = Page.find(params[:page_id])
       @grid_file = @page.grid_files.build
     end
-    
+
     def create
       @page = Page.find(params[:page_id])
       @grid_file = @page.grid_files.build
@@ -23,12 +23,12 @@ module ControlCenter
         render :json => {:success => false}
       end
     end
-    
+
     def edit
       @page = Page.find(params[:page_id])
       @grid_file = @page.grid_files.find(params[:id])
     end
-    
+
     def update
       @page = Page.find(params[:page_id])
       @grid_file = @page.grid_files.find(params[:id])
@@ -38,14 +38,14 @@ module ControlCenter
         render :edit
       end
     end
-    
+
     def destroy
       @page = Page.find(params[:page_id])
       @grid_file = @page.grid_files.find(params[:id])
       @grid_file.destroy
       redirect_to edit_control_center_page_path(@page)
     end
-    
+
     def upload
       # logger.info { "----#{env['rack.input']}" }
       # logger.info { "----#{env['HTTP_X_FILE_NAME']}" }
@@ -53,11 +53,13 @@ module ControlCenter
       @page = Page.find(params[:page_id])
       @grid_file = @page.grid_files.build
       if env["rack.input"]
-        @grid_file.store(env["rack.input"], env["HTTP_X_FILE_NAME"])
+        file = env["rack.input"]
+        filename = env["HTTP_X_FILE_NAME"]
       else
-        @grid_file.store(params[:qqfile].read, params[:qqfile].original_filename)
+        file = params[:qqfile].read
+        filename = params[:qqfile].original_filename
       end
-      if @grid_file.save
+      if @grid_file.store(file, filename)
         content = render_to_string(:partial => "control_center/pages/files")
         render :json => {:success => true, :content => content}
       end

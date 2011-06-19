@@ -1,17 +1,23 @@
 development:
-  database: steverandytantra_development
+  database: dummy_development
   host: localhost
   use_activesupport_time_zone: true
+  include_root_in_json: false
+  persist_in_safe_mode: true
 
 test:
-  database: steverandytantra_test
+  database: dummy_test
   host: localhost
   use_activesupport_time_zone: true
+  include_root_in_json: false
+  persist_in_safe_mode: true
 
 production:
-  database: steverandytantra_production
+  database: dummy_production
   host: localhost
   # port:
   # username:
   # password:
   use_activesupport_time_zone: true
+  include_root_in_json: false
+  persist_in_safe_mode: true
