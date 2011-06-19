@@ -254,10 +254,11 @@ module ControlCenter
             meta_data = raw_text_array.delete_at(0).strip
             raw_text_array.each_with_index do |content, index|
               content = content.lines.to_a
+
               # Cleanup line breaks.
               loop { content.first == "\r\n" ? content.delete_at(0) : break }
               if content.first.include?("@ ")
-                # Extract content key from ! syntax.
+                # Extract content key from @ syntax.
                 content_key = content.delete_at(0).gsub("@ ", "").downcase
                 content_key = content_key.gsub("content", "").strip.gsub(" ", "_")
               elsif index == 0
@@ -265,6 +266,7 @@ module ControlCenter
               else
                 content_key = (index + 1).to_s
               end
+
               # Cleanup line breaks.
               loop { content.first == "\r\n" ? content.delete_at(0) : break }
               self.content[content_key] = content.join
@@ -273,6 +275,8 @@ module ControlCenter
             meta_data = self.raw_text.strip
             self.content = {}
           end
+
+          # Set each value of meta data.
           meta_data = underscore_hash_keys(YAML.load(meta_data))
           meta_data.each do |key, value|
             unless ControlCenter::Page::PROTECTED_FIELDS.include?(key)
@@ -283,9 +287,11 @@ module ControlCenter
               end
             end
           end
+
           # Set the field to nil if the value isn't present in meta data.
+          # Except for authors.
           (self.attributes.keys.map{ |k| k.to_sym } - PROTECTED_FIELDS).each do |field|
-            self[field] = nil if !meta_data.keys.include?(field)
+            self[field] = nil if !meta_data.keys.include?(field) && field != :authors
           end
         end
       end
