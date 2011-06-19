@@ -1,7 +1,7 @@
 #content
   .panels.clearfix
     .panel.wide
-      %h3 
+      %h3
         Recent Visits
       .big-text
         %p
@@ -23,7 +23,7 @@
         %p.label.last= "This Month (#{@current_month.strftime('%B %Y')})"
   .panels.clearfix
     .panel.wide{:style => "height:180px"}
-      %h3 
+      %h3
         Historical Visits
         %span.link= link_to "Yearly", "#", :title => "Show statistic year by year."
         %span.link= link_to "Monthly", "#", :title => "Show statistic month by month."
@@ -40,7 +40,7 @@
               .total{:style => "height:#{historical_visits[num].to_f/top_value.to_f*100.0}%", :title => pluralize(historical_visits[num], "visit")}
               .unique{:style => "height:#{historical_unique_visits[num].to_f/top_value.to_f*100.0}%", :title => pluralize(historical_unique_visits[num], "unique visit")}
             %p= (current_hour - num.hour).strftime("%I %p")
-            
+
   .panels.clearfix
     .panel
       %h3
@@ -135,6 +135,3 @@
           %p= "Statistics were started on ___. That was ___ ago. Storage usage up to now is ___. Number of pages that has been tracked is ___."
         %li
           %p= "Every statistic for the current month is based on local time (#{Time.zone.now.strftime('%Z')}). Every other statistic is based on universal time (UTC)."
-
-:javascript
-  autoRefresh();

@@ -4,7 +4,7 @@
  * Multiple file upload component with progress-bar, drag-and-drop. 
  * © 2010 Andrew Valums ( andrew(at)valums.com ) 
  * 
- * Licensed under GNU GPL 2 or later, see license.txt.
+ * Licensed under GNU GPL 2 or later and GNU LGPL 2 or later, see license.txt.
  */    
 
 //
@@ -486,7 +486,7 @@ qq.FileUploader = function(o){
                 
         template: '<div class="qq-uploader">' + 
                 '<div class="qq-upload-drop-area"><span>Drop files here to upload</span></div>' +
-                '<div class="qq-upload-button">Upload File</div>' +
+                '<div class="qq-upload-button">Upload a file</div>' +
                 '<ul class="qq-upload-list"></ul>' + 
              '</div>',
 

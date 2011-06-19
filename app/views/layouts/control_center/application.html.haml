@@ -13,8 +13,6 @@
     %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge"}
     = csrf_meta_tag
     = stylesheet_link_tag "/control_center/stylesheets/application.css"
-    - unless ios?
-      = stylesheet_link_tag "/control_center/stylesheets/non_ios.css"
     - if content_for?(:head_stylesheets)
       = yield :head_stylesheets
     /[if lt IE 8]
@@ -41,7 +39,7 @@
     - if content_for?(:head_javascripts)
       = yield :head_javascripts
     - if content_for?(:head)
-      = yield :head 
+      = yield :head
   %body.controlcenter
     = render "layouts/control_center/header"
     = yield

@@ -52,6 +52,11 @@ $(document).ready(function() {
       debug: false,
       // events
       // you can return false to abort submit
+      template: '<div class="qq-uploader">' +
+                  '<div class="qq-upload-drop-area"><span>Drop files here to upload</span></div>' +
+                  '<div class="qq-upload-button">Upload Files</div>' +
+                  '<ul class="qq-upload-list"></ul>' +
+                '</div>',
       onSubmit: function(id, fileName){},
       onProgress: function(id, fileName, loaded, total){},
       onComplete: function(id, fileName, responseJSON){

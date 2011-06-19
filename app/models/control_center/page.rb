@@ -203,6 +203,24 @@ module ControlCenter
       end
     end
 
+    def authors_as_user
+      users = []
+      for author in self.authors
+        if author.is_a?(String)
+          if user = User.where(:username => author).first
+            users << user
+          elsif user = User.where(:email => author).first
+            users << user
+          elsif user = User.where(:full_name => author).first
+            users << user
+          end
+        else
+          users << user if User.where(:_id => author).first
+        end
+      end
+      return users
+    end
+
     protected
 
     def set_default_slug

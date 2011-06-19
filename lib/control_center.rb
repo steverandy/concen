@@ -1,9 +1,8 @@
 require "control_center/engine" if defined?(Rails)
 
-module ControlCenter    
-  mattr_accessor :application_name, :geoip_api_key
+module ControlCenter
+  mattr_accessor :application_name
   @@application_name = nil
-  @@geoip_api_key = nil
 
   def self.setup
     yield self
