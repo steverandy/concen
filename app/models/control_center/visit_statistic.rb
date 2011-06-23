@@ -137,13 +137,12 @@ module ControlCenter
       reduce =
         "function(key, values) {
           var total = 0;
-          values.forEach(function(value){
-            total += value.count;
-          });
+          values.forEach(function(value){ total += value.count; });
           return {count: total};
         };"
       if VisitStatistic.where(:hourly_location_done => true, :hour.lte => current_hour).to_a.count > 0
-        result = VisitStatistic.collection.map_reduce(map, reduce, :out => "inline", :query => {"hourly_location_done" => true, "hour" => {"$lte" => current_hour}}).find().to_a
+        query = {"hourly_location_done" => true, "hour" => {"$lte" => current_hour}}
+        result = VisitStatistic.collection.map_reduce(map, reduce, :out => {:inline => 1}, :raw => true, :query => query).find().to_a[0][1]
         result.sort! {|x,y| y["value"]["count"].to_i <=> x["value"]["count"].to_i }
       else
         return false
