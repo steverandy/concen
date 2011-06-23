@@ -38,7 +38,8 @@ module ControlCenter
     after_destroy :reset_position
 
     scope :with_position, where(:position.exists => true)
-    scope :published, lambda { {:where => {:publish_time.lte => Time.now.utc}} }
+    scope :with_slug, ->(slug) { any_of({:slug => slug}, {:default_slug => slug}) }
+    scope :published, lambda { where({:publish_time.lte => Time.now.utc}) }
 
     # Get the list of dynamic fields by checking againts this array.
     # Values should mirror the listed fields above.
