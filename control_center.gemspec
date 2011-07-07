@@ -16,13 +16,14 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_development_dependency("compass", "0.11.3")
-  s.add_dependency("haml", "~>3.1.0")
-  s.add_dependency("mongoid", "~>2.0.0")
-  s.add_dependency("bson_ext", "~>1.3.0")
-  s.add_dependency("whenever", "~>0.6.7")
-  s.add_dependency("chronic", "~>0.4.3")
-  s.add_dependency("redcarpet", "~>1.11.2")
-  s.add_dependency("mime-types", "~>1.16")
-  s.add_dependency("rack-gridfs", "~>0.4.0")
-  s.add_dependency("bcrypt-ruby", "~>2.1.4")
+  s.add_dependency("haml", "~> 3.1.0")
+  s.add_dependency("mustache", "~> 0.99.4")
+  s.add_dependency("mongoid", "~> 2.0.0")
+  s.add_dependency("bson_ext", "~> 1.3.0")
+  s.add_dependency("whenever", "~> 0.6.7")
+  s.add_dependency("chronic", "~> 0.4.3")
+  s.add_dependency("redcarpet", "~> 1.17.2")
+  s.add_dependency("mime-types", "~> 1.16")
+  s.add_dependency("rack-gridfs", "~> 0.4.0")
+  s.add_dependency("bcrypt-ruby", "~> 2.1.4")
 end
