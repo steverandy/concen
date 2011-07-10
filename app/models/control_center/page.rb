@@ -42,8 +42,7 @@ module ControlCenter
     scope :with_position, where(:position.exists => true)
     scope :with_slug, ->(slug) { any_of({:slug => slug}, {:default_slug => slug}) }
     scope :published, lambda {
-      where({:publish_time.lte => Time.now}).
-      any_of({:status.exists => false}, {:status => nil}, {:status => /published/i})
+      where(:publish_time.lte => Time.now, :status.in => [nil, /published/i])
     }
 
     index :parent_id, :background => true
