@@ -1,6 +1,6 @@
 namespace :control_center do
   desc "Create initial setup for Control Center."
-  task :setup => [:environment, :add_schedule, :copy_assets, :create_first_admin] do
+  task :setup => [:environment, :add_schedule, :copy_assets, :create_first_user] do
   end
 
   desc "Add schedule.rb file to be used by whenever gem (cron jobs)."
