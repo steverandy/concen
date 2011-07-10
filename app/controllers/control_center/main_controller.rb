@@ -1,11 +1,13 @@
 module ControlCenter
   class MainController < ApplicationController
     layout "control_center/application"
-  
+
+    before_filter :authenticate_user
+
     def index
       redirect_to :action => :statistics
     end
-  
+
     # Supports OS X and Linux, require top command.
     #   @current_month_visits = Statistic.visits_for_current :month
     # Real time visits
@@ -13,12 +15,12 @@ module ControlCenter
     # Month: visits
     def statistics
       @page_title = "Statistics"
-    
+
       @current_time = Time.zone.now
       @current_hour = Time.zone.local(@current_time.year, @current_time.month, @current_time.day, @current_time.hour, 0, 0, 0)
       @current_day = Time.zone.local(@current_time.year, @current_time.month, @current_time.day)
       @current_month = Time.zone.local(@current_time.year, @current_time.month, 1, 0, 0, 0, 0)
-    
+
       processor_statistic = []
       memory_statistic = []
       @server_statistics = {}
@@ -45,12 +47,12 @@ module ControlCenter
       end
       uptime_array = `uptime`.split("up")[1].strip.split("user")[0].split(","); uptime_array.delete_at(uptime_array.length - 1)
       if uptime_array.present?
-        uptime = uptime_array.join(",") 
+        uptime = uptime_array.join(",")
         @server_statistics[:uptime] = uptime
       end
-    
+
       @mongodb_stats = Mongoid.database.stats
-    
+
       # Disabled because it's uncertain the result is what as intended.
       # begin
       #   @assets_storage_usage = Mongoid.database.collection("fs.chunks").stats["storageSize"]
@@ -58,11 +60,7 @@ module ControlCenter
       #   @assets_storage_usage = 0
       # end
     end
-  
-    def content
-      # @parents = Parent.all.asc(:position)
-    end
-  
+
     def assets
     end
   end

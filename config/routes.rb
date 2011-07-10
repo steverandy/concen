@@ -1,14 +1,33 @@
+require "rack/gridfs"
+
+# Use Rails.application.routes.prepend on Rails 3.1.
 Rails.application.routes.draw do
-  scope :constraints => {:subdomain => "controlcenter"} do
-    devise_for :admins, :class_name => "ControlCenter::Admin", :path_names => { :sign_in => "signin", :sign_out => "signout", :sign_up => "signup" }, :module => "control_center/admins"
-  end
-  
-  scope :constraints => {:subdomain => "controlcenter"}, :as => "control_center" do
-    match "/" => "control_center/main#index", :as => "admin_root"
-    match "/statistics" => "control_center/main#statistics", :as => "statistics"
-    match "/content" => "control_center/main#content", :as => "content"
-  end
-  
   match "/visits/record.gif" => "control_center/visits#record", :as => "record_visit"
   match "/visits/js" => "control_center/visits#visit_recorder_js", :as => "visit_recorder_js"
+  mount Rack::GridFS::Endpoint.new(:db => Mongoid.database, :lookup => :path), :at => "gridfs"
+
+  scope :constraints => {:subdomain => "controlcenter"}, :module => "control_center", :as => "control_center"  do
+    get "signout" => "sessions#destroy", :as => "signout"
+    get "signin" => "sessions#new", :as => "signin"
+    get "signup" => "users#new", :as => "signup"
+
+    resources :users
+
+    resources :sessions
+
+    match "/statistics" => "main#statistics", :as => "statistics"
+
+    resources :pages do
+      collection do
+        put :sort
+      end
+      resources :grid_files do
+        collection do
+          post :upload
+        end
+      end
+    end
+
+    root :to => "main#statistics"
+  end
 end

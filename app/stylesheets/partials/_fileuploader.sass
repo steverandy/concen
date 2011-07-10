@@ -1,0 +1,75 @@
+.qq-uploader
+  position: relative
+
+.qq-upload-button
+  display: block
+  color: $color-1
+  border: 1px solid $color-2
+  text-align: center
+  padding: 10px 0
+  height: 20px
+  line-height: 20px
+  font-weight: 600
+  font-size: 16px
+
+.qq-upload-button-hover
+
+.qq-upload-button-focus
+  outline: 1px dotted black
+
+.qq-upload-drop-area
+  position: absolute
+  top: 0
+  left: 0
+  width: 174px - 2px
+  height: 20px
+  padding: 10px 0
+  border: 1px solid $color-2
+  background: white
+  z-index: 2
+  text-align: center
+  span
+    display: block
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 20px
+    line-height: 20px
+    padding: 10px 0
+    font-size: 13px
+    text-align: center
+
+.qq-upload-drop-area-active
+  background: $color-4
+
+.qq-upload-list
+  padding: 0
+  list-style: disc
+  list-style-position: outside
+  li
+    margin-top: 10px
+    padding: 0
+    line-height: 15px
+    font-size: 12px
+
+.qq-upload-file, .qq-upload-spinner, .qq-upload-size, .qq-upload-cancel, .qq-upload-failed-text
+  margin-right: 7px
+
+.qq-upload-file
+
+.qq-upload-spinner
+  display: inline-block
+  background: url("/control_center/images/fileuploader-loading.gif")
+  width: 15px
+  height: 15px
+  vertical-align: text-bottom
+
+.qq-upload-size, .qq-upload-cancel
+  font-size: 11px
+
+.qq-upload-failed-text
+  display: none
+
+.qq-upload-fail .qq-upload-failed-text
+  display: inline

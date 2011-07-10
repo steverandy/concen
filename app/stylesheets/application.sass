@@ -1,481 +1,423 @@
-@import "blueprint/reset"
 @import "compass"
-@import "blueprint"
-@import "blueprint/scaffolding"
+@import "compass/reset"
+@import "blueprint/print"
+@import "partials/variables"
+@import "partials/mixins"
 @import "partials/base"
 @import "partials/form"
-@import "partials/mixins"
+@import "partials/fileuploader"
 
-// Variables
+@media print
+  +blueprint-print
 
-$grey20: lighten(#000, 20%)
-
-// Basic
-
-html
-	overflow-y: scroll
-
-body
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
-	font-weight: 400
-	color: $grey20
-	min-width: 820px
-	// Improved handling of kerning pairs and ligatures.
-	text-rendering: optimizeLegibility
-	
-.wf-active body
-	font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
-	
-h1
-	font-size: 24px
-
-h2
-	font: 20px/normal 'Helvetica Neue', Helvetica, Arial, sans-serif
-	font-weight: 500
-	margin-bottom: 30px
-	
-.wf-active h2
-	font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
-	font-weight: 600
-	
-h3
-	font: 16px/normal 'Helvetica Neue', Helvetica, Arial, sans-serif
-	font-weight: 500
-	
-.wf-active h3
-	font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
-	font-weight: 600
-	
-p
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
-	font-weight: 400
-	
-.wf-active p
-	font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
-
-a
-	// $normal, $hover, $active, $visited, $focus
-	@include link-colors($grey20, $grey20, $grey20, $grey20, $grey20)
-	@include hover-link
-	
-.controlcenter a
-	outline: none
-	
-a.inactive
-	color: lighten(#000, 60%)
-	text-decoration: none
-	
-img.visit-recorder
-	position: absolute
-	top: 0
-	left: 0
-	
-.clearfix
-	@include clearfix
-	
-.center
-	text-align: center
-	
-a.link-button
-	font-size: 13px
-	@include hover-link
-	@include inline-block
-	border: 1px solid lighten(#000, 60%)
-	padding: 4px 10px
-	font-weight: 500
-	width: auto
-	min-width: 80px
-	max-width: 140px
-
-a.link-button:hover
-	background: lighten(#000, 94%)
-	text-decoration: none
+body.controlcenter
+  header, #content, footer
+    width: 960px
 
 // Header
 
 header
-	width: 760px
-	display: block
-	border-bottom: 1px solid lighten(#000, 80%)
-	margin: 30px auto 0 auto
-	position: relative
-	h1
-		padding-bottom: 15px
-		height: 25px
-		font-weight: 600
-		a
-			font-size: 22px
-			line-height: 25px
-			display: block
-			@include clearfix
-		a:hover
-			text-decoration: none
-		span
-			float: left
-		span.application-name
-			font-weight: 300
-			margin-left: 14px
-		img
-			display: block
-	nav
-		ul
-			@include horizontal-list(10px)
-			position: absolute
-			top: 5px
-			font-size: 13px
-			li a
-				line-height: 15px
-				@include hover-link
-		ul.left
-			left: 0
-		ul.right
-			top: 5px
-			right: 0
-	form
-		position: absolute
-		top: 0
-		right: 0
-	input#keyword
-		@include background-image('magnifying-glass.png')
-		background-position: 6px 5px
-		border: 1px solid lighten(#000, 70%)
-		@include border-radius(60px)
-		-webkit-appearance: none
-		min-width: 120px
-		width: 120px
-		height: 15px
-		padding: 4px 12px 4px 24px
-		font-size: 12px
-		line-height: 15px
-		color: lighten(#000, 60%)
-		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
-		outline: none
-	input#keyword:focus
-		color: lighten(#000, 20%)
-		
-.wf-active header input#keyword
-	font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
+  display: block
+  border-bottom: 1px solid $color-2
+  margin: 30px auto 0 auto
+  position: relative
+  h1
+    height: 25px
+    line-height: 25px
+    padding-bottom: 15px
+    font-size: 24px
+    .wf-active &
+      font-weight: 600
+    a
+      display: block
+      border-bottom: 0
+      +clearfix
+      text-decoration: none
+    span
+      float: left
+    span.application-name
+      margin-left: 14px
+      font-weight: 400
+      .wf-active &
+        font-weight: 300
+    img
+      display: block
+  nav
+    ul
+      +horizontal-list(10px)
+      font-size: 13px
+      overflow: visible
+      position: absolute
+      top: 4px
+      li a
+        line-height: 17px
+        +hover-link
+    ul.left
+      left: 0
+    ul.right
+      right: 0
+  form
+    position: absolute
+    top: 0
+    right: 0
+  input#keyword
+    font-size: 12px
+    line-height: 15px
+    +background-image-with-dimension('magnifying-glass.png')
+    background-position: 6px 5px
+    border: 1px solid lighten(#000, 70%)
+    outline: none
+    +border-radius(60px)
+    -webkit-appearance: none
+    min-width: 120px
+    width: 120px
+    height: 15px
+    padding: 4px 12px 4px 24px
+    color: $gray-60
+  input#keyword:focus
+    color: $gray-20
 
-body
-	header, section.content, footer
-		width: 760px
-
-body.controlcenter
-	header, section.content, footer
-		width: 960px
-		
 // Content Section
 
-section.content
-	margin: 0 auto
-	margin-top: 30px
-	display: block
-	text-align: left
-	div.parent-header
-		height: 24px
-		width: 100%
-		position: relative
-		h2
-			line-height: 24px
-			display: inline
-			margin-bottom: 0
-		p.description
-			font-size: 12px
-			display: inline
-			margin-left: 6px
-			color: lighten(#000, 60%)
-		p.counter
-			font: italic 18px/24px  Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif
-			float: right
-	
+#content
+  margin: 30px auto 0 auto
+  text-align: left
+  h1
+    margin-bottom: 30px
+    .wf-active &
+      font-weight: 600
+  div.parent-header
+    height: 24px
+    width: 100%
+    position: relative
+    h2
+      line-height: 24px
+      display: inline
+      margin-bottom: 0
+    p.description
+      font-size: 12px
+      display: inline
+      margin-left: 6px
+      color: lighten(#000, 60%)
+    p.counter
+      font-style: italic
+      font-size: 18px
+      line-height: 24px
+      float: right
+
+ul.pages
+  margin-left: 0
+  font-size: 14px
+  p, ul p
+    margin-bottom: 10px
+  a, ul a
+    font-size: 12px
+    margin-left: 10px
+  ul
+    margin-left: 20px
+
 section#article
-	width: 774px
-			
-.wf-active ul.search-result div.text p.date
-	font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
-			
+  width: 774px
+
 .boxshadow ul.search-result
-	padding-bottom: 0
-	li.child
-		margin-top: 0
-		margin-bottom: 30px
-	div.text
-		margin-top: 0
-	
+  padding-bottom: 0
+  li.child
+    margin-top: 0
+    margin-bottom: 30px
+  div.text
+    margin-top: 0
+
 // Footer
 
 footer
-	color: $grey20
-	margin: 0px auto 30px auto
-	width: 760px
-	display: block
-	font-size: 12px
-	border-top: 1px solid lighten(#000, 80%)
-	p
-		text-align: center
-		margin: 15px 0 0 0
+  color: $color-1
+  margin: 30px auto
+  width: 760px
+  display: block
+  font-size: 12px
+  border-top: 1px solid $color-2
+  p
+    text-align: center
+    margin: 15px 0 0 0
+    font-size: 12px
 
-body.controlcenter footer
-	width: 960px
-		
 // Buttons
 
 a.prev
-	@include background-image('button-prev.png')
-	text-indent: -9999px
-	display: block
-	
-a.prev.disabled
-	@include background-image('button-prev-disabled.png')
-	
-a.next
-	@include background-image('button-next.png')
-	text-indent: -9999px
-	display: block
-	
-a.next.disabled
-	@include background-image('button-next-disabled.png')
-	
-a.grid
-	@include background-image('button-grid.png')
-	text-indent: -9999px
-	display: block
-	
-#file-list
-	width: 260px
-	float: right
-	// background: lighten(#000, 94%)
-	padding: 0 0 0 20px
-	margin-bottom: 20px
-	@include text-shadow(white, 0px, 1px, 0px)
-	position: relative
-	h3
-		line-height: 1
-		font-size: 13px
-		margin-bottom: 10px
-		position: relative
-		background: lighten(#000, 92%)
-		padding: 6px 10px
-		@include text-shadow(white, 0px, 1px, 0px)
-	a.organize
-		font-size: 12px
-		font-weight: 600
-		line-height: 25px
-		display: block
-		position: absolute
-		top: 0
-		right: 10px
-		color: lighten(#000, 60%)
-	a.sort-path
-		display: none
-	ul
-		list-style-position: inside
-		margin-bottom: 20px
-		li
-			font-size: 12px
-			line-height: 1
-			height: 12px
-			list-style-type: square
-			padding: 8px 10px
-			border-bottom: 1px solid lighten(#000, 92%)
-			@include clearfix
-			a
-				font-size: 12px
-			.right
-				float: right
-				height: inherit
-				@include clearfix
-				div, a
-					width: 12px
-					height: 12px
-					margin-left: 10px
-					display: block
-					text-indent: -9999px
-					float: left
-				.check
-					@include background-image('glyph-small-check.png')
-				.activate
-					@include background-image('glyph-small-check-alt.png')
-				.activate:hover
-					@include background-image('glyph-small-check.png')
-				.handle
-					@include background-image('glyph-small-handle.png')
-				.delete
-					@include background-image('glyph-small-delete.png')
-				
-.panels
-	.panel
-		float: left
-		width: 300px
-		margin-right: 30px
-		margin-bottom: 30px
-		font-size: 12px
-		h3
-			margin-bottom: 10px
-			line-height: 1
-			background: lighten(#000, 92%)
-			padding: 6px 10px
-			@include text-shadow(white, 0px, 1px, 0px)
-			span
-				font-size: 12px
-				margin-left: 2px
-				color: lighten(#000, 60%)
-				font-weight: 500
-			span.link
-				a
-					font-size: 10px
-					line-height: 10px
-					float: right
-					display: block
-					border: 1px solid lighten(#000, 60%)
-					@include border-radius(2px)
-					padding: 2px 6px
-					font-weight: 600
-					@include box-shadow(white, 0px, 1px, 0px)
-					margin-left: 8px
-					text-align: center
-					color: lighten(#000, 40%)
-					background: lighten(#000, 88%)
-					@include linear-gradient(color-stops(lighten(#000, 95%), lighten(#000, 85%)))
-				a.active, a:active
-					color: lighten(#000, 40%)
-					border-color: lighten(#000, 50%)
-					background: lighten(#000, 85%)
-					@include linear-gradient(color-stops(lighten(#000, 85%), lighten(#000, 95%)))
-				a:hover
-					text-decoration: none
-			span.timezone
-				font-size: 10px
-				line-height: 10px
-				float: right
-				display: block
-				border: 1px solid lighten(#000, 70%)
-				@include border-radius(2px)
-				padding: 2px 6px
-				font-weight: 600
-				@include box-shadow(white, 0px, 1px, 0px)
-				margin-left: 8px
-				text-align: center
-				color: lighten(#000, 60%)
-		div.big-text
-			margin-top: 20px
-			width: 300px
-			float: left
-			margin-right: 30px
-			p
-				font-weight: 600
-				font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
-				text-align: center
-				line-height: 1
-				padding: 0 8px
-				span.primary
-					font-size: 32px
-				span.slash
-					font-size: 32px
-					font-weight: 200
-					margin: 0 10px
-				span.secondary
-					font-size: 32px
-			p.label
-				font-size: 12px
-				font-weight: 400
-				font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
-				color: lighten(#000, 20%)
-				margin-top: 8px
-			p.label.last
-				margin-bottom: 0
-		div.big-text.edge
-			margin-right: 0
-		ul
-			width: 100%
-			li
-				padding: 6px 0
-				margin: 0 10px
-				line-height: normal
-				border-bottom: 1px solid lighten(#000, 92%)
-				position: relative
-				list-style: none
-				overflow: hidden
-				a, p
-					font-size: 12px
-					line-height: normal
-					$use-mozilla-ellipsis-binding: true
-					@include ellipsis
-					-moz-binding: url('/control_center/stylesheets/xml/ellipsis.xml#ellipsis')
-					display: block
-					width: 100%
-				p.right
-					position: absolute
-					top: 6px
-					right: 0
-					padding-left: 10px
-					background: white
-					width: auto
+  +background-image-with-dimension("button-prev.png")
+  text-indent: -9999px
+  display: block
 
-	.panel.wide
-		width: 960px
-		margin-right: 0
-	.edge
-		margin-right: 0px
-	ul.historical-visits
-		list-style-type: none
-		border: none
-		li
-			float: right
-			width: 40px
-			padding: 0
-			margin: 0
-			height: 142px
-			border: none
-			div.count
-				height: 120px
-				position: relative
-			div.total, div.unique
-				position: absolute
-				bottom: 0
-				left: 0
-				width: 100%
-			div.total
-				background: #43d166
-				z-index: 10
-			div.unique
-				background: #9aeeb0
-				z-index: 11
-			p
-				margin-top: 8px
-				height: 14px
-				font-size: 11px
-				line-height: 14px
-				text-align: center
-				
+a.prev.disabled
+  +background-image-with-dimension("button-prev-disabled.png")
+
+a.next
+  +background-image-with-dimension("button-next.png")
+  text-indent: -9999px
+  display: block
+
+a.next.disabled
+  +background-image-with-dimension("button-next-disabled.png")
+
+a.grid
+  +background-image-with-dimension("button-grid.png")
+  text-indent: -9999px
+  display: block
+
+#file-list
+  width: 260px
+  float: right
+  // background: lighten(#000, 94%)
+  padding: 0 0 0 20px
+  margin-bottom: 20px
+  +text-shadow(white, 0px, 1px, 0px)
+  position: relative
+  h3
+    line-height: 1
+    font-size: 13px
+    margin-bottom: 10px
+    position: relative
+    background: lighten(#000, 92%)
+    padding: 6px 10px
+    +text-shadow(white, 0px, 1px, 0px)
+  a.organize
+    font-size: 12px
+    font-weight: 600
+    line-height: 25px
+    display: block
+    position: absolute
+    top: 0
+    right: 10px
+    color: lighten(#000, 60%)
+  a.sort-path
+    display: none
+  ul
+    list-style-position: inside
+    margin-bottom: 20px
+    li
+      font-size: 12px
+      line-height: 1
+      height: 12px
+      list-style-type: square
+      padding: 8px 10px
+      border-bottom: 1px solid lighten(#000, 92%)
+      +clearfix
+      a
+        font-size: 12px
+      .right
+        float: right
+        height: inherit
+        +clearfix
+        div, a
+          width: 12px
+          height: 12px
+          margin-left: 10px
+          display: block
+          text-indent: -9999px
+          float: left
+        .check
+          +background-image-with-dimension("glyph-small-check.png")
+        .activate
+          +background-image-with-dimension("glyph-small-check-alt.png")
+        .activate:hover
+          +background-image-with-dimension("glyph-small-check.png")
+        .handle
+          +background-image-with-dimension("glyph-small-handle.png")
+        .delete
+          +background-image-with-dimension("glyph-small-delete.png")
+
+.panels
+  .panel
+    float: left
+    width: 300px
+    margin-right: 30px
+    margin-bottom: 30px
+    font-size: 12px
+    h3
+      margin-bottom: 10px
+      line-height: 1
+      background: lighten(#000, 92%)
+      padding: 6px 10px
+      +text-shadow(white, 0px, 1px, 0px)
+      span
+        font-size: 12px
+        margin-left: 2px
+        color: lighten(#000, 60%)
+        font-weight: 500
+      span.link
+        a
+          font-size: 10px
+          line-height: 10px
+          float: right
+          display: block
+          border: 1px solid lighten(#000, 60%)
+          +border-radius(2px)
+          padding: 2px 6px
+          font-weight: 600
+          +box-shadow(white, 0px, 1px, 0px)
+          margin-left: 8px
+          text-align: center
+          color: lighten(#000, 40%)
+          background: lighten(#000, 88%)
+          +linear-gradient(color-stops(lighten(#000, 95%), lighten(#000, 85%)))
+        a.active, a:active
+          color: lighten(#000, 40%)
+          border-color: lighten(#000, 50%)
+          background: lighten(#000, 85%)
+          +linear-gradient(color-stops(lighten(#000, 85%), lighten(#000, 95%)))
+        a:hover
+          text-decoration: none
+      span.timezone
+        font-size: 10px
+        line-height: 10px
+        float: right
+        display: block
+        border: 1px solid lighten(#000, 70%)
+        +border-radius(2px)
+        padding: 2px 6px
+        font-weight: 600
+        +box-shadow(white, 0px, 1px, 0px)
+        margin-left: 8px
+        text-align: center
+        color: lighten(#000, 60%)
+    div.big-text
+      margin-top: 20px
+      width: 300px
+      float: left
+      margin-right: 30px
+      p
+        font-weight: 600
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
+        text-align: center
+        line-height: 1
+        padding: 0 8px
+        span.primary
+          font-size: 32px
+        span.slash
+          font-size: 32px
+          font-weight: 200
+          margin: 0 10px
+        span.secondary
+          font-size: 32px
+      p.label
+        font-size: 12px
+        font-weight: 400
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
+        color: lighten(#000, 20%)
+        margin-top: 8px
+      p.label.last
+        margin-bottom: 0
+    div.big-text.edge
+      margin-right: 0
+    ul
+      width: 100%
+      li
+        padding: 6px 0
+        margin: 0 10px
+        line-height: normal
+        border-bottom: 1px solid lighten(#000, 92%)
+        position: relative
+        list-style: none
+        overflow: hidden
+        a, p
+          font-size: 12px
+          line-height: normal
+          $use-mozilla-ellipsis-binding: true
+          +ellipsis
+          -moz-binding: url('/control_center/stylesheets/xml/ellipsis.xml#ellipsis')
+          display: block
+          width: 100%
+        p.right
+          position: absolute
+          top: 6px
+          right: 0
+          padding-left: 10px
+          background: white
+          width: auto
+
+  .panel.wide
+    width: 960px
+    margin-right: 0
+  .edge
+    margin-right: 0px
+  ul.historical-visits
+    list-style-type: none
+    border: none
+    li
+      float: right
+      width: 40px
+      padding: 0
+      margin: 0
+      height: 142px
+      border: none
+      div.count
+        height: 120px
+        position: relative
+      div.total, div.unique
+        position: absolute
+        bottom: 0
+        left: 0
+        width: 100%
+      div.total
+        background: #43d166
+        z-index: 10
+      div.unique
+        background: #9aeeb0
+        z-index: 11
+      p
+        margin-top: 8px
+        height: 14px
+        font-size: 11px
+        line-height: 14px
+        text-align: center
+
+// Qtip JS Plugin
+
 .qtip-content
-	font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
-	font-size: 13px
-	color: $grey20
-	background: white
-	
+  font-size: 13px
+  color: $gray-20
+  background: white
+
 .qtip-tip, .qtip-wrapper
 
 .qtip-wrapper
-	@include box-shadow(rgba(0,0,0,0.75), 0, 1px, 3px)
-				
-.wf-active .panels .panel div.big-text 
-	p
-		font-family: 'proxima-nova-extra-condensed-1', 'proxima-nova-extra-condensed-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
-		font-weight: 700
-	p.label
-		font-family: 'proxima-nova-1', 'proxima-nova-2', 'Helvetica Neue', Helvetica, Arial, sans-serif
-		font-weight: 500
+  +box-shadow(rgba(0,0,0,0.75), 0, 1px, 3px)
 
-// Typekit specific
+// Ace Text Editor
 
-.wf-loading
-	ul.squares-column li.parent h2,
-	ul.squares-column li.parent p,
-	#article-top h2,
-	#article-top p.extra-info,
-	header nav ul li a,
-	footer p,
-	ul.squares h2,
-	ul.squares p
-		visibility: hidden
+#text-editor
+  width: 700px
+  height: 400px
+  line-height: normal
+  position: relative
+  &.wide
+    width: 950px
+
+// .ace_gutter
+//   display: none
+
+#file-manager
+  float: right
+  div.border
+    padding: 20px
+    width: 174px
+  h3
+    margin-top: 20px
+    a
+      font-size: 12px
+      margin-right: 4px
+      color: $color-2
+      font-weight: normal
+  ul
+    list-style: disc inside
+    li
+      font-size: 12px
+      margin-top: 10px
+      a
+        color: $color-2
+        margin-right: 4px
+        &.filename
+          color: $color-1
+
+form.with-text-editor
+  float: left

@@ -1,13 +1,9 @@
-require "uuid"
-
 module ControlCenter
   class VisitsController < ApplicationController
-    skip_before_filter :authenticate_admin!
-    
     def record
       VisitKey.where(:expire.lte => Time.now.utc).destroy_all
       if params[:k] && visit_key = VisitKey.where(:_id => params[:k]).first
-        cookies[:visitor_id] = {:value => UUID.new.generate, :expires => 20.years.from_now} if cookies[:visitor_id].blank?
+        cookies[:visitor_id] = {:value => SecureRandom.uuid, :expires => 20.years.from_now} if cookies[:visitor_id].blank?
         # Parsing user agent on server side may cause some slow down.
         # TODO: May implement on client side.
         user_agent = Agent.new request.env["HTTP_USER_AGENT"]
@@ -36,13 +32,15 @@ module ControlCenter
         statistics_collection.update({:url => params[:u], :month => current_month}, {"$inc" => {:visits => 1}, "$set" => {:title => params[:t]}}, :upsert => true)
         visit_key.delete
       end
-      image = File.open("#{Rails.root}/public/control_center/images/record-visit.gif")
-      send_data image.read, :type => "image/gif", :filename => "record-visit.gif", :disposition => "inline"
+      image_path = "#{Rails.root}/public/control_center/images/record-visit.gif"
+      send_file image_path, :type => "image/gif", :disposition => "inline"
+      # image = File.open("#{Rails.root}/public/control_center/images/record-visit.gif")
+      # send_data image.read, :type => "image/gif", :filename => "record-visit.gif", :disposition => "inline"
     end
   
     def visit_recorder_js
       @visit_key = VisitKey.create(:expire => Time.now.utc + 30.seconds)
-      cookies[:visitor_id] = {:value => UUID.new.generate, :expires => 20.years.from_now} if cookies[:visitor_id].blank?
+      cookies[:visitor_id] = {:value => SecureRandom.uuid, :expires => 20.years.from_now} if cookies[:visitor_id].blank?
       render :layout => false, :mime_type => "text/javascript"
     end
   end
