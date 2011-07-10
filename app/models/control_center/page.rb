@@ -39,8 +39,12 @@ module ControlCenter
     after_destroy :destroy_grid_files
     after_destroy :reset_position
 
-    scope :with_position, where(:position.exists => true)
+    # This scope should not be chained with other any_of criteria.
+    # Because the mongo driver takes a hash for a query,
+    # and a hash doesn't allow duplicate keys.
     scope :with_slug, ->(slug) { any_of({:slug => slug}, {:default_slug => slug}) }
+
+    scope :with_position, where(:position.exists => true)
     scope :published, lambda {
       where(:publish_time.lte => Time.now, :status.in => [nil, /published/i])
     }
@@ -134,9 +138,10 @@ module ControlCenter
 			children = self.parent.children
 			children = children.published if options[:only_published]
 			if options[:chronologically]
+			  children = children.desc(:publish_time)
 				children.where(:publish_time.lt => self.publish_time).first
 			else
-				children = children.asc(:position)
+				children = children.desc(:position)
 				children.where(:position.lt => self.position).first
 			end
     end
@@ -146,6 +151,7 @@ module ControlCenter
 			children = self.parent.children
 			children = children.published if options[:only_published]
 			if options[:chronologically]
+			  children = children.asc(:publish_time)
 				children.where(:publish_time.gt => self.publish_time).first
 			else
 				children = children.asc(:position)
