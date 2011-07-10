@@ -10,7 +10,7 @@ gem "whenever", "~> 0.6.7"
 gem "chronic", "~> 0.4.3"
 gem "redcarpet", "~> 1.11.2"
 gem "mime-types", "~> 1.16"
-gem "rack-gridfs", "~> 0.4.0"
+gem "rack-gridfs", "~> 0.4.1"
 gem "bcrypt-ruby", "~> 2.1.4"
 
 # For test.
