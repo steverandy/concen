@@ -1,7 +1,7 @@
 module ControlCenter
   class Visit
     include Mongoid::Document
-  
+
     field :url, :type => String
     field :ip_address, :type => String
     field :user_agent, :type => String
@@ -14,9 +14,9 @@ module ControlCenter
     field :os, :type => String
     field :browser, :type => String
     field :browser_version, :type => String
-  
-    index :url
-    index :timestamp
-    index :visitor_id
+
+    index :url, :background => true
+    index :timestamp, :background => true
+    index :visitor_id, :background => true
   end
 end

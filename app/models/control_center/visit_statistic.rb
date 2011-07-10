@@ -27,9 +27,9 @@ module ControlCenter
     field :monthly_location_done, :type => Boolean, :default => false
     field :timezone, :type => String
 
-    index :hour
-    index :url
-    index :timestamp
+    index :hour, :background => true
+    index :url, :background => true
+    index :timestamp, :background => true
 
     def self.visits_for_current(length, *args)
       options = args.extract_options!
