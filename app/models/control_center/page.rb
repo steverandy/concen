@@ -23,6 +23,7 @@ module ControlCenter
     field :publish_month, :type => Time
     field :labels, :type => Array, :default => []
     field :authors, :type => Array, :default => []
+    field :status, :type => String
 
     validates_presence_of :title
     validates_presence_of :default_slug
@@ -40,11 +41,18 @@ module ControlCenter
 
     scope :with_position, where(:position.exists => true)
     scope :with_slug, ->(slug) { any_of({:slug => slug}, {:default_slug => slug}) }
-    scope :published, lambda { where({:publish_time.lte => Time.now.utc}) }
+    scope :published, lambda {
+      where({:publish_time.lte => Time.now}).
+      any_of({:status.exists => false}, {:status => nil}, {:status => /published/i})
+    }
+
+    index :parent_id, :background => true
+    index :publish_time, :background => true
+    index :default_slug, :background => true
 
     # Get the list of dynamic fields by checking againts this array.
     # Values should mirror the listed fields above.
-    PREDEFINED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :default_slug, :content, :raw_text, :position, :grid_files, :title, :description, :publish_time, :labels, :authors]
+    PREDEFINED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :default_slug, :content, :raw_text, :position, :grid_files, :title, :description, :publish_time, :labels, :authors, :status]
 
     # These fields can't be overwritten by user's meta data when parsing raw_text.
     PROTECTED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :default_slug, :content, :raw_text, :position, :grid_files]
