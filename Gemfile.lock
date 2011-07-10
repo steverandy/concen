@@ -74,7 +74,7 @@ GEM
     nokogiri (1.4.5)
     polyglot (0.3.1)
     rack (1.2.3)
-    rack-gridfs (0.4.0)
+    rack-gridfs (0.4.1)
       mime-types
       mongo (~> 1.2)
       rack
@@ -133,7 +133,7 @@ DEPENDENCIES
   haml (~> 3.1.2)
   mime-types (~> 1.16)
   mongoid (~> 2.0.0)
-  rack-gridfs (~> 0.4.0)
+  rack-gridfs (~> 0.4.1)
   rails (~> 3.0.9)
   redcarpet (~> 1.11.2)
   turn
