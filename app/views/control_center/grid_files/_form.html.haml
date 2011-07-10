@@ -12,7 +12,7 @@
         .corner
       .shadow-bottom
         .corner
-  = text_area_tag :control_center_grid_file_page, @grid_file.read, :class => "text-editor-content hidden"
+  = text_area_tag :control_center_grid_file_page, @grid_file.read.force_encoding("utf-8"), :class => "text-editor-content hidden"
   .actions.flush
     = f.submit "Save"
     = link_to "Delete", control_center_page_grid_file_path(@page, @grid_file), :method => :delete

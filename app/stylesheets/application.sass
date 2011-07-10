@@ -9,7 +9,7 @@
 
 @media print
   +blueprint-print
-  
+
 body.controlcenter
   header, #content, footer
     width: 960px
@@ -32,6 +32,7 @@ header
       display: block
       border-bottom: 0
       +clearfix
+      text-decoration: none
     span
       float: left
     span.application-name
@@ -67,7 +68,7 @@ header
     border: 1px solid lighten(#000, 70%)
     outline: none
     +border-radius(60px)
-    -webkit-appearance: none    
+    -webkit-appearance: none
     min-width: 120px
     width: 120px
     height: 15px
@@ -75,7 +76,7 @@ header
     color: $gray-60
   input#keyword:focus
     color: $gray-20
-    
+
 // Content Section
 
 #content
@@ -103,7 +104,7 @@ header
       font-size: 18px
       line-height: 24px
       float: right
-      
+
 ul.pages
   margin-left: 0
   font-size: 14px
@@ -114,10 +115,10 @@ ul.pages
     margin-left: 10px
   ul
     margin-left: 20px
-  
+
 section#article
   width: 774px
-      
+
 .boxshadow ul.search-result
   padding-bottom: 0
   li.child
@@ -125,7 +126,7 @@ section#article
     margin-bottom: 30px
   div.text
     margin-top: 0
-  
+
 // Footer
 
 footer
@@ -146,23 +147,23 @@ a.prev
   +background-image-with-dimension("button-prev.png")
   text-indent: -9999px
   display: block
-  
+
 a.prev.disabled
   +background-image-with-dimension("button-prev-disabled.png")
-  
+
 a.next
   +background-image-with-dimension("button-next.png")
   text-indent: -9999px
   display: block
-  
+
 a.next.disabled
   +background-image-with-dimension("button-next-disabled.png")
-  
+
 a.grid
   +background-image-with-dimension("button-grid.png")
   text-indent: -9999px
   display: block
-  
+
 #file-list
   width: 260px
   float: right
@@ -224,7 +225,7 @@ a.grid
           +background-image-with-dimension("glyph-small-handle.png")
         .delete
           +background-image-with-dimension("glyph-small-delete.png")
-        
+
 .panels
   .panel
     float: left
@@ -369,14 +370,14 @@ a.grid
         font-size: 11px
         line-height: 14px
         text-align: center
-        
+
 // Qtip JS Plugin
-        
+
 .qtip-content
   font-size: 13px
   color: $gray-20
   background: white
-  
+
 .qtip-tip, .qtip-wrapper
 
 .qtip-wrapper
@@ -391,10 +392,10 @@ a.grid
   position: relative
   &.wide
     width: 950px
-  
+
 // .ace_gutter
 //   display: none
-  
+
 #file-manager
   float: right
   div.border
@@ -417,6 +418,6 @@ a.grid
         margin-right: 4px
         &.filename
           color: $color-1
-  
+
 form.with-text-editor
   float: left

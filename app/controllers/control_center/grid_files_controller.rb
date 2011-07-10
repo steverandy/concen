@@ -54,7 +54,7 @@ module ControlCenter
       @grid_file = @page.grid_files.build
       if env["rack.input"]
         file = env["rack.input"]
-        filename = env["HTTP_X_FILE_NAME"]
+        filename = CGI::unescape(env["HTTP_X_FILE_NAME"])
       else
         file = params[:qqfile].read
         filename = params[:qqfile].original_filename

@@ -1,5 +1,6 @@
 require "yaml"
 require "redcarpet"
+require "mustache"
 
 module ControlCenter
   class Page
@@ -56,33 +57,10 @@ module ControlCenter
       end
     end
 
-    def content_in_html(key = "main", scope = Object.new)
+    def content_in_html(key = "main", data={})
       if content = self.content.try(:[], key)
-        case self.content_template(key)
-        when "markdown"
-          Redcarpet.new(content, :smart).to_html
-        when "haml"
-          Haml::Engine.new(content).render(scope)
-        end
-      else
-        return nil
-      end
-    end
-
-    def content_template(key="main")
-      if content = self.content.try(:[], key)
-        match_count = 0
-        for line in content.lines
-          for matcher in ["%h1", "%h2", "%h3", "%h4", "$h5", "%h6", "%p", "%div"]
-            match_count += 1 if line.match(/^#{matcher}\s{1}/)
-            break if match_count >= 2
-          end
-        end
-        if match_count >= 2
-          return "haml"
-        else
-          return "markdown"
-        end
+        content = Mustache.render(content, data)
+        content = Redcarpet.new(content, :smart, :fenced_code, :gh_blockcode).to_html
       else
         return nil
       end
@@ -146,43 +124,37 @@ module ControlCenter
 
     def previous(*args)
       options = args.extract_options!
-      if options[:only_published]
-        children = self.parent.children.published.asc(:position)
-        first = self.first?(:only_published => true)
-      else
-        children = self.parent.children.asc(:position)
-        first = self.first?
-      end
-      if first
-        return false
-      else
-        children.each_with_index { |child, index| return children.to_a[index-1] if child.id == self.id }
-      end
+			children = self.parent.children
+			children = children.published if options[:only_published]
+			if options[:chronologically]
+				children.where(:publish_time.lt => self.publish_time).first
+			else
+				children = children.asc(:position)
+				children.where(:position.lt => self.position).first
+			end
     end
 
     def next(*args)
-      options = args.extract_options!
-      if options[:only_published]
-        children = self.parent.children.published.asc(:position)
-        last = self.last?(:only_published => true)
-      else
-        children = self.parent.children.asc(:position)
-        last = self.last?
-      end
-      if last
-        return false
-      else
-        children.each_with_index { |child, index| return children.to_a[index+1] if child.id == self.id }
-      end
+			options = args.extract_options!
+			children = self.parent.children
+			children = children.published if options[:only_published]
+			if options[:chronologically]
+				children.where(:publish_time.gt => self.publish_time).first
+			else
+				children = children.asc(:position)
+				children.where(:position.gt => self.position).first
+			end
     end
 
     def first?(*args)
       options = args.extract_options!
-      if options[:only_published]
-        children = self.parent.children.published.asc(:position)
-      else
-        children = self.parent.children.asc(:position)
-      end
+			children = self.parent.children
+			children = children.published if options[:only_published]
+			if options[:chronologically]
+				children = children.asc(:publish_time)
+			else
+				children = children.asc(:position)
+			end
       if children.first
         if self.id == children.first.id
           return true
@@ -196,11 +168,13 @@ module ControlCenter
 
     def last?(*args)
       options = args.extract_options!
-      if options[:only_published]
-        children = self.parent.children.published.asc(:position)
-      else
-        children = self.parent.children.asc(:position)
-      end
+			children = self.parent.children
+			children = children.published if options[:only_published]
+			if options[:chronologically]
+				children = children.asc(:publish_time)
+			else
+				children = children.asc(:position)
+			end
       if children.last
         if self.id == children.last.id
           return true

@@ -44,7 +44,7 @@ module ControlCenter
     def store(content, filename)
       original_filename = filename.dup
       file_extension = File.extname(filename).downcase
-      filename = "#{self.id.to_s}-#{File.basename(original_filename, file_extension).parameterize.gsub("_", "-")}#{file_extension}"
+      filename = "#{self.id.to_s}-#{File.basename(original_filename, file_extension).downcase.parameterize.gsub("_", "-")}#{file_extension}"
       grid = Mongo::Grid.new(Mongoid.database)
       content_type = MIME::Types.type_for(filename).first.to_s
       if self.grid_id
