@@ -1,6 +1,6 @@
 require "rails"
 
-module ControlCenter  
+module ControlCenter
   class Engine < Rails::Engine
     # Use Rails.application.routes.prepend on Rails 3.1
     # and disasble the following code block.
@@ -10,12 +10,13 @@ module ControlCenter
         app.routes_reloader.paths.uniq!
       end
     end
-    
+
     rake_tasks do
       load "control_center/railties/setup.rake"
+      load "control_center/railties/page.rake"
       load "control_center/railties/visit_statistic.rake"
     end
-    
+
     # Add a load path for this specific Engine
     # config.autoload_paths << File.expand_path("../markdown.rb", __FILE__)
   end
