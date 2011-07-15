@@ -3,6 +3,6 @@ module Haml::Filters::Markdown
   lazy_require "redcarpet"
 
   def render(text)
-    Redcarpet.new(text, :smart, :fenced_code, :gh_blockcode).to_html
+    Redcarpet.new(text, :smart, :fenced_code).to_html
   end
 end
