@@ -297,7 +297,7 @@ module ControlCenter
       meta_data = raw_text_array.delete_at(0).lines.to_a
       meta_data.each_with_index do |line, index|
         if line.match /publish time/i
-          meta_data[index] = "Publish Time: #{self.publish_time}"
+          meta_data[index] = "#{line.split(':')[0]}: #{self.publish_time}"
           meta_data[index] << "\r\n" if line.include? "\r\n"
         end
       end
