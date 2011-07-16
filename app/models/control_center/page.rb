@@ -115,6 +115,7 @@ module ControlCenter
     end
 
     def parse_publish_time(publish_time_string)
+      publish_time_string = publish_time_string.to_s
       begin
         Chronic.time_class = Time.zone
         parsed_date = Chronic.parse(publish_time_string, :now => Time.zone.now)
