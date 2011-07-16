@@ -71,7 +71,7 @@ module ControlCenter
     def content_in_html(key = "main", data={})
       if content = self.content.try(:[], key)
         content = Mustache.render(content, data)
-        content = Redcarpet.new(content, :smart, :fenced_code).to_html
+        content = Redcarpet.new(content, :fenced_code).to_html
       else
         return nil
       end
@@ -244,7 +244,7 @@ module ControlCenter
     def parse_raw_text
       if self.raw_text && self.raw_text.length > 0 && (self.new? || self.raw_text_changed?)
         self.content = {}
-        raw_text_array = self.raw_text.split("---")
+        raw_text_array = self.raw_text.split("-----")
         if raw_text_array.count > 1
           meta_data = raw_text_array.delete_at(0).strip
           raw_text_array.each_with_index do |content, index|
@@ -294,7 +294,7 @@ module ControlCenter
     end
 
     def update_raw_text
-      raw_text_array = self.raw_text.split("---")
+      raw_text_array = self.raw_text.split("-----")
       meta_data = raw_text_array.delete_at(0).lines.to_a
       meta_data.each_with_index do |line, index|
         if line.match /publish time/i
@@ -302,7 +302,7 @@ module ControlCenter
           meta_data[index] << "\r\n" if line.include? "\r\n"
         end
       end
-      self.raw_text = meta_data.join + "---" + raw_text_array.join
+      self.raw_text = meta_data.join + "-----" + raw_text_array.join
     end
 
     def destroy_children
