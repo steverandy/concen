@@ -99,9 +99,9 @@ module ControlCenter
 
     def search_grid_files(extensions, filename=nil)
       if filename
-        self.grid_files.where(:original_filename => /.*#{filename}.*.*\.(#{extensions.join("|")}).*$/i)
+        self.grid_files.where(:original_filename => /.*#{filename}.*.*\.(#{extensions.join("|")}).*$/i).asc(:original_filename)
       else
-        self.grid_files.where(:original_filename => /.*\.(#{extensions.join("|")}).*/i)
+        self.grid_files.where(:original_filename => /.*\.(#{extensions.join("|")}).*/i).asc(:original_filename)
       end
     end
 
