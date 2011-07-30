@@ -5,6 +5,8 @@ module ControlCenter
     include Mongoid::Document
     include Mongoid::Timestamps
 
+    store_in "control_center.users"
+
     field :full_name, :type => String
     field :username, :type => String
     field :email, :type => String

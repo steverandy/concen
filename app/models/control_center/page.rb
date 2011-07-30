@@ -7,6 +7,8 @@ module ControlCenter
     include Mongoid::Document
     include Mongoid::Timestamps
 
+    store_in "control_center.pages"
+
     references_many :children, :class_name => "ControlCenter::Page", :foreign_key => :parent_id, :inverse_of => :parent
     referenced_in :parent, :class_name => "ControlCenter::Page", :inverse_of => :children
     embeds_many :grid_files, :class_name => "ControlCenter::GridFile"
@@ -244,14 +246,11 @@ module ControlCenter
     def parse_raw_text
       if self.raw_text && self.raw_text.length > 0 && (self.new? || self.raw_text_changed?)
         self.content = {}
-        raw_text_array = self.raw_text.split("-----")
+        raw_text_array = self.raw_text.split(/(?:\r\n-{3,}\r\n)/)
         if raw_text_array.count > 1
           meta_data = raw_text_array.delete_at(0).strip
           raw_text_array.each_with_index do |content, index|
-            content = content.lines.to_a
-
-            # Cleanup line breaks.
-            loop { content.first == "\r\n" ? content.delete_at(0) : break }
+            content = content.strip.lines.to_a
             if content.first && content.first.include?("@ ")
               # Extract content key from @ syntax.
               content_key = content.delete_at(0).gsub("@ ", "").downcase
@@ -261,9 +260,6 @@ module ControlCenter
             else
               content_key = (index + 1).to_s
             end
-
-            # Cleanup line breaks.
-            loop { content.first == "\r\n" ? content.delete_at(0) : break }
             self.content[content_key] = content.join
           end
         else
@@ -294,7 +290,7 @@ module ControlCenter
     end
 
     def update_raw_text
-      raw_text_array = self.raw_text.split("-----")
+      raw_text_array = self.raw_text.split(/(?:\r\n-{3,}\r\n)/, 2)
       meta_data = raw_text_array.delete_at(0).lines.to_a
       meta_data.each_with_index do |line, index|
         if line.match /publish time/i
@@ -302,7 +298,7 @@ module ControlCenter
           meta_data[index] << "\r\n" if line.include? "\r\n"
         end
       end
-      self.raw_text = meta_data.join + "-----" + raw_text_array.join
+      self.raw_text = meta_data.join + self.raw_text.match(/(?:\r\n-{3,}\r\n)/).to_s + raw_text_array.join
     end
 
     def destroy_children
