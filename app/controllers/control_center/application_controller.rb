@@ -9,14 +9,6 @@ module ControlCenter
 
     helper_method :current_user, :authenticate_user
 
-    # def ios?
-    #   if @user_agent.os.to_s == "iOS"
-    #     return true
-    #   else
-    #     return false
-    #   end
-    # end
-
     protected
 
     def set_controlcenter
@@ -32,9 +24,5 @@ module ControlCenter
     def authenticate_user
       redirect_to control_center_signin_path unless current_user
     end
-
-    # def get_user_agent
-    #   @user_agent = Agent.new request.env["HTTP_USER_AGENT"]
-    # end
   end
 end
