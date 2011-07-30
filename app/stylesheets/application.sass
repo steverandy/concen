@@ -1,5 +1,6 @@
 @import "compass"
 @import "compass/reset"
+@import "compass/typography/text/force-wrap"
 @import "blueprint/print"
 @import "partials/variables"
 @import "partials/mixins"
@@ -388,12 +389,16 @@ a.grid
 // Ace Text Editor
 
 #text-editor
-  height: 400px
+  min-height: 400px
   line-height: normal
   position: relative
 
-// .ace_gutter
-//   display: none
+.ace_scroller
+  overflow-x: auto !important
+
+.ace_sb
+  height: 100% !important
+  width: 30px !important
 
 #file-manager
   float: right
@@ -410,11 +415,12 @@ a.grid
       color: $color-2
       font-weight: normal
   ul
-    list-style: disc inside
+    list-style-type: none
     li
       font-size: 12px
       margin-top: 10px
       a
+        +force-wrap
         color: $color-2
         margin-right: 4px
         &.filename

@@ -42,8 +42,15 @@ module ControlCenter
     def destroy
       @page = Page.find(params[:page_id])
       @grid_file = @page.grid_files.find(params[:id])
-      @grid_file.destroy
-      redirect_to edit_control_center_page_path(@page)
+      respond_to do |format|
+        if @grid_file.destroy
+          format.html { redirect_to edit_control_center_page_path(@page) }
+          format.json { render :json => {:success => true} }
+        else
+          format.html { redirect_to edit_control_center_page_path(@page) }
+          format.json { render :json => {:success => false} }
+        end
+      end
     end
 
     def upload

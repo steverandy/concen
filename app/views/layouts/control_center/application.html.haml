@@ -13,6 +13,7 @@
     %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge"}
     = csrf_meta_tag
     = stylesheet_link_tag "/control_center/stylesheets/application.css"
+    = stylesheet_link_tag "/control_center/stylesheets/jquery.ui.resizable.css"
     - if content_for?(:head_stylesheets)
       = yield :head_stylesheets
     /[if lt IE 8]
@@ -33,6 +34,9 @@
     = javascript_include_tag "/control_center/javascripts/jquery-ui/jquery.ui.mouse.js"
     = javascript_include_tag "/control_center/javascripts/jquery-ui/jquery.ui.position.js"
     = javascript_include_tag "/control_center/javascripts/jquery-ui/jquery.ui.sortable.js"
+    = javascript_include_tag "/control_center/javascripts/jquery-ui/jquery.ui.resizable.js"
+    = javascript_include_tag "/control_center/javascripts/jquery-ui/jquery.ui.draggable.js"
+    = javascript_include_tag "/control_center/javascripts/jquery-ui/jquery.ui.droppable.js"
     = javascript_include_tag "/control_center/javascripts/jquery.ui.nestedSortable.js"
     = javascript_include_tag "/control_center/javascripts/jquery_ujs.js"
     = javascript_include_tag "/control_center/javascripts/application.js"

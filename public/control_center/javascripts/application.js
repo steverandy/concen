@@ -11,64 +11,96 @@ $(document).ready(function() {
     event.preventDefault();
 	});
 
+	// Delete files.
+  $("#file-manager a.delete").live("click", function(event) {
+    if (confirm("Are you sure?") == true) {
+      targetURL = $(this).attr("href");
+      parentLi = $(this).parents("li").eq(0);
+      $.ajax({
+        url: targetURL,
+        type: "DELETE",
+        dataType: "json",
+        success: function(data, textStatus, xhr) {
+          if (data.success) {
+            console.log(parentLi);
+            parentLi.remove();
+          };
+        }
+      });
+    };
+    event.preventDefault();
+  });
+
+  // Insert file path to text editor by drag and drop.
+  $("#file-manager a.filename").draggable({
+    revert: "invalid",
+    helper: "clone"
+  });
+	$( "#text-editor" ).droppable({
+	  accept: ".filename",
+		drop: function(event, ui) {
+      window.editor.insert(ui.draggable.data("path"));
+		}
+	});
+
 	$("div.panel ul li p.right").each(function(index) {
 		$(this).parents("li").eq(0).find("p:not(.right)").width($(this).parents("li").eq(0).width() - $(this).innerWidth());
 		$(this).parents("li").eq(0).find("a").width($(this).parents("li").eq(0).width() - $(this).innerWidth());
 	});
 
-  if ($("#text-editor").length > 0) {
-    var editor = ace.edit("text-editor");
-    editor.getSession().setTabSize(2);
-    editor.getSession().setUseSoftTabs(true);
-    editor.setHighlightActiveLine(false);
-    editor.setShowPrintMargin(false);
-    editor.getSession().setUseWrapMode(true);
-    editor.getSession().setValue($("textarea.text-editor-content").eq(0).val());
-    editor.renderer.setShowGutter(false);
+  // Setup text editor (ace.js).
+	setupTextEditor = function() {
+	  if ($("#text-editor").length > 0) {
+      window.editor = ace.edit("text-editor");
+      editor.getSession().setTabSize(2);
+      editor.getSession().setUseSoftTabs(true);
+      editor.setHighlightActiveLine(false);
+      editor.setShowPrintMargin(false);
+      editor.getSession().setUseWrapMode(true);
+      editor.getSession().setValue($("textarea.text-editor-content").eq(0).val());
+      editor.renderer.setShowGutter(false);
 
-    $("form.with-text-editor").submit(function() {
-  	  var editorContent = editor.getSession().getValue();
-  	  $("textarea.text-editor-content").eq(0).val(editorContent);
-  	  console.log($("textarea.text-editor-content").eq(0).val());
-    });
-  };
+      $("form.with-text-editor").submit(function() {
+    	  var editorContent = editor.getSession().getValue();
+    	  $("textarea.text-editor-content").eq(0).val(editorContent);
+      });
+    };
+	};
 
+	setupTextEditor();
+
+  // Text editor is resizable.
+  resizableTextEditor = $("form.with-text-editor .thick-border .border").eq(0)
+  resizableTextEditor.resizable({
+		minHeight: resizableTextEditor.height(),
+		minWidth: resizableTextEditor.width(),
+		maxWidth: resizableTextEditor.width(),
+		stop: function(event, ui) {
+		  $("#text-editor").css("height", $("#text-editor").parent().height());
+		  setupTextEditor();
+		}
+  });
+
+  // Setup file uploader. Support multiple files upload and drag and drop.
   if ($("#file-uploader").length > 0) {
     var uploader = new qq.FileUploader({
-      // pass the dom node (ex. $(selector)[0] for jQuery users)
       element: $("#file-uploader")[0],
-      // path to server-side upload script
       action: $("#file-uploader").data("upload-path"),
-      // additional data to send, name-value pairs
       params: {},
-      // validation
-      // ex. ['jpg', 'jpeg', 'png', 'gif'] or []
-      allowedExtensions: [],
-      // each file size limit in bytes
-      // this option isn't supported in all browsers
       sizeLimit: 0, // max size
       minSizeLimit: 0, // min size
-      // set to true to output server response to console
       debug: false,
       csrf: true,
-      // events
-      // you can return false to abort submit
       template: '<div class="qq-uploader">' +
                   '<div class="qq-upload-drop-area"><span>Drop files here to upload</span></div>' +
                   '<div class="qq-upload-button">Upload Files</div>' +
                   '<ul class="qq-upload-list"></ul>' +
                 '</div>',
-      onSubmit: function(id, fileName){},
-      onProgress: function(id, fileName, loaded, total){},
       onComplete: function(id, fileName, responseJSON){
         if (responseJSON.success) {
+          $("#file-manager ul.qq-upload-list li.qq-upload-success").remove();
           $("#file-manager div.files").replaceWith(responseJSON.content);
-          $("#file-manager ul.qq-upload-list").html("");
-        }
-      },
-      onCancel: function(id, fileName){},
-      messages: {
-          // error messages, see qq.FileUploaderBasic for content
+        };
       },
       showMessage: function(message){ alert(message); }
     });

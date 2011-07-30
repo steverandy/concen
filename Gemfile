@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gem "rails", "~> 3.0.9"
-gem "compass", "0.11.3"
+gem "compass", "0.11.5"
 
 gem "haml", "~> 3.1.2"
 gem "mustache", "~> 0.99.4"
