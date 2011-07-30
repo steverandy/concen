@@ -11,15 +11,17 @@
   +blueprint-print
 
 body.controlcenter
+  min-width: 960px
+  padding: $standard-gap
   header, #content, footer
-    width: 960px
+    width: 100%
 
 // Header
 
 header
   display: block
   border-bottom: 1px solid $color-2
-  margin: 30px auto 0 auto
+  margin: 0 auto
   position: relative
   h1
     height: 25px
@@ -131,7 +133,7 @@ section#article
 
 footer
   color: $color-1
-  margin: 30px auto
+  margin: $standard-gap auto 0 auto
   width: 760px
   display: block
   font-size: 12px
@@ -386,21 +388,20 @@ a.grid
 // Ace Text Editor
 
 #text-editor
-  width: 700px
   height: 400px
   line-height: normal
   position: relative
-  &.wide
-    width: 950px
 
 // .ace_gutter
 //   display: none
 
 #file-manager
   float: right
+  width: 25%
+  div.thick-border
+    margin-left: $standard-gap
   div.border
     padding: 20px
-    width: 174px
   h3
     margin-top: 20px
     a
@@ -421,3 +422,10 @@ a.grid
 
 form.with-text-editor
   float: left
+  width: 75%
+  &.wide
+    width: 100%
+  .thick-border
+    .border
+      +thick-border-shadow(top)
+      padding: 10px
