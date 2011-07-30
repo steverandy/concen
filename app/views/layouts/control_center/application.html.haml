@@ -20,10 +20,6 @@
       = stylesheet_link_tag "/control_center/stylesheets/ie.css"
     %script{:type => "text/javascript", :src => "http://use.typekit.com/wjq3dno.js"}
     %script{:type => "text/javascript"} try{Typekit.load();}catch(e){}
-    /[if lt IE 7]
-      = javascript_include_tag "/control_center/stylesheets/DD_belatedPNG_0.0.8a.js"
-      :javascript
-        DD_belatedPNG.fix('img, .png-bg')
     - if Rails.env == "production"
       = javascript_include_tag "//ajax.cdnjs.com/ajax/libs/modernizr/1.7/modernizr-1.7.min.js"
       = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"
