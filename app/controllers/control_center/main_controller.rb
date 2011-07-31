@@ -2,7 +2,7 @@ module ControlCenter
   class MainController < ApplicationController
     layout "control_center/application"
 
-    before_filter :authenticate_user
+    # before_filter :authenticate_user
 
     def index
       redirect_to :action => :statistics
@@ -52,6 +52,17 @@ module ControlCenter
       end
 
       @mongodb_stats = Mongoid.database.stats
+
+      @stats = Visit.aggregate_count_for(:hour => 24)
+      @stats.map! do |s|
+        time = Time.zone.at s[0]
+        zone_offset = Time.zone_offset(time.zone)
+        [(Time.zone.at(s[0]).utc.to_i + zone_offset)*1000, s[1]]
+      end
+
+
+
+
 
       # Disabled because it's uncertain the result is what as intended.
       # begin

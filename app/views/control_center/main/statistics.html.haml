@@ -1,3 +1,7 @@
+- content_for :head_javascripts do
+  = javascript_include_tag "/control_center/javascripts/jquery.flot.js"
+  = javascript_include_tag "/control_center/javascripts/jquery.flot.stack.js"
+
 #content
   .panels.clearfix
     .panel
@@ -23,3 +27,67 @@
       = render "statistics_extra_panel_1" rescue nil
     .panel.edge
       = render "statistics_extra_panel_2" rescue nil
+
+#placeholder1{:style => "width: 800px; height: 200px;"}
+
+:javascript
+  $(function () {
+    var d1 = #{@stats.to_json}
+
+    function plotWithOptions() {
+      $.plot($("#placeholder1"), [{label: "Visits", data: d1}], {
+        xaxis: {
+          mode: "time",
+          timeformat: "%h %P",
+          ticks: #{@stats.count}
+        },
+        yaxis: {tickDecimals: 0},
+        grid: { hoverable: true, clickable: true },
+        legend: { show: true, position: 'ne' },
+        series: {
+          lines: { show: true, fill: true, steps: false, lineWidth: 2, fillColor: { colors: [ { opacity: 0.08 }, { opacity: 0.08 }, { opacity: 0.08 } ] }},
+          points: { show: true },
+          stack: true,
+          shadowSize: 0
+        },
+        colors: ["#F3535C"]
+      });
+    };
+
+    plotWithOptions();
+
+    function showTooltip(x, y, contents) {
+      $('<div id="tooltip">' + contents + '</div>').css( {
+          position: 'absolute',
+          display: 'none',
+          top: y + 5,
+          left: x + 5,
+          border: '1px solid #fdd',
+          padding: '2px',
+          'background-color': '#fee',
+          opacity: 0.80
+      }).appendTo("body").fadeIn(200);
+    };
+
+    var previousPoint = null;
+    $("#placeholder1").bind("plothover", function (event, pos, item) {
+        $("#x").text(pos.x.toFixed(2));
+        $("#y").text(pos.y.toFixed(2));
+
+        if (item) {
+          if (previousPoint != item.dataIndex) {
+            previousPoint = item.dataIndex;
+
+            $("#tooltip").remove();
+            var x = item.datapoint[0].toFixed(2),
+                y = item.datapoint[1].toFixed(2);
+
+            showTooltip(item.pageX, item.pageY, "Visits: " + parseInt(y));
+          }
+        }
+        else {
+          $("#tooltip").remove();
+          previousPoint = null;
+        }
+    });
+  });
