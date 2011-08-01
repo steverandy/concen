@@ -1,7 +1,3 @@
-
-# # All time data are stored in UTC time.
-# TODO: Create cron job to calculate unique_visits on every hour.
-
 module ControlCenter
   class Visit
     include Mongoid::Document
@@ -17,56 +13,30 @@ module ControlCenter
     index :hour, :background => true
     index :url, :background => true
 
-    def self.aggregate_count_for(*args)
+    def self.aggregate_count_by_url(*args)
       options = args.extract_options!
-      if day = options[:day]
-        start_time = options[:start_time] || Time.now.utc
-        day = day.to_i
-        days = []
-        0.upto day-1 do |index|
-          if index == 0
-            days << (Time.new(start_time.year, start_time.month, start_time.day) + 1.days).to_i * 1000
-          end
-          days << (Time.new(start_time.year, start_time.month, start_time.day) - index.days).to_i * 1000
-        end
+      stats = self.only(:url).aggregate.map do |s|
+        [s["url"], s["count"].to_i]
+      end
+      stats.sort! {|x,y| y[1] <=> x[1]}
+      stats[0..options[:limit]-1] if options[:limit]
+    end
 
-        map = <<-EOF
-          function() {
-            #{'var times =' + days.to_s}
-
-            for (index in times) {
-              if (this.hour.getTime() < times[index]) {
-                emit(times[parseInt(index+1)], this.count);
-              };
-            };
-          }
-        EOF
-
-        query = {:hour => {"$lte" => start_time}}
-      elsif hour = options[:hour]
+    def self.aggregate_count_by_time(*args)
+      options = args.extract_options!
+      if hour = options[:hour]
         hour = hour.to_i
         current_time = Time.now.utc
         start_time = options[:start_time] || Time.utc(current_time.year, current_time.month, current_time.day, current_time.hour)
         end_time = start_time - (hour-1).hours
-        map = <<-EOF
-          function() {
-            emit(this.hour, this.count);
-          }
-        EOF
-        query = {:hour => {"$gte" => end_time, "$lte" => start_time}}
-      end
-
-      reduce = <<-EOF
-        function(time, counts) {
-          var count = 0;
-          for (index in counts) { count += counts[index]; };
-          return count;
-        }
-      EOF
-
-      results = self.collection.map_reduce(map, reduce, :out => {:inline => 1}, :raw => true, :query => query).find().to_a.first[1]
-      results.map do |result|
-        [result["_id"].to_i, result["value"].to_i]
+        stats = self.only(:hour).where(:hour.gte => end_time, :hour.lte => start_time).aggregate.map do |s|
+          hour = s["hour"]
+          if options[:time_in_integer]
+            hour = hour.to_i
+            hour *= 1000 if options[:precision] == "millisecond"
+          end
+          [hour, s["count"].to_i]
+        end
       end
     end
   end

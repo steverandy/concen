@@ -1039,8 +1039,8 @@ a.grid {
 .panels .panel p.big-number {
   font-size: 60px;
   text-align: center;
-  height: 145px;
-  line-height: 145px;
+  height: 174px;
+  line-height: 174px;
 }
 /* line 293, ../../../app/stylesheets/application.sass */
 .panels .panel div.big-text {

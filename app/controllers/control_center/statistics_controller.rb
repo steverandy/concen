@@ -11,68 +11,67 @@ module ControlCenter
     # Month: visits
     def index
       @page_title = "Statistics"
+    end
 
-      @current_time = Time.zone.now
-      @current_hour = Time.zone.local(@current_time.year, @current_time.month, @current_time.day, @current_time.hour, 0, 0, 0)
-      @current_day = Time.zone.local(@current_time.year, @current_time.month, @current_time.day)
-      @current_month = Time.zone.local(@current_time.year, @current_time.month, 1, 0, 0, 0, 0)
+    def visits
+      @stats = Visit.aggregate_count_by_time(:hour => params[:hour], :time_in_integer => true, :precision => "millisecond")
+      @stats.map! do |s|
+        time = Time.zone.at s[0]/1000
+        zone_offset = Time.zone_offset(time.zone)
+        [(Time.zone.at(s[0]/1000).utc.to_i + zone_offset)*1000, s[1]]
+      end
+      respond_to do |format|
+        format.json { render :json => @stats }
+      end
+    end
 
-      processor_statistic = []
-      memory_statistic = []
-      @server_statistics = {}
+    def popular_pages
+      @popular_pages_stats = ControlCenter::Visit.aggregate_count_by_url(:limit => 6)
+      respond_to do |format|
+        format.html { render :partial => "control_center/statistics/popular_pages" }
+      end
+    end
+
+    def server
+      processor_stat = []
+      memory_stat = []
+      @server_stats = {}
       if RUBY_PLATFORM.downcase.include?("darwin")
         top = `top -l 1 -pid 0`.split(/\n+/)
         if top.present?
-          processor_statistic = top[3].scan(/[0-9]+\.\d+/)
-          memory_statistic = top[6].scan(/[0-9]\d+/)
-          @server_statistics = {
-            :processor => {:user => processor_statistic[0], :sys => processor_statistic[1], :idle => processor_statistic[2]},
-            :memory => {:wired => memory_statistic[0], :active => memory_statistic[1], :inactive => memory_statistic[2], :used => memory_statistic[3], :free => memory_statistic[4]}
+          processor_stat = top[3].scan(/[0-9]+\.\d+/)
+          memory_stat = top[6].scan(/[0-9]\d+/)
+          @server_stats = {
+            :processor => {:user => processor_stat[0], :sys => processor_stat[1], :idle => processor_stat[2]},
+            :memory => {:wired => memory_stat[0], :active => memory_stat[1], :inactive => memory_stat[2], :used => memory_stat[3], :free => memory_stat[4]}
           }
         end
       elsif RUBY_PLATFORM.downcase.include?("linux")
         top = `top -b -n 1 -p 0`.split(/\n+/)
         if top.present?
-          processor_statistic = top[2].scan(/[0-9]+\.\d+/)
-          memory_statistic = top[3].scan(/[0-9]\d+/)
-          @server_statistics = {
-            :processor => {:user => processor_statistic[0], :sys => processor_statistic[1], :idle => processor_statistic[3]},
-            :memory => {:total => memory_statistic[0].to_i/1024, :used => memory_statistic[1].to_i/1024, :free => memory_statistic[2].to_i/1024}
+          processor_stat = top[2].scan(/[0-9]+\.\d+/)
+          memory_stat = top[3].scan(/[0-9]\d+/)
+          @server_stats = {
+            :processor => {:user => processor_stat[0], :sys => processor_stat[1], :idle => processor_stat[3]},
+            :memory => {:total => memory_stat[0].to_i/1024, :used => memory_stat[1].to_i/1024, :free => memory_stat[2].to_i/1024}
           }
         end
       end
       uptime_array = `uptime`.split("up")[1].strip.split("user")[0].split(","); uptime_array.delete_at(uptime_array.length - 1)
       if uptime_array.present?
         uptime = uptime_array.join(",")
-        @server_statistics[:uptime] = uptime
+        @server_stats[:uptime] = uptime
       end
 
       @mongodb_stats = Mongoid.database.stats
 
-      @recent_visits_stats = Visit.aggregate_count_for(:hour => 24)
-      @recent_visits_stats.map! do |s|
-        time = Time.zone.at s[0]
-        zone_offset = Time.zone_offset(time.zone)
-        [(Time.zone.at(s[0]).utc.to_i + zone_offset)*1000, s[1]]
-      end
-
-      # Disabled because it's uncertain the result is what as intended.
-      # begin
-      #   @assets_storage_usage = Mongoid.database.collection("fs.chunks").stats["storageSize"]
-      # rescue
-      #   @assets_storage_usage = 0
-      # end
-    end
-
-    def visits
-      @visits_stats = Visit.aggregate_count_for(:hour => params[:hour])
-      @visits_stats.map! do |s|
-        time = Time.zone.at s[0]
-        zone_offset = Time.zone_offset(time.zone)
-        [(Time.zone.at(s[0]).utc.to_i + zone_offset)*1000, s[1]]
+      begin
+        @mongodb_grid_fs_stats = Mongoid.database.collection("fs.chunks").stats["storageSize"]
+      rescue
+        @mongodb_grid_fs_stats = 0
       end
       respond_to do |format|
-        format.json { render :json => @visits_stats }
+        format.html { render :partial => "control_center/statistics/server" }
       end
     end
   end

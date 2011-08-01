@@ -13,32 +13,18 @@
         #recent-visits{:style => "width: 100%; height: 200px;"}
 
   .panels.clearfix
-    .panel.visits-past-one-hour
+    .panel.visits-1-hour
       .thick-border
         .border
           %h3 Visits In Past Hour
-          %p.big-number= ControlCenter::Visit.aggregate_count_for(:hour => 1).first.last
-    .panel
+          %p.big-number
+    .panel.popular-pages
       .thick-border
         .border
           %h3 Popular Pages
-    .panel.edge
+          %ul
+    .panel.server.edge
       .thick-border
         .border
           %h3 Server
           %ul
-            %li
-              %p Uptime
-              %p.right= @server_statistics[:uptime] if @server_statistics
-            %li
-              %p Processor
-              %p.right= "#{@server_statistics[:processor][:user]}% user, #{@server_statistics[:processor][:sys]}% sys, #{@server_statistics[:processor][:idle]}% idle" if @server_statistics[:processor].present?
-            %li
-              %p Memory
-              %p.right= "#{@server_statistics[:memory][:used]} MB used, #{@server_statistics[:memory][:free]} MB free" if @server_statistics[:memory].present?
-            %li
-              %p MongoDB Data Size
-              %p.right= number_to_human_size(@mongodb_stats["dataSize"])
-            %li
-              %p MongoDB Index Size
-              %p.right= number_to_human_size(@mongodb_stats["indexSize"])

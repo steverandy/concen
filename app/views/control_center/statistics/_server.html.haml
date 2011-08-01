@@ -1,0 +1,19 @@
+%ul
+  %li
+    %p Uptime
+    %p.right= @server_stats[:uptime] if @server_stats
+  %li
+    %p Processor
+    %p.right= "#{@server_stats[:processor][:user]}% user, #{@server_stats[:processor][:sys]}% sys, #{@server_stats[:processor][:idle]}% idle" if @server_stats[:processor].present?
+  %li
+    %p Memory
+    %p.right= "#{@server_stats[:memory][:used]} MB used, #{@server_stats[:memory][:free]} MB free" if @server_stats[:memory].present?
+  %li
+    %p MongoDB Data Size
+    %p.right= number_to_human_size(@mongodb_stats["dataSize"])
+  %li
+    %p MongoDB Index Size
+    %p.right= number_to_human_size(@mongodb_stats["indexSize"])
+  %li
+    %p MongoDB GridFS Size
+    %p.right= number_to_human_size(@mongodb_grid_fs_stats)

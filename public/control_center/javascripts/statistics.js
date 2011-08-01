@@ -72,6 +72,12 @@ $(function () {
 
   $("#recent-visits").resize(function() {});
 
+  $(window).resize(function() {
+    $("div.panel ul li p.right").each(function(index) {
+  		$(this).parents("li").eq(0).find("p:not(.right)").width($(this).parents("li").eq(0).width() - $(this).innerWidth());
+  		$(this).parents("li").eq(0).find("a").width($(this).parents("li").eq(0).width() - $(this).innerWidth());
+  	});
+  });
 
   function update() {
     $.getJSON("/statistics/visits", {"hour": 24}, function(json, textStatus) {
@@ -80,11 +86,19 @@ $(function () {
       window.plot.draw();
     });
     $.getJSON("/statistics/visits", {"hour": 1}, function(json, textStatus) {
-      $("div.panel.visits-past-one-hour").find("p.big-number").html(json[0][1]);
+      if (json.length > 0) {
+        $("div.panel.visits-1-hour").find("p.big-number").html(json[0][1]);
+      };
     });
+    $.get("statistics/popular_pages", function(data, textStatus, xhr) {
+      $("div.panel.popular-pages").find("ul").replaceWith(data);
+    });
+    $.get("statistics/server", function(data, textStatus, xhr) {
+      $("div.panel.server").find("ul").replaceWith(data);
+    });
+
     setTimeout(update, 5000);
   };
 
   update();
-
 });

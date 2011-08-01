@@ -1,0 +1,5 @@
+%ul
+  - for stat in @popular_pages_stats
+    %li
+      %p= link_to stat.first, stat.first
+      %p.right= stat.last

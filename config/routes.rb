@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     resources :statistics do
       collection do
         get :visits
+        get :popular_pages
+        get :server
       end
     end
     resources :users

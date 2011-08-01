@@ -43,11 +43,6 @@ $(document).ready(function() {
 		}
 	});
 
-	$("div.panel ul li p.right").each(function(index) {
-		$(this).parents("li").eq(0).find("p:not(.right)").width($(this).parents("li").eq(0).width() - $(this).innerWidth());
-		$(this).parents("li").eq(0).find("a").width($(this).parents("li").eq(0).width() - $(this).innerWidth());
-	});
-
   // Setup text editor (ace.js).
 	setupTextEditor = function() {
 	  if ($("#text-editor").length > 0) {
