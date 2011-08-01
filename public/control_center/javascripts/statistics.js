@@ -4,9 +4,10 @@ $(function () {
       xaxis: {
         mode: "time",
         timeformat: "%h %P",
-        ticks: 24,
         color: "#141F52",
-        tickColor: "#DADCE7"
+        tickColor: "#DADCE7",
+        minTickSize: [1, "hour"],
+        tickSize: [1, "hour"]
       },
       yaxis: {
         tickDecimals: 0,
@@ -88,6 +89,8 @@ $(function () {
     $.getJSON("/statistics/visits", {"hour": 1}, function(json, textStatus) {
       if (json.length > 0) {
         $("div.panel.visits-1-hour").find("p.big-number").html(json[0][1]);
+      } else {
+        $("div.panel.visits-1-hour").find("p.big-number").html("0");
       };
     });
     $.get("statistics/popular_pages", function(data, textStatus, xhr) {

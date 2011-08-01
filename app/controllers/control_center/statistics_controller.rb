@@ -15,10 +15,10 @@ module ControlCenter
 
     def visits
       @stats = Visit.aggregate_count_by_time(:hour => params[:hour], :time_in_integer => true, :precision => "millisecond")
+      # Readjust timestamp because flot graph doesn't handle time zone.
       @stats.map! do |s|
         time = Time.zone.at s[0]/1000
-        zone_offset = Time.zone_offset(time.zone)
-        [(Time.zone.at(s[0]/1000).utc.to_i + zone_offset)*1000, s[1]]
+        [(time.utc.to_i + time.utc_offset)*1000, s[1]]
       end
       respond_to do |format|
         format.json { render :json => @stats }

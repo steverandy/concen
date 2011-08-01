@@ -26,16 +26,35 @@ module ControlCenter
       if hour = options[:hour]
         hour = hour.to_i
         current_time = Time.now.utc
-        start_time = options[:start_time] || Time.utc(current_time.year, current_time.month, current_time.day, current_time.hour)
-        end_time = start_time - (hour-1).hours
-        stats = self.only(:hour).where(:hour.gte => end_time, :hour.lte => start_time).aggregate.map do |s|
-          hour = s["hour"]
+        end_time = options[:start_time] || Time.utc(current_time.year, current_time.month, current_time.day, current_time.hour)
+        start_time = end_time - (hour-1).hours
+        available_hours = []
+
+        # Aggregate.
+        stats = self.only(:hour).where(:hour.gte => start_time, :hour.lte => end_time).aggregate.map do |s|
+          h = s["hour"]
+          available_hours << h
           if options[:time_in_integer]
-            hour = hour.to_i
-            hour *= 1000 if options[:precision] == "millisecond"
+            h = h.to_i
+            h *= 1000 if options[:precision] == "millisecond"
           end
-          [hour, s["count"].to_i]
+          [h, s["count"].to_i]
         end
+
+        # Fill the empty hours.
+        (0..hour-1).each do |h|
+          hour = (end_time-h.hours)
+          unless available_hours.include? hour
+            if options[:time_in_integer]
+              hour = hour.to_i
+              hour *= 1000 if options[:precision] == "millisecond"
+            end
+            stats << [hour, 0]
+          end
+        end
+
+        # Sort.
+        stats.sort! {|x,y| x[0] <=> y[0]}
       end
     end
   end
