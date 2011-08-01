@@ -11,12 +11,14 @@ Rails.application.routes.draw do
     get "signin" => "sessions#new", :as => "signin"
     get "signup" => "users#new", :as => "signup"
 
+    # get "statistics" => "statistics#index", :as => "statistics"
+    resources :statistics do
+      collection do
+        get :visits
+      end
+    end
     resources :users
-
     resources :sessions
-
-    match "/statistics" => "main#statistics", :as => "statistics"
-
     resources :pages do
       collection do
         put :sort
@@ -28,6 +30,6 @@ Rails.application.routes.draw do
       end
     end
 
-    root :to => "main#statistics"
+    root :to => "statistics#index"
   end
 end

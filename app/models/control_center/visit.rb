@@ -47,7 +47,7 @@ module ControlCenter
         hour = hour.to_i
         current_time = Time.now.utc
         start_time = options[:start_time] || Time.utc(current_time.year, current_time.month, current_time.day, current_time.hour)
-        end_time = start_time - hour.hours
+        end_time = start_time - (hour-1).hours
         map = <<-EOF
           function() {
             emit(this.hour, this.count);
@@ -66,7 +66,7 @@ module ControlCenter
 
       results = self.collection.map_reduce(map, reduce, :out => {:inline => 1}, :raw => true, :query => query).find().to_a.first[1]
       results.map do |result|
-        [result["_id"].to_i, result["value"]]
+        [result["_id"].to_i, result["value"].to_i]
       end
     end
   end
