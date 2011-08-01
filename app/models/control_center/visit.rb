@@ -8,7 +8,6 @@ module ControlCenter
     field :url, :type => String
     field :count, :type => Integer, :default => 1
     field :title, :type => String
-    # field :visits, :type => Integer, :default => 1
 
     index :hour, :background => true
     index :url, :background => true
