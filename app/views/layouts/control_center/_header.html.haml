@@ -7,9 +7,9 @@
     %ul.right
       %li= link_to "Statistics", control_center_statistics_path
       %li= link_to "Pages", control_center_pages_path
-      %li= link_to "Users", ""
-      %li= link_to "Settings", ""
+      %li= link_to "Users", control_center_users_path
       - if current_user
+        %li= link_to "Settings", edit_control_center_user_path(current_user)
         %li= link_to "Sign Out", control_center_signout_path
       - else
         %li= link_to "Sign In", control_center_signin_path

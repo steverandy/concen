@@ -14,8 +14,8 @@ module ControlCenter
     field :full_control, :type => Boolean, :default => false
     field :auth_token, :type => String
 
-    attr_reader :password
-    attr_accessible :full_name, :username, :email, :password, :password_confirmation
+    attr_reader :password, :current_password
+    attr_accessible :full_name, :username, :email, :password, :password_confirmation, :current_password
 
     validates_presence_of :username
     validates_presence_of :email

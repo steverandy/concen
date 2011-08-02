@@ -11,7 +11,6 @@ Rails.application.routes.draw do
     get "signin" => "sessions#new", :as => "signin"
     get "signup" => "users#new", :as => "signup"
 
-    # get "statistics" => "statistics#index", :as => "statistics"
     resources :statistics do
       collection do
         get :visits

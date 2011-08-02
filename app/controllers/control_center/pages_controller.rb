@@ -1,5 +1,3 @@
-require "chronic"
-
 module ControlCenter
   class PagesController < ApplicationController
     layout "control_center/application"

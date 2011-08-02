@@ -1,6 +1,7 @@
 require "yaml"
 require "redcarpet"
 require "mustache"
+require "chronic"
 
 module ControlCenter
   class Page

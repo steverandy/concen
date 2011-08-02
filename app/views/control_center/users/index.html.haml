@@ -1,0 +1,7 @@
+#content
+  %ul
+    - for user in @users
+      %li
+        = user.full_name
+        = user.username
+        = user.created_at
