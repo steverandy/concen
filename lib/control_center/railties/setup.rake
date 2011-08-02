@@ -1,13 +1,6 @@
 namespace :control_center do
   desc "Create initial setup for Control Center."
-  task :setup => [:environment, :add_schedule, :copy_assets, :create_first_user] do
-  end
-
-  desc "Add schedule.rb file to be used by whenever gem (cron jobs)."
-  task :add_schedule => :environment do
-    origin      = File.join(ControlCenter::Engine.root, "lib", "control_center")
-    destination = File.join(Rails.root, "config")
-    File.open("#{destination}/schedule.rb", "a") {|f| f.puts("\n\n"); f.puts(File.read("#{origin}/schedule.rb")); }
+  task :setup => [:environment, :copy_assets] do
   end
 
   desc "Copy assets for Control Center."
@@ -26,14 +19,5 @@ namespace :control_center do
     destination = File.join(Rails.root, "public")
     FileUtils.rm_r "#{destination}/control_center" if File.directory?("#{destination}/control_center")
     FileUtils.ln_s "#{origin}/control_center/", "#{destination}/"
-  end
-
-  desc "Create the first user."
-  task :create_first_user => :environment do
-    unless ControlCenter::User.all.any?
-      if ControlCenter::User.create!(:username => "admin", :email => "admin@mail.com", :full_name => "Admin", :password => "jfds93hfds9", :password_confirmation => "jfds93hfds9")
-        puts "Admin has been created. Username is admin and password is jfds93hfds9. Please login and change email or password."
-      end
-    end
   end
 end
