@@ -8,9 +8,9 @@
       %li= link_to "Statistics", control_center_statistics_path
       %li= link_to "Pages", control_center_pages_path
       %li= link_to "Users", ""
-      -# %li= link_to "Settings", ""
-      -# - if current_user
-      -#   %li= link_to "Sign Out", control_center_signout_path
-      -# - else
-      -#   %li= link_to "Sign In", control_center_signin_path
+      %li= link_to "Settings", ""
+      - if current_user
+        %li= link_to "Sign Out", control_center_signout_path
+      - else
+        %li= link_to "Sign In", control_center_signin_path
       -# = render "layouts/control_center/extra_header_links"
