@@ -14,7 +14,7 @@ module ControlCenter
     end
 
     def visits
-      @stats = Visit.aggregate_count_by_time(:hour => params[:hour], :time_in_integer => true, :precision => "millisecond")
+      @stats = Visit.aggregate_count_by_time(:hour => params[:hour], :precision => "millisecond")
       # Readjust timestamp because flot graph doesn't handle time zone.
       @stats.map! do |s|
         time = Time.zone.at s[0]/1000

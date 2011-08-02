@@ -28,33 +28,41 @@ module ControlCenter
         current_time = Time.now.utc
         end_time = options[:start_time] || Time.utc(current_time.year, current_time.month, current_time.day, current_time.hour)
         start_time = end_time - (hour-1).hours
-        available_hours = []
-
-        # Aggregate.
-        stats = self.only(:hour).where(:hour.gte => start_time, :hour.lte => end_time).aggregate.map do |s|
-          h = s["hour"]
-          available_hours << h
-          if options[:time_in_integer]
-            h = h.to_i
-            h *= 1000 if options[:precision] == "millisecond"
-          end
-          [h, s["count"].to_i]
-        end
-
-        # Fill the empty hours.
+        hours = []
         (0..hour-1).each do |h|
-          hour = (end_time-h.hours)
-          unless available_hours.include? hour
-            if options[:time_in_integer]
-              hour = hour.to_i
-              hour *= 1000 if options[:precision] == "millisecond"
-            end
-            stats << [hour, 0]
-          end
+          hours << (end_time - h.hours).to_i
         end
 
-        # Sort.
-        stats.sort! {|x,y| x[0] <=> y[0]}
+        map = <<-EOF
+          function() {
+            var hours = #{hours.to_json};
+            for (index in hours) {
+              if (this.hour.getTime() == hours[index]*1000) {
+                emit(hours[index], this.count);
+              } else {
+                emit(hours[index], 0);
+              };
+            };
+
+          }
+        EOF
+
+        reduce = <<-EOF
+          function(time, counts) {
+            var count = 0;
+            for (index in counts) { count += counts[index]; };
+            return count;
+          }
+        EOF
+
+        query = {:hour => {"$gte" => start_time, "$lte" => end_time}}
+        results = self.collection.map_reduce(map, reduce, :out => {:inline => 1}, :raw => true, :query => query)["results"]
+        results.sort { |x,y| x["id"] <=> y["id"] }
+        results.map do |result|
+          time = result["_id"].to_i
+          time *= 1000 if options[:precision] == "millisecond"
+          [time, result["value"].to_i]
+        end
       end
     end
   end
