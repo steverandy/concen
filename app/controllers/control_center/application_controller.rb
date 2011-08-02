@@ -16,9 +16,7 @@ module ControlCenter
     end
 
     def current_user
-      if session[:user_id]
-        @current_user ||= ControlCenter::User.where(:_id => session[:user_id]).first
-      end
+      @current_user ||= ControlCenter::User.where(:auth_token => cookies[:auth_token]).first if cookies[:auth_token]
     end
 
     def authenticate_user

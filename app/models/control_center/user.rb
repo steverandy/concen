@@ -12,6 +12,7 @@ module ControlCenter
     field :email, :type => String
     field :password_digest, :type => String
     field :full_control, :type => Boolean, :default => false
+    field :auth_token, :type => String
 
     attr_reader :password
     attr_accessible :full_name, :username, :email, :password, :password_confirmation
@@ -27,6 +28,8 @@ module ControlCenter
     validates_confirmation_of :password
     validates_presence_of :password, :on => :create
 
+    before_create :generate_auth_token
+
     def authenticate(unencrypted_password)
       if BCrypt::Password.new(self.password_digest) == unencrypted_password
         self
@@ -40,6 +43,10 @@ module ControlCenter
       unless unencrypted_password.blank?
         self.password_digest = BCrypt::Password.create(unencrypted_password)
       end
+    end
+
+    def generate_auth_token
+      self.auth_token = SecureRandom.urlsafe_base64
     end
   end
 end

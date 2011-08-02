@@ -1,5 +1,3 @@
-require "chronic"
-
 module ControlCenter
   class SessionsController < ApplicationController
     layout "control_center/application"
@@ -8,9 +6,11 @@ module ControlCenter
     end
 
     def create
-      user = User.where(:username => params[:username]).first
+      user = User.where(:username => /#{params[:username]}/i).first
+
       if user && user.authenticate(params[:password])
-        session[:user_id] = user.id
+        cookies.permanent[:auth_token] = user.auth_token
+        Rails.logger.info "---#{cookies[:auth_token]}"
         redirect_to root_path, :notice => "You have successfully signed in!"
       else
         flash.now.alert = "Invalid email or password"
@@ -19,7 +19,7 @@ module ControlCenter
     end
 
     def destroy
-      session[:user_id] = nil
+      cookies.delete(:auth_token)
       redirect_to root_path, :notice => "You have successfully signed out!"
     end
   end
