@@ -14,11 +14,27 @@ module ControlCenter
 
     def self.aggregate_count_by_url(*args)
       options = args.extract_options!
-      stats = self.only(:url).aggregate.map do |s|
-        [s["url"], s["count"].to_i]
+
+      map = <<-EOF
+        function() {
+          emit(this.url, this.count);
+        }
+      EOF
+
+      reduce = <<-EOF
+        function(time, counts) {
+          var count = 0;
+          for (index in counts) { count += counts[index]; };
+          return count;
+        }
+      EOF
+
+      results = self.collection.map_reduce(map, reduce, :out => {:inline => 1}, :raw => true)["results"]
+      results = results.sort {|x,y| y["value"] <=> x["value"]}
+      results = results[0..options[:limit]-1] if options[:limit]
+      results = results.map do |result|
+        [result["_id"], result["value"].to_i]
       end
-      stats.sort! {|x,y| y[1] <=> x[1]}
-      stats[0..options[:limit]-1] if options[:limit]
     end
 
     def self.aggregate_count_by_time(*args)
@@ -56,9 +72,10 @@ module ControlCenter
         EOF
 
         query = {:hour => {"$gte" => start_time, "$lte" => end_time}}
+
         results = self.collection.map_reduce(map, reduce, :out => {:inline => 1}, :raw => true, :query => query)["results"]
-        results.sort { |x,y| x["id"] <=> y["id"] }
-        results.map do |result|
+        results = results.sort { |x,y| x["id"] <=> y["id"] }
+        results = results.map do |result|
           time = result["_id"].to_i
           time *= 1000 if options[:precision] == "millisecond"
           [time, result["value"].to_i]
