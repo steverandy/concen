@@ -10,7 +10,6 @@ module ControlCenter
 
       if user && user.authenticate(params[:password])
         cookies.permanent[:auth_token] = user.auth_token
-        Rails.logger.info "---#{cookies[:auth_token]}"
         redirect_to root_path, :notice => "You have successfully signed in!"
       else
         flash.now.alert = "Invalid email or password"

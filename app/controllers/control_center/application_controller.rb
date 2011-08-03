@@ -4,7 +4,6 @@ module ControlCenter
 
     layout "control_center/application"
 
-    # before_filter :get_user_agent
     before_filter :set_controlcenter
 
     helper_method :current_user, :authenticate_user
