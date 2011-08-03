@@ -1,0 +1,9 @@
+%ul
+  - if @referrals_stats.count == 0
+    %li
+      %p No Referrals
+  - else
+    - for stat in @referrals_stats
+      %li
+        %p= stat.first
+        %p.right= stat.last

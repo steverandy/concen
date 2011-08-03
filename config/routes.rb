@@ -21,9 +21,9 @@ Rails.application.routes.draw do
     end
     resource :traffic do
       member do
-        get :visits_count
+        get :visits_counts
         get :pages
-        get :sources
+        get :referrals
       end
     end
     resource :performance do

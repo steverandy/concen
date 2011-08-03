@@ -13,12 +13,13 @@ module ControlCenter
       @page_title = "Traffic"
     end
 
-    def visits_count
-      @stats = Visit.aggregate_count_by_time(:hour => params[:hour], :precision => "millisecond")
-      # Readjust timestamp because flot graph doesn't handle time zone.
-      @stats.map! do |s|
-        time = Time.zone.at s[0]/1000
-        [(time.utc.to_i + time.utc_offset)*1000, s[1]]
+    def visits_counts
+      if @stats = Visit::URL.aggregate_count_by_time(:hour => params[:hour], :precision => "millisecond")
+        # Readjust timestamp because flot graph doesn't handle time zone.
+        @stats.map! do |s|
+          time = Time.zone.at s[0]/1000
+          [(time.utc.to_i + time.utc_offset)*1000, s[1]]
+        end
       end
       respond_to do |format|
         format.json { render :json => @stats }
@@ -26,9 +27,16 @@ module ControlCenter
     end
 
     def pages
-      @pages_stats = ControlCenter::Visit.aggregate_count_by_url(:limit => 6)
+      @pages_stats = Visit::URL.aggregate_count_by_url(:limit => 6)
       respond_to do |format|
         format.html { render :partial => "control_center/traffics/pages" }
+      end
+    end
+
+    def referrals
+      @referrals_stats = Visit::Referral.aggregate_count_by_referral(:limit => 6)
+      respond_to do |format|
+        format.html { render :partial => "control_center/traffics/referrals" }
       end
     end
   end

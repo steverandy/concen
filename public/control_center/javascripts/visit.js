@@ -81,12 +81,12 @@ $(function() {
   });
 
   function update() {
-    $.getJSON("/traffic/visits_count", {"hour": 24}, function(json, textStatus) {
+    $.getJSON("/traffic/visits_counts", {"hour": 24}, function(json, textStatus) {
       window.plot.setData([json]);
       window.plot.setupGrid();
       window.plot.draw();
     });
-    $.getJSON("/traffic/visits_count", {"hour": 1}, function(json, textStatus) {
+    $.getJSON("/traffic/visits_counts", {"hour": 1}, function(json, textStatus) {
       if (json.length > 0) {
         $("div.panel.visits-1-hour").find("p.big-number").html(json[0][1]);
       } else {
@@ -96,9 +96,9 @@ $(function() {
     $.get("/traffic/pages", function(data, textStatus, xhr) {
       $("div.panel.pages").find("ul").replaceWith(data);
     });
-    // $.get("/traffics/", function(data, textStatus, xhr) {
-    //   $("div.panel.traffics").find("ul").replaceWith(data);
-    // });
+    $.get("/traffic/referrals", function(data, textStatus, xhr) {
+      $("div.panel.referrals").find("ul").replaceWith(data);
+    });
 
     setTimeout(update, 5000);
   };
