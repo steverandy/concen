@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     get "signin" => "sessions#new", :as => "signin"
     get "signup" => "users#new", :as => "signup"
 
+    resources :users
+    resources :sessions
+    resources :responses
     resources :statistics do
       collection do
         get :visits
@@ -18,8 +21,6 @@ Rails.application.routes.draw do
         get :server
       end
     end
-    resources :users
-    resources :sessions
     resources :pages do
       collection do
         put :sort
