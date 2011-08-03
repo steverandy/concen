@@ -7,8 +7,8 @@
     %ul.right
       - if current_user
         %li= link_to "Status", control_center_status_path
-        %li= link_to "Visits", control_center_visits_path
-        %li= link_to "Responses", control_center_responses_path
+        %li= link_to "Traffic", control_center_traffic_path
+        %li= link_to "Performance", control_center_performance_path
         %li= link_to "Pages", control_center_pages_path
         %li= link_to "Users", control_center_users_path
         %li= link_to "Settings", edit_control_center_user_path(current_user)

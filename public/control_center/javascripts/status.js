@@ -1,6 +1,6 @@
 $(function() {
   function update() {
-    $.getJSON("/status/count", function(json, textStatus) {
+    $.getJSON("/status/counts", function(json, textStatus) {
       $("div.panel.pages").find("p.big-number").html(json.pages);
       $("div.panel.users").find("p.big-number").html(json.users);
     });

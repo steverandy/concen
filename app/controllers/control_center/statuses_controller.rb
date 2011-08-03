@@ -9,7 +9,7 @@ module ControlCenter
       render
     end
 
-    def count
+    def counts
       respond_to do |format|
         format.json {
           render :json => {:pages => Page.count, :users => User.count}

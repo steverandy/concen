@@ -13,18 +13,20 @@ Rails.application.routes.draw do
 
     resources :users
     resources :sessions
-    resources :responses
     resource :status do
       member do
         get :server
-        get :count
+        get :counts
       end
     end
-    resources :visits do
-      collection do
-        get :count
+    resource :traffic do
+      member do
+        get :visits_count
         get :pages
+        get :sources
       end
+    end
+    resource :performance do
     end
     resources :pages do
       collection do
@@ -37,6 +39,6 @@ Rails.application.routes.draw do
       end
     end
 
-    root :to => "visits#index"
+    root :to => "statuses#show"
   end
 end
