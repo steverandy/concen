@@ -8,7 +8,7 @@ module ControlCenter
     include Mongoid::Document
     include Mongoid::Timestamps
 
-    store_in "control_center.pages"
+    store_in self.name.underscore.gsub("/", ".").pluralize
 
     references_many :children, :class_name => "ControlCenter::Page", :foreign_key => :parent_id, :inverse_of => :parent
     referenced_in :parent, :class_name => "ControlCenter::Page", :inverse_of => :children

@@ -5,7 +5,7 @@ module ControlCenter
     include Mongoid::Document
     include Mongoid::Timestamps
 
-    store_in "control_center.users"
+    store_in self.name.underscore.gsub("/", ".").pluralize
 
     field :full_name, :type => String
     field :username, :type => String

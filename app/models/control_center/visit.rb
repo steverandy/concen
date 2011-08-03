@@ -2,7 +2,7 @@ module ControlCenter
   class Visit
     include Mongoid::Document
 
-    store_in "control_center.visits"
+    store_in self.name.underscore.gsub("/", ".").pluralize
 
     field :hour, :type => Time
     field :url, :type => String
