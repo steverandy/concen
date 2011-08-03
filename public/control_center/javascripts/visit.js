@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
   function plotWithOptions() {
     window.plot = $.plot($("#recent-visits"), [{label: "Visits", data: []}], {
       xaxis: {
@@ -81,24 +81,24 @@ $(function () {
   });
 
   function update() {
-    $.getJSON("/statistics/visits", {"hour": 24}, function(json, textStatus) {
+    $.getJSON("/visits/count", {"hour": 24}, function(json, textStatus) {
       window.plot.setData([json]);
       window.plot.setupGrid();
       window.plot.draw();
     });
-    $.getJSON("/statistics/visits", {"hour": 1}, function(json, textStatus) {
+    $.getJSON("/visits/count", {"hour": 1}, function(json, textStatus) {
       if (json.length > 0) {
         $("div.panel.visits-1-hour").find("p.big-number").html(json[0][1]);
       } else {
         $("div.panel.visits-1-hour").find("p.big-number").html("0");
       };
     });
-    $.get("statistics/popular_pages", function(data, textStatus, xhr) {
-      $("div.panel.popular-pages").find("ul").replaceWith(data);
+    $.get("/visits/pages", function(data, textStatus, xhr) {
+      $("div.panel.pages").find("ul").replaceWith(data);
     });
-    $.get("statistics/server", function(data, textStatus, xhr) {
-      $("div.panel.server").find("ul").replaceWith(data);
-    });
+    // $.get("statistics/server", function(data, textStatus, xhr) {
+    //   $("div.panel.server").find("ul").replaceWith(data);
+    // });
 
     setTimeout(update, 5000);
   };

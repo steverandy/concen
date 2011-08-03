@@ -4,13 +4,12 @@
   = javascript_include_tag "/control_center/javascripts/jquery.flot.js"
   = javascript_include_tag "/control_center/javascripts/jquery.flot.stack.js"
   = javascript_include_tag "/control_center/javascripts/jquery.flot.resize.js"
-  = javascript_include_tag "/control_center/javascripts/statistics.js"
+  = javascript_include_tag "/control_center/javascripts/visit.js"
 
 #content
   .panels.thick-border
     .panel.wide.border
-      %h3
-        Visits in Past 24 Hours
+      %h3 Past 24 Hours
       .graph
         #recent-visits{:style => "width: 100%; height: 200px;"}
 
@@ -18,15 +17,11 @@
     .panel.visits-1-hour
       .thick-border
         .border
-          %h3 Visits In Past Hour
+          %h3 Past Hour
           %p.big-number
-    .panel.popular-pages
+    .panel.pages
       .thick-border
         .border
-          %h3 Popular Pages
+          %h3 Pages
           %ul
-    .panel.server.edge
-      .thick-border
-        .border
-          %h3 Server
-          %ul
+    .panel.sources

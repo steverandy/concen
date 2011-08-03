@@ -14,11 +14,16 @@ Rails.application.routes.draw do
     resources :users
     resources :sessions
     resources :responses
-    resources :statistics do
-      collection do
-        get :visits
-        get :popular_pages
+    resource :status do
+      member do
         get :server
+        get :count
+      end
+    end
+    resources :visits do
+      collection do
+        get :count
+        get :pages
       end
     end
     resources :pages do
@@ -32,6 +37,6 @@ Rails.application.routes.draw do
       end
     end
 
-    root :to => "statistics#index"
+    root :to => "visits#index"
   end
 end
