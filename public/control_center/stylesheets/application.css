@@ -1107,12 +1107,10 @@ a.grid {
   -o-text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
-  -moz-binding: url('/../../public/control_center/xml/ellipsis.xml#ellipsis');
-  -moz-binding: url("/control_center/stylesheets/xml/ellipsis.xml#ellipsis");
   display: block;
   width: 100%;
 }
-/* line 337, ../../../app/stylesheets/application.sass */
+/* line 335, ../../../app/stylesheets/application.sass */
 .panels .panel ul li p.right {
   position: absolute;
   top: 6px;
@@ -1121,22 +1119,22 @@ a.grid {
   background: white;
   width: auto;
 }
-/* line 345, ../../../app/stylesheets/application.sass */
+/* line 343, ../../../app/stylesheets/application.sass */
 .panels .panel.wide {
   width: auto;
   margin-right: 0;
   float: none;
 }
-/* line 349, ../../../app/stylesheets/application.sass */
+/* line 347, ../../../app/stylesheets/application.sass */
 .panels .edge {
   margin-right: 0px;
 }
-/* line 351, ../../../app/stylesheets/application.sass */
+/* line 349, ../../../app/stylesheets/application.sass */
 .panels ul.historical-visits {
   list-style-type: none;
   border: none;
 }
-/* line 354, ../../../app/stylesheets/application.sass */
+/* line 352, ../../../app/stylesheets/application.sass */
 .panels ul.historical-visits li {
   float: right;
   width: 40px;
@@ -1145,29 +1143,29 @@ a.grid {
   height: 142px;
   border: none;
 }
-/* line 361, ../../../app/stylesheets/application.sass */
+/* line 359, ../../../app/stylesheets/application.sass */
 .panels ul.historical-visits li div.count {
   height: 120px;
   position: relative;
 }
-/* line 364, ../../../app/stylesheets/application.sass */
+/* line 362, ../../../app/stylesheets/application.sass */
 .panels ul.historical-visits li div.total, .panels ul.historical-visits li div.unique {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
 }
-/* line 369, ../../../app/stylesheets/application.sass */
+/* line 367, ../../../app/stylesheets/application.sass */
 .panels ul.historical-visits li div.total {
   background: #43d166;
   z-index: 10;
 }
-/* line 372, ../../../app/stylesheets/application.sass */
+/* line 370, ../../../app/stylesheets/application.sass */
 .panels ul.historical-visits li div.unique {
   background: #9aeeb0;
   z-index: 11;
 }
-/* line 375, ../../../app/stylesheets/application.sass */
+/* line 373, ../../../app/stylesheets/application.sass */
 .panels ul.historical-visits li p {
   margin-top: 8px;
   height: 14px;
@@ -1176,14 +1174,14 @@ a.grid {
   text-align: center;
 }
 
-/* line 384, ../../../app/stylesheets/application.sass */
+/* line 382, ../../../app/stylesheets/application.sass */
 .qtip-content {
   font-size: 13px;
   color: #333333;
   background: white;
 }
 
-/* line 391, ../../../app/stylesheets/application.sass */
+/* line 389, ../../../app/stylesheets/application.sass */
 .qtip-wrapper {
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
@@ -1191,57 +1189,57 @@ a.grid {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
 }
 
-/* line 396, ../../../app/stylesheets/application.sass */
+/* line 394, ../../../app/stylesheets/application.sass */
 #text-editor {
   min-height: 400px;
   position: relative;
 }
 
-/* line 400, ../../../app/stylesheets/application.sass */
+/* line 398, ../../../app/stylesheets/application.sass */
 .ace_scroller {
   overflow-x: auto !important;
 }
 
-/* line 403, ../../../app/stylesheets/application.sass */
+/* line 401, ../../../app/stylesheets/application.sass */
 .ace_sb {
   height: 100% !important;
   width: 30px !important;
 }
 
-/* line 407, ../../../app/stylesheets/application.sass */
+/* line 405, ../../../app/stylesheets/application.sass */
 #file-manager {
   float: right;
   width: 25%;
 }
-/* line 410, ../../../app/stylesheets/application.sass */
+/* line 408, ../../../app/stylesheets/application.sass */
 #file-manager div.thick-border {
   margin-left: 30px;
 }
-/* line 412, ../../../app/stylesheets/application.sass */
+/* line 410, ../../../app/stylesheets/application.sass */
 #file-manager div.border {
   padding: 20px;
 }
-/* line 414, ../../../app/stylesheets/application.sass */
+/* line 412, ../../../app/stylesheets/application.sass */
 #file-manager h3 {
   margin-top: 20px;
 }
-/* line 416, ../../../app/stylesheets/application.sass */
+/* line 414, ../../../app/stylesheets/application.sass */
 #file-manager h3 a {
   font-size: 12px;
   margin-right: 4px;
   color: #858bad;
   font-weight: normal;
 }
-/* line 421, ../../../app/stylesheets/application.sass */
+/* line 419, ../../../app/stylesheets/application.sass */
 #file-manager ul {
   list-style-type: none;
 }
-/* line 423, ../../../app/stylesheets/application.sass */
+/* line 421, ../../../app/stylesheets/application.sass */
 #file-manager ul li {
   font-size: 12px;
   margin-top: 10px;
 }
-/* line 426, ../../../app/stylesheets/application.sass */
+/* line 424, ../../../app/stylesheets/application.sass */
 #file-manager ul li a {
   white-space: pre;
   white-space: pre-wrap;
@@ -1254,21 +1252,21 @@ a.grid {
   color: #858bad;
   margin-right: 4px;
 }
-/* line 430, ../../../app/stylesheets/application.sass */
+/* line 428, ../../../app/stylesheets/application.sass */
 #file-manager ul li a.filename {
   color: #141f52;
 }
 
-/* line 433, ../../../app/stylesheets/application.sass */
+/* line 431, ../../../app/stylesheets/application.sass */
 form.with-text-editor {
   float: left;
   width: 75%;
 }
-/* line 436, ../../../app/stylesheets/application.sass */
+/* line 434, ../../../app/stylesheets/application.sass */
 form.with-text-editor.wide {
   width: 100%;
 }
-/* line 439, ../../../app/stylesheets/application.sass */
+/* line 437, ../../../app/stylesheets/application.sass */
 form.with-text-editor .thick-border .border {
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 1px inset;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 1px inset;
@@ -1277,7 +1275,7 @@ form.with-text-editor .thick-border .border {
   padding: 10px;
 }
 
-/* line 444, ../../../app/stylesheets/application.sass */
+/* line 442, ../../../app/stylesheets/application.sass */
 .tickLabel {
   font-size: 12px;
 }

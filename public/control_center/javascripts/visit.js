@@ -74,11 +74,15 @@ $(function() {
   $("#recent-visits").resize(function() {});
 
   $(window).resize(function() {
+    updatePanelTextWidth();
+  });
+
+  function updatePanelTextWidth() {
     $("div.panel ul li p.right").each(function(index) {
   		$(this).parents("li").eq(0).find("p:not(.right)").width($(this).parents("li").eq(0).width() - $(this).innerWidth());
   		$(this).parents("li").eq(0).find("a").width($(this).parents("li").eq(0).width() - $(this).innerWidth());
   	});
-  });
+  }
 
   function update() {
     $.getJSON("/traffic/visits_counts", {"hour": 24}, function(json, textStatus) {
@@ -95,9 +99,11 @@ $(function() {
     });
     $.get("/traffic/pages", function(data, textStatus, xhr) {
       $("div.panel.pages").find("ul").replaceWith(data);
+      updatePanelTextWidth();
     });
     $.get("/traffic/referrals", function(data, textStatus, xhr) {
       $("div.panel.referrals").find("ul").replaceWith(data);
+      updatePanelTextWidth();
     });
 
     setTimeout(update, 5000);
