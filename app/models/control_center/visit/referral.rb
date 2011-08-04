@@ -6,19 +6,21 @@ module ControlCenter
       store_in self.name.underscore.gsub("/", ".").pluralize
 
       field :hour, :type => Time
-      field :referral, :type => String
+      field :url, :type => String
+      field :domain, :type => String
       field :count, :type => Integer, :default => 1
 
       index :hour, :background => true
       index :url, :background => true
+      index :domain, :background => true
 
-      def self.aggregate_count_by_referral(*args)
+      def self.aggregate_count_by_domain(*args)
         options = args.extract_options!
 
         map = <<-EOF
           function() {
-            if (this.referral != null) {
-              emit(this.source, this.count);
+            if (this.domain != null) {
+              emit(this.domain, this.count);
             };
           }
         EOF

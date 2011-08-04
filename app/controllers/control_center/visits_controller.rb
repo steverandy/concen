@@ -1,3 +1,5 @@
+require "domainatrix"
+
 module ControlCenter
   class VisitsController < ApplicationController
 
@@ -12,16 +14,22 @@ module ControlCenter
       if params[:k] && visit_key = Visit::Key.where(:_id => params[:k]).first
         current_time = Time.now.utc
         current_hour = Time.utc(current_time.year, current_time.month, current_time.day, current_time.hour)
-        visit_url_collection = Visit::URL.collection
-        visit_url_collection.update(
+        Visit::Page.collection.update(
           {:url => params[:u], :hour => current_hour},
           {"$inc" => {:count => 1}, "$set" => {:title => params[:t]}},
           :upsert => true
         )
-        visit_source_collection = Visit::Referral.collection
-        visit_source_collection.update(
-          {:source => params[:r], :hour => current_hour},
-          {"$inc" => {:count => 1}},
+        begin
+          referral_url = params[:r]
+          referral = Domainatrix.parse(referral_url)
+          referral_domain = referral.domain + "." + referral.public_suffix
+        rescue
+          referral_url = nil
+          referral_domain = nil
+        end
+        Visit::Referral.collection.update(
+          {:url => referral_url, :hour => current_hour},
+          {"$inc" => {:count => 1}, "$set" => {:domain => referral_domain}},
           :upsert => true
         )
         visit_key.delete

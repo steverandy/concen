@@ -1,6 +1,6 @@
 module ControlCenter
   module Visit
-    class URL
+    class Page
       include Mongoid::Document
 
       store_in self.name.underscore.gsub("/", ".").pluralize
