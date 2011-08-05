@@ -74,7 +74,9 @@ module ControlCenter
     def content_in_html(key = "main", data={})
       if content = self.content.try(:[], key)
         content = Mustache.render(content, data)
-        content = Redcarpet.new(content, :fenced_code).to_html
+        markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :fenced_code_blocks => true)
+        html = markdown.render content
+        content = Redcarpet::Render::SmartyPants.render html
       else
         return nil
       end
