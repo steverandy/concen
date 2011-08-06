@@ -1196,50 +1196,39 @@ a.grid {
 }
 
 /* line 398, ../../../app/stylesheets/application.sass */
-.ace_scroller {
-  overflow-x: auto !important;
-}
-
-/* line 401, ../../../app/stylesheets/application.sass */
-.ace_sb {
-  height: 100% !important;
-  width: 30px !important;
-}
-
-/* line 405, ../../../app/stylesheets/application.sass */
 #file-manager {
   float: right;
   width: 25%;
 }
-/* line 408, ../../../app/stylesheets/application.sass */
+/* line 401, ../../../app/stylesheets/application.sass */
 #file-manager div.thick-border {
   margin-left: 30px;
 }
-/* line 410, ../../../app/stylesheets/application.sass */
+/* line 403, ../../../app/stylesheets/application.sass */
 #file-manager div.border {
   padding: 20px;
 }
-/* line 412, ../../../app/stylesheets/application.sass */
+/* line 405, ../../../app/stylesheets/application.sass */
 #file-manager h3 {
   margin-top: 20px;
 }
-/* line 414, ../../../app/stylesheets/application.sass */
+/* line 407, ../../../app/stylesheets/application.sass */
 #file-manager h3 a {
   font-size: 12px;
   margin-right: 4px;
   color: #858bad;
   font-weight: normal;
 }
-/* line 419, ../../../app/stylesheets/application.sass */
+/* line 412, ../../../app/stylesheets/application.sass */
 #file-manager ul {
   list-style-type: none;
 }
-/* line 421, ../../../app/stylesheets/application.sass */
+/* line 414, ../../../app/stylesheets/application.sass */
 #file-manager ul li {
   font-size: 12px;
   margin-top: 10px;
 }
-/* line 424, ../../../app/stylesheets/application.sass */
+/* line 417, ../../../app/stylesheets/application.sass */
 #file-manager ul li a {
   white-space: pre;
   white-space: pre-wrap;
@@ -1252,21 +1241,21 @@ a.grid {
   color: #858bad;
   margin-right: 4px;
 }
-/* line 428, ../../../app/stylesheets/application.sass */
+/* line 421, ../../../app/stylesheets/application.sass */
 #file-manager ul li a.filename {
   color: #141f52;
 }
 
-/* line 431, ../../../app/stylesheets/application.sass */
+/* line 424, ../../../app/stylesheets/application.sass */
 form.with-text-editor {
   float: left;
   width: 75%;
 }
-/* line 434, ../../../app/stylesheets/application.sass */
+/* line 427, ../../../app/stylesheets/application.sass */
 form.with-text-editor.wide {
   width: 100%;
 }
-/* line 437, ../../../app/stylesheets/application.sass */
+/* line 430, ../../../app/stylesheets/application.sass */
 form.with-text-editor .thick-border .border {
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 1px inset;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 1px inset;
@@ -1275,7 +1264,7 @@ form.with-text-editor .thick-border .border {
   padding: 10px;
 }
 
-/* line 442, ../../../app/stylesheets/application.sass */
+/* line 435, ../../../app/stylesheets/application.sass */
 .tickLabel {
   font-size: 12px;
 }
