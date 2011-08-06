@@ -1,0 +1,19 @@
+Title: Use Redcarpet as a Markdown Filter for Haml in Rails
+
+Description: Haml by default does not use Redcarpet Ruby Gem if available as the dependecy to parse Markdown text format. But it’s easy to overwrite the Haml internal to use Redcarpet.
+
+Publish Time: 2011-07-16 19:00:00 +0800
+
+-----
+
+Haml makes it very easy to include text in various formats such as CSS, JavaScript, Markdown or Textile. Specifically for Markdown, Haml depends on additional Ruby Gem such as RDiscount, peg-markdown, or Maruku. Recently, there is a new Ruby Gem for Markdown parser called [Redcarpet](https://github.com/tanoku/redcarpet), created by [Vicent Martí](https://github.com/tanoku).
+
+Redcarpet is basically a Ruby wrapper of [Upskirt](https://github.com/tanoku/redcarpet), which originally created by Natacha Porté. Upskirt is a standard compliant Markdown parser and it supports many extensions such as non-strict emphasis, fenced code blocks, tables, and autolinks. One of the best features of Upskirt is that it handles arbitrary and malicious input text very well.
+
+> Upskirt has been extensively security audited, and includes protection against all possible DOS attacks (stack overflows, out of memory situations, malformed Markdown syntax...) and against client attacks through malicious embedded HTML.
+
+To integrate Rercarpet and Haml in your Rails app, first add the Redcarpet gem in the `Gemfile`.
+
+```
+gem "redcarpet", "~> 1.17.2"
+```
