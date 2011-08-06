@@ -10,6 +10,3 @@ Fabricator("control_center/page") do
   title { Fabricate.sequence(:title) { |i| "Title #{i}" } }
 end
 
-# Fabricator("control_center/grid_file") do
-#
-# end

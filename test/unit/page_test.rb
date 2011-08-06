@@ -2,12 +2,12 @@ require "test_helper"
 
 class PageTest < ActiveSupport::TestCase
   test "should create page" do
-    page = Fabricate("control_center/page")
-    assert_not_nil(page.id)
+    page = Fabricate "control_center/page"
+    assert_not_nil page.id
   end
 
   test "should create child page" do
-    page = Fabricate("control_center/page")
+    page = Fabricate "control_center/page"
     child_page = page.children.create(:title => "1984")
     assert_not_nil(child_page.id)
     assert_equal(page.id, child_page.parent.id)
