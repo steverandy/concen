@@ -249,7 +249,7 @@ module ControlCenter
     def parse_raw_text
       if self.raw_text && self.raw_text.length > 0 && (self.new? || self.raw_text_changed?)
         self.content = {}
-        raw_text_array = self.raw_text.split(/(?:\r\n-{3,}\r\n)/)
+        raw_text_array = self.raw_text.split(/(?:\r?\n-{3,}\r?\n)/)
         if raw_text_array.count > 1
           meta_data = raw_text_array.delete_at(0).strip
           raw_text_array.each_with_index do |content, index|
@@ -293,15 +293,19 @@ module ControlCenter
     end
 
     def update_raw_text
-      raw_text_array = self.raw_text.split(/(?:\r\n-{3,}\r\n)/, 2)
+      raw_text_array = self.raw_text.split(/(?:\r?\n-{3,}\r?\n)/, 2)
       meta_data = raw_text_array.delete_at(0).lines.to_a
       meta_data.each_with_index do |line, index|
         if line.match /publish time/i
           meta_data[index] = "#{line.split(':')[0]}: #{self.publish_time}"
-          meta_data[index] << "\r\n" if line.include? "\r\n"
+          if line.include? "\r\n"
+            meta_data[index] << "\r\n"
+          elsif line.include? "\n"
+            meta_data[index] << "\n"
+          end
         end
       end
-      self.raw_text = meta_data.join + self.raw_text.match(/(?:\r\n-{3,}\r\n)/).to_s + raw_text_array.join
+      self.raw_text = meta_data.join + self.raw_text.match(/(?:\r?\n-{3,}\r?\n)/).to_s + raw_text_array.join
     end
 
     def destroy_children
