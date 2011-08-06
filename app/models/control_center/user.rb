@@ -46,7 +46,7 @@ module ControlCenter
     end
 
     def generate_auth_token
-      self.auth_token = SecureRandom.urlsafe_base64
+      self.auth_token = ActiveSupport::SecureRandom.urlsafe_base64
     end
   end
 end
