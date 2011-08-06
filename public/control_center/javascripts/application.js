@@ -47,17 +47,17 @@ $(document).ready(function() {
 	setupTextEditor = function() {
 	  if ($("#text-editor").length > 0) {
       window.editor = ace.edit("text-editor");
-      editor.getSession().setTabSize(2);
-      editor.getSession().setUseSoftTabs(true);
-      editor.setHighlightActiveLine(false);
-      editor.setShowPrintMargin(false);
-      editor.getSession().setUseWrapMode(true);
-      editor.getSession().setValue($("textarea.text-editor-content").eq(0).val());
-      editor.renderer.setShowGutter(false);
+      window.editor.setHighlightActiveLine(false);
+      window.editor.setShowPrintMargin(false);
+      window.editor.getSession().setValue($("textarea.text-editor-content").eq(0).val());
+      window.editor.getSession().setTabSize(2);
+      window.editor.getSession().setUseSoftTabs(true);
+      window.editor.getSession().setUseWrapMode(false);
+      window.editor.renderer.setShowGutter(false);
 
       $("form.with-text-editor").submit(function() {
-    	  var editorContent = editor.getSession().getValue();
-    	  $("textarea.text-editor-content").eq(0).val(editorContent);
+        var editorContent = window.editor.getSession().getValue();
+        $("textarea.text-editor-content").eq(0).val(editorContent);
       });
     };
 	};
@@ -72,7 +72,7 @@ $(document).ready(function() {
 		maxWidth: resizableTextEditor.width(),
 		stop: function(event, ui) {
 		  $("#text-editor").css("height", $("#text-editor").parent().height());
-		  setupTextEditor();
+      window.editor.resize();
 		}
   });
 
