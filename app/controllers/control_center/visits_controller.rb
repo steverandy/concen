@@ -17,7 +17,7 @@ module ControlCenter
         Visit::Page.collection.update(
           {:url => params[:u], :hour => current_hour},
           {"$inc" => {:count => 1}, "$set" => {:title => params[:t]}},
-          :upsert => true
+          :upsert => true, :safe => false
         )
         begin
           referral_url = params[:r]
@@ -30,7 +30,7 @@ module ControlCenter
         Visit::Referral.collection.update(
           {:url => referral_url, :hour => current_hour},
           {"$inc" => {:count => 1}, "$set" => {:domain => referral_domain}},
-          :upsert => true
+          :upsert => true, :safe => false
         )
         visit_key.delete
       end
