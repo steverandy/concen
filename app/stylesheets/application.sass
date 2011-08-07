@@ -111,11 +111,21 @@ header
 ul.pages
   margin-left: 0
   font-size: 14px
+  span.handle
+    background: url("/control_center/images/icon-handle.png")
+    width: 12px
+    height: 12px
+    +inline-block
   p, ul p
     margin-bottom: 10px
+    vertical-align: middle
+    span, a
+      vertical-align: middle
+  ul
+    p
+      // background: $gray-90
   a, ul a
-    font-size: 12px
-    margin-left: 10px
+    margin-left: 4px
   ul
     margin-left: 20px
 
@@ -431,6 +441,19 @@ form.with-text-editor
       +thick-border-shadow(top)
       padding: 10px
 
-
 .tickLabel
   font-size: 12px
+
+table
+  border-collapse: collapse
+  font-size: 14px
+  th
+    font-weight: bold
+  td, th
+    border: 1px solid #ccc
+    padding: $standard-gap/3
+    vertical-align: top
+    &.center
+      text-align: center
+    &.right
+      text-align: right
