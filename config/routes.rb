@@ -27,6 +27,9 @@ Rails.application.routes.draw do
       end
     end
     resource :performance do
+      member do
+        get :responses
+      end
     end
     resources :pages do
       collection do
