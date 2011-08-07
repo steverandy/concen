@@ -5,7 +5,6 @@ module ControlCenter
     rake_tasks do
       load "control_center/railties/setup.rake"
       load "control_center/railties/page.rake"
-      load "control_center/railties/visit_statistic.rake"
     end
 
     # Add a load path for this specific Engine
