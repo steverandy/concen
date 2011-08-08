@@ -10,7 +10,7 @@ module ControlCenter
     end
 
     def record
-      Visit::Key.where(:expire.lte => Time.now.utc).destroy_all
+      Visit::Key.safely(false).where(:expire.lte => Time.now.utc).delete_all
       if params[:k] && visit_key = Visit::Key.where(:_id => params[:k]).first
         current_time = Time.now.utc
         current_hour = Time.utc(current_time.year, current_time.month, current_time.day, current_time.hour)
@@ -32,7 +32,7 @@ module ControlCenter
           {"$inc" => {:count => 1}, "$set" => {:domain => referral_domain}},
           :upsert => true, :safe => false
         )
-        visit_key.delete
+        visit_key.safely(false).delete
       end
       image_path = "#{Rails.root}/public/control_center/images/record-visit.gif"
       send_file image_path, :type => "image/gif", :disposition => "inline"
