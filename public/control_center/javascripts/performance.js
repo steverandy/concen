@@ -3,10 +3,10 @@ $(function() {
     window.plot = $.plot($("#recent-responses"), [{label: "Total Runtime", data: []}, {label: "View Runtime", data: []},{label: "Database Runtime", data: []}], {
       xaxis: {
         mode: "time",
-        timeformat: "%h %P",
+        timeformat: "%h:%M %P",
         color: "#141F52",
         tickColor: "#DADCE7",
-        // tickSize: [1, "hour"]
+        tickSize: [5, "minute"]
       },
       yaxis: {
         tickDecimals: 0,
@@ -27,8 +27,7 @@ $(function() {
         stack: null,
         shadowSize: 0
       },
-      colors: ["#F3535C", "#E7C400", "#26A12B"]
-      // colors: ["#19c84f"]
+      colors: ["#F3535C", "#E7C400", "#19c84f"]
     });
   };
 
