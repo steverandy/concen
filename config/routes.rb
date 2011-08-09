@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     resource :performance do
       member do
         get :responses
+        get :runtimes
       end
     end
     resources :pages do

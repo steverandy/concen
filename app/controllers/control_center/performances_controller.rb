@@ -24,5 +24,12 @@ module ControlCenter
         format.json { render :json => @stats }
       end
     end
+
+    def runtimes
+      @runtimes_stats = Response.aggregate_average_runtime(:type => params[:type])
+      respond_to do |format|
+        format.html { render :partial => "control_center/performances/runtimes" }
+      end
+    end
   end
 end

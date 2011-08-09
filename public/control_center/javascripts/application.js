@@ -127,7 +127,10 @@ $(document).ready(function() {
           dataType: "json",
           data: data,
           success: function(data, textStatus, xhr) {
-            $(this).sortable("cancel");
+            if (!data.success) {
+              $("ul.pages").nestedSortable("cancel");
+            };
+            // $(this).sortable("cancel");
           }
         });
 		  };

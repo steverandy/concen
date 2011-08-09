@@ -1,6 +1,6 @@
 $(function() {
-  function plotWithOptions() {
-    window.plot = $.plot($("#recent-responses"), [{label: "Total Runtime", data: []}, {label: "View Runtime", data: []},{label: "Database Runtime", data: []}], {
+  function plotWithOptions(data) {
+    window.plot = $.plot($("#recent-responses"), [{label: "Total Runtime", data: data.total_runtime}, {label: "View Runtime", data: data.view_runtime},{label: "MongoDB Runtime", data: data.mongo_runtime}], {
       xaxis: {
         mode: "time",
         timeformat: "%h:%M %P",
@@ -31,7 +31,7 @@ $(function() {
     });
   };
 
-  plotWithOptions();
+  // plotWithOptions({});
 
   function showTooltip(x, y, contents) {
     $("<div id='tooltip'>" + contents + "</div>").css( {
@@ -72,40 +72,37 @@ $(function() {
 
   $("#recent-responses").resize(function() {});
 
-  // $(window).resize(function() {
-  //   updatePanelTextWidth();
-  // });
-  //
-  // function updatePanelTextWidth() {
-  //   $("div.panel ul li p.right").each(function(index) {
-  //    $(this).parents("li").eq(0).find("p:not(.right)").width($(this).parents("li").eq(0).width() - $(this).innerWidth());
-  //    $(this).parents("li").eq(0).find("a").width($(this).parents("li").eq(0).width() - $(this).innerWidth());
-  //  });
-  // }
-  //
+  $(window).resize(function() {
+    updatePanelTextWidth();
+  });
+
+  function updatePanelTextWidth() {
+    $("div.panel ul li p.right").each(function(index) {
+     $(this).parents("li").eq(0).find("p:not(.right)").width($(this).parents("li").eq(0).width() - $(this).innerWidth());
+     $(this).parents("li").eq(0).find("a").width($(this).parents("li").eq(0).width() - $(this).innerWidth());
+   });
+  }
+
   function update() {
     $.getJSON("/performance/responses", {"hour": 1}, function(json, textStatus) {
-      console.log(json.mongo_runtime)
-      window.plot.setData([json.total_runtime, json.view_runtime, json.mongo_runtime]);
-      window.plot.setupGrid();
-      window.plot.draw();
+      plotWithOptions(json);
+      // window.plot.setData([json.total_runtime, json.view_runtime, json.mongo_runtime]);
+      // window.plot.setupGrid();
+      // window.plot.draw();
+      // console.log(window.plot.getOptions())
     });
-    // $.getJSON("/traffic/visits_counts", {"hour": 1}, function(json, textStatus) {
-    //   if (json.length > 0) {
-    //     $("div.panel.visits-1-hour").find("p.big-number").html(json[0][1]);
-    //   } else {
-    //     $("div.panel.visits-1-hour").find("p.big-number").html("0");
-    //   };
-    // });
-    // $.get("/traffic/pages", function(data, textStatus, xhr) {
-    //   $("div.panel.pages").find("ul").replaceWith(data);
-    //   updatePanelTextWidth();
-    // });
-    // $.get("/traffic/referrals", function(data, textStatus, xhr) {
-    //   $("div.panel.referrals").find("ul").replaceWith(data);
-    //   updatePanelTextWidth();
-    // });
-
+    $.get("/performance/runtimes", {"type": "total"}, function(data, textStatus, xhr) {
+      $("div.panel.total-runtime").find("ul").replaceWith(data);
+      updatePanelTextWidth();
+    });
+    $.get("/performance/runtimes", {"type": "view"}, function(data, textStatus, xhr) {
+      $("div.panel.view-runtime").find("ul").replaceWith(data);
+      updatePanelTextWidth();
+    });
+    $.get("/performance/runtimes", {"type": "mongo"}, function(data, textStatus, xhr) {
+      $("div.panel.mongodb-runtime").find("ul").replaceWith(data);
+      updatePanelTextWidth();
+    });
     setTimeout(update, 5000);
   };
 
