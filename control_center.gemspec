@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency("mustache", "~> 0.99.4")
   s.add_dependency("redcarpet", "~> 2.0.0b")
   s.add_dependency("mongoid", "~> 2.0.0")
+  s.add_dependency("mongo-rails-instrumentation", "~> 0.2.4")
   s.add_dependency("bson_ext", "~> 1.3.0")
   s.add_dependency("rack-gridfs", "~> 0.4.1")
   s.add_dependency("chronic", "~> 0.4.3")

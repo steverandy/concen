@@ -1,4 +1,5 @@
 require "rails"
+require "mongo/rails/instrumentation/railtie"
 
 module ControlCenter
   class Engine < Rails::Engine
