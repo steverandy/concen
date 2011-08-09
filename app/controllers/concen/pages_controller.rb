@@ -28,12 +28,17 @@ module Concen
     end
 
     def edit
-      @page = Page.find(params[:id])
+      if current_concen_user.full_control || @page.authors_as_user.include?(current_concen_user)
+        @page = Page.find(params[:id])
+      else
+        flash[:notice] = "Only author can edit page."
+        redirect_to concen_pages_path
+      end
     end
 
     def update
       @page = Page.find(params[:id])
-      if @page.authors_as_user.include?(current_concen_user)
+      if current_concen_user.full_control || @page.authors_as_user.include?(current_concen_user)
         if @page.update_attributes(params[:concen_page])
           redirect_to(edit_concen_page_path(@page), :notice => "Page was successfully created.")
         else
@@ -45,9 +50,14 @@ module Concen
     end
 
     def destroy
-      @page = Page.find(params[:id])
-      @page.destroy
-      redirect_to concen_pages_path
+      if current_concen_user.full_control || @page.authors_as_user.include?(current_concen_user)
+        @page = Page.find(params[:id])
+        @page.destroy
+        redirect_to concen_pages_path
+      else
+        flash[:notice] = "Only author can delete page."
+        redirect_to concen_pages_path
+      end
     end
 
     def sort
@@ -77,7 +87,7 @@ module Concen
           end
           render :json => {:success => true}
         else
-          render :json => {:success => false}
+          render :json => {:success => false, :message => "Only user with full control can sort pages."}
         end
       end
     end
