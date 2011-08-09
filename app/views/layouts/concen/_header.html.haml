@@ -1,0 +1,18 @@
+%header
+  %h1
+    %a{:href => "/"}
+      %span.control-center CONCEN
+      %span.application-name= Concen.application_name
+  %nav
+    %ul.right
+      - if current_concen_user
+        %li= link_to "Status", concen_status_path
+        %li= link_to "Traffic", concen_traffic_path
+        %li= link_to "Performance", concen_performance_path
+        %li= link_to "Pages", concen_pages_path
+        %li= link_to "Users", concen_users_path
+        %li= link_to "Settings", edit_concen_user_path(current_concen_user)
+        %li= link_to "Sign Out", concen_signout_path
+      - else
+        %li= link_to "Sign In", concen_signin_path
+      -# = render "layouts/concen/extra_header_links"

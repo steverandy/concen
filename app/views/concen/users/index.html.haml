@@ -1,0 +1,19 @@
+#content
+  %table.users
+    %thead
+      %tr
+        %th Username
+        %th Full Name
+        %th Email
+        %th Sign Up On
+        %th Pages
+        %th Full Control
+    %tbody
+      - for user in @users
+        %tr
+          %td= user.username
+          %td= user.full_name
+          %td= mail_to user.email, user.email, :encode => "javascript"
+          %td= user.created_at.strftime("%d %B %Y")
+          %td= Concen::Page.where(:authors.in => [user.username, user.full_name, user.email]).count
+          %td.center= check_box_tag "full_control", 1, user.full_control

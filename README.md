@@ -1,4 +1,4 @@
-# Control Center Engine
+# CONCEN
 
 ## Requirements:
 
@@ -11,9 +11,6 @@
 ## Installation
 
 1. Add the following to the Gemfile.
-	gem 'user-agent', :git => 'git://github.com/steverandy/user-agent.git'
-	gem 'geo_ip', :git => 'git://github.com/steverandy/geo_ip.git'
-	gem 'whenever', '0.6.2', :require => false
 	gem 'control_center', :path => './vendor/gems/control_center'
 2. Add initializer file for control_center configurations.
 	ControlCenter.setup do |config|

@@ -1,0 +1,14 @@
+- if root && page.level == 0
+  - children = [page]
+- else
+  - children = Concen::Page.where(:parent_id => page.id).asc(:position)
+%ul{:class => children.first.level == 0 && "pages", :data => {:level => children.first.level}}
+  - for child in children
+    %li{:data => {:id => "page-#{child.id}"}}
+      %p
+        %span.handle
+        = link_to child.title, edit_concen_page_path(child), :class => "title"
+        = link_to "Add", new_concen_page_path(:level => child.level + 1, :parent_id => child.id), :class => "link-button hidden"
+        = link_to "Delete", concen_page_path(child), :method => :delete, :confirm => "Are you sure?", :class => "link-button hidden"
+      - if Concen::Page.where(:parent_id => child.id).count > 0
+        = render :partial => "nested_list", :locals => {:page => child, :root => false}

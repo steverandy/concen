@@ -1,0 +1,15 @@
+- content_for :head_javascripts do
+  = javascript_include_tag "/concen/javascripts/ace/ace.js"
+  = javascript_include_tag "/concen/javascripts/fileuploader.js"
+
+#content
+  %h1 Edit Page
+  .clearfix
+    = render "form"
+    #file-manager
+      .thick-border
+        .border
+          #file-uploader{:data => {"upload-path" => upload_concen_page_grid_files_path(@page)}}
+            %noscript
+              %p Please enable JavaScript to use file uploader.
+          = render "files"

@@ -1,0 +1,5 @@
+#content
+  - if @page
+    = render :partial => "nested_list", :locals => {:page => @page, :root => true}
+  - else
+    = link_to "New Page", new_concen_page_path(:level => 0)

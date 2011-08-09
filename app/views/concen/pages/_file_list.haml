@@ -1,0 +1,7 @@
+%ul
+  - files.each_with_index do |file, index|
+    %li
+      = link_to "#{file.original_filename} (#{number_to_human_size(file.size)})", file.url(root_url), :class => "filename", "data-path" => file.path
+      - if file.text?
+        = link_to "Edit", edit_concen_page_grid_file_path(file.page, file)
+      = link_to "Delete", concen_page_grid_file_path(file.page, file), :class => "delete"
