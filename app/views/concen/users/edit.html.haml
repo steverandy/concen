@@ -1,9 +1,9 @@
 #content
   %h1 Edit User Settings
   .clearfix
-    - if params[:invitation_token] || params[:concen_user][:invitation_token]
+    - if params.try(:[], :invitation_token) || params.try(:[], :concen_user).try(:[], :invitation_token)
       = render "form"
-    - elsif params[:password_reset_token] || params[:concen_user][:invitation_token]
+    - elsif params.try(:[], :password_reset_token) || params.try(:[], :concen_user).try(:[], :password_reset_token)
       = render "password_reset"
     - else
       = render "settings"
