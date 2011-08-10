@@ -1,0 +1,27 @@
+= form_for @user do |f|
+  - if @user.errors.any?
+    #errorExplanation
+      %h3= "#{pluralize(@user.errors.count, "error")} prohibited this parent from being saved:"
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :full_name
+    = f.text_field :full_name
+  .field
+    = f.label :username
+    = f.text_field :username
+  .field
+    = f.label :email
+    = f.text_field :email
+  .field
+    = f.label :password
+    = f.password_field :password
+  .field
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation
+  .actions.flush
+    = f.submit "Save"
+    - if @user.persisted?
+      = link_to "Delete", concen_page_path(@user), :method => :delete
+    = link_to "Cancel", concen_pages_path

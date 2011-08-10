@@ -8,6 +8,19 @@ module Concen
       @users = User.all
     end
 
+    def new
+      @user = User.new
+    end
+
+    def create
+      @user = User.create(params[:concen_user])
+      if @user.save
+        redirect_to(concen_users_path, :notice => "User was successfully created.")
+      else
+        render :new
+      end
+    end
+
     def edit
       @user = current_concen_user
     end
