@@ -11,14 +11,21 @@ Rails.application.routes.draw do
     get "signin" => "sessions#new", :as => "signin"
     get "signup" => "users#new", :as => "signup"
 
-    resources :users
+    resources :users do
+      member do
+        put :toggle_attribute
+      end
+    end
+
     resources :sessions
+
     resource :status do
       member do
         get :server
         get :counts
       end
     end
+
     resource :traffic do
       member do
         get :visits_counts
@@ -26,16 +33,19 @@ Rails.application.routes.draw do
         get :referrals
       end
     end
+
     resource :performance do
       member do
         get :responses
         get :runtimes
       end
     end
+
     resources :pages do
       collection do
         put :sort
       end
+
       resources :grid_files do
         collection do
           post :upload

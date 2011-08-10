@@ -27,5 +27,18 @@ module Concen
         render :edit
       end
     end
+
+    def toggle_attribute
+      respond_to do |format|
+        if current_concen_user.full_control
+          @user = User.find(params[:id])
+          @user.write_attribute(params[:attribute].to_sym, !@user.read_attribute(params[:attribute].to_sym))
+          @user.save
+          format.json { render :json => {:success => true} }
+        else
+          format.json { render :json => {:success => false, :message => "Only user with full control can toggle attribute."} }
+        end
+      end
+    end
   end
 end
