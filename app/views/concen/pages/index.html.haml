@@ -1,3 +1,6 @@
+- content_for :head_javascripts do
+  = javascript_include_tag "/concen/javascripts/page.js"
+
 #content
   - if @page
     = render :partial => "nested_list", :locals => {:page => @page, :root => true}
