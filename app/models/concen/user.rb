@@ -33,6 +33,7 @@ module Concen
     validates_presence_of :password, :on => :create
 
     before_create { generate_token(:auth_token) }
+    before_update :nulify_unused_token
 
     def authenticate(unencrypted_password)
       if BCrypt::Password.new(self.password_digest) == unencrypted_password
@@ -74,6 +75,13 @@ module Concen
 
     def generate_token(field)
       self.write_attribute(field.to_sym, ActiveSupport::SecureRandom.urlsafe_base64)
+    end
+
+    def nulify_unused_token
+      self.password_reset_token = nil
+      self.password_reset_sent_at = nil
+      self.invitation_token = nil
+      self.invitation_sent_at = nil
     end
   end
 end
