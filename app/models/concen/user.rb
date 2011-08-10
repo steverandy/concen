@@ -54,6 +54,7 @@ module Concen
       generate_token(:password_reset_token)
       self.password_reset_sent_at = Time.now
       save
+      Rails.logger.info "--called"
       # Send email here.
     end
 

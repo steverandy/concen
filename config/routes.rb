@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       collection do
         get :new_invite
         post :invite
+        get :new_reset_password
+        post :reset_password
       end
       member do
         put :toggle_attribute

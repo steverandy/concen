@@ -2,7 +2,7 @@ module Concen
   class UsersController < ApplicationController
     layout "concen/application"
 
-    before_filter :authenticate_concen_user, :except => [:edit, :update]
+    before_filter :authenticate_concen_user, :except => [:edit, :update, :new_reset_password, :reset_password]
 
     def index
       @users = User.all
@@ -78,11 +78,21 @@ module Concen
 
     def invite
       if current_concen_user.full_control
-        @user = User.send_invitation(params[:concen_user][:email])
-        redirect_to(concen_users_path, :notice => "Invitation has been sent.")
+        @user = User.send_invitation params[:concen_user][:email]
+        redirect_to concen_users_path, :notice => "Invitation has been sent."
       else
-        redirect_to(concen_users_path, :notice => "Only user with full control can invite.")
+        redirect_to concen_users_path, :notice => "Only user with full control can invite."
       end
+    end
+
+    def new_reset_password
+      @user = User.new
+    end
+
+    def reset_password
+      @user = User.where(:email => params[:concen_user][:email]).first
+      @user.send_password_reset
+      redirect_to concen_signin_path, :notice => "Password reset instruction has been sent."
     end
   end
 end

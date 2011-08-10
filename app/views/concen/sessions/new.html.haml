@@ -7,5 +7,7 @@
     .field
       = label_tag :password
       = password_field_tag :password, params[:password]
+    .field
+      = link_to "Reset Password", new_reset_password_concen_users_path, :class => "link-button"
     .actions
       = submit_tag "Sign In"
