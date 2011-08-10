@@ -1,16 +1,9 @@
 #content
-  = form_for @user do |f|
-    - if @user.errors.any?
-      #errorExplanation
-        %h3= "#{pluralize(@user.errors.count, "error")} prohibited this parent from being saved:"
-        %ul
-          - @user.errors.full_messages.each do |msg|
-            %li= msg
-    .field
-      = f.label :current_password, "Current Password"
-      = f.password_field :current_password
-    .field
-      = f.label :password, "New Password"
-      = f.password_field :password
-    .actions
-      = f.submit "Update"
+  %h1 Edit User Settings
+  .clearfix
+    - if params[:invitation_token] || params[:concen_user][:invitation_token]
+      = render "form"
+    - elsif params[:password_reset_token] || params[:concen_user][:invitation_token]
+      = render "password_reset"
+    - else
+      = render "settings"

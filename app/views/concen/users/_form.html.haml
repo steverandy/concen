@@ -5,6 +5,8 @@
       %ul
         - @user.errors.full_messages.each do |msg|
           %li= msg
+  - if @user.invitation_token
+    = f.hidden_field :invitation_token
   .field
     = f.label :full_name
     = f.text_field :full_name

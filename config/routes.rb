@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     get "signup" => "users#new", :as => "signup"
 
     resources :users do
+      collection do
+        get :new_invite
+        post :invite
+      end
       member do
         put :toggle_attribute
       end

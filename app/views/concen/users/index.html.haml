@@ -2,6 +2,10 @@
   = javascript_include_tag "/concen/javascripts/user.js"
 
 #content
+  %h1
+    Users
+    = link_to "New User", new_concen_user_path, :class => "link-button"
+    = link_to "Invite New User", new_invite_concen_users_path, :class => "link-button"
   %table.users
     %thead
       %tr
@@ -20,4 +24,4 @@
           %td= user.created_at.strftime("%d %B %Y")
           %td= Concen::Page.where(:authors.in => [user.username, user.full_name, user.email]).count
           %td.center
-            = check_box_tag "full_control", 1, user.full_control, "data-path" => toggle_attribute_concen_user_path(user), :disabled => user == current_concen_user
+            = check_box_tag "full_control", 1, user.full_control, "data-path" => toggle_attribute_concen_user_path(user), :disabled => user == current_concen_user || !current_concen_user.full_control
