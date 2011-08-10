@@ -28,7 +28,7 @@ module Concen
     validates_confirmation_of :password
     validates_presence_of :password, :on => :create
 
-    before_create :generate_auth_token
+    before_create { generate_auth_token(:auth_token) }
 
     def authenticate(unencrypted_password)
       if BCrypt::Password.new(self.password_digest) == unencrypted_password
@@ -45,8 +45,8 @@ module Concen
       end
     end
 
-    def generate_auth_token
-      self.auth_token = ActiveSupport::SecureRandom.urlsafe_base64
+    def generate_token(field)
+      self.write_attribute(field.to_sym, ActiveSupport::SecureRandom.urlsafe_base64)
     end
   end
 end
