@@ -2,6 +2,7 @@
   = javascript_include_tag "/concen/javascripts/page.js"
 
 #content
+  %h1 Pages
   - if @page
     = render :partial => "nested_list", :locals => {:page => @page, :root => true}
   - else
