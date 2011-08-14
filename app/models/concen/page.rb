@@ -51,6 +51,9 @@ module Concen
     scope :published, lambda {
       where(:publish_time.lte => Time.now, :status.in => [nil, /published/i])
     }
+    scope :unpublished, lambda {
+      any_of({:publish_time => nil}, {:publish_time.gt => Time.now})
+    }
 
     index :parent_id, :background => true
     index :publish_time, :background => true
