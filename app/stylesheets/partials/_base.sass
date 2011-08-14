@@ -47,9 +47,10 @@ a.link-button
   background: $color-4
   +background(linear-gradient(white, $color-3))
   +text-shadow(rgba(white, 1) 0 1px 0)
-
-a.link-button:hover
-  text-decoration: none
+  &:hover
+    text-decoration: none
+  &:active
+    +background(linear-gradient($color-3, white))
 
 img.visit-recorder
   position: absolute

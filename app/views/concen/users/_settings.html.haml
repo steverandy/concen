@@ -7,9 +7,11 @@
           %li= msg
   .field
     = f.label :current_password, "Current Password"
-    = f.password_field :current_password
+    .thick-border
+      .border= f.password_field :current_password
   .field
     = f.label :password, "New Password"
-    = f.password_field :password
+    .thick-border
+      .border= f.password_field :password
   .actions
     = f.submit "Update"

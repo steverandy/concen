@@ -52,7 +52,7 @@ $(document).ready(function() {
       window.editor.getSession().setValue($("textarea.text-editor-content").eq(0).val());
       window.editor.getSession().setTabSize(2);
       window.editor.getSession().setUseSoftTabs(true);
-      window.editor.getSession().setUseWrapMode(false);
+      window.editor.getSession().setUseWrapMode(true);
       window.editor.renderer.setShowGutter(false);
 
       $("form.with-text-editor").submit(function() {

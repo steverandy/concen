@@ -7,6 +7,7 @@
 @import "partials/base"
 @import "partials/form"
 @import "partials/fileuploader"
+@import "partials/flot"
 
 @media print
   +blueprint-print
@@ -24,20 +25,23 @@ header
   border-bottom: 1px solid $color-2
   margin: 0 auto
   position: relative
+  +clearfix
   h1
     height: 25px
     line-height: 25px
     padding-bottom: 15px
     font-size: 24px
+    float: left
     .wf-active &
       font-weight: 600
     a
-      display: block
       border-bottom: 0
       +clearfix
       text-decoration: none
     span
       float: left
+    span.engine-name
+      letter-spacing: 5px
     span.application-name
       margin-left: 14px
       font-weight: 400
@@ -46,19 +50,17 @@ header
     img
       display: block
   nav
+    position: absolute
+    right: 0
+    top: 0
     ul
       +horizontal-list(10px)
       font-size: 13px
       overflow: visible
-      position: absolute
-      top: 4px
-      li a
-        line-height: 17px
-        +hover-link
-    ul.left
-      left: 0
-    ul.right
-      right: 0
+      li
+        line-height: 25px
+        a
+          +hover-link
   form
     position: absolute
     top: 0
@@ -83,12 +85,14 @@ header
 // Content Section
 
 #content
-  margin: 30px auto 0 auto
+  margin: $standard-gap auto 0 auto
   text-align: left
   h1
-    margin-bottom: 30px
+    margin-bottom: $standard-gap
     .wf-active &
       font-weight: 600
+    span
+      margin-right: $standard-gap/2
   div.parent-header
     height: 24px
     width: 100%
@@ -414,11 +418,11 @@ a.grid
     padding: 20px
   h3
     margin-top: 20px
+    span
+      vertical-align: middle
     a
-      font-size: 12px
       margin-right: 4px
-      color: $color-2
-      font-weight: normal
+      vertical-align: middle
   ul
     list-style-type: none
     li
@@ -438,7 +442,6 @@ form.with-text-editor
     width: 100%
   .thick-border
     .border
-      +thick-border-shadow(top)
       padding: 10px
 
 .tickLabel
@@ -447,13 +450,18 @@ form.with-text-editor
 table
   border-collapse: collapse
   font-size: 14px
+  width: 100%
   th
     font-weight: bold
+    background: $color-4
   td, th
-    border: 1px solid #ccc
+    border-bottom: 1px solid $color-5
     padding: $standard-gap/3
     vertical-align: top
     &.center
       text-align: center
     &.right
       text-align: right
+  tr:last-child
+    td
+      border-bottom: 0

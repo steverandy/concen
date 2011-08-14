@@ -1,15 +1,15 @@
 .files
   .stylesheets
     %h3
-      Stylesheets
-      = link_to "New", concen_page_grid_files_path(@page, :file_type => "css"), :class => "new-file"
+      %span Stylesheets
+      = link_to "New", concen_page_grid_files_path(@page, :file_type => "css"), :class => "link-button new-file"
     - if @page.stylesheets.any?
       = render :partial => "concen/pages/file_list", :locals => {:files => @page.stylesheets}
 
   .javascripts
     %h3
-      JavaScripts
-      = link_to "New", concen_page_grid_files_path(@page, :file_type => "js"), :class => "new-file"
+      %span JavaScripts
+      = link_to "New", concen_page_grid_files_path(@page, :file_type => "js"), :class => "link-button new-file"
     - if @page.javascripts.any?
       = render :partial => "concen/pages/file_list", :locals => {:files => @page.javascripts}
 

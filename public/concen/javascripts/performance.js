@@ -21,7 +21,7 @@ $(function() {
         color: "#fe3145",
         markings: [ { xaxis: { from: 0, to: 2 }, yaxis: { from: 10, to: 10 }, color: "#bb0000" } ]
       },
-      legend: {show: true, position: "ne"},
+      legend: {show: true, position: "nw", labelBoxBorderColor: false},
       series: {
         lines: {show: true, fill: false, steps: false, lineWidth: 2, fillColor: {colors: [{opacity: 0.1}, {opacity: 0.1}]}},
         stack: null,

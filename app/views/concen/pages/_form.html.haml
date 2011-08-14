@@ -5,9 +5,10 @@
       %ul
         - @page.errors.full_messages.each do |msg|
           %li= msg
-  .field.thick-border
-    .border
-      #text-editor
+  .field
+    .thick-border.text-editor
+      .border
+        #text-editor
   = f.text_area :raw_text, :class => "text-editor-content hidden"
   = f.hidden_field :parent_id
   = f.hidden_field :level
