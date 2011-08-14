@@ -17,13 +17,15 @@
             %th Sign Up On
             %th Pages
             %th Full Control
+            %th Actions
         %tbody
           - for user in @users
             %tr
               %td= user.username
               %td= user.full_name
-              %td= mail_to user.email, user.email, :encode => "javascript"
+              %td= user.email
               %td= user.created_at.strftime("%d %B %Y")
               %td= Concen::Page.where(:authors.in => [user.username, user.full_name, user.email]).count
+              %td= check_box_tag "full_control", 1, user.full_control, "data-path" => toggle_attribute_concen_user_path(user), :disabled => user == current_concen_user || !current_concen_user.full_control
               %td
-                = check_box_tag "full_control", 1, user.full_control, "data-path" => toggle_attribute_concen_user_path(user), :disabled => user == current_concen_user || !current_concen_user.full_control
+                = link_to "Delete", concen_user_path(user), :method => :delete, :confirm => "Are you sure?"

@@ -55,6 +55,17 @@ module Concen
       end
     end
 
+    def destroy
+      if current_concen_user.full_control
+        @user = User.find(params[:id])
+        @user.destroy
+        redirect_to concen_users_path
+      else
+        flash[:notice] = "Only user with full control can delete a user."
+        redirect_to concen_users_path
+      end
+    end
+
     def toggle_attribute
       respond_to do |format|
         if current_concen_user.full_control

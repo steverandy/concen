@@ -27,7 +27,7 @@
     = f.label :password_confirmation
     .thick-border
       .border= f.password_field :password_confirmation
-  .actions.flush
+  .actions
     = f.submit "Save"
     - if @user.persisted?
       = link_to "Delete", concen_page_path(@user), :method => :delete
