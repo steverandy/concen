@@ -9,19 +9,24 @@
     = f.hidden_field :invitation_token
   .field
     = f.label :full_name
-    = f.text_field :full_name
+    .thick-border
+      .border= f.text_field :full_name
   .field
     = f.label :username
-    = f.text_field :username
+    .thick-border
+      .border= f.text_field :username
   .field
     = f.label :email
-    = f.text_field :email
+    .thick-border
+      .border= f.text_field :email
   .field
     = f.label :password
-    = f.password_field :password
+    .thick-border
+      .border= f.password_field :password
   .field
     = f.label :password_confirmation
-    = f.password_field :password_confirmation
+    .thick-border
+      .border= f.password_field :password_confirmation
   .actions.flush
     = f.submit "Save"
     - if @user.persisted?

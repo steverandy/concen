@@ -650,29 +650,25 @@ header h1 span {
   float: left;
 }
 /* line 43, ../../../app/stylesheets/application.sass */
-header h1 span.engine-name {
-  letter-spacing: 5px;
-}
-/* line 45, ../../../app/stylesheets/application.sass */
 header h1 span.application-name {
   margin-left: 14px;
   font-weight: 400;
 }
-/* line 48, ../../../app/stylesheets/application.sass */
+/* line 46, ../../../app/stylesheets/application.sass */
 .wf-active header h1 span.application-name {
   font-weight: 300;
 }
-/* line 50, ../../../app/stylesheets/application.sass */
+/* line 48, ../../../app/stylesheets/application.sass */
 header h1 img {
   display: block;
 }
-/* line 52, ../../../app/stylesheets/application.sass */
+/* line 50, ../../../app/stylesheets/application.sass */
 header nav {
   position: absolute;
   right: 0;
   top: 0;
 }
-/* line 56, ../../../app/stylesheets/application.sass */
+/* line 54, ../../../app/stylesheets/application.sass */
 header nav ul {
   margin: 0;
   padding: 0;
@@ -705,11 +701,11 @@ header nav ul li:last-child {
 header nav ul li.last {
   padding-right: 0;
 }
-/* line 60, ../../../app/stylesheets/application.sass */
+/* line 58, ../../../app/stylesheets/application.sass */
 header nav ul li {
   line-height: 25px;
 }
-/* line 62, ../../../app/stylesheets/application.sass */
+/* line 60, ../../../app/stylesheets/application.sass */
 header nav ul li a {
   text-decoration: none;
 }
@@ -717,13 +713,13 @@ header nav ul li a {
 header nav ul li a:hover {
   text-decoration: underline;
 }
-/* line 64, ../../../app/stylesheets/application.sass */
+/* line 62, ../../../app/stylesheets/application.sass */
 header form {
   position: absolute;
   top: 0;
   right: 0;
 }
-/* line 68, ../../../app/stylesheets/application.sass */
+/* line 66, ../../../app/stylesheets/application.sass */
 header input#keyword {
   font-size: 12px;
   line-height: 15px;
@@ -747,48 +743,48 @@ header input#keyword {
   padding: 4px 12px 4px 24px;
   color: #999999;
 }
-/* line 82, ../../../app/stylesheets/application.sass */
+/* line 80, ../../../app/stylesheets/application.sass */
 header input#keyword:focus {
   color: #333333;
 }
 
-/* line 87, ../../../app/stylesheets/application.sass */
+/* line 85, ../../../app/stylesheets/application.sass */
 #content {
   margin: 30px auto 0 auto;
   text-align: left;
 }
-/* line 90, ../../../app/stylesheets/application.sass */
+/* line 88, ../../../app/stylesheets/application.sass */
 #content h1 {
   margin-bottom: 30px;
 }
-/* line 92, ../../../app/stylesheets/application.sass */
+/* line 90, ../../../app/stylesheets/application.sass */
 .wf-active #content h1 {
   font-weight: 600;
 }
-/* line 94, ../../../app/stylesheets/application.sass */
+/* line 92, ../../../app/stylesheets/application.sass */
 #content h1 span {
   margin-right: 15px;
 }
-/* line 96, ../../../app/stylesheets/application.sass */
+/* line 94, ../../../app/stylesheets/application.sass */
 #content div.parent-header {
   height: 24px;
   width: 100%;
   position: relative;
 }
-/* line 100, ../../../app/stylesheets/application.sass */
+/* line 98, ../../../app/stylesheets/application.sass */
 #content div.parent-header h2 {
   line-height: 24px;
   display: inline;
   margin-bottom: 0;
 }
-/* line 104, ../../../app/stylesheets/application.sass */
+/* line 102, ../../../app/stylesheets/application.sass */
 #content div.parent-header p.description {
   font-size: 12px;
   display: inline;
   margin-left: 6px;
   color: #999999;
 }
-/* line 109, ../../../app/stylesheets/application.sass */
+/* line 107, ../../../app/stylesheets/application.sass */
 #content div.parent-header p.counter {
   font-style: italic;
   font-size: 18px;
@@ -796,12 +792,12 @@ header input#keyword:focus {
   float: right;
 }
 
-/* line 115, ../../../app/stylesheets/application.sass */
+/* line 113, ../../../app/stylesheets/application.sass */
 ul.pages {
   margin-left: 0;
   font-size: 14px;
 }
-/* line 118, ../../../app/stylesheets/application.sass */
+/* line 116, ../../../app/stylesheets/application.sass */
 ul.pages span.handle {
   background: url("/concen/images/icon-handle.png");
   width: 12px;
@@ -816,44 +812,44 @@ ul.pages span.handle {
 ul.pages span.handle {
   *display: inline;
 }
-/* line 123, ../../../app/stylesheets/application.sass */
+/* line 121, ../../../app/stylesheets/application.sass */
 ul.pages p, ul.pages ul p {
   margin-bottom: 10px;
   vertical-align: middle;
 }
-/* line 126, ../../../app/stylesheets/application.sass */
+/* line 124, ../../../app/stylesheets/application.sass */
 ul.pages p span, ul.pages p a, ul.pages ul p span, ul.pages ul p a {
   vertical-align: middle;
 }
-/* line 131, ../../../app/stylesheets/application.sass */
+/* line 129, ../../../app/stylesheets/application.sass */
 ul.pages a, ul.pages ul a {
   margin-left: 4px;
 }
-/* line 133, ../../../app/stylesheets/application.sass */
+/* line 131, ../../../app/stylesheets/application.sass */
 ul.pages ul {
   margin-left: 20px;
 }
 
-/* line 136, ../../../app/stylesheets/application.sass */
+/* line 134, ../../../app/stylesheets/application.sass */
 section#article {
   width: 774px;
 }
 
-/* line 139, ../../../app/stylesheets/application.sass */
+/* line 137, ../../../app/stylesheets/application.sass */
 .boxshadow ul.search-result {
   padding-bottom: 0;
 }
-/* line 141, ../../../app/stylesheets/application.sass */
+/* line 139, ../../../app/stylesheets/application.sass */
 .boxshadow ul.search-result li.child {
   margin-top: 0;
   margin-bottom: 30px;
 }
-/* line 144, ../../../app/stylesheets/application.sass */
+/* line 142, ../../../app/stylesheets/application.sass */
 .boxshadow ul.search-result div.text {
   margin-top: 0;
 }
 
-/* line 149, ../../../app/stylesheets/application.sass */
+/* line 147, ../../../app/stylesheets/application.sass */
 footer {
   color: #141f52;
   margin: 30px auto 0 auto;
@@ -862,14 +858,14 @@ footer {
   font-size: 12px;
   border-top: 1px solid #858bad;
 }
-/* line 156, ../../../app/stylesheets/application.sass */
+/* line 154, ../../../app/stylesheets/application.sass */
 footer p {
   text-align: center;
   margin: 15px 0 0 0;
   font-size: 12px;
 }
 
-/* line 163, ../../../app/stylesheets/application.sass */
+/* line 161, ../../../app/stylesheets/application.sass */
 a.prev {
   background: url('/../../public/concen/images/button-prev.png?1292674399');
   background-repeat: no-repeat;
@@ -879,7 +875,7 @@ a.prev {
   display: block;
 }
 
-/* line 168, ../../../app/stylesheets/application.sass */
+/* line 166, ../../../app/stylesheets/application.sass */
 a.prev.disabled {
   background: url('/../../public/concen/images/button-prev-disabled.png?1292674399');
   background-repeat: no-repeat;
@@ -887,7 +883,7 @@ a.prev.disabled {
   width: 26px;
 }
 
-/* line 171, ../../../app/stylesheets/application.sass */
+/* line 169, ../../../app/stylesheets/application.sass */
 a.next {
   background: url('/../../public/concen/images/button-next.png?1292674399');
   background-repeat: no-repeat;
@@ -897,7 +893,7 @@ a.next {
   display: block;
 }
 
-/* line 176, ../../../app/stylesheets/application.sass */
+/* line 174, ../../../app/stylesheets/application.sass */
 a.next.disabled {
   background: url('/../../public/concen/images/button-next-disabled.png?1292674399');
   background-repeat: no-repeat;
@@ -905,7 +901,7 @@ a.next.disabled {
   width: 26px;
 }
 
-/* line 179, ../../../app/stylesheets/application.sass */
+/* line 177, ../../../app/stylesheets/application.sass */
 a.grid {
   background: url('/../../public/concen/images/button-grid.png?1292674399');
   background-repeat: no-repeat;
@@ -915,7 +911,7 @@ a.grid {
   display: block;
 }
 
-/* line 184, ../../../app/stylesheets/application.sass */
+/* line 182, ../../../app/stylesheets/application.sass */
 #file-list {
   width: 260px;
   float: right;
@@ -924,7 +920,7 @@ a.grid {
   text-shadow: white 0px 1px 0px;
   position: relative;
 }
-/* line 192, ../../../app/stylesheets/application.sass */
+/* line 190, ../../../app/stylesheets/application.sass */
 #file-list h3 {
   line-height: 1;
   font-size: 13px;
@@ -934,7 +930,7 @@ a.grid {
   padding: 6px 10px;
   text-shadow: white 0px 1px 0px;
 }
-/* line 200, ../../../app/stylesheets/application.sass */
+/* line 198, ../../../app/stylesheets/application.sass */
 #file-list a.organize {
   font-size: 12px;
   font-weight: 600;
@@ -945,16 +941,16 @@ a.grid {
   right: 10px;
   color: #999999;
 }
-/* line 209, ../../../app/stylesheets/application.sass */
+/* line 207, ../../../app/stylesheets/application.sass */
 #file-list a.sort-path {
   display: none;
 }
-/* line 211, ../../../app/stylesheets/application.sass */
+/* line 209, ../../../app/stylesheets/application.sass */
 #file-list ul {
   list-style-position: inside;
   margin-bottom: 20px;
 }
-/* line 214, ../../../app/stylesheets/application.sass */
+/* line 212, ../../../app/stylesheets/application.sass */
 #file-list ul li {
   font-size: 12px;
   line-height: 1;
@@ -965,18 +961,18 @@ a.grid {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 222, ../../../app/stylesheets/application.sass */
+/* line 220, ../../../app/stylesheets/application.sass */
 #file-list ul li a {
   font-size: 12px;
 }
-/* line 224, ../../../app/stylesheets/application.sass */
+/* line 222, ../../../app/stylesheets/application.sass */
 #file-list ul li .right {
   float: right;
   height: inherit;
   overflow: hidden;
   *zoom: 1;
 }
-/* line 228, ../../../app/stylesheets/application.sass */
+/* line 226, ../../../app/stylesheets/application.sass */
 #file-list ul li .right div, #file-list ul li .right a {
   width: 12px;
   height: 12px;
@@ -985,35 +981,35 @@ a.grid {
   text-indent: -9999px;
   float: left;
 }
-/* line 235, ../../../app/stylesheets/application.sass */
+/* line 233, ../../../app/stylesheets/application.sass */
 #file-list ul li .right .check {
   background: url('/../../public/concen/images/glyph-small-check.png?1292674399');
   background-repeat: no-repeat;
   height: 12px;
   width: 12px;
 }
-/* line 237, ../../../app/stylesheets/application.sass */
+/* line 235, ../../../app/stylesheets/application.sass */
 #file-list ul li .right .activate {
   background: url('/../../public/concen/images/glyph-small-check-alt.png?1292674399');
   background-repeat: no-repeat;
   height: 12px;
   width: 12px;
 }
-/* line 239, ../../../app/stylesheets/application.sass */
+/* line 237, ../../../app/stylesheets/application.sass */
 #file-list ul li .right .activate:hover {
   background: url('/../../public/concen/images/glyph-small-check.png?1292674399');
   background-repeat: no-repeat;
   height: 12px;
   width: 12px;
 }
-/* line 241, ../../../app/stylesheets/application.sass */
+/* line 239, ../../../app/stylesheets/application.sass */
 #file-list ul li .right .handle {
   background: url('/../../public/concen/images/glyph-small-handle.png?1292674399');
   background-repeat: no-repeat;
   height: 12px;
   width: 12px;
 }
-/* line 243, ../../../app/stylesheets/application.sass */
+/* line 241, ../../../app/stylesheets/application.sass */
 #file-list ul li .right .delete {
   background: url('/../../public/concen/images/glyph-small-delete.png?1292674399');
   background-repeat: no-repeat;
@@ -1021,36 +1017,36 @@ a.grid {
   width: 12px;
 }
 
-/* line 246, ../../../app/stylesheets/application.sass */
+/* line 244, ../../../app/stylesheets/application.sass */
 .panels {
   margin-bottom: 30px;
 }
-/* line 248, ../../../app/stylesheets/application.sass */
+/* line 246, ../../../app/stylesheets/application.sass */
 .panels .panel {
   float: left;
   width: 31.25%;
   margin-right: 3.125%;
   font-size: 12px;
 }
-/* line 254, ../../../app/stylesheets/application.sass */
+/* line 252, ../../../app/stylesheets/application.sass */
 .panels .panel .graph {
   padding: 15px;
 }
-/* line 256, ../../../app/stylesheets/application.sass */
+/* line 254, ../../../app/stylesheets/application.sass */
 .panels .panel h3 {
   line-height: 1;
   border-bottom: 1px solid #858bad;
   padding: 10px;
   text-shadow: white 0px 1px 0px;
 }
-/* line 261, ../../../app/stylesheets/application.sass */
+/* line 259, ../../../app/stylesheets/application.sass */
 .panels .panel h3 span {
   font-size: 12px;
   margin-left: 2px;
   color: #999999;
   font-weight: 500;
 }
-/* line 267, ../../../app/stylesheets/application.sass */
+/* line 265, ../../../app/stylesheets/application.sass */
 .panels .panel h3 span.link a {
   font-size: 10px;
   line-height: 10px;
@@ -1080,7 +1076,7 @@ a.grid {
   background-image: -ms-linear-gradient(top, #f2f2f2, #d9d9d9);
   background-image: linear-gradient(top, #f2f2f2, #d9d9d9);
 }
-/* line 282, ../../../app/stylesheets/application.sass */
+/* line 280, ../../../app/stylesheets/application.sass */
 .panels .panel h3 span.link a.active, .panels .panel h3 span.link a:active {
   color: #666666;
   border-color: gray;
@@ -1092,11 +1088,11 @@ a.grid {
   background-image: -ms-linear-gradient(top, #d9d9d9, #f2f2f2);
   background-image: linear-gradient(top, #d9d9d9, #f2f2f2);
 }
-/* line 287, ../../../app/stylesheets/application.sass */
+/* line 285, ../../../app/stylesheets/application.sass */
 .panels .panel h3 span.link a:hover {
   text-decoration: none;
 }
-/* line 289, ../../../app/stylesheets/application.sass */
+/* line 287, ../../../app/stylesheets/application.sass */
 .panels .panel h3 span.timezone {
   font-size: 10px;
   line-height: 10px;
@@ -1119,21 +1115,21 @@ a.grid {
   text-align: center;
   color: #999999;
 }
-/* line 302, ../../../app/stylesheets/application.sass */
+/* line 300, ../../../app/stylesheets/application.sass */
 .panels .panel p.big-number {
   font-size: 72px;
   text-align: center;
   height: 168px;
   line-height: 168px;
 }
-/* line 307, ../../../app/stylesheets/application.sass */
+/* line 305, ../../../app/stylesheets/application.sass */
 .panels .panel div.big-text {
   margin-top: 20px;
   width: 300px;
   float: left;
   margin-right: 30px;
 }
-/* line 312, ../../../app/stylesheets/application.sass */
+/* line 310, ../../../app/stylesheets/application.sass */
 .panels .panel div.big-text p {
   font-weight: 600;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -1141,21 +1137,21 @@ a.grid {
   line-height: 1;
   padding: 0 8px;
 }
-/* line 318, ../../../app/stylesheets/application.sass */
+/* line 316, ../../../app/stylesheets/application.sass */
 .panels .panel div.big-text p span.primary {
   font-size: 32px;
 }
-/* line 320, ../../../app/stylesheets/application.sass */
+/* line 318, ../../../app/stylesheets/application.sass */
 .panels .panel div.big-text p span.slash {
   font-size: 32px;
   font-weight: 200;
   margin: 0 10px;
 }
-/* line 324, ../../../app/stylesheets/application.sass */
+/* line 322, ../../../app/stylesheets/application.sass */
 .panels .panel div.big-text p span.secondary {
   font-size: 32px;
 }
-/* line 326, ../../../app/stylesheets/application.sass */
+/* line 324, ../../../app/stylesheets/application.sass */
 .panels .panel div.big-text p.label {
   font-size: 12px;
   font-weight: 400;
@@ -1163,19 +1159,19 @@ a.grid {
   color: #333333;
   margin-top: 8px;
 }
-/* line 332, ../../../app/stylesheets/application.sass */
+/* line 330, ../../../app/stylesheets/application.sass */
 .panels .panel div.big-text p.label.last {
   margin-bottom: 0;
 }
-/* line 334, ../../../app/stylesheets/application.sass */
+/* line 332, ../../../app/stylesheets/application.sass */
 .panels .panel div.big-text.edge {
   margin-right: 0;
 }
-/* line 336, ../../../app/stylesheets/application.sass */
+/* line 334, ../../../app/stylesheets/application.sass */
 .panels .panel ul {
   width: 100%;
 }
-/* line 338, ../../../app/stylesheets/application.sass */
+/* line 336, ../../../app/stylesheets/application.sass */
 .panels .panel ul li {
   padding: 6px 10px;
   border-bottom: 1px solid #dadce7;
@@ -1183,7 +1179,7 @@ a.grid {
   list-style: none;
   overflow: hidden;
 }
-/* line 344, ../../../app/stylesheets/application.sass */
+/* line 342, ../../../app/stylesheets/application.sass */
 .panels .panel ul li a, .panels .panel ul li p {
   font-size: 12px;
   white-space: nowrap;
@@ -1194,7 +1190,7 @@ a.grid {
   display: block;
   width: 100%;
 }
-/* line 349, ../../../app/stylesheets/application.sass */
+/* line 347, ../../../app/stylesheets/application.sass */
 .panels .panel ul li p.right {
   position: absolute;
   top: 6px;
@@ -1203,22 +1199,22 @@ a.grid {
   background: white;
   width: auto;
 }
-/* line 357, ../../../app/stylesheets/application.sass */
+/* line 355, ../../../app/stylesheets/application.sass */
 .panels .panel.wide {
   width: auto;
   margin-right: 0;
   float: none;
 }
-/* line 361, ../../../app/stylesheets/application.sass */
+/* line 359, ../../../app/stylesheets/application.sass */
 .panels .edge {
   margin-right: 0px;
 }
-/* line 363, ../../../app/stylesheets/application.sass */
+/* line 361, ../../../app/stylesheets/application.sass */
 .panels ul.historical-visits {
   list-style-type: none;
   border: none;
 }
-/* line 366, ../../../app/stylesheets/application.sass */
+/* line 364, ../../../app/stylesheets/application.sass */
 .panels ul.historical-visits li {
   float: right;
   width: 40px;
@@ -1227,29 +1223,29 @@ a.grid {
   height: 142px;
   border: none;
 }
-/* line 373, ../../../app/stylesheets/application.sass */
+/* line 371, ../../../app/stylesheets/application.sass */
 .panels ul.historical-visits li div.count {
   height: 120px;
   position: relative;
 }
-/* line 376, ../../../app/stylesheets/application.sass */
+/* line 374, ../../../app/stylesheets/application.sass */
 .panels ul.historical-visits li div.total, .panels ul.historical-visits li div.unique {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
 }
-/* line 381, ../../../app/stylesheets/application.sass */
+/* line 379, ../../../app/stylesheets/application.sass */
 .panels ul.historical-visits li div.total {
   background: #43d166;
   z-index: 10;
 }
-/* line 384, ../../../app/stylesheets/application.sass */
+/* line 382, ../../../app/stylesheets/application.sass */
 .panels ul.historical-visits li div.unique {
   background: #9aeeb0;
   z-index: 11;
 }
-/* line 387, ../../../app/stylesheets/application.sass */
+/* line 385, ../../../app/stylesheets/application.sass */
 .panels ul.historical-visits li p {
   margin-top: 8px;
   height: 14px;
@@ -1258,14 +1254,14 @@ a.grid {
   text-align: center;
 }
 
-/* line 396, ../../../app/stylesheets/application.sass */
+/* line 394, ../../../app/stylesheets/application.sass */
 .qtip-content {
   font-size: 13px;
   color: #333333;
   background: white;
 }
 
-/* line 403, ../../../app/stylesheets/application.sass */
+/* line 401, ../../../app/stylesheets/application.sass */
 .qtip-wrapper {
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
@@ -1273,48 +1269,48 @@ a.grid {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
 }
 
-/* line 408, ../../../app/stylesheets/application.sass */
+/* line 406, ../../../app/stylesheets/application.sass */
 #text-editor {
   min-height: 400px;
   position: relative;
 }
 
-/* line 412, ../../../app/stylesheets/application.sass */
+/* line 410, ../../../app/stylesheets/application.sass */
 #file-manager {
   float: right;
   width: 25%;
 }
-/* line 415, ../../../app/stylesheets/application.sass */
+/* line 413, ../../../app/stylesheets/application.sass */
 #file-manager div.thick-border {
   margin-left: 30px;
 }
-/* line 417, ../../../app/stylesheets/application.sass */
+/* line 415, ../../../app/stylesheets/application.sass */
 #file-manager div.border {
   padding: 20px;
 }
-/* line 419, ../../../app/stylesheets/application.sass */
+/* line 417, ../../../app/stylesheets/application.sass */
 #file-manager h3 {
   margin-top: 20px;
 }
-/* line 421, ../../../app/stylesheets/application.sass */
+/* line 419, ../../../app/stylesheets/application.sass */
 #file-manager h3 span {
   vertical-align: middle;
 }
-/* line 423, ../../../app/stylesheets/application.sass */
+/* line 421, ../../../app/stylesheets/application.sass */
 #file-manager h3 a {
   margin-right: 4px;
   vertical-align: middle;
 }
-/* line 426, ../../../app/stylesheets/application.sass */
+/* line 424, ../../../app/stylesheets/application.sass */
 #file-manager ul {
   list-style-type: none;
 }
-/* line 428, ../../../app/stylesheets/application.sass */
+/* line 426, ../../../app/stylesheets/application.sass */
 #file-manager ul li {
   font-size: 12px;
   margin-top: 10px;
 }
-/* line 431, ../../../app/stylesheets/application.sass */
+/* line 429, ../../../app/stylesheets/application.sass */
 #file-manager ul li a {
   white-space: pre;
   white-space: pre-wrap;
@@ -1327,56 +1323,56 @@ a.grid {
   color: #858bad;
   margin-right: 4px;
 }
-/* line 435, ../../../app/stylesheets/application.sass */
+/* line 433, ../../../app/stylesheets/application.sass */
 #file-manager ul li a.filename {
   color: #141f52;
 }
 
-/* line 438, ../../../app/stylesheets/application.sass */
+/* line 436, ../../../app/stylesheets/application.sass */
 form.with-text-editor {
   float: left;
   width: 75%;
 }
-/* line 441, ../../../app/stylesheets/application.sass */
+/* line 439, ../../../app/stylesheets/application.sass */
 form.with-text-editor.wide {
   width: 100%;
 }
-/* line 444, ../../../app/stylesheets/application.sass */
+/* line 442, ../../../app/stylesheets/application.sass */
 form.with-text-editor .thick-border .border {
   padding: 10px;
 }
 
-/* line 447, ../../../app/stylesheets/application.sass */
+/* line 445, ../../../app/stylesheets/application.sass */
 .tickLabel {
   font-size: 12px;
 }
 
-/* line 450, ../../../app/stylesheets/application.sass */
+/* line 448, ../../../app/stylesheets/application.sass */
 table {
   border-collapse: collapse;
   font-size: 14px;
   width: 100%;
 }
-/* line 454, ../../../app/stylesheets/application.sass */
+/* line 452, ../../../app/stylesheets/application.sass */
 table th {
   font-weight: bold;
   background: #f3f3f7;
 }
-/* line 457, ../../../app/stylesheets/application.sass */
+/* line 455, ../../../app/stylesheets/application.sass */
 table td, table th {
   border-bottom: 1px solid #dadce7;
   padding: 10px;
   vertical-align: top;
 }
-/* line 461, ../../../app/stylesheets/application.sass */
+/* line 459, ../../../app/stylesheets/application.sass */
 table td.center, table th.center {
   text-align: center;
 }
-/* line 463, ../../../app/stylesheets/application.sass */
+/* line 461, ../../../app/stylesheets/application.sass */
 table td.right, table th.right {
   text-align: right;
 }
-/* line 466, ../../../app/stylesheets/application.sass */
+/* line 464, ../../../app/stylesheets/application.sass */
 table tr:last-child td {
   border-bottom: 0;
 }
