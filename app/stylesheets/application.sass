@@ -32,19 +32,20 @@ header
     padding-bottom: 15px
     font-size: 24px
     float: left
-    .wf-active &
-      font-weight: 600
     a
       border-bottom: 0
       +clearfix
       text-decoration: none
     span
       float: left
+    span.engine-name
+      font-weight: bold
+      .wf-active &
+        font-weight: 700
     span.application-name
       margin-left: 14px
-      font-weight: 400
       .wf-active &
-        font-weight: 300
+        font-weight: 400
     img
       display: block
   nav
@@ -302,43 +303,17 @@ a.grid
       text-align: center
       height: 168px
       line-height: 168px
-    div.big-text
-      margin-top: 20px
-      width: 300px
-      float: left
-      margin-right: 30px
-      p
-        font-weight: 600
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
-        text-align: center
-        line-height: 1
-        padding: 0 8px
-        span.primary
-          font-size: 32px
-        span.slash
-          font-size: 32px
-          font-weight: 200
-          margin: 0 10px
-        span.secondary
-          font-size: 32px
-      p.label
-        font-size: 12px
-        font-weight: 400
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
-        color: lighten(#000, 20%)
-        margin-top: 8px
-      p.label.last
-        margin-bottom: 0
-    div.big-text.edge
-      margin-right: 0
     ul
       width: 100%
+      min-height: $standard-gap/2
       li
         padding: $standard-gap/5 $standard-gap/3
         border-bottom: 1px solid $color-5
         position: relative
         list-style: none
         overflow: hidden
+        &:last-child, &.last
+          border-bottom: 0
         a, p
           font-size: 12px
           +ellipsis
