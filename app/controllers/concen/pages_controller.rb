@@ -28,9 +28,8 @@ module Concen
     end
 
     def edit
-      if current_concen_user.full_control || @page.authors_as_user.include?(current_concen_user)
-        @page = Page.find(params[:id])
-      else
+      @page = Page.find(params[:id])
+      unless current_concen_user.full_control || @page.authors_as_user.include?(current_concen_user)
         flash[:notice] = "Only author can edit page."
         redirect_to concen_pages_path
       end
