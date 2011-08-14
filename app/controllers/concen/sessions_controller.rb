@@ -3,6 +3,11 @@ module Concen
     layout "concen/application"
 
     def new
+      if User.all.any?
+        render
+      else
+        redirect_to new_concen_user_path
+      end
     end
 
     def create

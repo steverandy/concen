@@ -404,14 +404,14 @@ form textarea.tall {
 }
 /* line 67, ../../../app/stylesheets/partials/_form.sass */
 form #errorExplanation ul {
-  margin: 10px 0 16px 12px;
+  margin: 15px 0 15px 0;
 }
 /* line 69, ../../../app/stylesheets/partials/_form.sass */
 form #errorExplanation ul li {
   font-size: 12px;
-  list-style-position: inside;
+  list-style: disc inside;
   line-height: 18px;
-  color: #f12d40;
+  color: red;
 }
 
 /* line 75, ../../../app/stylesheets/partials/_form.sass */

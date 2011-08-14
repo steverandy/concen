@@ -2,22 +2,29 @@ module Concen
   class UsersController < ApplicationController
     layout "concen/application"
 
-    before_filter :authenticate_concen_user, :except => [:edit, :update, :new_reset_password, :reset_password]
+    before_filter :authenticate_concen_user, :except => [:new, :edit, :update, :create, :new_reset_password, :reset_password]
 
     def index
       @users = User.all
     end
 
     def new
-      @user = User.new
+      if User.all.any?
+        redirect_to root_path
+      else
+        @user = User.new
+      end
     end
 
     def create
-      @user = User.create(params[:concen_user])
-      if @user.save
-        redirect_to(concen_users_path, :notice => "User was successfully created.")
-      else
-        render :new
+      if !User.all.any? || (current_concen_user && current_concen_user.full_control)
+        @user = User.new(params[:concen_user])
+        @user.full_control = true
+        if @user.save
+          redirect_to(concen_users_path, :notice => "User was successfully created.")
+        else
+          render :new
+        end
       end
     end
 
