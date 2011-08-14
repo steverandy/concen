@@ -28,12 +28,18 @@ module Concen
         }
       EOF
 
-      results = self.collection.map_reduce(map, reduce, :out => {:inline => 1}, :raw => true)["results"]
-      results = results.sort {|x,y| y["value"] <=> x["value"]}
-      results = results[0..options[:limit]-1] if options[:limit]
-      results = results.map do |result|
-        [result["_id"], result["value"]]
+      begin
+        results = self.collection.map_reduce(map, reduce, :out => {:inline => 1}, :raw => true)["results"]
+        results = results.sort {|x,y| y["value"] <=> x["value"]}
+        results = results[0..options[:limit]-1] if options[:limit]
+        results = results.map do |result|
+          [result["_id"], result["value"]]
+        end
+      rescue
+        results = []
       end
+
+      return results
     end
   end
 end
