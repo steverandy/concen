@@ -30,12 +30,18 @@ module Concen
           }
         EOF
 
-        results = self.collection.map_reduce(map, reduce, :out => {:inline => 1}, :raw => true)["results"]
-        results = results.sort {|x,y| y["value"] <=> x["value"]}
-        results = results[0..options[:limit]-1] if options[:limit]
-        results = results.map do |result|
-          [result["_id"], result["value"].to_i]
+        begin
+          results = self.collection.map_reduce(map, reduce, :out => {:inline => 1}, :raw => true)["results"]
+          results = results.sort {|x,y| y["value"] <=> x["value"]}
+          results = results[0..options[:limit]-1] if options[:limit]
+          results = results.map do |result|
+            [result["_id"], result["value"].to_i]
+          end
+        rescue
+          results = []
         end
+
+        return results
       end
 
       def self.aggregate_count_by_time(*args)
@@ -74,13 +80,19 @@ module Concen
 
           query = {:hour => {"$gte" => start_time, "$lte" => end_time}}
 
-          results = self.collection.map_reduce(map, reduce, :out => {:inline => 1}, :raw => true, :query => query)["results"]
-          results = results.sort { |x,y| x["id"] <=> y["id"] }
-          results = results.map do |result|
-            time = result["_id"].to_i
-            time *= 1000 if options[:precision] == "millisecond"
-            [time, result["value"].to_i]
+          begin
+            results = self.collection.map_reduce(map, reduce, :out => {:inline => 1}, :raw => true, :query => query)["results"]
+            results = results.sort { |x,y| x["id"] <=> y["id"] }
+            results = results.map do |result|
+              time = result["_id"].to_i
+              time *= 1000 if options[:precision] == "millisecond"
+              [time, result["value"].to_i]
+            end
+          rescue
+            results = []
           end
+
+          return results
         end
       end
     end
