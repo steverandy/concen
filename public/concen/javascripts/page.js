@@ -65,7 +65,7 @@ $(document).ready(function() {
 	setupTextEditor();
 
   // Text editor is resizable.
-  resizableTextEditor = $("form.with-text-editor .thick-border .border").eq(0)
+  resizableTextEditor = $("form.with-text-editor .border").eq(0)
   resizableTextEditor.resizable({
 		minHeight: resizableTextEditor.height(),
 		minWidth: resizableTextEditor.width(),

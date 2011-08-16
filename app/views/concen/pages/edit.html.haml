@@ -5,12 +5,11 @@
 
 #content
   %h1 Edit Page
-  .clearfix
-    = render "form"
-    #file-manager
-      .thick-border
-        .border
-          #file-uploader{:data => {"upload-path" => upload_concen_page_grid_files_path(@page)}}
-            %noscript
-              %p Please enable JavaScript to use file uploader.
-          = render "files"
+  = render "form"
+  #file-manager
+    .border
+      #file-uploader{:data => {"upload-path" => upload_concen_page_grid_files_path(@page)}}
+        %noscript
+          %p Please enable JavaScript to use file uploader.
+      = render "files"
+  .clear

@@ -6,9 +6,3 @@
   background: image-url($path)
   background-repeat: no-repeat
   +image-dimensions($path)
-
-=thick-border-shadow($position)
-  @if $position == top
-    +box-shadow(rgba(black, 0.2) 0 2px 1px inset)
-  @else if $position == bottom
-    +box-shadow(rgba(black, 0.2) 0 -2px 1px inset)

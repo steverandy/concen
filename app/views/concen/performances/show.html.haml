@@ -7,25 +7,24 @@
   = javascript_include_tag "/concen/javascripts/performance.js"
 
 #content
-  .panels.thick-border
-    .panel.wide.border
-      %h3 Responses in Past Hour
-      .graph
-        #recent-responses{:style => "width: 100%; height: 200px;"}
+  .panels
+    .panel.wide
+      .border
+        %h3 Responses in Past Hour
+        .graph
+          #recent-responses{:style => "width: 100%; height: 200px;"}
 
-  .panels.clearfix
+  .panels
     .panel.total-runtime
-      .thick-border
-        .border
-          %h3 Average Total Runtime
-          %ul
+      .border
+        %h3 Average Total Runtime
+        %ul
     .panel.view-runtime
-      .thick-border
-        .border
-          %h3 Average View Runtime
-          %ul
+      .border
+        %h3 Average View Runtime
+        %ul
     .panel.mongodb-runtime.edge
-      .thick-border
-        .border
-          %h3 Average MongoDB Runtime
-          %ul
+      .border
+        %h3 Average MongoDB Runtime
+        %ul
+    .clear

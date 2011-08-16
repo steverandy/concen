@@ -7,6 +7,8 @@ form
   .field
     +clearfix
     margin-bottom: $standard-gap/2
+    &.text-editor
+      overflow: visible
   span.align
     line-height: 30px
     font-size: 12px
@@ -26,7 +28,7 @@ form
     width: 160px
     display: block
     font-weight: 400
-    line-height: 34px
+    line-height: 28px
   label.blank
     text-indent: -9999px
     font-size: 14px
@@ -38,14 +40,10 @@ form
     display: inline
     line-height: normal
     vertical-align: middle
-  .thick-border
-    +inline-block
-    &.text-editor
-      display: block
-    .border
-      +thick-border-shadow(top)
   input[type=text], input[type=password], textarea
-    border: 0
+    border: 1px solid $color-2
+    +border-radius(4px)
+    +box-shadow(rgba($color-2, 0.3) 0 2px 2px inset)
     height: 16px
     line-height: 16px
     padding: 5px

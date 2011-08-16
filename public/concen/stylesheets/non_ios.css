@@ -5,7 +5,7 @@ ul.squares li.child-container h3 {
   -o-text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
-  -moz-binding: url('/../../public/control_center/xml/ellipsis.xml#ellipsis');
+  -moz-binding: url('/../../public/concen/xml/ellipsis.xml#ellipsis');
 }
 /* line 9, ../../../app/stylesheets/non_ios.sass */
 ul.squares li.child-container p.date {
@@ -14,7 +14,7 @@ ul.squares li.child-container p.date {
   -o-text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
-  -moz-binding: url('/../../public/control_center/xml/ellipsis.xml#ellipsis');
+  -moz-binding: url('/../../public/concen/xml/ellipsis.xml#ellipsis');
 }
 
 /* line 14, ../../../app/stylesheets/non_ios.sass */
@@ -24,5 +24,5 @@ ul.squares li.child-container p.date {
   -o-text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
-  -moz-binding: url('/../../public/control_center/xml/ellipsis.xml#ellipsis');
+  -moz-binding: url('/../../public/concen/xml/ellipsis.xml#ellipsis');
 }

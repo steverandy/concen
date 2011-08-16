@@ -61,24 +61,10 @@ img.visit-recorder
   top: 0
   left: 0
 
-.thick-border
-  position: relative
-  padding: 3px
-  background: $color-3
+.border
+  border: 1px solid $color-2
   +border-radius(4px)
-  .border
-    border: 1px solid $color-2
-    +border-radius(3px)
-    background: white
-    position: relative
-    &.with-padding
-      padding: 2px
-
-a.thick-border
-  .border
-    +thick-border-shadow(bottom)
-  &:active .border
-    +thick-border-shadow(top)
+  +box-shadow(rgba($color-2, 0.3) 0 3px 0px)
 
 .clearfix
   +clearfix

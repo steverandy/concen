@@ -257,6 +257,8 @@ a.grid
       line-height: 1
       border-bottom: 1px solid $color-2
       padding: $standard-gap/3
+      background: $color-4
+      +border-top-radius(4px)
       +text-shadow(white, 0px, 1px, 0px)
       span
         font-size: 12px
@@ -386,10 +388,9 @@ a.grid
 #file-manager
   float: right
   width: 25%
-  div.thick-border
-    margin-left: $standard-gap
   div.border
     padding: 20px
+    margin-left: $standard-gap
   h3
     margin-top: 20px
     span
@@ -414,9 +415,9 @@ form.with-text-editor
   width: 75%
   &.wide
     width: 100%
-  .thick-border
-    .border
-      padding: 10px
+  .border
+    padding: 10px
+    +box-shadow(rgba($color-2, 0.3) 0 2px 2px inset)
 
 .tickLabel
   font-size: 12px
@@ -426,6 +427,8 @@ table
   font-size: 14px
   width: 100%
   th
+    background: $color-4
+    +border-top-radius(4px)
     font-weight: bold
     font-size: 16px
     .wf-active &
