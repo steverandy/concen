@@ -9,5 +9,5 @@ VisitRecorder.record = function(data) {
   if(document.referrer && document.referrer != "") {
     data.r = document.referrer;
   }
-  $("body").append("<img class='visit-recorder' src='<%= record_visit_path %>?" + jQuery.param(data) + "'/>");
+  $("body").append("<img class='visit-recorder' src='<%= record_visit_path %>?" + jQuery.param(data) + "' style='display:none;' />");
 };
