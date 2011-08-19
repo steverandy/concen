@@ -37,3 +37,5 @@ Call record function before the closing <body> tag.
 :javascript
   VisitRecorder.record({});
 ```
+
+More complete instruction to use this engine will be added soon.

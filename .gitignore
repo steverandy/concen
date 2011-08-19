@@ -1,6 +1,7 @@
 .DS_Store
 .bundle/
 .rvmrc
+*.gem
 log/*.log
 app/stylesheets/.sass-cache
 pkg/
