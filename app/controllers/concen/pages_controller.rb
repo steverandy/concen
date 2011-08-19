@@ -5,6 +5,7 @@ module Concen
     before_filter :authenticate_concen_user
 
     def index
+      @page_title = "Pages"
       @page = Page.where(:level => 0).first
     end
 

@@ -5,6 +5,7 @@ module Concen
     before_filter :authenticate_concen_user, :except => [:new, :edit, :update, :create, :new_reset_password, :reset_password]
 
     def index
+      @page_title = "Users"
       @users = User.all
     end
 
@@ -34,6 +35,7 @@ module Concen
       elsif params[:invitation_token]
         @user = User.where(:invitation_token => params[:invitation_token]).first
       else
+        @page_title = "Settings"
         @user = current_concen_user
       end
       redirect_to concen_signin_path unless @user

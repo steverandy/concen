@@ -1,7 +1,7 @@
 module Concen
   class PerformancesController < ApplicationController
     def show
-
+      @page_title = "Performance"
     end
 
     def responses
