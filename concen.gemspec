@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.summary = %q{Control and monitor website.}
   s.description = %q{This gem provides a Rails engine for Rails application to control and monitor the application from a web interface. It covers controlling content, monitoring visitors, and monitoring application performance. The engine is flexible in term of form and function. It can be styled and have custom functions. }
 
-  s.files = Dir["README", "MIT-LICENSE", "config/routes.rb", "init.rb", "lib/**/*", "app/**/*", "public/control_center/**/*"]
+  s.files = Dir["README", "LICENSE", "config/routes.rb", "init.rb", "lib/**/*", "app/**/*", "public/concen/**/*"]
   s.require_paths = ["lib"]
 
   s.add_development_dependency("compass", "0.11.5")
