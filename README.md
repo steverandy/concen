@@ -2,30 +2,38 @@
 
 ## Installation
 
-1. Add the following to the Gemfile.
+Add the following to the Gemfile.
 
-    gem 'concen'
+```
+gem "concen"
+```
 	
-2. Add initializer file for concen configurations.
+Add initializer file for concen configurations.
 
-  	Concen.setup do |config|
-  	  config.application_name = "My Application Name"
-  	end
+```
+Concen.setup do |config|
+  config.application_name = "My Application Name"
+end
+```
 
 ## Accessing Concen
 
-To access Concen, please visit [http://concen.domain.com](http://concen.domain.com). Sign in with admin account to continue.
+To access Concen, use "concen" subdomain for example http://concen.domain.com. Sign in with admin account to continue. [Pow](http://pow.cx/) rack server is recommended because it provides access to subdomain by default.
 
-## Insert Visit Recorder JavaScript
+## Insert Visit Recorder JavaScript for Real Time Traffic Monitoring
 
 Visit Recorder will record the visitors' information for pages, which include the Visit Recorder JavaScript.
 To do so, please follow these steps:
 
-1. Insert the Visit Recorder JavaScript.
+Insert the Visit Recorder JavaScript in your layout.
 
-    = javascript_include_tag visit_recorder_js_url
+```
+= javascript_include_tag visit_recorder_js_url
+```
       
-2. Call record function.
-    
-    :javascript
-      VisitRecorder.record({});
+Call record function before the closing <body> tag.
+
+```
+:javascript
+  VisitRecorder.record({});
+```
