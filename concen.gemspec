@@ -5,14 +5,17 @@ require "concen/version"
 Gem::Specification.new do |s|
   s.name = "concen"
   s.version = Concen::VERSION
-  s.platform = Gem::Platform::RUBY
   s.authors = ["Steve Randy Tantra"]
-  s.email = ["mail@steverandytantra.com"]
-  s.homepage = "http://steverandytantra.com"
-  s.summary = %q{Control and monitor website.}
+  s.email = ["steve.randy@gmail.com"]
+  s.homepage = ""
+  s.summary = %q{Control and monitor Rails application.}
   s.description = %q{This gem provides a Rails engine for Rails application to control and monitor the application from a web interface. It covers controlling content, monitoring visitors, and monitoring application performance. The engine is flexible in term of form and function. It can be styled and have custom functions. }
 
-  s.files = Dir["README", "LICENSE", "config/routes.rb", "init.rb", "lib/**/*", "app/**/*", "public/concen/**/*"]
+  s.rubyforge_project = "concen"
+
+  s.files = `git ls-files`.split("\n")
+  s.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
   s.add_development_dependency("compass", "0.11.5")
