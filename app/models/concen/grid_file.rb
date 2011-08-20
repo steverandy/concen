@@ -42,16 +42,24 @@ module Concen
     end
 
     def store(content, filename)
-      original_filename = filename.dup
-      file_extension = File.extname(filename).downcase
-      filename = "#{self.id.to_s}-#{File.basename(original_filename, file_extension).downcase.parameterize.gsub("_", "-")}#{file_extension}"
       grid = Mongo::Grid.new(Mongoid.database)
-      content_type = MIME::Types.type_for(filename).first.to_s
-      if self.grid_id
-        grid.delete(self.grid_id)
-      end
-      if grid_id = grid.put(content, :content_type => content_type, :filename => filename, :safe => true)
-        self.update_attributes(:filename => filename, :original_filename => original_filename, :grid_id => grid_id)
+
+      # First, delete if a GridFS file already exists.
+      # There is no update.
+      grid.delete(self.grid_id) if self.grid_id
+
+      original_filename = filename.dup
+      file_extension = File.extname(original_filename).downcase
+      content_type = MIME::Types.type_for(original_filename).first.to_s
+
+      # Pre generate ObjectId for the new GridFS file.
+      grid_id = BSON::ObjectId.new
+
+      filename = File.basename(original_filename, file_extension).downcase.parameterize.gsub("_", "-")
+      filename = "#{grid_id.to_s}-#{filename}#{file_extension}"
+
+      if grid.put(content, :_id => grid_id, :filename => filename, :content_type => content_type, :safe => true)
+        self.update_attributes(:grid_id => grid_id, :filename => filename, :original_filename => original_filename)
       else
         return false
       end
