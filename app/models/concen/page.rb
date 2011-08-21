@@ -269,7 +269,7 @@ module Concen
             else
               content_key = (index + 1).to_s
             end
-            self.content[content_key] = content.join
+            self.content[content_key] = content.join.strip
           end
         else
           meta_data = self.raw_text.strip
