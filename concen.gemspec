@@ -7,10 +7,11 @@ Gem::Specification.new do |s|
   s.version = Concen::VERSION
   s.authors = ["Steve Randy Tantra"]
   s.email = ["steve.randy@gmail.com"]
-  s.homepage = ""
-  s.summary = %q{Control and monitor Rails application.}
-  s.description = %q{This gem provides a Rails engine for Rails application to control and monitor the application from a web interface. It covers controlling content, monitoring visitors, and monitoring application performance. The engine is flexible in term of form and function. It can be styled and have custom functions. }
+  s.homepage = "https://github.com/steverandy/concen"
+  s.summary = "Control and monitor Rails application."
+  s.description = "A Rails Engine to control and monitor Rails application from a web interface. It includes content capturing system, real-time traffic monitoring, and real-time performance monitoring. It’s built to be flexible and customizable."
 
+  s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project = "concen"
 
   s.files = `git ls-files`.split("\n")
