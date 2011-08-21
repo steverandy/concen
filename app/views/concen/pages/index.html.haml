@@ -2,8 +2,11 @@
   = javascript_include_tag "/concen/javascripts/page.js"
 
 #content
-  %h1 Pages
+  %h1
+    = one_line do
+      %span Pages
+      - unless @page
+        = link_to "New Page", new_concen_page_path(:level => 0), :class => "link-button"
+
   - if @page
     = render :partial => "nested_list", :locals => {:page => @page, :root => true}
-  - else
-    = link_to "New Page", new_concen_page_path(:level => 0)
