@@ -40,12 +40,9 @@ header
       float: left
     span.engine-name
       font-weight: bold
-      .wf-active &
-        font-weight: 700
     span.application-name
       margin-left: $standard-gap/2
-      .wf-active &
-        font-weight: 400
+      font-weight: normal
     img
       display: block
   nav
@@ -88,8 +85,6 @@ header
   text-align: left
   h1
     margin-bottom: $standard-gap
-    .wf-active &
-      font-weight: 600
     span
       margin-right: $standard-gap/2
   div.parent-header
@@ -196,17 +191,6 @@ a.grid
     background: lighten(#000, 92%)
     padding: 6px 10px
     +text-shadow(white, 0px, 1px, 0px)
-  a.organize
-    font-size: 12px
-    font-weight: 600
-    line-height: 25px
-    display: block
-    position: absolute
-    top: 0
-    right: 10px
-    color: lighten(#000, 60%)
-  a.sort-path
-    display: none
   ul
     list-style-position: inside
     margin-bottom: 20px
@@ -259,47 +243,6 @@ a.grid
       background: $color-4
       +border-top-radius(4px)
       +text-shadow(white, 0px, 1px, 0px)
-      span
-        font-size: 12px
-        margin-left: 2px
-        color: lighten(#000, 60%)
-        font-weight: 500
-      span.link
-        a
-          font-size: 10px
-          line-height: 10px
-          float: right
-          display: block
-          border: 1px solid lighten(#000, 60%)
-          +border-radius(2px)
-          padding: 2px 6px
-          font-weight: 600
-          +box-shadow(white, 0px, 1px, 0px)
-          margin-left: 8px
-          text-align: center
-          color: lighten(#000, 40%)
-          background: lighten(#000, 88%)
-          +linear-gradient(color-stops(lighten(#000, 95%), lighten(#000, 85%)))
-        a.active, a:active
-          color: lighten(#000, 40%)
-          border-color: lighten(#000, 50%)
-          background: lighten(#000, 85%)
-          +linear-gradient(color-stops(lighten(#000, 85%), lighten(#000, 95%)))
-        a:hover
-          text-decoration: none
-      span.timezone
-        font-size: 10px
-        line-height: 10px
-        float: right
-        display: block
-        border: 1px solid lighten(#000, 70%)
-        +border-radius(2px)
-        padding: 2px 6px
-        font-weight: 600
-        +box-shadow(white, 0px, 1px, 0px)
-        margin-left: 8px
-        text-align: center
-        color: lighten(#000, 60%)
     p.big-number
       font-size: 72px
       text-align: center
@@ -428,8 +371,8 @@ table
   th
     background: $color-4
     +border-top-radius(4px)
-    font-weight: bold
     font-size: 16px
+    font-weight: bold
     .wf-active &
       font-weight: 600
   td, th
