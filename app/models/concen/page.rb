@@ -77,9 +77,12 @@ module Concen
     def content_in_html(key = "main", data={})
       if content = self.content.try(:[], key)
         content = Mustache.render(content, data)
-        markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :fenced_code_blocks => true)
+        markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, Concen.markdown_extensions)
         html = markdown.render content
-        content = Redcarpet::Render::SmartyPants.render html
+        if Concen.parse_markdown_with_smartypants
+          html = Redcarpet::Render::SmartyPants.render html
+        end
+        return html
       else
         return nil
       end
