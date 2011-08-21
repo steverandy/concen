@@ -33,10 +33,64 @@ Back to the Rails application, the developer/programmer could place these conten
 
 The above method call will return all the contents that have been marked as published and sort them by publish time. In this fashion, Rails views could be free from any static content.
 
+Concen also comes with a configurable Markdown parser. [Markdown](http://daringfireball.net/projects/markdown/syntax) is a recommended text format to be used in Concen. Markdown is easy to understand and always in plain text mode. You can easily generate HTML from the Markdown formatted content with the following method call.
+
+    Concen::Page.published.desc(:publish_time).first.content_in_html
+
 Generating static content should not be performed for every request because it is expensive. Concen does not have a mechanism of caching. However it is very simple in Rails to cache a page. You don't have to use Rails page caching mechanism. You simple need to set the proper Cache-Control header. For example the following code will cache a page for 5 minutes in any reverse proxy and in the client browser. You can add a [Rack Cache](http://rtomayko.github.com/rack-cache/) or setup [Nginx reverse proxy cache](http://wiki.nginx.org/HttpProxyModule#proxy_cache) easily or even [Varnish](http://varnish-cache.org/) when the time comes.
 
     expires_in 5.minutes, :public => true
     fresh_when :etag => @article, :public => true
+
+## Writing Style for Content Capturing System
+
+There are no rules enforced for writing content with Concen CCS. But there are certain writing styles that will help writing content more manageable and convenient.
+
+Here is an example with single-segment content.
+
+    Title: 1984
+
+    Description: Nineteen Eighty-Four (sometimes written 1984) is a 1948 dystopian fiction written by George Orwell about a society ruled by an oligarchical dictatorship.
+
+    Publish Time: tomorrow
+
+    -----
+
+    It was a bright cold day in April, and the clocks were striking thirteen. Winston Smith, his chin nuzzled into his breast in an effort to escape the vile wind, slipped quickly through the glass doors of Victory Mansions, though not quickly enough to prevent a swirl of gritty dust from entering along with him.
+
+Here is another example with multiple-segment content.
+
+    Title: 1984
+
+    Description: Nineteen Eighty-Four (sometimes written 1984) is a 1948 dystopian fiction written by George Orwell about a society ruled by an oligarchical dictatorship.
+
+    Publish Time: tomorrow
+
+    -----
+
+    @ Chapter 1
+
+    It was a bright cold day in April, and the clocks were striking thirteen. Winston Smith, his chin nuzzled into his breast in an effort to escape the vile wind, slipped quickly through the glass doors of Victory Mansions, though not quickly enough to prevent a swirl of gritty dust from entering along with him.
+
+    -----
+
+    @ Chapter 2
+
+    As he put his hand to the door-knob Winston saw that he had left the diary open on the table. DOWN WITH BIG BROTHER was written all over it, in letters almost big enough to be legible across the room. It was an inconceivably stupid thing to have done. But, he realized, even in his panic he had not wanted to smudge the creamy paper by shutting the book while the ink was wet.
+
+Content can be divided with 3 or more hyphen (-). The first part will always be metadata declaration. The rest will be the content.
+
+"Publish Time" meta data has special treatment, where it accepts date in natural language format, relative to the current time.
+
+To obtain the content, you typically will call:
+
+    Concen::Page.published.desc(:publish_time).first.content
+
+Or if you want the content in HTML format, simply call:
+
+    Concen::Page.published.desc(:publish_time).first.content_in_html
+
+`content_in_html` accepts an argument of the content segment key. In this example if you declare "Chapter 2", the key will be "chapter_2".
 
 ## Real Time Traffic Monitoring
 
