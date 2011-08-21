@@ -21,6 +21,16 @@ Add initializer file for concen configurations.
       config.typekit_id = "qxq7sbk"
     end
 
+Generate mongoid.yml configuration.
+
+    rails g mongoid:config
+
+For more configuration options checkout the [Mongoid documentation](http://mongoid.org/docs/installation/configuration.html)
+
+Symlink assets.
+
+    rake concen:symlink_assets
+
 ## Content Capturing System
 
 Any Rails application will require static contents at some point or another. Many of us will just write those content in Rails views. Quite recently I have begun to think that this is a wrong thing to do. We don't need a full blown Content Management System (CMS) to handle them. We rather need a Content Capturing System (CCS). Most of these contents might not come from you, but other people. Most often they are several people involved. A CCS does not focus in managing content. It focuses on capturing content from the content creator.
