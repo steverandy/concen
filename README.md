@@ -25,7 +25,7 @@ Generate mongoid.yml configuration.
 
     rails g mongoid:config
 
-For more configuration options checkout the [Mongoid documentation](http://mongoid.org/docs/installation/configuration.html)
+For more configuration options checkout the [Mongoid documentation](http://mongoid.org/docs/installation/configuration.html).
 
 Symlink assets.
 
@@ -92,11 +92,11 @@ Content can be divided with 3 or more hyphen (-). The first part will always be 
 
 "Publish Time" meta data has special treatment, where it accepts date in natural language format, relative to the current time.
 
-To obtain the content, you typically will call:
+To obtain the content, you typically will call the following.
 
     Concen::Page.published.desc(:publish_time).first.content
 
-Or if you want the content in HTML format, simply call:
+Or if you want the content in HTML format, simply call the following.
 
     Concen::Page.published.desc(:publish_time).first.content_in_html
 
@@ -104,15 +104,15 @@ Or if you want the content in HTML format, simply call:
 
 ## Real Time Traffic Monitoring
 
-Insert the Visit Recorder JavaScript in your layout.
+Insert the Visit Recorder JavaScript in your layout. It's recommended to append this code block right before the closing `</bod>` tag.
 
-For layout in Haml:
+For layout in Haml, insert the following code block.
 
     = javascript_include_tag visit_recorder_js_url
     :javascript
       VisitRecorder.record({});
 
-For layout in ERB:
+For layout in ERB, insert the following code block.
 
     <script src="http://steverandytantra.com/visits/js" type="text/javascript"></script>
     <script>
