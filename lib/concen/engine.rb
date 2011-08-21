@@ -1,4 +1,6 @@
 require "rails"
+require "haml"
+require "mongoid"
 require "mongo/rails/instrumentation/railtie"
 
 module Concen
