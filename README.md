@@ -128,7 +128,7 @@ If you have used Concen for any of your websites and would like to be listed her
 
 ## Version History
 
-- **0.1.4** (23 August 2011):
+- **0.1.4** (22 August 2011):
 
   - Simpler setup process (only in 2 steps).
   - Brief guide is available upon the completion of setup.
