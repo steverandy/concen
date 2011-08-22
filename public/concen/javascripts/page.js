@@ -32,16 +32,20 @@ $(document).ready(function() {
   });
 
   // Insert file path to text editor by drag and drop.
-  $("#file-manager a.filename").draggable({
-    revert: "invalid",
-    helper: "clone"
-  });
-	$( "#text-editor" ).droppable({
-	  accept: ".filename",
-		drop: function(event, ui) {
-      window.editor.insert(ui.draggable.data("path"));
-		}
-	});
+  setupFilePathDragDrop = function() {
+    $("#file-manager a.filename").draggable( {
+      revert: "invalid",
+      helper: "clone"
+    });
+  	$("#text-editor").droppable({
+  	  accept: ".filename",
+  		drop: function(event, ui) {
+        window.editor.insert(ui.draggable.data("path"));
+  		}
+  	});
+  };
+
+  setupFilePathDragDrop();
 
   // Setup text editor (ace.js).
 	setupTextEditor = function() {
@@ -86,15 +90,16 @@ $(document).ready(function() {
       minSizeLimit: 0, // min size
       debug: false,
       csrf: true,
-      template: '<div class="qq-uploader">' +
-                  '<div class="qq-upload-drop-area"><span>Drop files here to upload</span></div>' +
-                  '<div class="qq-upload-button">Upload Files</div>' +
-                  '<ul class="qq-upload-list"></ul>' +
-                '</div>',
+      template: "<div class='qq-uploader'>" +
+                  "<div class='qq-upload-drop-area'><span>Drop files here to upload</span></div>" +
+                  "<div class='qq-upload-button'>Upload Files</div>" +
+                  "<ul class='qq-upload-list'></ul>" +
+                "</div>",
       onComplete: function(id, fileName, responseJSON){
         if (responseJSON.success) {
           $("#file-manager ul.qq-upload-list li.qq-upload-success").remove();
           $("#file-manager div.files").replaceWith(responseJSON.content);
+          setupFilePathDragDrop();
         };
       },
       showMessage: function(message){ alert(message); }

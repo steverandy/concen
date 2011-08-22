@@ -132,6 +132,7 @@ If you have used Concen for any of your websites and would like to be listed her
 
   - Simpler setup process (only in 2 steps).
   - Brief guide is available upon the completion of setup.
+  - Fix a bug in file path drag and drop function.
 
 - **0.1.3** (21 August 2011): Minor bug fixes.
 
