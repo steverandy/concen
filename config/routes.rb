@@ -4,7 +4,6 @@ require "rack/gridfs"
 Rails.application.routes.draw do
   match "/visits/record.gif" => "concen/visits#record", :as => "record_visit"
   match "/visits/js" => "concen/visits#visit_recorder_js", :as => "visit_recorder_js"
-  mount Rack::GridFS::Endpoint.new(:db => Mongoid.database, :lookup => :path, :expires => 315360000), :at => "gridfs"
 
   scope :constraints => {:subdomain => "concen"}, :module => "concen", :as => "concen"  do
     get "signout" => "sessions#destroy", :as => "signout"
@@ -61,4 +60,8 @@ Rails.application.routes.draw do
 
     root :to => "statuses#show"
   end
+
+  begin
+    mount Rack::GridFS::Endpoint.new(:db => Mongoid.database, :lookup => :path, :expires => 315360000), :at => "gridfs"
+  rescue; end;
 end
