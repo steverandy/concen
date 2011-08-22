@@ -14,26 +14,15 @@ Add the following to the Gemfile of a Rails application.
 
     gem "concen", "~> 0.1"
 
-Add initializer file for concen configurations.
+Run the rake task to setup Concen.
 
-    Concen.setup do |config|
-      config.application_name = "My Application Name"
-      config.typekit_id = "qxq7sbk"
-    end
+    rake concen:setup
 
-Generate mongoid.yml configuration.
-
-    rails g mongoid:config
-
-For more configuration options checkout the [Mongoid documentation](http://mongoid.org/docs/installation/configuration.html).
-
-Symlink assets.
-
-    rake concen:symlink_assets
+Follow the brief guide upon completion of the rake task.
 
 ## Content Capturing System
 
-Any Rails application will require static contents at some point or another. Many of us will just write those content in Rails views. Quite recently I have begun to think that this is a wrong thing to do. We don't need a full blown Content Management System (CMS) to handle them. We rather need a Content Capturing System (CCS). Most of these contents might not come from you, but other people. Most often they are several people involved. A CCS does not focus in managing content. It focuses on capturing content from the content creator.
+Any Rails application will require static contents at some point or another. Many of us will just write those contents in the Rails views. Quite recently I have begun to think that this is a wrong approach. We don't need a full blown Content Management System (CMS) to handle them. We rather need a Content Capturing System (CCS). Most of these contents might not come from you, but other people. Most often, there are several people involved. A CCS does not focus in managing content. It focuses on capturing content from the content creators.
 
 The CCS itself has a simple text editor and a simple file uploader. Contents these days are not only in the form of text but also images, audios and videos. CCS offers a quick and easy way to capture all of them.
 
@@ -47,7 +36,7 @@ Concen also comes with a configurable Markdown parser. [Markdown](http://daringf
 
     Concen::Page.published.desc(:publish_time).first.content_in_html
 
-Generating static content should not be performed for every request because it is expensive. Concen does not have a mechanism of caching. However it is very simple in Rails to cache a page. You don't have to use Rails page caching mechanism. You simple need to set the proper Cache-Control header. For example the following code will cache a page for 5 minutes in any reverse proxy and in the client browser. You can add a [Rack Cache](http://rtomayko.github.com/rack-cache/) or setup [Nginx reverse proxy cache](http://wiki.nginx.org/HttpProxyModule#proxy_cache) easily or even [Varnish](http://varnish-cache.org/) when the time comes.
+Generating static content should not be performed for every request because it is expensive. Concen does not have a mechanism of caching. However it is very simple in Rails to cache a page. You don't have to use Rails page caching mechanism. You simply need to set the proper Cache-Control header. For example the following code will cache a page for 5 minutes in any reverse proxy and in the client browser. You can add a [Rack Cache](http://rtomayko.github.com/rack-cache/) or setup [Nginx reverse proxy cache](http://wiki.nginx.org/HttpProxyModule#proxy_cache) easily or even [Varnish](http://varnish-cache.org/) when the time comes.
 
     expires_in 5.minutes, :public => true
     fresh_when :etag => @article, :public => true
@@ -104,7 +93,7 @@ Or if you want the content in HTML format, simply call the following.
 
 ## Real Time Traffic Monitoring
 
-Insert the Visit Recorder JavaScript in your layout. It's recommended to append this code block right before the closing `</bod>` tag.
+Insert the Visit Recorder JavaScript in your layout. It's recommended to append this code block right before the closing `</body>` tag.
 
 For layout in Haml, insert the following code block.
 
@@ -130,3 +119,21 @@ There is no extra setup for this free real-time performance monitoring. And ther
 ## Concen Web Interface
 
 To access Concen web interface, use "concen" subdomain for example http://concen.domain.com. When it's accessed for the first time, it will prompt to create a new master user. This user will have full control over the Concen. [Pow](http://pow.cx/) rack server is recommended because it provides access to subdomain by default.
+
+## Websites That Have Used Concen in Production
+
+- [http://steverandytantra.com/](http://steverandytantra.com/)
+
+If you have used Concen for any of your websites and would like to be listed here. Please send me a message.
+
+## Version History
+
+- **0.1.4** (23 August 2011): Simpler setup process. Now only in 2 steps.
+
+- **0.1.3** (21 August 2011): Minor bug fixes.
+
+- **0.1.2** (19 August 2011): Minor bug fixes.
+
+- **0.1.1** (19 August 2011): Minor bug fixes.
+
+- **0.1** (19 August 2011): Initial release.
