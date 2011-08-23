@@ -60,10 +60,21 @@ class PageTest < ActiveSupport::TestCase
     assert_equal page.content_in_html, File.read("#{File.dirname(__FILE__)}/../support/raw_text/code_blocks.html")
   end
 
-  test "should have default_slug" do
-    page = Fabricate "concen/page"
-    assert_not_nil page.default_slug
-    assert page.default_slug.length > 0
+  test "should have slug automatically generated" do
+    page1 = Fabricate "concen/page", :title => "Something New"
+    assert_equal page1.slug, "something-new"
+
+    page2 = Fabricate.build "concen/page", :title => nil
+    page2.raw_text = File.read "#{File.dirname(__FILE__)}/../support/raw_text/title.txt"
+    page2.save
+    assert_equal page2.slug, "something-new"
+  end
+
+  test "should be able to set slug from raw_text" do
+    page = Fabricate.build "concen/page", :title => nil
+    page.raw_text = File.read "#{File.dirname(__FILE__)}/../support/raw_text/slug.txt"
+    page.save
+    assert_equal page.slug, "something-else"
   end
 
   test "should not be created without title" do

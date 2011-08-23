@@ -1,0 +1,3 @@
+Title: Something
+
+Slug: something-else

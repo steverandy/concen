@@ -14,6 +14,4 @@ Redcarpet is basically a Ruby wrapper of [Upskirt](https://github.com/tanoku/red
 
 To integrate Rercarpet and Haml in your Rails app, first add the Redcarpet gem in the `Gemfile`.
 
-```
-gem "redcarpet", "~> 1.17.2"
-```
+    gem "redcarpet", "~> 1.17.2"

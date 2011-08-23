@@ -18,7 +18,7 @@ module Concen
     field :level, :type => Integer
     field :title, :type => String
     field :description, :type => String
-    field :default_slug, :type => String
+    field :slug, :type => String
     field :raw_text, :type => String
     field :content, :type => Hash, :default => {}
     field :position, :type => Integer
@@ -29,12 +29,12 @@ module Concen
     field :status, :type => String
 
     validates_presence_of :title
-    validates_presence_of :default_slug
+    validates_presence_of :slug
     validates_uniqueness_of :title, :scope => [:parent_id, :level], :case_sensitive => false
-    validates_uniqueness_of :default_slug, :scope => [:parent_id, :level], :case_sensitive => false
+    validates_uniqueness_of :slug, :scope => [:parent_id, :level], :case_sensitive => false
 
     before_validation :parse_raw_text
-    before_validation :set_default_slug
+    before_validation :set_slug
     before_save :set_publish_month
     before_create :set_position
     after_save :unset_unused_dynamic_fields
@@ -45,7 +45,7 @@ module Concen
     # This scope should not be chained with other any_of criteria.
     # Because the mongo driver takes a hash for a query,
     # and a hash doesn't allow duplicate keys.
-    scope :with_slug, ->(slug) { any_of({:slug => slug}, {:default_slug => slug}) }
+    scope :with_slug, ->(slug) { where(:slug => slug) }
 
     scope :with_position, where(:position.exists => true)
     scope :published, lambda {
@@ -57,22 +57,14 @@ module Concen
 
     index :parent_id, :background => true
     index :publish_time, :background => true
-    index :default_slug, :background => true
+    index :slug, :background => true
 
     # Get the list of dynamic fields by checking againts this array.
     # Values should mirror the listed fields above.
-    PREDEFINED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :default_slug, :content, :raw_text, :position, :grid_files, :title, :description, :publish_time, :labels, :authors, :status]
+    PREDEFINED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :slug, :content, :raw_text, :position, :grid_files, :title, :description, :publish_time, :labels, :authors, :status]
 
     # These fields can't be overwritten by user's meta data when parsing raw_text.
-    PROTECTED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :default_slug, :content, :raw_text, :position, :grid_files]
-
-    def slug
-      if user_defined_slug = self.read_attribute(:slug)
-        user_defined_slug
-      else
-        self.default_slug
-      end
-    end
+    PROTECTED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :content, :raw_text, :position, :grid_files]
 
     def content_in_html(key = "main", data={})
       if content = self.content.try(:[], key)
@@ -230,8 +222,12 @@ module Concen
 
     protected
 
-    def set_default_slug
-      self.default_slug = self.title.parameterize if self.title
+    def set_slug
+      if self.slug.blank?
+        self.slug = self.title.parameterize if self.title
+      else
+        self.slug = self.slug.parameterize
+      end
     end
 
     def set_position
