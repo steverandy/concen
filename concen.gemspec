@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.email = ["steve.randy@gmail.com"]
   s.homepage = "https://github.com/steverandy/concen"
   s.summary = "Control and monitor Rails application."
-  s.description = "A Rails Engine to control and monitor Rails application from a web interface. It includes content capturing system, real-time traffic monitoring, and real-time performance monitoring. It’s built to be flexible and customizable."
+  s.description = "A Rails Engine to control and monitor Rails application from a web interface. It includes content capturing system, real-time traffic monitoring, and real-time performance monitoring. It's built to be flexible and customizable."
 
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project = "concen"
