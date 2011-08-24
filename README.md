@@ -131,6 +131,7 @@ If you have used Concen for any of your websites and would like to be listed her
 - **0.1.5** (23 August 2011):
 
   - A better approach of handling slug. Slug by default is generated from title. It can then be overwritten by specifying "Slug" in metadata declaration (from the text editor).
+  - Fix gemspec encoding issue.
 
 - **0.1.4** (22 August 2011):
 
