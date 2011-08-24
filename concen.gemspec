@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 $:.push File.expand_path("../lib", __FILE__)
+
 require "concen/version"
 
 Gem::Specification.new do |s|
@@ -10,7 +11,7 @@ Gem::Specification.new do |s|
   s.email = ["steve.randy@gmail.com"]
   s.homepage = "https://github.com/steverandy/concen"
   s.summary = "Control and monitor Rails application."
-  s.description = "A Rails Engine to control and monitor Rails application from a web interface. It includes content capturing system, real-time traffic monitoring, and real-time performance monitoring. It’s built to be flexible and customizable."
+  s.description = "A Rails Engine to control and monitor Rails application from a web interface. It includes content capturing system, real-time traffic monitoring, and real-time performance monitoring. It is built to be flexible and customizable."
 
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project = "concen"
@@ -20,7 +21,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_development_dependency("compass", "0.11.5")
+  s.add_development_dependency("compass", "~> 0.11.5")
   s.add_dependency("haml", "~> 3.1.0")
   s.add_dependency("mustache", "~> 0.99.4")
   s.add_dependency("redcarpet", "~> 2.0.0b3")

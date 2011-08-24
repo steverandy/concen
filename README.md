@@ -128,7 +128,11 @@ If you have used Concen for any of your websites and would like to be listed her
 
 ## Version History
 
-- **0.1.6** (23 August 2011):
+- **0.1.7** (24 August 2011):
+
+  - Fix installation error when using Ruby 1.8.7.
+
+- **0.1.6** (24 August 2011):
 
   - Fix gemspec encoding issue.
 
