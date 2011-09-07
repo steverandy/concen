@@ -21,7 +21,7 @@
     %script{:type => "text/javascript"} try{Typekit.load();}catch(e){}
     - if Rails.env == "production"
       = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"
-      = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/jquery/1.6.2/jquery.min.js"
+      = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/jquery/1.6.3/jquery.min.js"
     - else
       = javascript_include_tag "concen/modernizr", "concen/jquery"
     = javascript_include_tag "concen/application"
