@@ -1,10 +1,10 @@
 - content_for :head_javascripts do
   /[if lte IE 8]
-    = javascript_include_tag "/concen/javascripts/excanvas.js"
-  = javascript_include_tag "/concen/javascripts/jquery.flot.js"
-  = javascript_include_tag "/concen/javascripts/jquery.flot.stack.js"
-  = javascript_include_tag "/concen/javascripts/jquery.flot.resize.js"
-  = javascript_include_tag "/concen/javascripts/performance.js"
+    = javascript_include_tag "concen/excanvas"
+  = javascript_include_tag "concen/jquery.flot"
+  = javascript_include_tag "concen/jquery.flot.stack"
+  = javascript_include_tag "concen/jquery.flot.resize"
+  = javascript_include_tag "concen/performance"
 
 #content
   .panels

@@ -12,29 +12,19 @@
     %meta{:name => "viewport", :content => "width = 1024"}
     %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge"}
     = csrf_meta_tag
-    = stylesheet_link_tag "/concen/stylesheets/application.css"
-    = stylesheet_link_tag "/concen/stylesheets/jquery.ui.resizable.css"
+    = stylesheet_link_tag "concen/application"
     - if content_for?(:head_stylesheets)
       = yield :head_stylesheets
     /[if lt IE 8]
-      = stylesheet_link_tag "/concen/stylesheets/ie.css"
+      = stylesheet_link_tag "concen/ie"
     %script{:type => "text/javascript", :src => "http://use.typekit.com/#{Concen.typekit_id}.js"}
     %script{:type => "text/javascript"} try{Typekit.load();}catch(e){}
     - if Rails.env == "production"
       = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"
       = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/jquery/1.6.2/jquery.min.js"
     - else
-      = javascript_include_tag "/concen/javascripts/modernizr.js", "/concen/javascripts/jquery.js"
-    = javascript_include_tag "/concen/javascripts/jquery-ui/jquery.ui.core.js"
-    = javascript_include_tag "/concen/javascripts/jquery-ui/jquery.ui.widget.js"
-    = javascript_include_tag "/concen/javascripts/jquery-ui/jquery.ui.mouse.js"
-    = javascript_include_tag "/concen/javascripts/jquery-ui/jquery.ui.position.js"
-    = javascript_include_tag "/concen/javascripts/jquery-ui/jquery.ui.sortable.js"
-    = javascript_include_tag "/concen/javascripts/jquery-ui/jquery.ui.resizable.js"
-    = javascript_include_tag "/concen/javascripts/jquery-ui/jquery.ui.draggable.js"
-    = javascript_include_tag "/concen/javascripts/jquery-ui/jquery.ui.droppable.js"
-    = javascript_include_tag "/concen/javascripts/jquery.ui.nestedSortable.js"
-    = javascript_include_tag "/concen/javascripts/jquery_ujs.js"
+      = javascript_include_tag "concen/modernizr", "concen/jquery"
+    = javascript_include_tag "concen/application"
     - if content_for?(:head_javascripts)
       = yield :head_javascripts
     - if content_for?(:head)

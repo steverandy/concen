@@ -31,7 +31,7 @@ module Concen
         {"$inc" => {:count => 1}, "$set" => {:domain => referral_domain}},
         :upsert => true, :safe => false
       )
-      image_path = "#{Rails.root}/public/concen/images/record-visit.gif"
+      image_path = "#{Concen::Engine.root}/app/assets/images/concen/record-visit.gif"
       send_file image_path, :type => "image/gif", :disposition => "inline"
     end
   end

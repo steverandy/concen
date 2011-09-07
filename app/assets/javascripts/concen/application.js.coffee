@@ -1,0 +1,11 @@
+//= require concen/jquery-ui/jquery.ui.core
+//= require concen/jquery-ui/jquery.ui.widget
+//= require concen/jquery-ui/jquery.ui.mouse
+//= require concen/jquery-ui/jquery.ui.position
+//= require concen/jquery-ui/jquery.ui.sortable
+//= require concen/jquery-ui/jquery.ui.resizable
+//= require concen/jquery-ui/jquery.ui.draggable
+//= require concen/jquery-ui/jquery.ui.droppable
+//= require concen/jquery.ui.nestedSortable
+//= require concen/jquery_ujs
+//= require_self

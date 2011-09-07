@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem "rails", "~> 3.0.9"
+gem "rails", ">= 3.0.0"
 
 gem "compass", "~> 0.11.5"
 gem "haml", "~> 3.1.0"
@@ -12,7 +12,7 @@ gem "bson_ext", "~> 1.3.0"
 gem "rack-gridfs", "~> 0.4.1"
 gem "chronic", "~> 0.4.3"
 gem "mime-types", "~> 1.16"
-gem "bcrypt-ruby", "~> 2.1.4"
+gem "bcrypt-ruby", "~> 3.0.0"
 gem "domainatrix", "~> 0.0.10"
 
 # For test.

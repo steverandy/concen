@@ -1,13 +1,16 @@
+//= require_self
+//= require concen/jquery.ui.resizable
+
 @import "compass"
 @import "compass/reset"
 @import "compass/typography/text/force-wrap"
 @import "blueprint/print"
-@import "partials/variables"
-@import "partials/mixins"
-@import "partials/base"
-@import "partials/form"
-@import "partials/fileuploader"
-@import "partials/flot"
+@import "concen/partials/variables"
+@import "concen/partials/mixins"
+@import "concen/partials/base"
+@import "concen/partials/form"
+@import "concen/partials/fileuploader"
+@import "concen/partials/flot"
 
 @media print
   +blueprint-print
@@ -64,7 +67,7 @@ header
   input#keyword
     font-size: 12px
     line-height: 15px
-    +background-image-with-dimension('magnifying-glass.png')
+    +background-image-with-dimension("concen/magnifying-glass.png")
     background-position: 6px 5px
     border: 1px solid lighten(#000, 70%)
     outline: none
@@ -110,7 +113,7 @@ ul.pages
   margin-left: 0
   font-size: 14px
   span.handle
-    background: url("/concen/images/icon-handle.png")
+    background: image-url("concen/icon-handle.png")
     width: 12px
     height: 12px
     +inline-block
@@ -155,23 +158,23 @@ footer
 // Buttons
 
 a.prev
-  +background-image-with-dimension("button-prev.png")
+  +background-image-with-dimension("concen/button-prev.png")
   text-indent: -9999px
   display: block
 
 a.prev.disabled
-  +background-image-with-dimension("button-prev-disabled.png")
+  +background-image-with-dimension("concen/button-prev-disabled.png")
 
 a.next
-  +background-image-with-dimension("button-next.png")
+  +background-image-with-dimension("concen/button-next.png")
   text-indent: -9999px
   display: block
 
 a.next.disabled
-  +background-image-with-dimension("button-next-disabled.png")
+  +background-image-with-dimension("concen/button-next-disabled.png")
 
 a.grid
-  +background-image-with-dimension("button-grid.png")
+  +background-image-with-dimension("concen/button-grid.png")
   text-indent: -9999px
   display: block
 
@@ -216,15 +219,15 @@ a.grid
           text-indent: -9999px
           float: left
         .check
-          +background-image-with-dimension("glyph-small-check.png")
+          +background-image-with-dimension("concen/glyph-small-check.png")
         .activate
-          +background-image-with-dimension("glyph-small-check-alt.png")
+          +background-image-with-dimension("concen/glyph-small-check-alt.png")
         .activate:hover
-          +background-image-with-dimension("glyph-small-check.png")
+          +background-image-with-dimension("concen/glyph-small-check.png")
         .handle
-          +background-image-with-dimension("glyph-small-handle.png")
+          +background-image-with-dimension("concen/glyph-small-handle.png")
         .delete
-          +background-image-with-dimension("glyph-small-delete.png")
+          +background-image-with-dimension("concen/glyph-small-delete.png")
 
 .panels
   margin-bottom: 30px

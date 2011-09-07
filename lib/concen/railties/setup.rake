@@ -6,9 +6,6 @@ namespace :concen do
     if ["development", "test"].include? Rails.env
       Rake::Task["concen:generate_mongoid_config"].invoke
       Rake::Task["concen:generate_initializer"].invoke
-      Rake::Task["concen:symlink_assets"].invoke
-    else
-      Rake::Task["concen:copy_assets"].invoke
     end
     message = "Concen setup for #{Rails.env} environment is complete."
     puts "\n\e[32m#{message}\e[0m\n" # Green.
@@ -61,27 +58,5 @@ INITIALIZER
       message = "#{file_path} has been successfully generated."
       puts "\n\e[32m#{message}\e[0m\n" # Green.
     end
-  end
-
-  desc "Copy assets for Control Center."
-  task :copy_assets do
-    origin      = File.join(Concen::Engine.root, "public")
-    destination = File.join(Rails.root, "public")
-    if Dir.exist?("#{destination}/concen") || File.exist?("#{destination}/concen")
-      FileUtils.rm_r "#{destination}/concen"
-    end
-    FileUtils.cp_r "#{origin}/concen/", "#{destination}/"
-    message = "Assets have been copied to #{destination}."
-    puts "\n\e[32m#{message}\e[0m\n" # Green.
-  end
-
-  desc "Symlink assets."
-  task :symlink_assets do
-    origin      = File.join(Concen::Engine.root, "public")
-    destination = File.join(Rails.root, "public")
-    FileUtils.rm_r "#{destination}/concen" if File.directory?("#{destination}/concen")
-    FileUtils.ln_s "#{origin}/concen/", "#{destination}/"
-    message = "Assets have been symlinked to #{destination}."
-    puts "\n\e[32m#{message}\e[0m\n" # Green.
   end
 end

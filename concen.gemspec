@@ -31,6 +31,6 @@ Gem::Specification.new do |s|
   s.add_dependency("rack-gridfs", "~> 0.4.1")
   s.add_dependency("chronic", "~> 0.4.3")
   s.add_dependency("mime-types", "~> 1.16")
-  s.add_dependency("bcrypt-ruby", "~> 2.1.4")
+  s.add_dependency("bcrypt-ruby", "~> 3.0.0")
   s.add_dependency("domainatrix", "~> 0.0.10")
 end
