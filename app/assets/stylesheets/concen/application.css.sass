@@ -67,10 +67,9 @@ header
   input#keyword
     font-size: 12px
     line-height: 15px
-    +background-image-with-dimension("concen/magnifying-glass.png")
-    background-position: 6px 5px
-    border: 1px solid lighten(#000, 70%)
+    background: image-url("concen/magnifying-glass.png") no-repeat 6px 5px
     outline: none
+    border: 1px solid lighten(#000, 70%)
     +border-radius(60px)
     -webkit-appearance: none
     min-width: 120px
@@ -155,29 +154,6 @@ footer
     margin: 15px 0 0 0
     font-size: 12px
 
-// Buttons
-
-a.prev
-  +background-image-with-dimension("concen/button-prev.png")
-  text-indent: -9999px
-  display: block
-
-a.prev.disabled
-  +background-image-with-dimension("concen/button-prev-disabled.png")
-
-a.next
-  +background-image-with-dimension("concen/button-next.png")
-  text-indent: -9999px
-  display: block
-
-a.next.disabled
-  +background-image-with-dimension("concen/button-next-disabled.png")
-
-a.grid
-  +background-image-with-dimension("concen/button-grid.png")
-  text-indent: -9999px
-  display: block
-
 #file-list
   width: 260px
   float: right
@@ -219,15 +195,15 @@ a.grid
           text-indent: -9999px
           float: left
         .check
-          +background-image-with-dimension("concen/glyph-small-check.png")
+          background: image-url("concen/glyph-small-check.png") no-repeat
         .activate
-          +background-image-with-dimension("concen/glyph-small-check-alt.png")
+          background: image-url("concen/glyph-small-check-alt.png") no-repeat
         .activate:hover
-          +background-image-with-dimension("concen/glyph-small-check.png")
+          background: image-url("concen/glyph-small-check.png") no-repeat
         .handle
-          +background-image-with-dimension("concen/glyph-small-handle.png")
+          background: image-url("concen/glyph-small-handle.png") no-repeat
         .delete
-          +background-image-with-dimension("concen/glyph-small-delete.png")
+          background: image-url("concen/glyph-small-delete.png") no-repeat
 
 .panels
   margin-bottom: 30px
