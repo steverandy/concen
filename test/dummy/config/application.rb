@@ -1,9 +1,10 @@
 require File.expand_path('../boot', __FILE__)
 
-require "active_model/railtie"
 require "action_controller/railtie"
-require "action_view/railtie"
 require "action_mailer/railtie"
+require "active_resource/railtie"
+require "rails/test_unit/railtie"
+require "sprockets/railtie"
 
 Bundler.require
 require "concen"
@@ -40,5 +41,7 @@ module Dummy
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    config.assets.enabled = true
   end
 end
