@@ -1,3 +1,8 @@
+//= require concen/jquery.flot
+//= require concen/jquery.flot.stack
+//= require concen/jquery.flot.resize
+//= require_self
+
 $(function() {
   function plotWithOptions(data) {
     window.plot = $.plot($("#recent-responses"), [{label: "Total Runtime", data: data.total_runtime}, {label: "View Runtime", data: data.view_runtime},{label: "MongoDB Runtime", data: data.mongo_runtime}], {

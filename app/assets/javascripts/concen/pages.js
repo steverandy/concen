@@ -1,3 +1,7 @@
+//= require concen/ace/ace
+//= require concen/fileuploader
+//= require_self
+
 $(document).ready(function() {
 	$("#file-manager a.new-file").live("click", function(event) {
     var filename = prompt("Filename", "");

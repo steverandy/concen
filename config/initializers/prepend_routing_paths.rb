@@ -5,4 +5,3 @@ Concen::Engine.paths["config/routes"].to_a.each do |route|
   Rails.application.routes_reloader.paths.uniq!
 end
 
-# Concen::Engine.paths.config.routes.to_a.each

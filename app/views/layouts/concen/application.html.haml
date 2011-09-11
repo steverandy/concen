@@ -13,6 +13,7 @@
     %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge"}
     = csrf_meta_tag
     = stylesheet_link_tag "concen/application"
+    = stylesheet_link_tag "concen/#{params[:controller]}"
     - if content_for?(:head_stylesheets)
       = yield :head_stylesheets
     /[if lt IE 8]
@@ -25,6 +26,7 @@
     - else
       = javascript_include_tag "concen/modernizr", "concen/jquery"
     = javascript_include_tag "concen/application"
+    = javascript_include_tag "concen/#{params[:controller]}"
     - if content_for?(:head_javascripts)
       = yield :head_javascripts
     - if content_for?(:head)
