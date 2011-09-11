@@ -4,7 +4,7 @@ Concen is a Rails Engine for controlling and monitoring a Rails application from
 
 ## Requirements
 
-- **Rails 3.0.x**. Concen only supports Rails 3.0 application. Support for Rails 3.1 is planned to be added in near future.
+- **Rails 3.1. Concen only supports Rails 3.1 application.
 - **MongoDB 1.8.x**. All data are stored in MongoDB database, including all of the files uploaded (stored in GridFS).
 - **Typekit** (optional). Concen uses [Proxima Nova](http://typekit.com/fonts/proxima-nova) font. This font can be obtained from Typekit.
 
@@ -13,6 +13,12 @@ Concen is a Rails Engine for controlling and monitoring a Rails application from
 Add the following to the Gemfile of a Rails application.
 
     gem "concen", "~> 0.1"
+
+Concen uses Compass to generate its stylesheets so include Compass' gem in assets group in the Gemfile. If you face a problem when precompiling the assets it's most likely because Compass' gem isn't included in the Gemfile.
+
+    group :assets do
+      gem "compass", "~> 0.12.alpha"
+    end
 
 Run the rake task to setup Concen.
 
