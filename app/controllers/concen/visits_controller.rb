@@ -5,7 +5,7 @@ module Concen
 
     def visit_recorder_js
       if cookies[:visitor_id].blank?
-        cookies[:visitor_id] = {:value => ActiveSupport::SecureRandom.uuid, :expires => 20.years.from_now}
+        cookies[:visitor_id] = {:value => SecureRandom.uuid, :expires => 20.years.from_now}
       end
       render :layout => false, :mime_type => "text/javascript"
     end

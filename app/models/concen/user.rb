@@ -59,8 +59,8 @@ module Concen
     end
 
     def self.send_invitation(email)
-      password = ActiveSupport::SecureRandom.hex(4)
-      username = "user#{ActiveSupport::SecureRandom.hex(4)}"
+      password = SecureRandom.hex(4)
+      username = "user#{SecureRandom.hex(4)}"
       new_user = self.new(
         :full_name => username,
         :username => username,
@@ -75,7 +75,7 @@ module Concen
     end
 
     def generate_token(field)
-      self.write_attribute(field.to_sym, ActiveSupport::SecureRandom.urlsafe_base64)
+      self.write_attribute(field.to_sym, SecureRandom.urlsafe_base64)
     end
 
     def nulify_unused_token
