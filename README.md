@@ -134,28 +134,32 @@ If you have used Concen for any of your websites and would like to be listed her
 
 ## Version History
 
-- **0.1.7** (24 August 2011):
+- **0.2.0**:
+
+  - Rails 3.1 compatibility.
+
+- **0.1.7**:
 
   - Fix installation error when using Ruby 1.8.7.
 
-- **0.1.6** (24 August 2011):
+- **0.1.6**:
 
   - Fix gemspec encoding issue.
 
-- **0.1.5** (23 August 2011):
+- **0.1.5**:
 
   - A better approach of handling slug. Slug by default is generated from title. It can then be overwritten by specifying "Slug" in metadata declaration (from the text editor).
 
-- **0.1.4** (22 August 2011):
+- **0.1.4**:
 
   - Simpler setup process (only in 2 steps).
   - Brief guide is available upon the completion of setup.
   - Fix a bug in file path drag and drop function.
 
-- **0.1.3** (21 August 2011): Minor bug fixes.
+- **0.1.3**: Minor bug fixes.
 
-- **0.1.2** (19 August 2011): Minor bug fixes.
+- **0.1.2**: Minor bug fixes.
 
-- **0.1.1** (19 August 2011): Minor bug fixes.
+- **0.1.1**: Minor bug fixes.
 
-- **0.1** (19 August 2011): Initial release.
+- **0.1**: Initial release.
