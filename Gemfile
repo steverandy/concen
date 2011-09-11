@@ -1,7 +1,8 @@
 source "http://rubygems.org"
 
-gem "rails", ">= 3.0.0"
+gem "rails", ">= 3.1.0"
 
+gem "sass-rails", "~> 3.1.0"
 gem "compass", "~> 0.12.alpha"
 gem "haml", "~> 3.1.0"
 gem "mustache", "~> 0.99.4"
@@ -17,7 +18,7 @@ gem "domainatrix", "~> 0.0.10"
 
 # For test.
 gem "capybara", ">= 0.4.0"
-gem "fabrication", "0.9.4"
+gem "fabrication", "1.1.0"
 gem "database_cleaner", "0.6.0"
 gem "ansi"
 gem "turn"
