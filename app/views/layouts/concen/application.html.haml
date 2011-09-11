@@ -13,20 +13,15 @@
     %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge"}
     = csrf_meta_tag
     = stylesheet_link_tag "concen/application"
-    = stylesheet_link_tag "concen/#{params[:controller]}"
+    = stylesheet_link_tag params[:controller]
     - if content_for?(:head_stylesheets)
       = yield :head_stylesheets
     /[if lt IE 8]
       = stylesheet_link_tag "concen/ie"
     %script{:type => "text/javascript", :src => "http://use.typekit.com/#{Concen.typekit_id}.js"}
     %script{:type => "text/javascript"} try{Typekit.load();}catch(e){}
-    - if Rails.env == "production"
-      = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"
-      = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"
-    - else
-      = javascript_include_tag "concen/modernizr", "concen/jquery"
     = javascript_include_tag "concen/application"
-    = javascript_include_tag "concen/#{params[:controller]}"
+    = javascript_include_tag params[:controller]
     - if content_for?(:head_javascripts)
       = yield :head_javascripts
     - if content_for?(:head)
