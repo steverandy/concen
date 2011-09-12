@@ -14,7 +14,7 @@ Add the following to the Gemfile of a Rails application.
 
     gem "concen", "~> 0.1"
 
-Concen uses Compass to generate its stylesheets so include Compass' gem in assets group in the Gemfile. If you face a problem when precompiling the assets it's most likely because Compass' gem isn't included in the Gemfile.
+Concen uses Compass to generate its stylesheets so include Compass' gem in assets group in the Gemfile. If you face a problem when precompiling the assets, it's most likely because Compass' gem isn't included in the Gemfile.
 
     group :assets do
       gem "compass", "~> 0.12.alpha"
