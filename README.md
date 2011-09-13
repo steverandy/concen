@@ -134,6 +134,11 @@ If you have used Concen for any of your websites and would like to be listed her
 
 ## Version History
 
+- **0.2.1**:
+
+  - Minor bug fixes.
+  - Update jQuery to 1.6.4.
+
 - **0.2.0**:
 
   - Rails 3.1 compatibility.
