@@ -138,6 +138,7 @@ If you have used Concen for any of your websites and would like to be listed her
 
   - Minor bug fixes.
   - Update jQuery to 1.6.4.
+  - Update Redcarpet to 2.0.0b5 (fixes for inline HTML bug in Markdown parser).
 
 - **0.2.0**:
 

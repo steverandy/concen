@@ -109,7 +109,7 @@ GEM
       thor (~> 0.14.6)
     rake (0.9.2)
     rdoc (3.9.4)
-    redcarpet (2.0.0b4)
+    redcarpet (2.0.0b5)
     rubyzip (0.9.4)
     sass (3.1.7)
     sass-rails (3.1.0)
@@ -156,6 +156,6 @@ DEPENDENCIES
   mustache (~> 0.99.4)
   rack-gridfs (~> 0.4.1)
   rails (>= 3.1.0)
-  redcarpet (~> 2.0.0b4)
+  redcarpet (= 2.0.0b5)
   sass-rails (~> 3.1.0)
   turn

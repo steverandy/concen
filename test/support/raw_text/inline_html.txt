@@ -1,0 +1,13 @@
+Title: Frame
+
+Description: A web application for organizing web pages elegantly. It was started as my degree's final year project. Since then, I have been continuing to perfect it. Now it is available for public.
+
+Publish Time: 2010-10-20 08:00:00 +0800
+
+-----
+
+## Introducing Frame
+
+Frame is a web application for saving and organizing web pages. It produces screenshots for web pages and stores them in frames. With screenshots as the visual indicator, identifying and organizing web pages are quick and easy, unlike other solutions that primarily only utilize texts.
+
+<div class="clear"></div>

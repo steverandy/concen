@@ -60,6 +60,15 @@ class PageTest < ActiveSupport::TestCase
     assert_equal page.content_in_html, File.read("#{File.dirname(__FILE__)}/../support/raw_text/code_blocks.html")
   end
 
+  test "should parse content with inline HTML and convert to html correctly" do
+    raw_text_code_blocks = File.read "#{File.dirname(__FILE__)}/../support/raw_text/inline_html.txt"
+    assert_not_nil raw_text_code_blocks
+
+    page = Fabricate "concen/page", :title => nil, :raw_text => raw_text_code_blocks
+    assert_equal page.content_in_html, page.content_in_html("main")
+    assert_equal page.content_in_html, File.read("#{File.dirname(__FILE__)}/../support/raw_text/inline_html.html")
+  end
+
   test "should have slug automatically generated" do
     page1 = Fabricate "concen/page", :title => "Something New"
     assert_equal page1.slug, "something-new"
