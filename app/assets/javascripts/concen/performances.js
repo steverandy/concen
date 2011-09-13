@@ -1,7 +1,6 @@
 //= require concen/jquery.flot
 //= require concen/jquery.flot.stack
 //= require concen/jquery.flot.resize
-//= require_self
 
 $(function() {
   function plotWithOptions(data) {
