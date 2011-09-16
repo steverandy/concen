@@ -231,15 +231,16 @@ module Concen
     end
 
     def set_position
-      if Page.where(:level => self.level).count > 0
-        self.position = Page.with_position.where(:level => self.level).asc(:position).last.position + 1
+      siblings = Page.where :parent_id => self.parent_id
+      if siblings.count > 0
+        self.position = siblings.with_position.asc(:position).last.position + 1
       else
         self.position = 1
       end
     end
 
     def reset_position
-      affected_pages = Page.with_position.where(:level => self.level, :position.gt => self.position)
+      affected_pages = Page.with_position.where :parent_id => self.parent_id, :position.gt => self.position
       if affected_pages.count > 0
         for page in affected_pages
           page.position = page.position - 1
