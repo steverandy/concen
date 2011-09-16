@@ -112,4 +112,17 @@ class PageTest < ActiveSupport::TestCase
     page.save
     assert_equal page.slug, "new-slug"
   end
+
+  test "should get position set/reset correctly" do
+    page = Fabricate "concen/page"
+    child_page_1 = page.children.create :title => "Position 1"
+    assert_equal child_page_1.position, 1
+    child_page_2 = page.children.create :title => "Position 2"
+    assert_equal child_page_2.position, 2
+    child_page_3 = page.children.create :title => "Position 3"
+    assert_equal child_page_3.position, 3
+
+    child_page_2.destroy
+    assert_equal child_page_3.reload.position, 2
+  end
 end
