@@ -137,6 +137,7 @@ If you have used Concen for any of your websites and would like to be listed her
 - **0.2.2**:
 
   - Update Chronic gem dependency.
+  - Fix set_position and reset_position.
 
 - **0.2.1**:
 
