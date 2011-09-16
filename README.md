@@ -134,6 +134,10 @@ If you have used Concen for any of your websites and would like to be listed her
 
 ## Version History
 
+- **0.2.2**:
+
+  - Update Chronic gem dependency.
+
 - **0.2.1**:
 
   - Minor bug fixes.
