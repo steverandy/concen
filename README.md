@@ -134,6 +134,10 @@ If you have used Concen for any of your websites and would like to be listed her
 
 ## Version History
 
+- **0.2.3**:
+
+  - Update Mongoid version.
+
 - **0.2.2**:
 
   - Update Chronic gem dependency.
