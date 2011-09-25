@@ -137,6 +137,7 @@ If you have used Concen for any of your websites and would like to be listed her
 - **0.2.3**:
 
   - Update Mongoid version.
+  - UI design enhancements.
 
 - **0.2.2**:
 
