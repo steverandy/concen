@@ -5,7 +5,7 @@
 %ul{:class => children.first.level == 0 && "pages", :data => {:level => children.first.level}}
   - for child in children
     %li{:data => {:id => "page-#{child.id}"}}
-      %p
+      %p{:class => "#{'author' if child.authors_as_user.map(&:_id).include? current_concen_user.id}"}
         %span.handle
         = link_to child.title, edit_concen_page_path(child), :class => "title"
         = link_to "Add", new_concen_page_path(:level => child.level + 1, :parent_id => child.id), :class => "link-button hidden"
