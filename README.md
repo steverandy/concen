@@ -138,6 +138,7 @@ If you have used Concen for any of your websites and would like to be listed her
 
   - Update Mongoid version.
   - UI design enhancements.
+  - Tests are now using MiniTest.
 
 - **0.2.2**:
 
