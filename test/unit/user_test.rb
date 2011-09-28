@@ -1,42 +1,46 @@
 require "test_helper"
+require "minitest/spec"
+require "minitest/autorun"
 
-class UserTest < ActiveSupport::TestCase
-  test "should create user" do
+describe Concen::User do
+  it "can create user" do
     user = Fabricate "concen/user"
-    assert_not_nil user.id
+    user.id.wont_be_nil
   end
 
-  test "shoud have password_digest" do
+  it "has password_digest" do
     user = Fabricate "concen/user"
-    assert_not_nil user.password_digest
+    user.password_digest.wont_be_nil
   end
 
-  test "shoud have auth_token" do
+  it "has auth_token" do
     user = Fabricate "concen/user"
-    assert_not_nil user.auth_token
+    user.auth_token.wont_be_nil
   end
 
-  test "should have username" do
+  it "has username" do
     user = Fabricate.build "concen/user", :username => nil
-    assert_raise(Mongoid::Errors::Validations) { user.save! }
-    assert_equal user.errors[:username].first, "can't be blank"
+    lambda { user.save! }.must_raise(Mongoid::Errors::Validations)
+    user.errors[:username].first.must_equal "can't be blank"
   end
 
-  test "should have email" do
+  it "has email" do
     user = Fabricate.build "concen/user", :email => nil
-    assert_raise(Mongoid::Errors::Validations) { user.save! }
-    assert_equal user.errors[:email].first, "can't be blank"
+    lambda { user.save! }.must_raise(Mongoid::Errors::Validations)
+    user.errors[:email].first.must_equal "can't be blank"
   end
 
-  test "should have full_name" do
+  it "has full_name" do
     user = Fabricate.build("concen/user", :full_name => nil)
-    assert_raise(Mongoid::Errors::Validations) { user.save! }
-    assert_equal user.errors[:full_name].first, "can't be blank"
+    lambda { user.save! }.must_raise(Mongoid::Errors::Validations)
+    user.errors[:full_name].first.must_equal "can't be blank"
   end
 
-  test "should authenticate user" do
+  it "must authenticate user" do
     password = {:password => "newpassword", :password_confirmation => "newpassword"}
     user = Fabricate "concen/user", password
-    assert user.authenticate("newpassword"), "Cannot authenticate user."
+    authenticated_user = user.authenticate("newpassword")
+    authenticated_user.wont_equal false
+    authenticated_user.must_be_instance_of Concen::User
   end
 end

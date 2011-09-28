@@ -1,7 +1,9 @@
-require 'test_helper'
+require "test_helper"
+require "minitest/spec"
+require "minitest/autorun"
 
-class ConcenTest < ActiveSupport::TestCase
-  test "truth" do
-    assert_kind_of Module, Concen
+describe Concen do
+  it "must be a Module" do
+    Concen.must_be_kind_of Module
   end
 end
