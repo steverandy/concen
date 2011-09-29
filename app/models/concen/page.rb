@@ -27,6 +27,7 @@ module Concen
     field :labels, :type => Array, :default => []
     field :authors, :type => Array, :default => []
     field :status, :type => String
+    field :slug_path, :type => Array, :default => []
 
     validates_presence_of :title
     validates_presence_of :slug
@@ -36,7 +37,9 @@ module Concen
     before_validation :parse_raw_text
     before_validation :set_slug
     before_save :set_publish_month
+    before_save :set_slug_path
     before_create :set_position
+    before_create :set_level
     after_save :unset_unused_dynamic_fields
     after_destroy :destroy_children
     after_destroy :destroy_grid_files
@@ -337,6 +340,23 @@ module Concen
       if self.publish_time
         self.publish_month = Time.zone.local(self.publish_time.year, self.publish_time.month)
       end
+    end
+
+    def set_level
+      if self.parent_id
+        self.level = self.parent.level + 1
+      else
+        self.level = 0
+      end
+    end
+
+    def set_slug_path
+      parent = self.parent
+      while parent
+        self.slug_path << parent.slug
+        parent = parent.parent
+      end
+      self.slug_path.reverse! if self.slug_path
     end
   end
 end
