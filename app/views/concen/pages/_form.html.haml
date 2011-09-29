@@ -10,7 +10,6 @@
       #text-editor
   = f.text_area :raw_text, :class => "text-editor-content hidden"
   = f.hidden_field :parent_id
-  = f.hidden_field :level
   .actions.flush
     = f.submit "Save"
     - if @page.persisted?

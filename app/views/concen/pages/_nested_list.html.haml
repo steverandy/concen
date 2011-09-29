@@ -8,7 +8,7 @@
       %p{:class => "#{'author' if child.authors_as_user.map(&:_id).include? current_concen_user.id}"}
         %span.handle
         = link_to child.title, edit_concen_page_path(child), :class => "title"
-        = link_to "Add", new_concen_page_path(:level => child.level + 1, :parent_id => child.id), :class => "link-button hidden"
+        = link_to "Add", new_concen_page_path(:parent_id => child.id), :class => "link-button hidden"
         = link_to "Edit", edit_concen_page_path(child), :class => "link-button hidden"
         = link_to "Delete", concen_page_path(child), :method => :delete, :confirm => "Are you sure?", :class => "link-button hidden"
       - if Concen::Page.where(:parent_id => child.id).count > 0

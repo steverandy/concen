@@ -15,7 +15,6 @@ module Concen
       else
         @page = Page.new
       end
-      @page.level = params[:level].to_i if params[:level]
     end
 
     def create
