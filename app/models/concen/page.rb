@@ -35,6 +35,7 @@ module Concen
     validates_uniqueness_of :slug, :scope => [:parent_id, :level], :case_sensitive => false
 
     before_validation :parse_raw_text
+    before_validation :set_title
     before_validation :set_slug
     before_validation :set_position
     before_validation :set_level
@@ -112,12 +113,16 @@ module Concen
     end
 
     def underscore_hash_keys(hash)
-      new_hash = {}
-      hash.each do |key, value|
-        value = underscore_hash_keys(value) if value.is_a?(Hash)
-        new_hash[key.gsub(" ","_").downcase.to_sym] = value
+      if hash.is_a? Hash
+        new_hash = {}
+        hash.each do |key, value|
+          value = underscore_hash_keys(value) if value.is_a?(Hash)
+          new_hash[key.gsub(" ","_").downcase.to_sym] = value
+        end
+        new_hash
+      else
+        return nil
       end
-      new_hash
     end
 
     def parse_publish_time(publish_time_string)
@@ -225,6 +230,21 @@ module Concen
 
     protected
 
+    def set_title
+      unless self.title
+        if self.parent
+          if last_untitled_page = self.parent.children.where(:title => /Untitled /i).asc(:title).last
+            last_untitled_number = last_untitled_page.title.split(" ").last.to_i
+            self.title = "Untitled #{last_untitled_number+1}"
+          else
+            self.title = "Untitled 1"
+          end
+        else
+          self.title = "Untitled 1"
+        end
+      end
+    end
+
     def set_slug
       if self.slug.blank?
         self.slug = self.title.parameterize if self.title
@@ -303,22 +323,23 @@ module Concen
           self.content = {}
         end
 
-        # Set each value of meta data.
-        meta_data = underscore_hash_keys(YAML.load(meta_data))
-        meta_data.each do |key, value|
-          unless PROTECTED_FIELDS.include?(key)
-            if key == :publish_time
-              self.parse_publish_time(value)
-            else
-              self.write_attribute(key, value)
+        if meta_data = underscore_hash_keys(YAML.load(meta_data))
+          # Set each value of meta data.
+          meta_data.each do |key, value|
+            unless PROTECTED_FIELDS.include?(key)
+              if key == :publish_time
+                self.parse_publish_time(value)
+              else
+                self.write_attribute(key, value)
+              end
             end
           end
-        end
 
-        # Set the field to nil if the value isn't present in meta data.
-        # Except for authors.
-        (self.attributes.keys.map{ |k| k.to_sym } - PROTECTED_FIELDS).each do |field|
-          self[field] = nil if !meta_data.keys.include?(field) && field != :authors
+          # Set the field to nil if the value isn't present in meta data.
+          # Except for authors.
+          (self.attributes.keys.map{ |k| k.to_sym } - PROTECTED_FIELDS).each do |field|
+            self[field] = nil if !meta_data.keys.include?(field) && field != :authors
+          end
         end
 
         self.update_raw_text

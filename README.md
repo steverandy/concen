@@ -140,6 +140,7 @@ If you have used Concen for any of your websites and would like to be listed her
   - UI design enhancements.
   - Tests are now using MiniTest.
   - Add ancestor_slugs field for Page model.
+  - Page is given a default title if none is present.
 
 - **0.2.2**:
 
