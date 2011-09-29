@@ -115,7 +115,7 @@ $(document).ready(function() {
 		helper:	"clone",
 		handle: "span.handle",
 		items: "li",
-		maxLevels: 3,
+		maxLevels: 0,
 		opacity: .6,
 		placeholder: "placeholder",
 		revert: 250,
