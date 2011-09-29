@@ -24,10 +24,9 @@ describe Concen::Page do
     page.title.must_equal "Page Title"
   end
 
-  it "won't be created without title" do
-    page = Fabricate.build "concen/page", :title => nil
-    lambda { page.save! }.must_raise(Mongoid::Errors::Validations)
-    page.errors[:title].first.must_equal "can't be blank"
+  it "must get default title when none is present" do
+    page = Fabricate "concen/page", :title => nil
+    page.title.must_equal "Untitled 1"
   end
 
   it "validates uniqueness of title" do
