@@ -23,4 +23,5 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 # Clean database.
 DatabaseCleaner.strategy = :truncation
+DatabaseCleaner.start
 DatabaseCleaner.clean

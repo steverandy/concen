@@ -3,6 +3,10 @@ require "minitest/spec"
 require "minitest/autorun"
 
 describe Concen::Page do
+  def setup
+    DatabaseCleaner.clean
+  end
+
   it "can create page" do
     page = Fabricate "concen/page"
     page.id.wont_be_nil
@@ -18,6 +22,20 @@ describe Concen::Page do
   it "must parse title from raw_text" do
     page = Fabricate "concen/page", :title => nil, :raw_text => "Title: Page Title"
     page.title.must_equal "Page Title"
+  end
+
+  it "won't be created without title" do
+    page = Fabricate.build "concen/page", :title => nil
+    lambda { page.save! }.must_raise(Mongoid::Errors::Validations)
+    page.errors[:title].first.must_equal "can't be blank"
+  end
+
+  it "validates uniqueness of title" do
+    parent_page = Fabricate "concen/page", :title => "Parent"
+    child_page_1 = parent_page.children.create :title => "Child"
+    child_page_2 = parent_page.children.build :title => "Child"
+    lambda { child_page_2.save! }.must_raise(Mongoid::Errors::Validations)
+    child_page_2.errors[:title].first.must_equal "is already taken"
   end
 
   it "must parse publish_time from raw_text" do
@@ -86,12 +104,6 @@ describe Concen::Page do
     page.raw_text = File.read "#{File.dirname(__FILE__)}/../support/raw_text/slug.txt"
     page.save
     page.slug.must_equal "something-else"
-  end
-
-  it "won't be created without title" do
-    page = Fabricate.build "concen/page", :title => nil
-    lambda { page.save! }.must_raise(Mongoid::Errors::Validations)
-    page.errors[:title].first.must_equal "can't be blank"
   end
 
   it "has authors" do

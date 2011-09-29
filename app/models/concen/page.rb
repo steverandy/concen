@@ -19,6 +19,7 @@ module Concen
     field :title, :type => String
     field :description, :type => String
     field :slug, :type => String
+    field :ancestor_slugs, :type => Array, :default => []
     field :raw_text, :type => String
     field :content, :type => Hash, :default => {}
     field :position, :type => Integer
@@ -27,7 +28,6 @@ module Concen
     field :labels, :type => Array, :default => []
     field :authors, :type => Array, :default => []
     field :status, :type => String
-    field :ancestor_slugs, :type => Array, :default => []
 
     validates_presence_of :title
     validates_presence_of :slug
@@ -36,10 +36,10 @@ module Concen
 
     before_validation :parse_raw_text
     before_validation :set_slug
+    before_validation :set_position
+    before_validation :set_level
     before_save :set_publish_month
     before_save :set_ancestor_slugs
-    before_create :set_position
-    before_create :set_level
     after_save :unset_unused_dynamic_fields
     after_destroy :destroy_children
     after_destroy :destroy_grid_files
@@ -64,10 +64,10 @@ module Concen
 
     # Get the list of dynamic fields by checking againts this array.
     # Values should mirror the listed fields above.
-    PREDEFINED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :slug, :content, :raw_text, :position, :grid_files, :title, :description, :publish_time, :labels, :authors, :status]
+    PREDEFINED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :slug, :ancestor_slugs, :content, :raw_text, :position, :grid_files, :title, :description, :publish_time, :labels, :authors, :status]
 
     # These fields can't be overwritten by user's meta data when parsing raw_text.
-    PROTECTED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :content, :raw_text, :position, :grid_files]
+    PROTECTED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :content, :raw_text, :position, :grid_files, :ancestor_slugs]
 
     def content_in_html(key = "main", data={})
       if content = self.content.try(:[], key)
@@ -234,12 +234,39 @@ module Concen
     end
 
     def set_position
-      siblings = Page.where :parent_id => self.parent_id
-      if siblings.count > 0
-        self.position = siblings.with_position.asc(:position).last.position + 1
-      else
-        self.position = 1
+      unless self.persisted?
+        siblings = Page.where :parent_id => self.parent_id
+        if siblings.count > 0
+          self.position = siblings.with_position.asc(:position).last.position + 1
+        else
+          self.position = 1
+        end
       end
+    end
+
+    def set_publish_month
+      if self.publish_time
+        self.publish_month = Time.zone.local(self.publish_time.year, self.publish_time.month)
+      end
+    end
+
+    def set_level
+      unless self.persisted?
+        if self.parent_id
+          self.level = self.parent.level + 1
+        else
+          self.level = 0
+        end
+      end
+    end
+
+    def set_ancestor_slugs
+      parent = self.parent
+      while parent
+        self.ancestor_slugs << parent.slug
+        parent = parent.parent
+      end
+      self.ancestor_slugs.reverse! if self.ancestor_slugs
     end
 
     def reset_position
@@ -334,29 +361,6 @@ module Concen
         end
       end
       Page.collection.update({"_id" => self.id}, {"$unset" => target_fields})
-    end
-
-    def set_publish_month
-      if self.publish_time
-        self.publish_month = Time.zone.local(self.publish_time.year, self.publish_time.month)
-      end
-    end
-
-    def set_level
-      if self.parent_id
-        self.level = self.parent.level + 1
-      else
-        self.level = 0
-      end
-    end
-
-    def set_ancestor_slugs
-      parent = self.parent
-      while parent
-        self.ancestor_slugs << parent.slug
-        parent = parent.parent
-      end
-      self.ancestor_slugs.reverse! if self.ancestor_slugs
     end
   end
 end
