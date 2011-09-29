@@ -7,13 +7,13 @@ rescue LoadError
 end
 
 require "rake"
-require "rake/rdoctask"
+require "rdoc/task"
 require "rake/testtask"
 
 Rake::TestTask.new(:test) do |t|
   t.libs << "lib"
   t.libs << "test"
-  t.pattern = "test/**/*_test.rb"
+  t.test_files = Dir.glob("test/**/*_test.rb")
   t.verbose = false
 end
 

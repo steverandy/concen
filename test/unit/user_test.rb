@@ -3,6 +3,10 @@ require "minitest/spec"
 require "minitest/autorun"
 
 describe Concen::User do
+  before do
+    DatabaseCleaner.clean
+  end
+
   it "can create user" do
     user = Fabricate "concen/user"
     user.id.wont_be_nil

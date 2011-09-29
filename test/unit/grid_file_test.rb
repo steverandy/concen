@@ -3,6 +3,10 @@ require "minitest/spec"
 require "minitest/autorun"
 
 describe Concen::GridFile do
+  before do
+    DatabaseCleaner.clean
+  end
+
   it "can store file in GridFS" do
     page = Fabricate "concen/page"
     grid_file = page.grid_files.build

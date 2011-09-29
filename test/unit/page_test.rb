@@ -3,7 +3,7 @@ require "minitest/spec"
 require "minitest/autorun"
 
 describe Concen::Page do
-  def setup
+  before do
     DatabaseCleaner.clean
   end
 
