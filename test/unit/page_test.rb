@@ -130,14 +130,14 @@ describe Concen::Page do
     child_page_3.reload.position.must_equal 2
   end
 
-  it "must have slug_path" do
+  it "must have ancestor_slugs" do
     page_1 = Fabricate "concen/page", :title => "A"
 
     page_2 = page_1.children.create :title => "B"
-    page_2.slug_path.must_equal ["a"]
+    page_2.ancestor_slugs.must_equal ["a"]
 
     page_3 = page_2.children.create :title => "C"
-    page_3.slug_path.must_equal ["a", "b"]
+    page_3.ancestor_slugs.must_equal ["a", "b"]
   end
 
   it "must have level" do

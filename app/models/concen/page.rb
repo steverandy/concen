@@ -27,7 +27,7 @@ module Concen
     field :labels, :type => Array, :default => []
     field :authors, :type => Array, :default => []
     field :status, :type => String
-    field :slug_path, :type => Array, :default => []
+    field :ancestor_slugs, :type => Array, :default => []
 
     validates_presence_of :title
     validates_presence_of :slug
@@ -37,7 +37,7 @@ module Concen
     before_validation :parse_raw_text
     before_validation :set_slug
     before_save :set_publish_month
-    before_save :set_slug_path
+    before_save :set_ancestor_slugs
     before_create :set_position
     before_create :set_level
     after_save :unset_unused_dynamic_fields
@@ -350,13 +350,13 @@ module Concen
       end
     end
 
-    def set_slug_path
+    def set_ancestor_slugs
       parent = self.parent
       while parent
-        self.slug_path << parent.slug
+        self.ancestor_slugs << parent.slug
         parent = parent.parent
       end
-      self.slug_path.reverse! if self.slug_path
+      self.ancestor_slugs.reverse! if self.ancestor_slugs
     end
   end
 end
