@@ -230,81 +230,6 @@ module Concen
 
     protected
 
-    def set_title
-      unless self.title
-        if self.parent
-          if last_untitled_page = self.parent.children.where(:title => /Untitled /i).asc(:title).last
-            last_untitled_number = last_untitled_page.title.split(" ").last.to_i
-            self.title = "Untitled #{last_untitled_number+1}"
-          else
-            self.title = "Untitled 1"
-          end
-        else
-          self.title = "Untitled 1"
-        end
-      end
-    end
-
-    def set_slug
-      if self.slug.blank?
-        self.slug = self.title.parameterize if self.title
-      else
-        self.slug = self.slug.parameterize
-      end
-    end
-
-    def set_position
-      # Only set position for newly created record.
-      # It will be used by before_validation callback
-      # just in case this field is used to validate something.
-      unless self.persisted?
-        siblings = Page.where :parent_id => self.parent_id
-        if siblings.count > 0
-          self.position = siblings.with_position.asc(:position).last.position + 1
-        else
-          self.position = 1
-        end
-      end
-    end
-
-    def set_publish_month
-      if self.publish_time
-        self.publish_month = Time.zone.local(self.publish_time.year, self.publish_time.month)
-      end
-    end
-
-    def set_level
-      # Only set level for newly created record.
-      # It will be used by before_validation callback
-      # because level is part of uniqness validation of :title and :slug.
-      unless self.persisted?
-        if self.parent_id
-          self.level = self.parent.level + 1
-        else
-          self.level = 0
-        end
-      end
-    end
-
-    def set_ancestor_slugs
-      parent = self.parent
-      while parent
-        self.ancestor_slugs << parent.slug
-        parent = parent.parent
-      end
-      self.ancestor_slugs.reverse! if self.ancestor_slugs
-    end
-
-    def reset_position
-      affected_pages = Page.with_position.where :parent_id => self.parent_id, :position.gt => self.position
-      if affected_pages.count > 0
-        for page in affected_pages
-          page.position = page.position - 1
-          page.save
-        end
-      end
-    end
-
     def parse_raw_text
       if self.raw_text && self.raw_text.length > 0 && (self.new? || self.raw_text_changed?)
         self.content = {}
@@ -368,6 +293,92 @@ module Concen
       self.raw_text = meta_data.join + self.raw_text.match(/(?:\r?\n-{3,}\r?\n)/).to_s + raw_text_array.join
     end
 
+    def unset_unused_dynamic_fields
+      target_fields = {}
+      for field in self.attributes.keys
+        if !PREDEFINED_FIELDS.include?(field.to_sym) && self[field.to_sym].nil?
+          target_fields[field.to_s] = 1
+        end
+      end
+      Page.collection.update({"_id" => self.id}, {"$unset" => target_fields})
+    end
+
+    # Give default title ("Untitled n") when no title is given.
+    def set_title
+      unless self.title
+        if self.parent
+          if last_untitled_page = self.parent.children.where(:title => /Untitled /i).asc(:title).last
+            last_untitled_number = last_untitled_page.title.split(" ").last.to_i
+            self.title = "Untitled #{last_untitled_number+1}"
+          else
+            self.title = "Untitled 1"
+          end
+        else
+          self.title = "Untitled 1"
+        end
+      end
+    end
+
+    def set_slug
+      if self.slug.blank?
+        self.slug = self.title.parameterize if self.title
+      else
+        self.slug = self.slug.parameterize
+      end
+    end
+
+    def set_position
+      # Only set position for newly created record.
+      # It will be used by before_validation callback
+      # just in case this field is used to validate something.
+      unless self.persisted?
+        siblings = Page.where :parent_id => self.parent_id
+        if siblings.count > 0
+          self.position = siblings.with_position.asc(:position).last.position + 1
+        else
+          self.position = 1
+        end
+      end
+    end
+
+    def reset_position
+      affected_pages = Page.with_position.where :parent_id => self.parent_id, :position.gt => self.position
+      if affected_pages.count > 0
+        for page in affected_pages
+          page.position = page.position - 1
+          page.save
+        end
+      end
+    end
+
+    def set_level
+      # Only set level for newly created record.
+      # It will be used by before_validation callback
+      # because level is part of uniqness validation of :title and :slug.
+      unless self.persisted?
+        if self.parent_id
+          self.level = self.parent.level + 1
+        else
+          self.level = 0
+        end
+      end
+    end
+
+    def set_publish_month
+      if self.publish_time
+        self.publish_month = Time.zone.local(self.publish_time.year, self.publish_time.month)
+      end
+    end
+
+    def set_ancestor_slugs
+      parent = self.parent
+      while parent
+        self.ancestor_slugs << parent.slug
+        parent = parent.parent
+      end
+      self.ancestor_slugs.reverse! if self.ancestor_slugs
+    end
+
     def destroy_children
       for child in self.children
         child.destroy
@@ -378,16 +389,6 @@ module Concen
       for grid_file in self.grid_files
         grid_file.destroy
       end
-    end
-
-    def unset_unused_dynamic_fields
-      target_fields = {}
-      for field in self.attributes.keys
-        if !PREDEFINED_FIELDS.include?(field.to_sym) && self[field.to_sym].nil?
-          target_fields[field.to_s] = 1
-        end
-      end
-      Page.collection.update({"_id" => self.id}, {"$unset" => target_fields})
     end
   end
 end
