@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency("haml", "~> 3.1.0")
   s.add_dependency("mustache", "~> 0.99.4")
   s.add_dependency("redcarpet", "~> 2.0.0b5")
-  s.add_dependency("mongoid", "~> 2.2.2")
+  s.add_dependency("mongoid", "~> 2.3.0")
   s.add_dependency("mongo", "~> 1.4.0")
   s.add_dependency("bson_ext", "~> 1.4.0")
   s.add_dependency("mongo-rails-instrumentation", "~> 0.2.4")
