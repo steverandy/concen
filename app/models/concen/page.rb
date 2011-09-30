@@ -254,6 +254,9 @@ module Concen
     end
 
     def set_position
+      # Only set position for newly created record.
+      # It will be used by before_validation callback
+      # just in case this field is used to validate something.
       unless self.persisted?
         siblings = Page.where :parent_id => self.parent_id
         if siblings.count > 0
@@ -271,6 +274,9 @@ module Concen
     end
 
     def set_level
+      # Only set level for newly created record.
+      # It will be used by before_validation callback
+      # because level is part of uniqness validation of :title and :slug.
       unless self.persisted?
         if self.parent_id
           self.level = self.parent.level + 1
