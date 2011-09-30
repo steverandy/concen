@@ -136,7 +136,7 @@ If you have used Concen for any of your websites and would like to be listed her
 
 - **0.2.3**:
 
-  - Update Mongoid version.
+  - Update Mongoid version (2.2.2).
   - UI design enhancements.
   - Tests are now using MiniTest.
   - Add ancestor_slugs field for Page model.

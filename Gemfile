@@ -2,13 +2,16 @@ source "http://rubygems.org"
 
 gem "rails", ">= 3.1.0"
 
-gem "sass-rails", "~> 3.1.0"
 gem "compass", "~> 0.12.alpha"
+gem "sass-rails", "~> 3.1.3"
+
+# gemspec.
 gem "haml", "~> 3.1.0"
 gem "mustache", "~> 0.99.4"
 gem "redcarpet", "2.0.0b5"
-gem "mongoid", "~> 2.2.1"
-gem "bson_ext", "~> 1.3.1"
+gem "mongoid", "~> 2.2.2"
+gem "mongo", "~> 1.4.0"
+gem "bson_ext", "~> 1.4.0"
 gem "mongo-rails-instrumentation", "~> 0.2.4"
 gem "rack-gridfs", "~> 0.4.1"
 gem "chronic", "~> 0.6.3"
