@@ -132,7 +132,12 @@ To access Concen web interface, use "concen" subdomain for example http://concen
 
 If you have used Concen for any of your websites and would like to be listed here. Please send me a message.
 
-## Version History
+## Versions History
+
+- **0.2.4**:
+
+  - Set Mongoid dependency at "~> 2.2" for flexibility.
+  - The fields for Concen::Response are now predefined.
 
 - **0.2.3**:
 
