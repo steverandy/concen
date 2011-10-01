@@ -3,6 +3,16 @@ module Concen
     include Mongoid::Document
     include Mongoid::Timestamps
 
+    field :controller, :type => String
+    field :action, :type => String
+    field :format, :type => Symbol
+    field :method, :type => String
+    field :path, :type => String
+    field :status, :type => Integer
+    field :view_runtime, :type => Float
+    field :mongo_runtime, :type => Float
+    field :total_runtime, :type => Float
+
     store_in self.name.underscore.gsub("/", ".").pluralize
 
     def self.aggregate_average_runtime(*args)
