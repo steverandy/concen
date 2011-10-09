@@ -188,6 +188,11 @@ If you have used Concen for any of your websites and would like to be listed her
 
 - **0.1**: Initial release.
 
+## Upcoming Features
+
+- Time range selection in traffic statistics.
+- Time range selection in performance statistics.
+
 ## License
 
 Copyright © 2011 Steve Randy Tantra
