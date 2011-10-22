@@ -134,6 +134,10 @@ If you have used Concen for any of your websites and would like to be listed her
 
 ## Versions
 
+- **0.2.5**:
+
+  - Temporary fix for Redcarpet's smartypants extension.
+
 - **0.2.4**:
 
   - Set Mongoid dependency at "~> 2.2" for flexibility.

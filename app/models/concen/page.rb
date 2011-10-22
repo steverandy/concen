@@ -71,17 +71,26 @@ module Concen
     PROTECTED_FIELDS = [:_id, :parent_id, :level, :created_at, :updated_at, :content, :raw_text, :position, :grid_files, :ancestor_slugs]
 
     def content_in_html(key = "main", data={})
+      html = nil
+
       if content = self.content.try(:[], key)
+        # Parse mustache first.
         content = Mustache.render(content, data)
+
+        # Parse markdown.
         markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, Concen.markdown_extensions)
         html = markdown.render content
+
+        # Parse smartypants.
         if Concen.parse_markdown_with_smartypants
+          # Temporary hack to fix smartypants bug in Redcarpet 2.0.0b5.
+          html.gsub!("&#39;", "'")
+
           html = Redcarpet::Render::SmartyPants.render html
         end
-        return html
-      else
-        return nil
       end
+
+      return html
     end
 
     def images(filename=nil)
