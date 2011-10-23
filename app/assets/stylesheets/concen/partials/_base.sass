@@ -44,17 +44,17 @@ a.link-button
   border: 1px solid $color-2
   padding: 2px 8px
   font-weight: bold
-  color: $color-2
+  color: $color-2 !important
   width: auto
   +border-radius(30px)
   vertical-align: middle
   background: $color-4
-  +background(linear-gradient(white, $color-3))
-  +text-shadow(rgba(white, 1) 0 1px 0)
+  +linear-gradient(white, $color-3)
+  text-shadow: white 0px 1px 0px
   &:hover
     text-decoration: none
   &:active
-    +background(linear-gradient($color-3, white))
+    +linear-gradient($color-3, white)
 
 img.visit-recorder
   position: absolute

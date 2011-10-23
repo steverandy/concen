@@ -1,20 +1,15 @@
+//= require concen/reset
 //= require_self
 //= require concen/fileuploader
 //= require concen/flot
 //= require concen/jquery.ui.resizable
 @charset "utf-8"
 
-@import "compass"
-@import "compass/reset"
-@import "compass/typography/text/force-wrap"
-@import "blueprint/print"
+@import "concen/mixins/bourbon"
 @import "concen/partials/variables"
 @import "concen/partials/mixins"
 @import "concen/partials/base"
 @import "concen/partials/form"
-
-@media print
-  +blueprint-print
 
 body.concen
   min-width: 960px
@@ -54,10 +49,11 @@ header
     right: 0
     top: 0
     ul
-      +horizontal-list(10px)
       font-size: 13px
       overflow: visible
       li
+        float: left
+        margin-left: 20px
         line-height: 25px
         a
           +hover-link
@@ -159,10 +155,9 @@ footer
 #file-list
   width: 260px
   float: right
-  // background: lighten(#000, 94%)
   padding: 0 0 0 20px
   margin-bottom: 20px
-  +text-shadow(white, 0px, 1px, 0px)
+  text-shadow: white 0px 1px 0px
   position: relative
   h3
     line-height: 1
@@ -171,7 +166,7 @@ footer
     position: relative
     background: lighten(#000, 92%)
     padding: 6px 10px
-    +text-shadow(white, 0px, 1px, 0px)
+    text-shadow: white 0px 1px 0px
   ul
     list-style-position: inside
     margin-bottom: 20px
@@ -213,7 +208,6 @@ footer
     float: left
     width: 31.25%
     margin-right: 3.125%
-    // margin-bottom: 30px
     font-size: 12px
     .graph
       padding: $standard-gap/2
@@ -222,8 +216,8 @@ footer
       border-bottom: 1px solid $color-2
       padding: $standard-gap/3
       background: $color-4
-      +border-top-radius(4px)
-      +text-shadow(white, 0px, 1px, 0px)
+      +border-radius(4px 4px 0 0)
+      text-shadow: white 0px 1px 0px
     p.big-number
       font-size: 72px
       text-align: center
@@ -242,7 +236,8 @@ footer
           border-bottom: 0
         a, p
           font-size: 12px
-          +ellipsis
+          // Need compass replacement
+          // +ellipsis
           display: block
           width: 100%
         p.right
@@ -351,7 +346,7 @@ table
   width: 100%
   th
     background: $color-4
-    +border-top-radius(4px)
+    +border-radius(4px 4px 0 0)
     font-size: 16px
     font-weight: bold
     .wf-active &

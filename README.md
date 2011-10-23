@@ -137,6 +137,8 @@ If you have used Concen for any of your websites and would like to be listed her
 - **0.2.5**:
 
   - Temporary fix for Redcarpet's smartypants extension.
+  - Minor color changes.
+  - Remove Compass dependency.
 
 - **0.2.4**:
 
