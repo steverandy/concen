@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= "#{@page_title + ' - ' if @page_title}Concen - #{Concen.application_name}" %></title>
+    <meta name="description" content="Web application to control and monitor a website." >
+    <meta name="author" content="Steve Randy Tantra">
+    <meta name="copyright" content="Copyright © 2011 by Steve Randy Tantra">
+    <meta name="DC.title" content="Status - Control Center - Steve Randy Tantra">
+    <meta name="DC.subject" content="Control, Monitor, Center, Web Application">
+    <meta name="DC.creator" content="Steve Randy Tantra">
+    <meta name="viewport" content="width = 1024">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <%= csrf_meta_tag %>
+    <%= stylesheet_link_tag "concen/application" %>
+    <% if content_for?(:head_stylesheets) %>
+      <%= yield :head_stylesheets %>
+    <% end %>
+    <!--[if lt IE 8]>
+      <%= stylesheet_link_tag "concen/ie" %>
+    <![endif]-->
+    <script type="text/javascript" src="http://use.typekit.com/<%= Concen.typekit_id %>.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <%= javascript_include_tag "concen/application" %>
+    <% if content_for?(:head_javascripts) %>
+      <%= yield :head_javascripts %>
+    <% end %>
+    <% if content_for?(:head) %>
+      <%= yield :head %>
+    <% end %>
+  </head>
+  <body class="concen">
+    <%= render "layouts/concen/header" %>
+    <%= yield %>
+    <footer class="clearfix">
+      <p>
+        <span>Created by</span>
+        <%= link_to "Steve Randy Tantra", "http://steverandytantra.com/"  %>
+      </p>
+    </footer>
+  </body>
+</html>

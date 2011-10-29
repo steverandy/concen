@@ -1,0 +1,34 @@
+<ul>
+  <li>
+    <p>Uptime</p>
+    <p class="right"><%= @server_stats[:uptime] if @server_stats %></p>
+  </li>
+  <li>
+    <p>Processor</p>
+    <p class="right">
+      <% if @server_stats[:processor].present? %>
+        <%= "#{@server_stats[:processor][:user]}% user, #{@server_stats[:processor][:sys]}% sys, #{@server_stats[:processor][:idle]}% idle" %>
+      <% end %>
+    </p>
+  </li>
+  <li>
+    <p>Memory</p>
+    <p class="right">
+      <% if @server_stats[:memory].present? %>
+        <%= "#{@server_stats[:memory][:used]} MB used, #{@server_stats[:memory][:free]} MB free" %>
+      <% end %>
+    </p>
+  </li>
+  <li>
+    <p>MongoDB Data Size</p>
+    <p class="right"><%= number_to_human_size(@mongodb_stats["dataSize"]) %></p>
+  </li>
+  <li>
+    <p>MongoDB Index Size</p>
+    <p class="right"><%= number_to_human_size(@mongodb_stats["indexSize"]) %></p>
+  </li>
+  <li>
+    <p>MongoDB GridFS Size</p>
+    <p class="right"><%= number_to_human_size(@mongodb_grid_fs_stats) %></p>
+  </li>
+</ul>

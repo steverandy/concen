@@ -1,0 +1,27 @@
+<% content_for :head_javascripts do %>
+  <%= javascript_include_tag "concen/statuses" %>
+<% end %>
+
+<div id="content">
+  <div class="panels">
+    <div class="panel pages">
+      <div class="border">
+        <h3>Pages</h3>
+        <p class="big-number"></p>
+      </div>
+    </div>
+    <div class="panel users">
+      <div class="border">
+        <h3>Users</h3>
+        <p class="big-number"></p>
+      </div>
+    </div>
+    <div class="panel server edge">
+      <div class="border">
+        <h3>Server</h3>
+        <ul></ul>
+      </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>

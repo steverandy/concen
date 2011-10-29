@@ -1,0 +1,12 @@
+<ul>
+  <% if @referrals_stats.count == 0 %>
+    <li><p>No Referrals</p></li>
+  <% else %>
+    <% for stat in @referrals_stats %>
+      <li>
+        <p><%= stat.first %></p>
+        <p class="right"><%= stat.last %></p>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

@@ -1,0 +1,26 @@
+<%= form_for @page, {:html => {:class => "with-text-editor #{'wide' if !@page.persisted?}"}} do |f| %>
+  <% if @page.errors.any? %>
+    <div id="errorExplanation">
+      <h3><%= "#{pluralize(@page.errors.count, "error")} prohibited this parent from being saved:" %></h3>
+      <ul>
+        <% @page.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field text-editor">
+    <div class="border">
+      <div id="text-editor"></div>
+    </div>
+  </div>
+  <%= f.text_area :raw_text, :class => "text-editor-content hidden" %>
+  <%= f.hidden_field :parent_id %>
+  <div class="actions flush">
+    <%= f.submit "Save" %>
+    <% if @page.persisted? %>
+      <%= link_to "Delete", concen_page_path(@page), :method => :delete %>
+    <% end %>
+    <%= link_to "Cancel", concen_pages_path %>
+  </div>
+<% end %>

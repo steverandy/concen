@@ -1,0 +1,17 @@
+<div id="content">
+  <h1>Sign In</h1>
+  <%= form_tag concen_sessions_path do %>
+    <div class="field">
+      <%= label_tag :username %>
+      <%= text_field_tag :username, params[:username] %>
+    </div>
+    <div class="field">
+      <%= label_tag :password %>
+      <%= password_field_tag :password, params[:password] %>
+    </div>
+    <div class="actions">
+      <%= submit_tag "Sign In" %>
+      <%= link_to "Reset Password", new_reset_password_concen_users_path %>
+    </div>
+  <% end %>
+</div>

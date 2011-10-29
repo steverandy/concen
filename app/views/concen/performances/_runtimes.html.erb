@@ -1,0 +1,8 @@
+<ul>
+  <% for stat in @runtimes_stats %>
+    <li>
+      <p><%= stat.first %></p>
+      <p class="right"><%= stat.last %></p>
+    </li>
+  <% end %>
+</ul>

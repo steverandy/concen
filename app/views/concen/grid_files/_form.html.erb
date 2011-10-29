@@ -1,0 +1,23 @@
+<%= form_for [@page, @grid_file], :url => concen_page_grid_file_path(@page, @grid_file), :html => {:class => "with-text-editor wide"} do |f| %>
+  <% if @grid_file.errors.any? %>
+    <div id="errorExplanation">
+      <h3><%= "#{pluralize(@page.errors.count, "error")} prohibited this parent from being saved:" %></h3>
+      <ul>
+        <% @page.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field text-editor">
+    <div class="border">
+      <div id="text-editor" class="wide"></div>
+    </div>
+  </div>
+  <%= text_area_tag :concen_grid_file_page, @grid_file.read.force_encoding("utf-8"), :class => "text-editor-content hidden" %>
+  <div class="actions flush">
+    <%= f.submit "Save" %>
+    <%= link_to "Delete", concen_page_grid_file_path(@page, @grid_file), :method => :delete %>
+    <%= link_to "Cancel", edit_concen_page_path(@page) %>
+  </div>
+<% end %>

@@ -1,0 +1,40 @@
+<% content_for :head_javascripts do %>
+  <!--[if lt IE 8]>
+    <%= javascript_include_tag "concen/excanvas" %>
+  <![endif]-->
+  <%= javascript_include_tag "concen/traffics" %>
+<% end %>
+
+<div id="content">
+  <div class="panels">
+    <div class="panel wide">
+      <div class="border">
+        <h3>Visits in Past 24 Hours</h3>
+        <div class="graph">
+          <div id="recent-visits" style="width: 100%; height: 200px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panels">
+    <div class="panel visits-1-hour">
+      <div class="border">
+        <h3>Visits in Past Hour</h3>
+        <p class="big-number"></p>
+      </div>
+    </div>
+    <div class="panel pages">
+      <div class="border">
+        <h3>Pages</h3>
+        <ul></ul>
+      </div>
+    </div>
+    <div class="panel referrals edge">
+      <div class="border">
+        <h3>Referrals</h3>
+        <ul></ul>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>

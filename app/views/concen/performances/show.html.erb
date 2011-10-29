@@ -1,0 +1,40 @@
+<% content_for :head_javascripts do %>
+  <!--[if lt IE 8]>
+    <%= javascript_include_tag "concen/excanvas" %>
+  <![endif]-->
+  <%= javascript_include_tag "concen/performances" %>
+<% end %>
+
+<div id="content">
+  <div class="panels">
+    <div class="panel wide">
+      <div class="border">
+        <h3>Responses in Past Hour</h3>
+        <div class="graph">
+          <div id="recent-responses" style="width: 100%; height: 200px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panels">
+    <div class="panel total-runtime">
+      <div class="border">
+        <h3>Average Total Runtime</h3>
+        <ul></ul>
+      </div>
+    </div>
+    <div class="panel view-runtime">
+      <div class="border">
+        <h3>Average View Runtime</h3>
+        <ul></ul>
+      </div>
+    </div>
+    <div class="panel mongodb-runtime edge">
+      <div class="border">
+        <h3>Average MongoDB Runtime</h3>
+        <ul></ul>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>

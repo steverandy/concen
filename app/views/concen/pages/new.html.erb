@@ -1,0 +1,10 @@
+<% content_for :head_javascripts do %>
+  <%= javascript_include_tag "concen/pages" %>
+<% end %>
+
+<div id="content">
+  <h1>New Page</h1>
+  <div class="clearfix">
+    <%= render "form" %>
+  </div>
+</div>

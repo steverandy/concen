@@ -1,0 +1,32 @@
+<div class="files">
+  <div class="stylesheets">
+    <h3>
+      <span>Stylesheets</span>
+      <%= link_to "New", concen_page_grid_files_path(@page, :file_type => "css"), :class => "link-button new-file" %>
+    </h3>
+    <% if @page.stylesheets.any? %>
+      <%= render :partial => "concen/pages/file_list", :locals => {:files => @page.stylesheets} %>
+    <% end %>
+  </div>
+  <div class="javascripts">
+    <h3>
+      <span>JavaScripts</span>
+      <%= link_to "New", concen_page_grid_files_path(@page, :file_type => "js"), :class => "link-button new-file" %>
+    </h3>
+    <% if @page.javascripts.any? %>
+      <%= render :partial => "concen/pages/file_list", :locals => {:files => @page.javascripts} %>
+    <% end %>
+  </div>
+  <% if @page.images.any? %>
+    <div class="images">
+      <h3>Images</h3>
+      <%= render :partial => "concen/pages/file_list", :locals => {:files => @page.images} %>
+    </div>
+  <% end %>
+  <% if @page.others.any? %>
+    <div class="others">
+      <h3>Others</h3>
+      <%= render :partial => "concen/pages/file_list", :locals => {:files => @page.others} %>
+    </div>
+  <% end %>
+</div>

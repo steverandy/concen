@@ -1,0 +1,12 @@
+<div id="content">
+  <h1>Edit User Settings</h1>
+  <div class="clearfix">
+    <% if params.try(:[], :invitation_token) || params.try(:[], :concen_user).try(:[], :invitation_token) %>
+      <%= render "form" %>
+    <% elsif params.try(:[], :password_reset_token) || params.try(:[], :concen_user).try(:[], :password_reset_token) %>
+      <%= render "password_reset" %>
+    <% else %>
+      <%= render "settings" %>
+    <% end %>
+  </div>
+</div>

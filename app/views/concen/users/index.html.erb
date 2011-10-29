@@ -1,0 +1,40 @@
+<% content_for :head_javascripts do %>
+  <%= javascript_include_tag "concen/users" %>
+<% end %>
+
+<div id="content">
+  <h1>
+    <span>Users</span><%= link_to "Invite New User", new_invite_concen_users_path, :class => "link-button" %>
+  </h1>
+  <div class="border">
+    <table class="users">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Sign Up On</th>
+          <th>Pages</th>
+          <th>Full Control</th>
+          <% if current_concen_user.full_control %>
+            <th>Actions</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% for user in @users %>
+          <tr>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td><%= user.created_at.strftime("%d %B %Y") %></td>
+            <td><%= Concen::Page.where(:authors.in => [user.username, user.full_name, user.email]).count %></td>
+            <td><%= check_box_tag "full_control", 1, user.full_control, "data-path" => toggle_attribute_concen_user_path(user), :disabled => user == current_concen_user || !current_concen_user.full_control %></td>
+            <% if current_concen_user.full_control %>
+              <td><%= link_to "Delete", concen_user_path(user), :method => :delete, :confirm => "Are you sure?" %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

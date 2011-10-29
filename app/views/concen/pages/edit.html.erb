@@ -1,0 +1,19 @@
+<% content_for :head_javascripts do %>
+  <%= javascript_include_tag "concen/pages" %>
+<% end %>
+
+<div id="content">
+  <h1>Edit Page</h1>
+  <%= render "form" %>
+  <div id="file-manager">
+    <div class="border">
+      <div id="file-uploader" data-upload-path="<%= upload_concen_page_grid_files_path(@page) %>">
+        <noscript>
+          <p>Please enable JavaScript to use file uploader.</p>
+        </noscript>
+      </div>
+      <%= render "files" %>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
