@@ -4,7 +4,6 @@ gem "rails", ">= 3.1.0"
 gem "sass-rails", "~> 3.1.3"
 
 # gemspec.
-gem "haml", "~> 3.1.0"
 gem "mustache", "~> 0.99.4"
 gem "redcarpet", "2.0.0b5"
 gem "mongoid", "~> 2.2"
