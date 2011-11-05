@@ -1,11 +1,14 @@
-//= require concen/reset
 //= require_self
 //= require concen/fileuploader
 //= require concen/flot
 //= require concen/jquery.ui.resizable
 @charset "utf-8"
 
-@import "concen/mixins/bourbon"
+@import "concen/compass/utilities"
+@import "concen/compass/typography"
+@import "concen/compass/css3"
+@import "concen/compass/reset"
+
 @import "concen/partials/variables"
 @import "concen/partials/mixins"
 @import "concen/partials/base"
@@ -237,8 +240,7 @@ footer
           border-bottom: 0
         a, p
           font-size: 12px
-          // Need compass replacement
-          // +ellipsis
+          +ellipsis
           display: block
           width: 100%
         p.right
@@ -296,7 +298,7 @@ footer
 .qtip-tip, .qtip-wrapper
 
 .qtip-wrapper
-  +box-shadow(rgba(0,0,0,0.75), 0, 1px, 3px)
+  +box-shadow(rgba(0,0,0,0.75) 0 1px 3px)
 
 // Ace Text Editor
 
