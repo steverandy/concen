@@ -134,6 +134,9 @@ If you have used Concen for any of your websites and would like to be listed her
 
 ## Versions
 
+- **0.2.6**:
+  - Update Redcarpet to version 2.0.0.
+
 - **0.2.5**:
 
   - Temporary fix for Redcarpet's smartypants extension.

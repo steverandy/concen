@@ -5,7 +5,7 @@ gem "sass-rails", "~> 3.1.3"
 
 # gemspec.
 gem "mustache", "~> 0.99.4"
-gem "redcarpet", "2.0.0b5"
+gem "redcarpet", "2.0.0"
 gem "mongoid", "~> 2.2"
 gem "mongo", "~> 1.3"
 gem "bson_ext", "~> 1.4.0"
