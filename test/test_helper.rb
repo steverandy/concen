@@ -5,6 +5,7 @@ require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 require File.expand_path("../fabricators.rb",  __FILE__)
 require "rails/test_help"
 require "database_cleaner"
+require "turn"
 
 ActionMailer::Base.delivery_method = :test
 ActionMailer::Base.perform_deliveries = true

@@ -1,13 +1,11 @@
 require "test_helper"
-require "minitest/spec"
-require "minitest/autorun"
 
-describe Concen do
-  before do
+class ConcenTest < ActiveSupport::TestCase  
+  def setup
     DatabaseCleaner.clean
   end
-
-  it "must be a Module" do
-    Concen.must_be_kind_of Module
+  
+  test "must be a Module" do
+    assert_kind_of Module, Concen
   end
 end
