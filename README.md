@@ -1,24 +1,18 @@
 # Concen
 
-Concen is a Rails Engine for controlling and monitoring a Rails application from a web interface. It includes content capturing system, real-time traffic monitoring, and real-time performance monitoring. It's built to be flexible and customizable to fit custom needs.
+Concen is a Rails Engine for managing and monitoring a Rails application from a web interface. It includes content management system, real-time traffic monitoring, and real-time performance monitoring. It's built to be flexible and customizable to fit custom needs.
 
 ## Requirements
 
 - **Rails 3.1**. Concen only supports Rails 3.1 application.
-- **MongoDB 1.8.x**. All data are stored in MongoDB database, including all of the files uploaded (stored in GridFS).
-- **Typekit** (optional). Concen uses [Proxima Nova](http://typekit.com/fonts/proxima-nova) font. This font can be obtained from Typekit.
+- **MongoDB 2.0.x**. All data are stored in MongoDB database, including all of the files uploaded (stored in GridFS).
+- **Typekit** (optional). Concen uses [Proxima Nova](http://typekit.com/fonts/proxima-nova) font. This font can be easily obtained from Typekit.
 
 ## Installation
 
 Add the following to the Gemfile of a Rails application.
 
-    gem "concen", "~> 0.1"
-
-Concen uses Compass to generate its stylesheets so include Compass' gem in assets group in the Gemfile. If you face a problem when precompiling the assets, it's most likely because Compass' gem isn't included in the Gemfile.
-
-    group :assets do
-      gem "compass", "~> 0.12.alpha"
-    end
+    gem "concen", "~> 0.2.6"
 
 Run the rake task to setup Concen.
 
@@ -26,11 +20,9 @@ Run the rake task to setup Concen.
 
 Follow the brief guide upon completion of the rake task.
 
-## Content Capturing System
+## Content Management System
 
-Any Rails application will require static contents at some point or another. Many of us will just write those contents in the Rails views. Quite recently I have begun to think that this is a wrong approach. We don't need a full blown Content Management System (CMS) to handle them. We rather need a Content Capturing System (CCS). Most of these contents might not come from you, but other people. Most often, there are several people involved. A CCS does not focus in managing content. It focuses on capturing content from the content creators.
-
-The CCS itself has a simple text editor and a simple file uploader. Contents these days are not only in the form of text but also images, audios and videos. CCS offers a quick and easy way to capture all of them.
+Most of the Rails applications will likely need a Content Management System (CMS) at some point or another. It could be for a blog or just static content. For the static content, it is very simple to write in the Rails views. If the programmer was the writer himself, this approach is very straight forward. But often the writers are not programmers. Concen allows the writers to write the content easily from day one. Then, programmers can programatically include this content in the Rails views. The CMS itself has a simple text editor and a simple file uploader. Content can be represented in the form of text and files (images, videos, sounds, etc).
 
 Back to the Rails application, the developer/programmer could place these contents in the views. For example with the following method call.
 
@@ -47,9 +39,9 @@ Generating static content should not be performed for every request because it i
     expires_in 5.minutes, :public => true
     fresh_when :etag => @article, :public => true
 
-## Writing Style for Content Capturing System
+## Writing Style for Content Management System
 
-There are no rules enforced for writing content with Concen CCS. But there are certain writing styles that will help writing content more manageable and convenient.
+There are no rules enforced for writing content in the CMS. But there are certain writing styles that will help writing content more convenient and manageable.
 
 Here is an example with single-segment content.
 
