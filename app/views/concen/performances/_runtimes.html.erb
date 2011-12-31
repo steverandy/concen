@@ -2,7 +2,7 @@
   <% for stat in @runtimes_stats %>
     <li>
       <p><%= stat.first %></p>
-      <p class="right"><%= stat.last %></p>
+      <p class="right"><%= number_to_human(stat.last, :units => {:unit => "ms", :thousand => "s"}).delete(" ") %></p>
     </li>
   <% end %>
 </ul>

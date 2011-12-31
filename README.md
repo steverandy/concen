@@ -126,6 +126,9 @@ If you have used Concen for any of your websites and would like to be listed her
 
 ## Versions
 
+- **0.2.7 (ongoing)**:
+  - Better time formatting.
+
 - **0.2.6**:
   - Update Redcarpet to version 2.0.0.
 
