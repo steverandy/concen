@@ -25,6 +25,7 @@
         <% for user in @users %>
           <tr>
             <td><%= user.username %></td>
+            <td><%= user.full_name %></td>
             <td><%= user.email %></td>
             <td><%= user.created_at.strftime("%d %B %Y") %></td>
             <td><%= Concen::Page.where(:authors.in => [user.username, user.full_name, user.email]).count %></td>
