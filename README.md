@@ -129,6 +129,7 @@ If you have used Concen for any of your websites and would like to be listed her
 - **0.2.7 (ongoing)**:
   - Better time formatting.
   - Show full name in user list.
+  - Update Redcarpet to version 2.1.0.
 
 - **0.2.6**:
   - Update Redcarpet to version 2.0.0.
