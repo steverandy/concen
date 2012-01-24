@@ -127,51 +127,51 @@ If you have used Concen for any of your websites and would like to be listed her
 ## Versions
 
 - **0.2.7 (ongoing)**:
-  - Better time formatting.
-  - Show full name in user list.
-  - Update Redcarpet to version 2.1.0.
+  - Better time formatting
+  - Show full name in user list
+  - Update Redcarpet to version 2.1.0
 
 - **0.2.6**:
-  - Update Redcarpet to version 2.0.0.
+  - Update Redcarpet to version 2.0.0
 
 - **0.2.5**:
 
-  - Temporary fix for Redcarpet's smartypants extension.
-  - Minor color changes.
-  - Remove Compass dependency.
-  - Remove Haml dependency.
+  - Temporary fix for Redcarpet's smartypants extension
+  - Minor color changes
+  - Remove Compass dependency
+  - Remove Haml dependency
 
 - **0.2.4**:
 
-  - Set Mongoid dependency at "~> 2.2" for flexibility.
-  - The fields for Concen::Response are now predefined.
+  - Set Mongoid dependency at "~> 2.2" for flexibility
+  - The fields for Concen::Response are now predefined
 
 - **0.2.3**:
 
-  - Update Mongoid version (2.2.2).
-  - UI design enhancements.
-  - Tests are now using MiniTest.
-  - Add ancestor_slugs field for Page model.
-  - Page is given a default title if none is present.
+  - Update Mongoid version (2.2.2)
+  - UI design enhancements
+  - Tests are now using MiniTest
+  - Add ancestor_slugs field for Page model
+  - Page is given a default title if none is present
 
 - **0.2.2**:
 
-  - Update Chronic gem dependency.
-  - Fix set_position and reset_position.
+  - Update Chronic gem dependency
+  - Fix set_position and reset_position
 
 - **0.2.1**:
 
-  - Minor bug fixes.
-  - Update jQuery to 1.6.4.
-  - Update Redcarpet to 2.0.0b5 (fixes for inline HTML bug in Markdown parser).
+  - Minor bug fixes
+  - Update jQuery to 1.6.4
+  - Update Redcarpet to 2.0.0b5 (fixes for inline HTML bug in Markdown parser)
 
 - **0.2.0**:
 
-  - Rails 3.1 compatibility.
+  - Rails 3.1 compatibility
 
 - **0.1.7**:
 
-  - Fix installation error when using Ruby 1.8.7.
+  - Fix installation error when using Ruby 1.8.7
 
 - **0.1.6**:
 
@@ -183,22 +183,22 @@ If you have used Concen for any of your websites and would like to be listed her
 
 - **0.1.4**:
 
-  - Simpler setup process (only in 2 steps).
-  - Brief guide is available upon the completion of setup.
-  - Fix a bug in file path drag and drop function.
+  - Simpler setup process (only in 2 steps)
+  - Brief guide is available upon the completion of setup
+  - Fix a bug in file path drag and drop function
 
-- **0.1.3**: Minor bug fixes.
+- **0.1.3**: Minor bug fixes
 
-- **0.1.2**: Minor bug fixes.
+- **0.1.2**: Minor bug fixes
 
-- **0.1.1**: Minor bug fixes.
+- **0.1.1**: Minor bug fixes
 
-- **0.1**: Initial release.
+- **0.1**: Initial release
 
 ## Upcoming Features
 
-- Time range selection in traffic statistics.
-- Time range selection in performance statistics.
+- Time range selection in traffic statistics
+- Time range selection in performance statistics
 
 ## License
 
