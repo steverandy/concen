@@ -2,8 +2,6 @@ module Concen
   class ApplicationController < ActionController::Base
     protect_from_forgery
 
-    layout "concen/application"
-
     before_filter :set_concen
 
     helper_method :current_concen_user, :authenticate_concen_user
