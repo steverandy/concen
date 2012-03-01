@@ -1,8 +1,7 @@
 require "domainatrix"
 
 module Concen
-  class VisitsController < ApplicationController
-
+  class VisitsController < Concen::ApplicationController
     def visit_recorder_js
       if cookies[:visitor_id].blank?
         cookies[:visitor_id] = {:value => SecureRandom.uuid, :expires => 20.years.from_now}

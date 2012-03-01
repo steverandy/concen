@@ -1,7 +1,5 @@
 module Concen
-  class TrafficsController < ApplicationController
-    layout "concen/application"
-
+  class TrafficsController < Concen::ApplicationController
     before_filter :authenticate_concen_user
 
     # Supports OS X and Linux, require top command.

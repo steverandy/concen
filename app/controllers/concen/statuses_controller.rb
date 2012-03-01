@@ -1,7 +1,5 @@
 module Concen
-  class StatusesController < ApplicationController
-    layout "concen/application"
-
+  class StatusesController < Concen::ApplicationController
     before_filter :authenticate_concen_user
 
     def show

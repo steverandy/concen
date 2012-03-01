@@ -1,7 +1,5 @@
 module Concen
-  class UsersController < ApplicationController
-    layout "concen/application"
-
+  class UsersController < Concen::ApplicationController
     before_filter :authenticate_concen_user, :except => [:new, :edit, :update, :create, :new_reset_password, :reset_password]
 
     def index

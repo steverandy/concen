@@ -1,5 +1,5 @@
 module Concen
-  class PerformancesController < ApplicationController
+  class PerformancesController < Concen::ApplicationController
     def show
       @page_title = "Performance"
     end

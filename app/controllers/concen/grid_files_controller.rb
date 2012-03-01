@@ -1,7 +1,5 @@
 module Concen
-  class GridFilesController < ApplicationController
-    layout "concen/application"
-
+  class GridFilesController < Concen::ApplicationController
     def new
       @page = Page.find(params[:page_id])
       @grid_file = @page.grid_files.build

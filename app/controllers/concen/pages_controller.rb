@@ -1,7 +1,5 @@
 module Concen
-  class PagesController < ApplicationController
-    layout "concen/application"
-
+  class PagesController < Concen::ApplicationController
     before_filter :authenticate_concen_user
 
     def index

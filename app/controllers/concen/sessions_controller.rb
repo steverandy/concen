@@ -1,7 +1,5 @@
 module Concen
-  class SessionsController < ApplicationController
-    layout "concen/application"
-
+  class SessionsController < Concen::ApplicationController
     def new
       if User.all.any?
         render

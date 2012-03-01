@@ -126,6 +126,9 @@ If you have used Concen for any of your websites and would like to be listed her
 
 ## Versions
 
+- **0.2.8**:
+  - Controller's classes are now inherited from Concen::ApplicationController
+
 - **0.2.7**:
   - Better time formatting
   - Show full name in user list
