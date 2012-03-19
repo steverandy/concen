@@ -128,6 +128,7 @@ If you have used Concen for any of your websites and would like to be listed her
 
 - **0.2.8**:
   - Controller's classes are now inherited from Concen::ApplicationController
+  - Update Redcarpet to version 2.1.1
 
 - **0.2.7**:
   - Better time formatting
