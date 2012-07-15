@@ -50,7 +50,7 @@ module Concen
 
       original_filename = filename.dup
       file_extension = File.extname(original_filename).downcase
-      content_type = MIME::Types.type_for(original_filename).first.to_s
+      content_type = content_type_for original_filename
 
       # Pre generate ObjectId for the new GridFS file.
       grid_id = BSON::ObjectId.new
@@ -63,6 +63,16 @@ module Concen
       else
         return false
       end
+    end
+
+    def content_type_for(filename)
+      content_type = MIME::Types.type_for(filename).first.to_s
+
+      # Special cases when mime-types fails to recognize
+      content_type = "video/mp4" if filename.include?(".mp4")
+      content_type = "video/x-m4v" if filename.include?(".m4v")
+
+      return content_type
     end
 
     protected
