@@ -126,6 +126,11 @@ If you have used Concen for any of your websites and would like to be listed her
 
 ## Versions
 
+- **0.2.9**:
+  - Handle special cases when mime-types gem fails to recognize
+  - Update Redcarpet version to "~> 2.2.0"
+  - Update Chronic version to "~> 0.6"
+
 - **0.2.8**:
   - Controller's classes are now inherited from Concen::ApplicationController
   - Update Redcarpet to version 2.1.1
