@@ -12,7 +12,7 @@ Concen is a Rails Engine for managing and monitoring a Rails application from a 
 
 Add the following to the Gemfile of a Rails application.
 
-    gem "concen", "~> 0.2.6"
+    gem "concen", "~> 0.2.9"
 
 Run the rake task to setup Concen.
 
