@@ -4,9 +4,9 @@ Concen is a Rails Engine for managing and monitoring a Rails application from a 
 
 ## Requirements
 
-- **Rails 3.1 and above**.
+- **Rails 3.1 and above**. Concen uses Rails asset pipeline, which is only available starting from Rails 3.1.
 - **MongoDB 2.0 and above**. All data are stored in MongoDB database, including all of the files uploaded (stored in GridFS).
-- **Typekit** (optional). Concen uses [Proxima Nova](http://typekit.com/fonts/proxima-nova) font. This font can be easily obtained from Typekit.
+- **Typekit** (optional). Concen uses [Proxima Nova](http://typekit.com/fonts/proxima-nova) font. This font can be obtained from Typekit.
 
 ## Installation
 
