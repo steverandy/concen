@@ -1,5 +1,7 @@
 # Concen
 
+Status: Dormant. Checkout [Content Directory](https://github.com/steverandy/content_directory) for a much lightweight alternative.
+
 Concen is a Rails Engine for managing and monitoring a Rails application from a web interface. It includes content management system, real-time traffic monitoring, and real-time performance monitoring. It's built to be flexible and customizable to fit custom needs.
 
 ## Requirements
