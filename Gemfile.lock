@@ -47,6 +47,7 @@ GEM
     childprocess (0.1.9)
       ffi (~> 1.0.6)
     chronic (0.8.0)
+    concurrent-ruby (1.1.10)
     database_cleaner (0.6.0)
     domainatrix (0.0.10)
       addressable
@@ -54,7 +55,8 @@ GEM
     fabrication (1.1.0)
     ffi (1.0.9)
     hike (1.2.1)
-    i18n (0.6.0)
+    i18n (0.9.5)
+      concurrent-ruby (~> 1.0)
     json_pure (1.5.2)
     mail (2.3.0)
       i18n (>= 0.4.0)
